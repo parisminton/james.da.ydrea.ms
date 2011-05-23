@@ -1,2 +1,4 @@
-* { border: 0px; margin: 0px; padding: 0px; }
-body { background: url(../a/bg_8bit.png) left top repeat-x; }
+@import url('reset.css');
+@import url('core.css');
+@import url('color.css');
+@import url('fonts.css');

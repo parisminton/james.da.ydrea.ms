@@ -1,0 +1,7 @@
+/* ### standardizing ### */
+body { font-size: 62.5%; }
+input, select, th, td { font-size: 1em; }
+
+/* ### global ### */
+#welcome h2 { margin-bottom: 10px; font-family:'News Gothic Std', Arial, Helvetica; font-size: 3.4em; font-weight: bold; color: #1756a4; }
+#welcome p { width: 700px; margin: 0 0 20px 0; font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
