@@ -93,6 +93,24 @@
       
       toggleBg : function (evt) {
         var ev = bW.evts.identify(evt),        
+            image_path = bW.styles.getStyle(ev.src, "background-image", "backgroundImage").split(/_off\.|_on\./),
+            suffix;
+        
+        if (ev.src.nodeName == "UL") {
+          if (ev.type == "mouseover") {
+            suffix = "_on.";
+          }
+          else {
+            suffix = "_off.";
+          }
+          
+          ev.src.style.backgroundImage = image_path[0] + suffix + image_path[1];
+    
+        }
+      },
+      
+      toggleNavBg : function (evt) {
+        var ev = bW.evts.identify(evt),        
             image_path = bW.styles.getStyle(ev.src.parentNode, "background-image", "backgroundImage").split(/_off\.|_on\./),
             suffix;
         
@@ -171,11 +189,17 @@
 
 }());
 
-bW.imgswaps.preloadTogglers("a/", bW.page.nav_lis);
-
+bW.imgswaps.preloadTogglers("a/", bW.page.the_nav);
+/*
 bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgswaps.toggleBg, false, bW.page.nav_lis);
 
 bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgswaps.toggleBg, false, bW.page.nav_lis);
+*/
+
+bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
+
+bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
+
   
 alert("I can take you there. Just follow me.");
 
