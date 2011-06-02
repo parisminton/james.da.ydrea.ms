@@ -3,8 +3,11 @@ body { font-size: 62.5%; }
 input, select, th, td { font-size: 1em; }
 
 /* ### global ### */
-#welcome h2 { margin-bottom: 10px; font-family:'News Gothic Std', Arial, Helvetica; font-size: 3.4em; font-weight: bold; color: #1756a4; }
-#welcome p { width: 700px; margin: 0 0 20px 0; font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
-#about p { width: 660px; margin: 0 0 20px 0; font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#work p { width: 660px; margin: 0 0 20px 0; font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#contact p { width: 660px; margin: 0 0 20px 0; font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#welcome h2 { font-family:'News Gothic Std', Arial, Helvetica; font-size: 3.4em; font-weight: bold; }
+#welcome p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
+#about p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#work p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#contact p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#contact-name, #contact-email, #contact-msg { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.8em; }
+#conf { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.7em; }
+#contact li { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.0em; line-height: 1.2 em; }

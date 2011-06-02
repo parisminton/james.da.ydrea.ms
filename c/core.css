@@ -1,17 +1,52 @@
+* { outline: none; }
 body { background: url(../a/bg_8bit.png) left top repeat-x; }
-#wrap { position: relative; width: 920px; margin: 0px auto; }
-#mast { position: relative; display: block; width: 557px; height: 109px; left: 77px; top: 38px; margin: 0px; text-indent: -9999px; background: url('../a/mast_8bit.png') left top no-repeat; z-index: 1; }
+
+#wrap { position: relative; width: 920px; margin: 0 auto; }
+
+#mast { position: relative; display: block; width: 557px; height: 109px; left: 77px; top: 38px; margin: 0; text-indent: -9999px; background: url('../a/mast_8bit.png') left top no-repeat; z-index: 1; }
+
 #toon { position: relative; left: 669px; margin: -109px 0 0; z-index: 9; }
-  #ref { position: absolute; left: 0; top: 0; z-index: 1; opacity: 0.5 }
+/*  #ref { position: absolute; left: 0; top: 0; z-index: 1; opacity: 0.5 } */
+
 #nav { position: relative; width: 898px; height: 341px; margin: -183px 0 0; z-index: 5; background: url('../a/cloud_8bit_on.png') left top no-repeat; }
 #nav li { display: block; height: 226px; margin-top: 43px; float: left; text-indent: -9999px; }
 #nav a { display: block; width: 100%; height: 100%; }
 #nav-about { width: 177px; margin-left: 95px; background: url('../a/about_8bit_off.png') left top no-repeat; }
 #nav-work { width: 177px; margin-left: 84px; background: url('../a/work_8bit_off.png') left top no-repeat; }
 #nav-contact { width: 212px; margin-left: 101px; background: url('../a/contact_8bit_off.png') left top no-repeat; }
+
 #content { margin: 0 auto; background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }
+
 #copy { position: relative; width: 680px; margin: 0 auto; }
+
 #welcome { display: none; top: 20px; }
-#about { padding: 0 0 30px }
-#about h2 { display: none; }
-#footer { position: relative; height: 100px; top: -20px; padding: 120px 0 0; background: url('../a/shelf_bottom_8bit.png') 48px top no-repeat; } 
+#welcome h2 { margin-bottom: 10px; } 
+#welcome p { width: 700px; margin: 0 0 20px 0; } 
+
+#about h2, #work h2, #contact h2 { display: none; }
+#about p, #work p { width: 660px; margin: 0 0 20px 0; }
+#about, #work, #contact { padding: 0 0 50px }
+
+#about { display: none; }
+
+#work { display: none; }
+
+#contact-form { position: relative; left: 150px; width: 376px; margin: 0 0 50px 0; }
+label { display: none; }
+#contact-wrap-name, #contact-wrap-email { display: block; width: 376px; height: 36px; margin-bottom: 8px; background: url('../a/contact_forms_bg_8bit.png') left top no-repeat; border: none; }
+#contact-wrap-msg { display: block; width: 376px; height: 204px; background: url('../a/contact_forms_bg_8bit.png') left -44px no-repeat; border: none; }
+#contact-name, #contact-email { width: 356px; margin: 8px; background: none; border: none; }
+#contact-msg { width: 360px; height: 184px; margin: 10px 0 30px 10px; resize: none; background: none; border: none; }
+#contact-wrap-conf { margin: 0; text-align: right; }
+#conf { display: inline; }
+#contact-conf { /* width: 16px; height: 26px;*/ }
+#newcheckbox { position: relative; display: inline; width: 16px; height: 26px; margin: 2px 0 0 4px; right: 0px; background: url('../a/checkboxes_sprite_8bit.png') left top no-repeat; float: right; }
+#contact-wrap-button { margin: 10px auto 30px; }
+#button { display: block; width: 312px; height: 52px; margin: 0 auto; background: url('/a/email_button_sprite_8bit.png') left top no-repeat; border: none; text-indent: -9999px; }
+#mylinks { width: 500px; margin: 30px auto 0; }
+#mylinks li { display: block; height: 24px; margin: 0 0 10px 0; padding: 4px 0 0 32px; background-image: url('../a/contact_sprite_8bit.png'); background-repeat: no-repeat; }
+#github  { background-position: left -36px; }
+#linkedin { background-position: left -71px; }
+#stackexchange { height: 28px; background-position: left -107px; }
+#lastfm { background-position: left -142px; margin-top: -4px; }
+#footer { position: relative; height: 100px; padding: 120px 0 0; background: url('../a/shelf_bottom_8bit.png') 48px top no-repeat; } 
