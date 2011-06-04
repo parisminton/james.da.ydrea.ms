@@ -1,0 +1,13 @@
+6/4/11
+
+- bW.registry.aargs is null in IE:
+  "main.js, line 63: aargs is null or not an object."
+
+  Explicitly declare it as an object before assigning?
+
+
+6/2/11
+
+- Replace cans button; increase its z-index.
+
+- Investigate regex for "name" field. After catching one non-word character, it lets others through.

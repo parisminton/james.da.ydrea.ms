@@ -130,6 +130,17 @@
           ev.src.parentNode.style.backgroundImage = image_path[0] + suffix + image_path[1];
     
         }
+      },
+      
+      toggleSprite : function (evt) {
+        var ev = bW.evts.identify(evt),
+            aargs = bW.evts.getAargs(bW.imgswaps.toggleSprite, ev.type);
+        if (ev.type == "mouseover") {
+          ev.src.style.backgroundPosition = aargs[0][0] + " " + aargs[0][1];
+        }
+        if (evt.type == "mouseout") {
+          ev.src.style.backgroundPosition = aargs[1][0] + " " + aargs[1][1];
+        }
       }
     },
     
@@ -189,6 +200,11 @@
         document.getElementById("nav-work"),
         document.getElementById("nav-contact")
       ],
+      th_cc : document.getElementById("thumb-christchild"),
+      th_sp : document.getElementById("thumb-spubble"),
+      th_na : document.getElementById("thumb-naomi"),
+      th_hv : document.getElementById("thumb-histvotes"),
+      th_cd : document.getElementById("thumb-code"),
       cb : document.forms["contact-form"]["contact-conf"],
       l : document.getElementById("conf"),
       form_name : document.getElementById("contact-name"),
@@ -216,11 +232,11 @@
       
       updateNewCheckbox : function (evt) {
         if (document.forms["contact-form"]["contact-conf"]) {
-          var aargs,
+          var /* aargs, */
               cb = document.forms["contact-form"]["contact-conf"],
               l = document.getElementById("conf");
               evt = bW.evts.identify(evt);
-              aargs = bW.evts.getAargs(bW.forms.updateNewCheckbox, evt.type);
+              /* aargs = bW.evts.getAargs(bW.forms.updateNewCheckbox, evt.type); */
           if (evt.type == "mouseover" && (!this.clicked)) {
             this.style.backgroundPosition = "-18px top";
           }
@@ -232,13 +248,13 @@
               this.clicked = true;
               this.style.backgroundPosition = "-36px top";
               cb.checked = true;
-              aargs[1].firstChild.nodeValue = "A copy of this message will be sent to you.";
+              l.firstChild.nodeValue = "A copy of this message will be sent to you.";
             }
             else {
               this.clicked = false;
               this.style.backgroundPosition = "left top";
               cb.checked = false; 
-              aargs[1].firstChild.nodeValue = "Want a copy of this message?";
+              l.firstChild.nodeValue = "Want a copy of this message?";
             }
           }
         }
@@ -320,6 +336,64 @@
       }
     }
   };
+
+  // page operations
+  function batchAddChildren(container) {
+    var contain = document.getElementById(container),
+        i = 1,
+        len = arguments.length,
+        frag = document.createDocumentFragment();
+    if (len < 2) {
+      alert("Error from batchAddChildren:\n\n  - This function needs at least one more argument\: The elements to be inserted\:\n\n batchAddChildren\(container, element1_to_insert \[, element_2_to_insert, element3_to_insert, ...\]\n\n");
+    }
+    else {
+      for (i; i < len; i += 1) {
+        elem = elementFactory(arguments[(i)]);
+        frag.appendChild(elem[0]);
+      }
+    }
+    contain.appendChild(frag);
+    alert("Work stage loaded.");
+  };
+
+  function elementFactory() {
+    var i = 0,
+        j = 0,
+        len = arguments.length,
+        elems = [],
+        el,
+        len2;
+    for (i; i < len; i += 1) {
+      for (key in arguments[i]) {
+        len2 = arguments[i][key].length;
+        if ((len2 % 2) != 0) {
+          alert("Error from elementFactory:\n\n  - An element is one argument short. Element objects need string arguments passed in pairs\:\n\n\  [\"attribute_name1\", \"attribute_value1\", \"attribute_name2\", \"attribute_value2\"\].\n\n");
+        }
+        else {
+          el = document.createElement(key);
+          if (len2 > 2) {
+            for (j; j < len2; j += 2) {
+              el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
+              /* alert("Inner loop. " +  arguments[i][key][(j + 1)]); */
+            }  
+          }
+          else {
+            el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
+            /* alert("Outer loop. " + arguments[i][key][(j + 1)]); */
+          } 
+          elems.push(el);
+        }
+      }
+    }
+    alert("There are " + elems.length + " new elements in the \"elems\" array.");
+    return elems;
+  };
+
+  var curr_i = { p : ["id", "work-current-item"] };
+  var curr_sd = { p : ["id", "work-current-shortdesc"] }; 
+
+  batchAddChildren("work", curr_i, curr_sd);
+
 }());
 
 bW.forms.swapCheckbox(bW.page.cb);
@@ -346,6 +420,21 @@ bW.evts.listenFor(bW.page.form_msg, "blur", bW.forms.placeholder, false);
 
 bW.evts.listenFor(bW.page.form_name, "blur", bW.forms.validate, false);
 bW.evts.listenFor(bW.page.form_email, "blur", bW.forms.validate, false);
+
+var thumb_coords = [ ["left", "-132px"], ["left", "top"] ];
+
+alert(bW.page.th_cc.nodeName);
+
+bW.evts.listenFor(bW.page.th_cc, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
+bW.evts.listenFor(bW.page.th_cc, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+bW.evts.listenFor(bW.page.th_sp, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
+bW.evts.listenFor(bW.page.th_sp, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_na, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_na, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_hv, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_hv, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_cd, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
+bW.evts.listenFor(bW.page.th_cd, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
 
 alert("I can take you there. Just follow me.");
 

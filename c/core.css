@@ -29,7 +29,22 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
 #about { display: none; }
 
-#work { display: none; }
+/* #work { display: none; } */
+#work img { visibility: hidden; }
+#work h3 { text-align: center; display: none; }
+#work .work-thumbnail { display: block; width: 132px; height: 132px; cursor:pointer; float: left; }
+#work #thumb-christchild { background: url('../a/thumb_christchild_sprite_8bit.png') left top no-repeat; }
+#work #thumb-spubble { background: url('../a/thumb_spubble_sprite_8bit.png') left top no-repeat; }
+#work #thumb-naomi { background: url('../a/thumb_naomi_sprite_8bit.png') left top no-repeat; }
+#work #thumb-histvotes { background: url('../a/thumb_histvotes_sprite_8bit.png') left top no-repeat; }
+#work #thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
+#work .shortdesc { text-align: center; display: none; }
+#work .longdesc { display: none; }
+#work-current-item { clear: both; }
+/* may not need this anymore... #work .focused { display: block; } this line should always appear below the other #work declarations */
+
+
+#contact { display: none; }
 
 #contact-form { position: relative; left: 150px; width: 376px; margin: 0 0 50px 0; }
 label { display: none; }
