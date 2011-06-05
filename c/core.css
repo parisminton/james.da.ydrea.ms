@@ -40,8 +40,9 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 #work #thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
 #work .shortdesc { text-align: center; display: none; }
 #work .longdesc { display: none; }
-#work-current-item { clear: both; }
-/* may not need this anymore... #work .focused { display: block; } this line should always appear below the other #work declarations */
+#work #work-current-item { text-align: center; padding-top: 20px; margin: 0; clear: both; }
+#work #work-current-shortdesc { text-align: center }
+/* #work #christchild { position: absolute; } */
 
 
 #contact { display: none; }

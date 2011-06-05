@@ -112,7 +112,7 @@
 
             <!-- christ child -->
             <div id="christchild" class="workitem">
-              <span id="thumb-christchild" class="work-thumbnail"><a href="http://web.archive.org/web/20090818101308/http://www.freep.com/christchild" target="_new"><img src="a/christchild.jpg" alt="Alternate text goes here." /></a></span>
+              <img id="img-christchild" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://web.archive.org/web/20090818101308/http://www.freep.com/christchild" target="_new">Christ Child House</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
               <p class="longdesc">I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.</p>
@@ -120,7 +120,7 @@
             
             <!-- spubble -->
             <div id="spubble" class="workitem">
-              <span id="thumb-spubble" class="work-thumbnail"><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new"><img src="a/christchild.jpg" alt="Alternate text goes here." /></a></span>
+              <img id="img-spubble" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new">Spubble Lite</a></h3>
               <p class="shortdesc">design</p>
               <p class="longdesc">As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.</p>
@@ -129,7 +129,7 @@
             
             <!-- naomi -->
             <div id="naomi" class="workitem">
-              <span id="thumb-naomi" class="work-thumbnail"><a href="http://www.naomirpatton.com" target="_new"><img src="a/christchild.jpg" alt="Alternate text goes here." /></a></span>
+              <img id="img-naomi" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://www.naomirpatton.com" target="_new">naomirpatton.com</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
               <p class="longdesc">This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href="http://www.typekit.com" target="_new">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library.</p>
@@ -137,7 +137,7 @@
 
             <!-- historicalvotes  -->
             <div id="histvotes" class="workitem">
-              <span id="thumb-histvotes" class="work-thumbnail"><a href="http://james.da.ydrea.ms" target="_new"><img src="a/christchild.jpg" alt="Alternate text goes here." /></a></span>
+              <img id="img-histvotes" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://james.da.ydrea.ms" target="_new">SE Michigan's presidential votes</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
               <p class="longdesc">This is a huge stats table that uses a slider animation for easier viewing.</p>
@@ -147,7 +147,7 @@
 
             <!-- github  -->
             <div id="code" class="workitem">
-              <span id="thumb-code" class="work-thumbnail"><a href="https://github.com/parisminton" target="_new"><img src="a/christchild.jpg" alt="Alternate text goes here." /></a></span>
+              <img id="img-code" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="https://github.com/parisminton" target="_new">My GitHub repositories</a></h3>
               <p class="shortdesc">miscellaneous code</p>
               <p class="longdesc">Here's where I store my code, and where you can peek under the hood of much of my stuff.</p>

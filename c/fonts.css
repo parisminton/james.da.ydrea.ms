@@ -9,6 +9,8 @@ input, select, th, td { font-size: 1em; }
 #work p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
 #work h3 { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
 #work .shortdesc { font-size: 2.0em; }
+#work #work-current-item { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
+#work #work-current-shortdesc { font-size: 2.0em; }
 #contact p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
 #contact-name, #contact-email, #contact-msg { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.8em; }
 #conf { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.7em; }

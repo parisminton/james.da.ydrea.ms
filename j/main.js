@@ -11,9 +11,8 @@
           node.addEventListener(evt, func, capt);
         }
         else {
-          evt = "on" + evt;
           if (node.attachEvent) {
-            node.attachEvent(evt, func);
+            node.attachEvent(("on" + evt) , func);
           }
           else {
             node[evt] = func;
@@ -25,8 +24,12 @@
         this.registry[proc_id].evt = evt;
         this.registry[proc_id].func = func;
         this.registry[proc_id].capt = capt;
-        this.registry[proc_id].aargs = aargs;
-        
+        if (aargs) {
+          this.registry[proc_id].aargs = aargs;
+        }
+        else { 
+          this.registry[proc_id].aargs = [];
+        }
         if (!func.reg_ids) {
           func.reg_ids = {};
         }
@@ -200,11 +203,6 @@
         document.getElementById("nav-work"),
         document.getElementById("nav-contact")
       ],
-      th_cc : document.getElementById("thumb-christchild"),
-      th_sp : document.getElementById("thumb-spubble"),
-      th_na : document.getElementById("thumb-naomi"),
-      th_hv : document.getElementById("thumb-histvotes"),
-      th_cd : document.getElementById("thumb-code"),
       cb : document.forms["contact-form"]["contact-conf"],
       l : document.getElementById("conf"),
       form_name : document.getElementById("contact-name"),
@@ -229,7 +227,7 @@
           elem.parentNode.replaceChild(sp, elem);
         }
       },
-      
+    
       updateNewCheckbox : function (evt) {
         if (document.forms["contact-form"]["contact-conf"]) {
           var /* aargs, */
@@ -337,6 +335,42 @@
     }
   };
 
+  var work = {
+    christchild : {
+      title : "Christ Child House",
+      img : document.getElementById("img-christchild"),
+      link : "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
+      sd : "design / markup / scripting"
+    },
+    spubble : {
+      title : "Spubble Lite",
+      img : document.getElementById("img-spubble"),
+      link : "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
+      sd : "design"
+    },
+    naomi : {
+      title : "naomirpatton.com",
+      img : document.getElementById("img-naomi"),
+      link : "http://www.naomirpatton.com",
+      sd : "design / markup / scripting"
+    },
+    histvotes : {
+      title : "SE Michigan's presidential votes",
+      img : document.getElementById("img-histvotes"),
+      link : "http://james.da.ydrea.ms",
+      sd : "design / markup / scripting"
+    },
+    code : {
+      title : "My GitHub repositories",
+      img : document.getElementById("img-code"),
+      link : "https://github.com/parisminton",
+      sd : "miscellaneous code"
+    }
+  };
+
+
+
+
   // page operations
   function batchAddChildren(container) {
     var contain = document.getElementById(container),
@@ -385,8 +419,46 @@
         }
       }
     }
-    alert("There are " + elems.length + " new elements in the \"elems\" array.");
     return elems;
+  };
+  
+  var thumb_coords = [ ["left", "-132px"], ["left", "top"] ];
+  
+  function wrapSpan(elem, id) {
+    if (elem) {
+      var sp,
+          clone = elem.cloneNode(true);
+      clone.style.visibility = "hidden";
+      sp = document.createElement("span");
+      sp.id = id;
+      sp.className = "work-thumbnail";
+      bW.evts.listenFor(sp, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(sp, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(sp, "mouseover", announce, false);
+      bW.evts.listenFor(sp, "mouseout", announce, false);
+      sp.appendChild(clone);
+      elem.parentNode.replaceChild(sp, elem);
+    }
+  };
+
+  wrapSpan(work.christchild.img, "thumb-christchild");
+  wrapSpan(work.spubble.img, "thumb-spubble");
+  wrapSpan(work.naomi.img, "thumb-naomi");
+  wrapSpan(work.histvotes.img, "thumb-histvotes");
+  wrapSpan(work.code.img, "thumb-code");
+
+  function announce(evt) {
+    var ev = bW.evts.identify(evt),
+        item = document.getElementById("work-current-item"),
+        sd = document.getElementById("work-current-shortdesc");
+    if (ev.type == "mouseover") {
+      item.innerHTML = work[ev.src.parentNode.id].title;
+      sd.innerHTML = work[ev.src.parentNode.id].sd;
+    }
+    if (ev.type == "mouseout") {
+      item.innerHTML = "";
+      sd.innerHTML = "";
+    }
   };
 
   var curr_i = { p : ["id", "work-current-item"] };
@@ -420,21 +492,6 @@ bW.evts.listenFor(bW.page.form_msg, "blur", bW.forms.placeholder, false);
 
 bW.evts.listenFor(bW.page.form_name, "blur", bW.forms.validate, false);
 bW.evts.listenFor(bW.page.form_email, "blur", bW.forms.validate, false);
-
-var thumb_coords = [ ["left", "-132px"], ["left", "top"] ];
-
-alert(bW.page.th_cc.nodeName);
-
-bW.evts.listenFor(bW.page.th_cc, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
-bW.evts.listenFor(bW.page.th_cc, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
-bW.evts.listenFor(bW.page.th_sp, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
-bW.evts.listenFor(bW.page.th_sp, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_na, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_na, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_hv, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_hv, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_cd, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords); 
-bW.evts.listenFor(bW.page.th_cd, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords); 
 
 alert("I can take you there. Just follow me.");
 
