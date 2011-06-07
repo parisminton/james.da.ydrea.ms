@@ -5,6 +5,11 @@ input, select, th, td { font-size: 1em; }
 /* ### global ### */
 #welcome h2 { font-family:'News Gothic Std', Arial, Helvetica; font-size: 3.4em; font-weight: bold; }
 #welcome p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
+#lightbox p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#lightbox h3 { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
+#lightbox .shortdesc { font-size: 1.8em; }
+#lightbox .link { font-size: 2.0em; font-weight: bold; }
+#lightbox .longdesc { font-size: 1.8em; }
 #about p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
 #work p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
 #work h3 { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }

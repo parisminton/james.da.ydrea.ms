@@ -1,6 +1,23 @@
 * { outline: none; }
 body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
+#shade { position: absolute; background-color: #000; z-index: 20; }
+
+#lightbox { position: absolute; width: 920px; margin: 60px auto; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; z-index: 30; }
+#lightbox-top { width: 920px; height: 52px; margin: 0; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; }
+#lightbox-body { background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }
+#lightbox-copy { position: relative; width: 580px; margin: 0 auto; padding-bottom: 20px; }
+#lightbox img { margin: 10px auto 18px; }
+#lightbox h3 { text-align: center; }
+#lightbox .shortdesc { text-align: center; display: block; }
+#lightbox .link { text-align: center; margin: 14px auto; }
+#lightbox .longdesc { display: block; }
+#previous, #next { top: 370px; position: absolute; display: block; width: 27px; height: 34px; margin: 0px; text-indent: -9999px; cursor: pointer; }
+#previous { left: 110px; background: url('../a/lightbox_previous_8bit.png') left top no-repeat; }
+#next { left: 746px; background: url('../a/lightbox_next_8bit.png') left top no-repeat; }
+#close { position: absolute; display: block; width: 23px; height: 23px; top: 62px; left: 750px; margin: 0px; text-indent: -9999px; background: url('../a/lightbox_close_8bit.png'); cursor: pointer; }
+#lightbox-bottom { width: 920px; height: 52px; margin: 0; background: url('../a/lightbox_bottom_8bit.png') 48px top no-repeat; }
+
 #wrap { position: relative; width: 920px; margin: 0 auto; }
 
 #mast { position: relative; display: block; width: 557px; height: 109px; left: 77px; top: 38px; margin: 0; text-indent: -9999px; background: url('../a/mast_8bit.png') left top no-repeat; z-index: 1; }
@@ -30,18 +47,17 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 #about { display: none; }
 
 /* #work { display: none; } */
-#work img { visibility: hidden; }
 #work h3 { text-align: center; display: none; }
-#work .work-thumbnail { display: block; width: 132px; height: 132px; cursor:pointer; float: left; }
-#work #thumb-christchild { background: url('../a/thumb_christchild_sprite_8bit.png') left top no-repeat; }
-#work #thumb-spubble { background: url('../a/thumb_spubble_sprite_8bit.png') left top no-repeat; }
-#work #thumb-naomi { background: url('../a/thumb_naomi_sprite_8bit.png') left top no-repeat; }
-#work #thumb-histvotes { background: url('../a/thumb_histvotes_sprite_8bit.png') left top no-repeat; }
-#work #thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
-#work .shortdesc { text-align: center; display: none; }
-#work .longdesc { display: none; }
-#work #work-current-item { text-align: center; padding-top: 20px; margin: 0; clear: both; }
-#work #work-current-shortdesc { text-align: center }
+.work-thumbnail { display: block; width: 132px; height: 132px; cursor:pointer; float: left; }
+#thumb-christchild { background: url('../a/thumb_christchild_sprite_8bit.png') left top no-repeat; }
+#thumb-spubble { background: url('../a/thumb_spubble_sprite_8bit.png') left top no-repeat; }
+#thumb-naomi { background: url('../a/thumb_naomi_sprite_8bit.png') left top no-repeat; }
+#thumb-histvotes { background: url('../a/thumb_histvotes_sprite_8bit.png') left top no-repeat; }
+#thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
+.shortdesc { text-align: center; display: none; }
+.longdesc { display: none; }
+#work-current-item { text-align: center; padding-top: 20px; margin: 0; clear: both; }
+#work-current-shortdesc { text-align: center }
 /* #work #christchild { position: absolute; } */
 
 

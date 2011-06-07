@@ -210,6 +210,64 @@
       form_msg : document.getElementById("contact-msg")
     },
     
+    // window calculations
+    viewport : {
+      
+      // core code from http://www.quirksmode.org
+      getPageSize : function() {
+		  	var scroll_x,
+            scroll_y,
+            window_width,
+            window_height,
+            page_width,
+            page_height;
+		  	if (window.innerHeight && window.scrollMaxY) {	
+		  		scroll_x = window.innerWidth + window.scrollMaxX;
+		  		scroll_y = window.innerHeight + window.scrollMaxY;
+		  	}
+		  	else if (document.body.scrollHeight > document.body.offsetHeight) {
+		  		scroll_x = document.body.scrollWidth;
+		  		scroll_y = document.body.scrollHeight;
+		  	}
+		  	else {
+		  		scroll_x = document.body.offsetWidth;
+		  		scroll_y = document.body.offsetHeight;
+		  	}
+		  	
+		  	if (self.innerHeight) {
+		  		if (document.documentElement.clientWidth) {
+		  			window_width = document.documentElement.clientWidth; 
+		  		}
+		  		else {
+		  			window_width = self.innerWidth;
+		  		}
+		  		window_height = self.innerHeight;
+		  	}
+		  	else if (document.documentElement && document.documentElement.clientHeight) {
+		  		window_width = document.documentElement.clientWidth;
+		  		window_height = document.documentElement.clientHeight;
+		  	}
+		  	else if (document.body) {
+		  		window_width = document.body.clientWidth;
+		  		window_height = document.body.clientHeight;
+		  	}	
+		  	if (scroll_y < window_height) {
+		  		page_height = window_height;
+		  	}
+		  	else { 
+		  		page_height = scroll_y;
+		  	}
+      
+		  	if (scroll_x < window_width) {	
+		  		page_width = scroll_x;		
+		  	}
+		  	else {
+		  		page_width = window_width;
+		  	}
+		  	return [page_width, page_height, window_width, window_height];
+		  }
+		},
+    
     // form processing
     forms : {
       swapCheckbox: function (elem) {
@@ -336,40 +394,79 @@
   };
 
   var work = {
-    christchild : {
-      title : "Christ Child House",
-      img : document.getElementById("img-christchild"),
-      link : "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
-      sd : "design / markup / scripting"
-    },
-    spubble : {
-      title : "Spubble Lite",
-      img : document.getElementById("img-spubble"),
-      link : "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
-      sd : "design"
-    },
-    naomi : {
-      title : "naomirpatton.com",
-      img : document.getElementById("img-naomi"),
-      link : "http://www.naomirpatton.com",
-      sd : "design / markup / scripting"
-    },
-    histvotes : {
-      title : "SE Michigan's presidential votes",
-      img : document.getElementById("img-histvotes"),
-      link : "http://james.da.ydrea.ms",
-      sd : "design / markup / scripting"
-    },
-    code : {
-      title : "My GitHub repositories",
-      img : document.getElementById("img-code"),
-      link : "https://github.com/parisminton",
-      sd : "miscellaneous code"
-    }
+    christchild : new WorkObj (
+      "Christ Child House",
+      document.getElementById("img-christchild"),
+      "thumb-christchild",
+      "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
+      "design / markup / scripting",
+      ["I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates."]
+    ),
+    spubble : new WorkObj (
+      "Spubble Lite",
+      document.getElementById("img-spubble"),
+      "thumb-spubble",
+      "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
+      "design",
+      [
+        "As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.",
+        "That weekend, I got to work with Wacom\'s draw-directly-on-screen-Cintiq display. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One."
+      ]
+    ),
+    naomi : new WorkObj (
+      "naomirpatton.com",
+      document.getElementById("img-naomi"),
+      "thumb-naomi",
+      "http://www.naomirpatton.com",
+      "design / markup / scripting",
+      ["This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library."]
+    ),
+    histvotes : new WorkObj (
+      "SE Michigan's presidential votes",
+      document.getElementById("img-histvotes"),
+      "thumb-histvotes",
+      "http://james.da.ydrea.ms/histvotes",
+      "design / markup / scripting",
+      [
+        "This is a huge stats table that uses a slider animation for easier viewing.",
+        "It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.",
+        "I ended up using an improved version of this slider script in the Christ Child House project later that year."
+      ]
+    ),
+    code : new WorkObj (
+      "My GitHub repositories",
+      document.getElementById("img-code"),
+      "thumb-code",
+      "https://github.com/parisminton",
+      "miscellaneous code",
+      ["Here's where I store my code, and where you can peek under the hood of much of my stuff."]
+    )
   };
 
-
-
+  function WorkObj(title, img, thumb_id, link, sd, ld) {
+    if (!(this instanceof WorkObj)) {
+      return new WorkObj(title, img, thumb_id, link, sd, ld);
+    }
+    this.title = title;
+    this.img = img;
+    this.thumb_id = thumb_id;
+    this.link = link;
+    this.sd = sd;
+    this.ld = ld;
+  }
+  WorkObj.prototype.announce = function (evt) {
+    var ev = bW.evts.identify(evt),
+        item = document.getElementById("work-current-item"),
+        sd = document.getElementById("work-current-shortdesc");
+    if (ev.type == "mouseover") {
+      item.innerHTML = this.title; 
+      sd.innerHTML = this.sd;
+    }
+    if (ev.type == "mouseout") {
+      item.innerHTML = "";
+      sd.innerHTML = "";
+    }
+  };
 
   // page operations
   function batchAddChildren(container) {
@@ -441,14 +538,65 @@
     }
   };
 
-  wrapSpan(work.christchild.img, "thumb-christchild");
-  wrapSpan(work.spubble.img, "thumb-spubble");
-  wrapSpan(work.naomi.img, "thumb-naomi");
-  wrapSpan(work.histvotes.img, "thumb-histvotes");
-  wrapSpan(work.code.img, "thumb-code");
+  function testCallback(callback) {
+    if (typeof callback === "function") {
+      return true;
+    }
+    else {
+      return false;
+    }
+  };
+
+  function displayNone(elem) {
+    elem.style.display = "none";
+  }
+
+  function wrapElem(inner, outer, callback) {
+    if (inner) {
+      var out = elementFactory(outer)[0],
+          clone = inner.cloneNode(true),
+          test = testCallback(callback);
+      if (test) {
+        callback(clone);
+      }
+      out.appendChild(clone);
+      inner.parentNode.replaceChild(out, inner);
+    }
+  };
+
+  for (key in work) {
+    wrapElem(work[key].img, { span : ["id", "thumb-" + key, "className", "work-thumbnail"] }, displayNone);
+  }
+
+  function batchAddListeners() {
+    for (key in work) {
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", announce, true);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", announce, true);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+    }
+  }
+/*
+  wrapElem(document.getElementById("wrap"), { div : ["id", "shade"] });
+*/
+  batchAddListeners();
+
+  var the_shade = document.getElementById("shade");
+  
+  the_shade.style.display = "block";
+  the_shade.style.position = "fixed";
+  the_shade.style.opacity = "0.8";
+  the_shade.style.width = bW.viewport.getPageSize()[0] + "px";
+  the_shade.style.height = bW.viewport.getPageSize()[1] + "px";
+  
+  var home = document.getElementById("home");
+  home.style.position = "relative";
+  var rect = home.getBoundingClientRect();
+  
+  alert(rect.height);
 
   function announce(evt) {
-    var ev = bW.evts.identify(evt),
+   var ev = bW.evts.identify(evt),
         item = document.getElementById("work-current-item"),
         sd = document.getElementById("work-current-shortdesc");
     if (ev.type == "mouseover") {

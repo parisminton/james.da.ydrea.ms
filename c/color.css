@@ -1,6 +1,6 @@
 body { background-color: #d7e2e6; }
 p { color: #666; } 
-#welcome h2, #work h3, #work a, #work .shortdesc, #work-current-item, #work-current-shortdesc { color: #1756a4; }
+#welcome h2, #lightbox h3, #lightbox .shortdesc, #lightbox .link a, #work h3, #work a, #work .shortdesc, #work-current-item, #work-current-shortdesc { color: #1756a4; }
 #contact-name, #contact-email, #contact-msg { color: #fff; }
 #conf { color: #99b4cc; }
 #contact li a { color: #666; }
