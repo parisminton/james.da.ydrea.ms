@@ -35,7 +35,7 @@
         $message = Swift_Message::newInstance()
           ->setSubject("A message from {$clean_name} via james.da.ydrea.ms")
           ->setFrom(array($clean_email => $clean_name))
-          ->setTo(array('me@.myemail.com' => 'James'))
+          ->setTo(array('me@myemail.com' => 'James'))
           ->setBody($clean_msg, 'text/html')
           ->addPart($clean_msg, 'text/html')
           ;
@@ -81,24 +81,7 @@
   </head>
 
   <body id="home"> 
-    <div id="shade"></div>
     <div id="wrap">
-      <div id="lightbox">
-        <div id="lightbox-top"></div>
-        <div id="lightbox-body">
-          <div id="lightbox-copy">
-            <img src="a/christchild.jpg" alt="Alternate text goes here." />
-            <h3>Christ Child House</h3>
-            <p class="shortdesc">design / markup / scripting</p>
-            <p class="link"><a href="http://web.archive.org/web/20090818101308/http://www.freep.com/christchild" target="_new">http://web.archive.com/http://www/freep.com/christchild</a></p>
-            <p class="longdesc">I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.</p>
-          </div><!-- end #lightbox-copy -->
-        </div><!-- end #lightbox-body -->
-        <div id="lightbox-bottom"></div>
-        <p id="previous">Previous</p>
-        <p id="next">Next</p>
-        <p id="close">Close this window</p>
-      </div><!-- end #lightbox -->
       <!-- <img id="ref" src="a/reference_8bit.png" alt="Just a reference" width="921" height="522" /> -->
       <h1 id="mast">James Thomas is a Web developer and designer. He has more than a decade of experience building and maintaining digital content for news organizations.</h1>
       <img id="toon" src="a/james_logo_leadclouds_8bit.png" alt="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." title="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." width="252" height="360" />
@@ -132,6 +115,7 @@
               <img id="img-christchild" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://web.archive.org/web/20090818101308/http://www.freep.com/christchild" target="_new">Christ Child House</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
+              <p class="link"><a href="http://web.archive.org/web/20090818101308/http://www.freep.com/christchild" target="_new">http://web.archive.com/http://www/freep.com/christchild</a></p>
               <p class="longdesc">I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.</p>
             </div>
             
@@ -140,6 +124,7 @@
               <img id="img-spubble" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new">Spubble Lite</a></h3>
               <p class="shortdesc">design</p>
+              <p class="link"><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new">See it in the iTunes Store</a></p>
               <p class="longdesc">As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.</p>
               <p class="longdesc">That weekend, I got to work with Wacom's draw-directly-on-screen-Cintiq display. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One.</p>
             </div>
@@ -149,6 +134,7 @@
               <img id="img-naomi" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://www.naomirpatton.com" target="_new">naomirpatton.com</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
+              <p class="link"><a href="http://www.naomirpatton.com" target="_new">http://www.naomirpatton.com</a></p>
               <p class="longdesc">This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href="http://www.typekit.com" target="_new">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library.</p>
             </div>
 
@@ -157,6 +143,7 @@
               <img id="img-histvotes" src="a/christchild.jpg" alt="Alternate text goes here." />
               <h3><a href="http://james.da.ydrea.ms" target="_new">SE Michigan's presidential votes</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
+              <p class="link"><a href="http://james.da.ydrea.ms/historicalvotes" target="_new">http://www.naomirpatton.com</a></p>
               <p class="longdesc">This is a huge stats table that uses a slider animation for easier viewing.</p>
               <p class="longdesc">It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.</p>
               <p class="longdesc">I ended up using an improved version of this slider script in the Christ Child House project later that year.</p>

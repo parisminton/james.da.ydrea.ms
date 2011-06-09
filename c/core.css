@@ -1,9 +1,9 @@
 * { outline: none; }
 body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
-#shade { position: absolute; background-color: #000; z-index: 20; }
+#shade { display: none; position: fixed; background-color: #000; z-index: 20; opacity: 0.8; }
 
-#lightbox { position: absolute; width: 920px; margin: 60px auto; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; z-index: 30; }
+#lightbox { display: none; position: absolute; width: 920px; margin: 60px auto; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; z-index: 30; }
 #lightbox-top { width: 920px; height: 52px; margin: 0; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; }
 #lightbox-body { background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }
 #lightbox-copy { position: relative; width: 580px; margin: 0 auto; padding-bottom: 20px; }
@@ -55,6 +55,7 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 #thumb-histvotes { background: url('../a/thumb_histvotes_sprite_8bit.png') left top no-repeat; }
 #thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
 .shortdesc { text-align: center; display: none; }
+#work .link { display: none; }
 .longdesc { display: none; }
 #work-current-item { text-align: center; padding-top: 20px; margin: 0; clear: both; }
 #work-current-shortdesc { text-align: center }

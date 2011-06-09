@@ -397,62 +397,81 @@
     christchild : new WorkObj (
       "Christ Child House",
       document.getElementById("img-christchild"),
+      "../a/christchild_24bit.png",
       "thumb-christchild",
       "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
       "design / markup / scripting",
-      ["I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates."]
+      ["I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates."],
+      "code",
+      "spubble"
     ),
     spubble : new WorkObj (
       "Spubble Lite",
       document.getElementById("img-spubble"),
+      "../a/spubble_24bit.png",
       "thumb-spubble",
       "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
       "design",
       [
         "As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.",
         "That weekend, I got to work with Wacom\'s draw-directly-on-screen-Cintiq display. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One."
-      ]
+      ],
+      "christchild",
+      "naomi"
     ),
     naomi : new WorkObj (
       "naomirpatton.com",
       document.getElementById("img-naomi"),
+      "../a/naomi_24bit.png",
       "thumb-naomi",
       "http://www.naomirpatton.com",
       "design / markup / scripting",
-      ["This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library."]
+      ["This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library."],
+      "spubble",
+      "histvotes"
     ),
     histvotes : new WorkObj (
       "SE Michigan's presidential votes",
       document.getElementById("img-histvotes"),
+      "../a/histvotes_24bit.png",
       "thumb-histvotes",
-      "http://james.da.ydrea.ms/histvotes",
+      "http://james.da.ydrea.ms/historicalvotes",
       "design / markup / scripting",
       [
         "This is a huge stats table that uses a slider animation for easier viewing.",
         "It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.",
         "I ended up using an improved version of this slider script in the Christ Child House project later that year."
-      ]
+      ],
+      "naomi",
+      "code"
     ),
     code : new WorkObj (
       "My GitHub repositories",
       document.getElementById("img-code"),
+      "../a/code_24bit.png",
       "thumb-code",
       "https://github.com/parisminton",
       "miscellaneous code",
-      ["Here's where I store my code, and where you can peek under the hood of much of my stuff."]
+      ["Here's where I store my code, and where you can peek under the hood of much of my stuff."],
+      "histvotes",
+      "christchild"
     )
   };
 
-  function WorkObj(title, img, thumb_id, link, sd, ld) {
+  function WorkObj(title, img_ref, img_src, thumb_id, url, sd, ld, previous, next) {
     if (!(this instanceof WorkObj)) {
-      return new WorkObj(title, img, thumb_id, link, sd, ld);
+      return new WorkObj(title, img_ref, img_src,  thumb_id, link, sd, ld, previous, next);
     }
     this.title = title;
-    this.img = img;
+    this.img = new Image();
+    this.img.ref = img_ref;
+    this.img.src = img_src;
     this.thumb_id = thumb_id;
-    this.link = link;
+    this.url = url;
     this.sd = sd;
     this.ld = ld;
+    this.previous = previous;
+    this.next = next;
   }
   WorkObj.prototype.announce = function (evt) {
     var ev = bW.evts.identify(evt),
@@ -480,11 +499,10 @@
     else {
       for (i; i < len; i += 1) {
         elem = elementFactory(arguments[(i)]);
-        frag.appendChild(elem[0]);
+        frag.appendChild(elem);
       }
     }
     contain.appendChild(frag);
-    alert("Work stage loaded.");
   };
 
   function elementFactory() {
@@ -495,28 +513,39 @@
         el,
         len2;
     for (i; i < len; i += 1) {
-      for (key in arguments[i]) {
-        len2 = arguments[i][key].length;
-        if ((len2 % 2) != 0) {
-          alert("Error from elementFactory:\n\n  - An element is one argument short. Element objects need string arguments passed in pairs\:\n\n\  [\"attribute_name1\", \"attribute_value1\", \"attribute_name2\", \"attribute_value2\"\].\n\n");
-        }
-        else {
-          el = document.createElement(key);
-          if (len2 > 2) {
-            for (j; j < len2; j += 2) {
-              el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
-              /* alert("Inner loop. " +  arguments[i][key][(j + 1)]); */
-            }  
+      if (typeof arguments[i] == "string") {
+        el = document.createElement(arguments[i]);
+        elems.push(el);
+      }
+      else {
+        for (key in arguments[i]) {
+          len2 = arguments[i][key].length;
+          if ((len2 % 2) != 0) {
+            alert("Error from elementFactory:\n\n  - An element is one argument short. Element objects need string arguments passed in pairs\:\n\n\  [\"attribute_name1\", \"attribute_value1\", \"attribute_name2\", \"attribute_value2\"\].\n\n");
           }
           else {
-            el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
-            /* alert("Outer loop. " + arguments[i][key][(j + 1)]); */
-          } 
-          elems.push(el);
+            el = document.createElement(key);
+            if (len2 > 2) {
+              for (j; j < len2; j += 2) {
+                el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
+                /* alert("Inner loop. " +  arguments[i][key][(j + 1)]); */
+              }  
+            }
+            else {
+              el[arguments[i][key][j]] = arguments[i][key][(j + 1)];
+              /* alert("Outer loop. " + arguments[i][key][(j + 1)]); */
+            }
+            elems.push(el);
+          }
         }
       }
     }
-    return elems;
+    if (len == 1) {
+      return elems[0];
+    }
+    else {
+      return elems;
+    }
   };
   
   var thumb_coords = [ ["left", "-132px"], ["left", "top"] ];
@@ -553,7 +582,7 @@
 
   function wrapElem(inner, outer, callback) {
     if (inner) {
-      var out = elementFactory(outer)[0],
+      var out = elementFactory(outer),
           clone = inner.cloneNode(true),
           test = testCallback(callback);
       if (test) {
@@ -565,7 +594,113 @@
   };
 
   for (key in work) {
-    wrapElem(work[key].img, { span : ["id", "thumb-" + key, "className", "work-thumbnail"] }, displayNone);
+    wrapElem(work[key].img.ref, { span : ["id", "thumb-" + key, "className", "work-thumbnail"] }, displayNone);
+  }
+
+  var lightbox = (function () {
+    var lbox = {},
+        i = 0,
+        len,
+        clone,
+        kids,
+        h = document.getElementById("home"),
+        w = document.getElementById("wrap"),
+        m = document.getElementById("mast"),
+        ef = elementFactory,
+        sh = ef( { div : [ "id", "shade" ] } ),
+        lb = ef( { div : [ "id", "lightbox" ] } ),
+        lb_top = ef( { div : [ "id", "lightbox-top" ] } ),
+        lb_body = ef( { div : [ "id", "lightbox-body" ] } ),
+        lb_copy = ef( { div : [ "id", "lightbox-copy" ] } ),
+        lb_img = ef( { img: [ "src", "../a/christchild.jpg" ] } ),
+        lb_h3 = ef("h3"),
+        lb_sd = ef( { p : [ "className", "shortdesc" ] } ),
+        lb_link = ef( { p : [ "className", "link" ] } ),
+        lb_anchor = ef( { a : [ "href", "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild", "target", "_new" ] } ),
+        lb_ld = ef( { p : [ "className", "longdesc" ] } ),
+        lb_bottom = ef( { div : [ "id", "lightbox-bottom" ] } ),
+        prev = ef( { p : [ "id", "previous" ] } ),
+        next = ef( { p : [ "id", "next" ] } ),
+        close = ef( { p : [ "id", "close" ] } );    
+    
+    // initial text values
+    bW.evts.listenFor(close, "click", hideWorkItem, false);
+    bW.evts.listenFor(sh, "click", hideWorkItem, false);
+    lb_h3.innerHTML = "Christ Child House";
+    lb_sd.innerHTML = "design / markup / scripting";
+    lb_anchor.innerHTML = "http://web.archive.org/http://www.freep.com/christchild";
+    lb_ld.innerHTML = "I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.";
+    prev.innerHTML = "Previous";
+    bW.evts.listenFor(prev, "click", updateWorkItem, false);
+    prev.innerHTML = "Next";
+    bW.evts.listenFor(next, "click", updateWorkItem, false);
+    prev.innerHTML = "Close this window";
+    
+    // insertion
+    lb_copy.appendChild(lb_img);
+    lb_copy.appendChild(lb_h3);
+    lb_link.appendChild(lb_anchor);
+    lb_copy.appendChild(lb_sd);
+    lb_copy.appendChild(lb_link);
+    lb_copy.appendChild(lb_ld);
+    lb_body.appendChild(lb_copy);
+    lb.appendChild(lb_top);
+    lb.appendChild(lb_body);
+    lb.appendChild(lb_bottom);
+    lb.appendChild(prev);
+    lb.appendChild(next);
+    lb.appendChild(close);
+    sh.style.width = bW.viewport.getPageSize()[0] + "px";
+    sh.style.height = bW.viewport.getPageSize()[1] + "px";
+    h.insertBefore(sh, w);
+    w.insertBefore(lb, m);
+
+    // populating the object to return
+    lbox.container = lb;
+    lbox.img = lb_img;
+    lbox.h3 = lb_h3;
+    lbox.sd = lb_sd;
+    lbox.anchor = lb_anchor;
+    lbox.ld = lb_ld;
+    lbox.shade = sh;
+    lbox.current = "christchild";
+
+    return lbox;
+  }());
+
+  function updateWorkItem(evt) {
+    var ev = bW.evts.identify(evt),
+        direction,
+        id;
+    if (ev.src.id == "previous" || ev.src.id == "next") {
+      direction = ev.src.id;
+      id = work[lightbox.current][direction];
+    }
+    else {
+      id = ev.src.id.replace("thumb-", ""); 
+    }
+    lightbox.img.src = work[id].img.src;
+    lightbox.h3.innerHTML = work[id].title;
+    lightbox.sd.innerHTML = work[id].sd;
+    lightbox.anchor.href = work[id].url;
+    lightbox.anchor.innerHTML = work[id].url;
+    lightbox.ld.innerHTML = work[id].ld.join("<br /><br />");
+    lightbox.current = id;
+  }
+
+  function showWorkItem(evt) {
+    var ev = bW.evts.identify(evt),
+        id = ev.src.id.replace("thumb-", "");
+    lightbox.current = id;
+    updateWorkItem(evt);
+    lightbox.container.style.display = "block";
+    lightbox.shade.style.display = "block";
+  }
+
+  function hideWorkItem(evt) {
+    var ev = bW.evts.identify(evt);
+    lightbox.container.style.display = "none";
+    lightbox.shade.style.display = "none";
   }
 
   function batchAddListeners() {
@@ -574,38 +709,26 @@
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", announce, true);
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "click", showWorkItem, false);
     }
   }
-/*
-  wrapElem(document.getElementById("wrap"), { div : ["id", "shade"] });
-*/
   batchAddListeners();
-
-  var the_shade = document.getElementById("shade");
-  
-  the_shade.style.display = "block";
-  the_shade.style.position = "fixed";
-  the_shade.style.opacity = "0.8";
-  the_shade.style.width = bW.viewport.getPageSize()[0] + "px";
-  the_shade.style.height = bW.viewport.getPageSize()[1] + "px";
-  
-  var home = document.getElementById("home");
-  home.style.position = "relative";
-  var rect = home.getBoundingClientRect();
-  
-  alert(rect.height);
 
   function announce(evt) {
    var ev = bW.evts.identify(evt),
         item = document.getElementById("work-current-item"),
         sd = document.getElementById("work-current-shortdesc");
     if (ev.type == "mouseover") {
+      item.style.textIndent = "0px";
+      sd.style.textIndent = "0px";
       item.innerHTML = work[ev.src.parentNode.id].title;
       sd.innerHTML = work[ev.src.parentNode.id].sd;
     }
     if (ev.type == "mouseout") {
-      item.innerHTML = "";
-      sd.innerHTML = "";
+      item.style.textIndent = "-9999px";
+      sd.style.textIndent = "-9999px";
+      item.innerHTML = "I\'ve enjoyed my work, and I continue to grow.";
+      sd.innerHTML = "Recently, I've been learning more about mobile development.";
     }
   };
 
@@ -613,6 +736,9 @@
   var curr_sd = { p : ["id", "work-current-shortdesc"] }; 
 
   batchAddChildren("work", curr_i, curr_sd);
+
+  innerHTML = "I\'ve enjoyed my work, and I continue to grow";
+  innerHTML = "Recently, I've been learning more about mobile development.";
 
 }());
 
