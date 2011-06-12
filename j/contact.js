@@ -396,79 +396,6 @@
     }
   };
 
-  var work = {
-    christchild : new WorkObj (
-      "Christ Child House",
-      document.getElementById("img-christchild"),
-      "../a/christchild_24bit.png",
-      "thumb-christchild",
-      "http://web.archive.org/http://www.freep.com/christchild",
-      "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
-      "design / markup / scripting",
-      [
-      "I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.",
-      "Unfortunately, these templates were overwritten with Freep.com''s redesign in January. Right now, the Wayback Machine has the only live instance of this package as it originally appeared."
-      ],
-      "code",
-      "spubble"
-    ),
-    spubble : new WorkObj (
-      "Spubble Lite",
-      document.getElementById("img-spubble"),
-      "../a/spubble_24bit.png",
-      "thumb-spubble",
-      "See it in the iTunes Store",
-      "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
-      "design",
-      [
-        "As part of a 48-hour hackathon at the University of Michigan, I created most of the interface elements and several icons for this proof-of-concept mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.",
-        "That weekend, I got to work with Wacom\'s draw-directly-on-the-screen-Cintiq display. Very cool. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One."
-      ],
-      "christchild",
-      "naomi"
-    ),
-    naomi : new WorkObj (
-      "naomirpatton.com",
-      document.getElementById("img-naomi"),
-      "../a/naomi_24bit.png",
-      "thumb-naomi",
-      "http://www.naomirpatton.com",
-      "http://www.naomirpatton.com",
-      "design / markup / scripting",
-      ["This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library. It also uses the jQuery lightbox library, which inspired me to write my own lightbox functions for this site."],
-      "spubble",
-      "histvotes"
-    ),
-    histvotes : new WorkObj (
-      "SE Michigan's presidential votes",
-      document.getElementById("img-histvotes"),
-      "../a/histvotes_24bit.png",
-      "thumb-histvotes",
-      "http://james.da.ydrea.ms/historicalvotes",
-      "http://james.da.ydrea.ms/historicalvotes",
-      "design / markup / scripting",
-      [
-        "This huge stats table uses my easing animation script for easier viewing.",
-        "It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.",
-        "I ended up using an improved version of this easing script in the Christ Child House project later that year."
-      ],
-      "naomi",
-      "code"
-    ),
-    code : new WorkObj (
-      "My GitHub repositories",
-      document.getElementById("img-code"),
-      "../a/code_24bit.png",
-      "thumb-code",
-      "https://github.com/parisminton",
-      "https://github.com/parisminton",
-      "miscellaneous code",
-      ["Here's where I store my code, and where you can peek under the hood of much of my stuff."],
-      "histvotes",
-      "christchild"
-    )
-  };
-
 
 
   function darken() {
@@ -556,35 +483,6 @@
 
 
 
-  function WorkObj(title, img_ref, img_src, thumb_id, link, url, sd, ld, previous, next) {
-    if (!(this instanceof WorkObj)) {
-      return new WorkObj(title, img_ref, img_src,  thumb_id, link, url, sd, ld, previous, next);
-    }
-    this.title = title;
-    this.img = new Image();
-    this.img.ref = img_ref;
-    this.img.src = img_src;
-    this.thumb_id = thumb_id;
-    this.link = link;
-    this.url = url;
-    this.sd = sd;
-    this.ld = ld;
-    this.previous = previous;
-    this.next = next;
-  }
-  WorkObj.prototype.announce = function (evt) {
-    var ev = bW.evts.identify(evt),
-        item = document.getElementById("work-current-item"),
-        sd = document.getElementById("work-current-shortdesc");
-    if (ev.type == "mouseover") {
-      item.innerHTML = this.title; 
-      sd.innerHTML = this.sd;
-    }
-    if (ev.type == "mouseout") {
-      item.innerHTML = "";
-      sd.innerHTML = "";
-    }
-  };
 
   // page operations
   function batchAddChildren(container) {
@@ -640,8 +538,6 @@
     }
   };
   
-  var thumb_coords = [ ["left", "-132px"], ["left", "top"] ];
-  
   function wrapSpan(elem, id) {
     if (elem) {
       var sp,
@@ -685,32 +581,6 @@
     }
   };
 
-  for (key in work) {
-    wrapElem(work[key].img.ref, { span : ["id", "thumb-" + key, "className", "work-thumbnail"] }, displayNone);
-  }
-  
-  // set all .workitem h3 and p elements to \"display: none;\"
-  (function() {
-    var ids = ["christchild", "spubble", "naomi", "histvotes", "code"],
-        ids_len = ids.length,
-        i,
-        j,
-        h3s,
-        ps;
-    for (i = 0; i < ids_len; i += 1) {
-      h3s = document.getElementById(ids[i]).getElementsByTagName("h3");
-      h3s_len = h3s.length;
-      ps = document.getElementById(ids[i]).getElementsByTagName("p");
-      ps_len = ps.length;
-      for (j = 0; j < h3s_len; j += 1) {
-        h3s[j].style.display = "none";
-      }
-      for (j = 0; j < ps_len; j += 1) {
-        ps[j].style.display = "none";
-      }
-    }
-  }());
-
   function goHome(evt) {
     var ev = bW.evts.identify(evt);
       window.location = "/";
@@ -720,154 +590,6 @@
     var m = document.getElementById("mast");
     bW.evts.listenFor(m, "click", goHome, false);
   }());
-
-
-  var lightbox = (function () {
-    var lbox = {},
-        i = 0,
-        len,
-        clone,
-        kids,
-        h = document.getElementById("home-page"),
-        w = document.getElementById("wrap"),
-        m = document.getElementById("mast"),
-        ef = elementFactory,
-        sh = ef( { div : [ "id", "shade" ] } ),
-        lb = ef( { div : [ "id", "lightbox" ] } ),
-        lb_top = ef( { div : [ "id", "lightbox-top" ] } ),
-        lb_body = ef( { div : [ "id", "lightbox-body" ] } ),
-        lb_copy = ef( { div : [ "id", "lightbox-copy" ] } ),
-        lb_img = ef( { img: [ "src", "../a/christchild.jpg" ] } ),
-        lb_h3 = ef("h3"),
-        lb_sd = ef( { p : [ "className", "shortdesc" ] } ),
-        lb_link = ef( { p : [ "className", "link" ] } ),
-        lb_anchor = ef( { a : [ "href", "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild", "target", "_new" ] } ),
-        lb_ld = ef( { p : [ "className", "longdesc" ] } ),
-        lb_bottom = ef( { div : [ "id", "lightbox-bottom" ] } ),
-        prev = ef( { p : [ "id", "previous" ] } ),
-        next = ef( { p : [ "id", "next" ] } ),
-        close = ef( { p : [ "id", "close" ] } );    
-    
-    // initial values
-    bW.evts.listenFor(close, "click", hideWorkItem, false);
-    bW.evts.listenFor(sh, "click", hideWorkItem, false);
-    lb_h3.innerHTML = "Christ Child House";
-    lb_sd.innerHTML = "design / markup / scripting";
-    lb_anchor.innerHTML = "http://web.archive.org/http://www.freep.com/christchild";
-    lb_ld.innerHTML = "I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.";
-    prev.innerHTML = "Previous";
-    bW.evts.listenFor(prev, "click", updateWorkItem, false);
-    prev.innerHTML = "Next";
-    bW.evts.listenFor(next, "click", updateWorkItem, false);
-    prev.innerHTML = "Close this window";
-    
-    // insertion
-    lb_copy.appendChild(lb_img);
-    lb_copy.appendChild(lb_h3);
-    lb_link.appendChild(lb_anchor);
-    lb_copy.appendChild(lb_sd);
-    lb_copy.appendChild(lb_link);
-    lb_copy.appendChild(lb_ld);
-    lb_body.appendChild(lb_copy);
-    lb.appendChild(lb_top);
-    lb.appendChild(lb_body);
-    lb.appendChild(lb_bottom);
-    lb.appendChild(prev);
-    lb.appendChild(next);
-    lb.appendChild(close);
-    sh.style.width = bW.viewport.getPageSize()[0] + "px";
-    sh.style.height = bW.viewport.getPageSize()[1] + "px";
-    h.insertBefore(sh, w);
-    w.insertBefore(lb, m);
-
-    // populating the object to return
-    lbox.container = lb;
-    lbox.img = lb_img;
-    lbox.h3 = lb_h3;
-    lbox.sd = lb_sd;
-    lbox.anchor = lb_anchor;
-    lbox.ld = lb_ld;
-    lbox.shade = sh;
-    lbox.current = "christchild";
-    lbox.visible = false;
-
-    return lbox;
-  }());
-
-  function updateWorkItem(evt) {
-    var ev = bW.evts.identify(evt),
-        direction,
-        id;
-    if (ev.src.id == "previous" || ev.src.id == "next") {
-      direction = ev.src.id;
-      id = work[lightbox.current][direction];
-    }
-    else {
-      id = ev.src.id.replace("thumb-", ""); 
-    }
-    lightbox.img.src = work[id].img.src;
-    lightbox.h3.innerHTML = work[id].title;
-    lightbox.sd.innerHTML = work[id].sd;
-    lightbox.anchor.href = work[id].url;
-    lightbox.anchor.innerHTML = work[id].link;
-    lightbox.ld.innerHTML = work[id].ld.join("<br /><br />");
-    lightbox.current = id;
-  }
-
-  function showWorkItem(evt) {
-    var ev = bW.evts.identify(evt),
-        id = ev.src.id.replace("thumb-", "");
-        
-    lightbox.current = id;
-    updateWorkItem(evt);
-    lightbox.container.style.display = "block";
-    darken();
-    lightbox.visible = true;
-  }
-
-  function hideWorkItem(evt) {
-    var ev = bW.evts.identify(evt);
-    lighten();
-    lightbox.container.style.display = "none";
-    lightbox.visible = false;
-  }
-
-  function batchAddListeners() {
-    for (key in work) {
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", announce, true);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", announce, true);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "click", showWorkItem, false);
-    }
-  }
-  batchAddListeners();
-
-  function announce(evt) {
-   var ev = bW.evts.identify(evt),
-        item = document.getElementById("work-current-item"),
-        sd = document.getElementById("work-current-shortdesc");
-    if (ev.type == "mouseover") {
-      item.style.textIndent = "0px";
-      sd.style.textIndent = "0px";
-      item.innerHTML = work[ev.src.parentNode.id].title;
-      sd.innerHTML = work[ev.src.parentNode.id].sd;
-    }
-    if (ev.type == "mouseout") {
-      item.style.textIndent = "-9999px";
-      sd.style.textIndent = "-9999px";
-      item.innerHTML = "I\'ve enjoyed my work, and I continue to grow.";
-      sd.innerHTML = "Recently, I've been learning more about mobile development.";
-    }
-  };
-
-  var curr_i = { p : ["id", "work-current-item"] };
-  var curr_sd = { p : ["id", "work-current-shortdesc"] }; 
-
-  batchAddChildren("work", curr_i, curr_sd);
-
-  innerHTML = "I\'ve enjoyed my work, and I continue to grow";
-  innerHTML = "Recently, I've been learning more about mobile development.";
 
 }());
 

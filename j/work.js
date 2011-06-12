@@ -205,12 +205,7 @@
         document.getElementById("nav-about"),
         document.getElementById("nav-work"),
         document.getElementById("nav-contact")
-      ],
-      cb : document.forms["contact-form"]["contact-conf"],
-      l : document.getElementById("conf"),
-      form_name : document.getElementById("contact-name"),
-      form_email : document.getElementById("contact-email"),
-      form_msg : document.getElementById("contact-msg")
+      ]
     },
     
     // window calculations
@@ -271,129 +266,6 @@
 		  }
 		},
     
-    // form processing
-    forms : {
-      swapCheckbox: function (elem) {
-        if (elem) {
-          var sp,
-              clone = elem.cloneNode(true);
-          clone.style.visibility = "hidden";
-          sp = document.createElement("span");
-          sp.id = "newcheckbox";
-          sp.appendChild(clone);
-          sp.clicked = false;
-          bW.evts.listenFor(sp, "click", bW.forms.updateNewCheckbox, false, [bW.page.cb, bW.page.l]);
-          bW.evts.listenFor(sp, "mouseover", bW.forms.updateNewCheckbox, false);
-          bW.evts.listenFor(sp, "mouseout", bW.forms.updateNewCheckbox, false);
-          elem.parentNode.replaceChild(sp, elem);
-        }
-      },
-    
-      updateNewCheckbox : function (evt) {
-        if (document.forms["contact-form"]["contact-conf"]) {
-          var /* aargs, */
-              cb = document.forms["contact-form"]["contact-conf"],
-              l = document.getElementById("conf");
-              evt = bW.evts.identify(evt);
-              /* aargs = bW.evts.getAargs(bW.forms.updateNewCheckbox, evt.type); */
-          if (evt.type == "mouseover" && (!this.clicked)) {
-            this.style.backgroundPosition = "-18px top";
-          }
-          if (evt.type == "mouseout" && (!this.clicked)) {
-            this.style.backgroundPosition = "left top";
-          }
-          if (evt.type == "click") {
-            if (!this.clicked) {
-              this.clicked = true;
-              this.style.backgroundPosition = "-36px top";
-              cb.checked = true;
-              l.firstChild.nodeValue = "A copy of this message will be sent to you.";
-            }
-            else {
-              this.clicked = false;
-              this.style.backgroundPosition = "left top";
-              cb.checked = false; 
-              l.firstChild.nodeValue = "Want a copy of this message?";
-            }
-          }
-        }
-      },
-      
-      placeholder : function (evt) {
-
-        var default_val,
-            evt = bW.evts.identify(evt);
-        
-        if (evt.src.id == "contact-name") {
-          default_val = "Your name";
-        }
-        if (evt.src.id == "contact-email") {
-          default_val = "Your e-mail address";
-        }
-        if (evt.src.id == "contact-msg") {
-          default_val = "So... a penguin, Optimus Prime and Supreme Court Justice Sonia Sotomayor walk into a bar...";
-        }
-        
-        if (evt.type == "focus") {
-          if (evt.src.value == default_val) {
-            evt.src.value = '';
-            evt.src.style.color = "#666666";
-          }
-        }
-        
-        if (evt.type == "blur") {
-          if (evt.src.value == '') {
-            evt.src.value = default_val;
-            evt.src.style.color = "#fff";
-          }
-        }
-      },
-
-      validate : function (evt) {
-        var re,
-            nonalpha,
-            len,
-            i,
-            white = /\s/,
-            tld = /\.[a-z]{2,4}$|\.museum$|\.travel$/i,
-            evt = bW.evts.identify(evt),
-            alert_msg = ["Please fix the following before sending this e-mail:\n"];
-        if (evt.src.id == "contact-name") {
-          re = /\W/;
-          if (re.test(evt.src.value)) {
-            nonalpha = re.exec(evt.src.value);
-            i;
-            len = nonalpha.length;
-            for (i = 0; i < len; i += 1) {
-              if (nonalpha[i] != " ") {
-                alert_msg.push("  - Your name can only contain alphanumeric characters.");
-              alert(alert_msg.join("\n"));
-              break;
-              }
-            }
-          }
-        }
-        
-        if (evt.src.id == "contact-email") {
-          re = /^[a-z0-9+._-]+@[a-z0-9.-]+\.[a-z]{2,4}$|^[a-z0-9+._-]+@[a-z0-9.-]+\.museum$|^[a-z0-9+._-]+@[a-z0-9.-]+\.travel$/i;
-          if (!re.test(evt.src.value)) {
-            if (white.test(evt.src.value)) {
-              alert_msg.push("  - Your e-mail address can\'t contain any whitespace.");
-            }
-            if (evt.src.value.indexOf('@') == -1) {
-              alert_msg.push("  - Your e-mail address must include one \"at\" sign \(@\).");
-            }
-            if (evt.src.value.indexOf('.') == -1) {
-              alert_msg.push("  - Your e-mail address must include a period.");
-            }
-            if (evt.src.value.indexOf('.') != -1 && !tld.test(evt.src.value)) {
-              alert_msg.push("  - The top-level domain of your e-mail address \(everything after the last period\) needs fixing. It should be between two and four letters long, or the terms \"museum\" or \"travel\".");
-            }
-            alert(alert_msg.join("\n"));
-          }
-        }
-      }
-    }
   };
 
   var work = {
@@ -721,14 +593,13 @@
     bW.evts.listenFor(m, "click", goHome, false);
   }());
 
-
   var lightbox = (function () {
     var lbox = {},
         i = 0,
         len,
         clone,
         kids,
-        h = document.getElementById("home-page"),
+        wp = document.getElementById("work-page"),
         w = document.getElementById("wrap"),
         m = document.getElementById("mast"),
         ef = elementFactory,
@@ -777,7 +648,7 @@
     lb.appendChild(close);
     sh.style.width = bW.viewport.getPageSize()[0] + "px";
     sh.style.height = bW.viewport.getPageSize()[1] + "px";
-    h.insertBefore(sh, w);
+    wp.insertBefore(sh, w);
     w.insertBefore(lb, m);
 
     // populating the object to return
@@ -871,8 +742,6 @@
 
 }());
 
-bW.forms.swapCheckbox(bW.page.cb);
-
 bW.imgswaps.preload("a/", bW.page.nav_lis);
 /*
 bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgswaps.toggleBg, false, bW.page.nav_lis);
@@ -883,20 +752,3 @@ bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgswaps.toggleBg, false, bW.p
 bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
 
 bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
-
-bW.evts.listenFor(bW.page.form_name, "focus", bW.forms.placeholder, false);
-bW.evts.listenFor(bW.page.form_name, "blur", bW.forms.placeholder, false);
-
-bW.evts.listenFor(bW.page.form_email, "focus", bW.forms.placeholder, false);
-bW.evts.listenFor(bW.page.form_email, "blur", bW.forms.placeholder, false);
-
-bW.evts.listenFor(bW.page.form_msg, "focus", bW.forms.placeholder, false);
-bW.evts.listenFor(bW.page.form_msg, "blur", bW.forms.placeholder, false);
-
-bW.evts.listenFor(bW.page.form_name, "blur", bW.forms.validate, false);
-bW.evts.listenFor(bW.page.form_email, "blur", bW.forms.validate, false);
-
-// alert("I can take you there. Just follow me.");
-
-
-

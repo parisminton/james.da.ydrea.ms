@@ -3,20 +3,26 @@ body { font-size: 62.5%; }
 input, select, th, td { font-size: 1em; }
 
 /* ### global ### */
-#welcome h2 { font-family:'News Gothic Std', Arial, Helvetica; font-size: 3.4em; font-weight: bold; }
-#welcome p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
-#lightbox p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#lightbox h3 { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
-#lightbox .shortdesc { font-size: 1.8em; }
-#lightbox .link { font-size: 2.0em; font-weight: bold; }
-#lightbox .longdesc { font-size: 1.8em; }
-#about p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#work p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#work h3 { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
+#welcome h2 { font-family:"news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 3.4em; font-weight: 700; }
+#welcome p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
+#lightbox p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#lightbox h3 { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 3.0em; font-weight: 700; line-height: 1.3em; }
+#lightbox .shortdesc { font-size: 2.0em; }
+#lightbox .link { font-size: 2.0em; }
+#lightbox .longdesc { font-size: 2.0em; line-height: 1.4em; }
+#about p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#about #photocredit { font-size: 1.4em; }
+#work p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#work h3 { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 3.0em; font-weight: 700; line-height: 1.3em; }
 #work .shortdesc { font-size: 2.0em; }
-#work #work-current-item { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 3.0em; font-weight: bold; line-height: 1.3em; }
+#work #work-current-item { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 3.0em; font-weight: 700; line-height: 1.3em; }
 #work #work-current-shortdesc { font-size: 2.0em; }
-#contact p { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
-#contact-name, #contact-email, #contact-msg { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.8em; }
-#conf { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 0.7em; }
-#contact li { font-family: 'News Gothic Std', Arial, Helvetica; font-size: 2.0em; line-height: 1.2 em; }
+#contact p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.2em; line-height: 1.3em; }
+#contact-name, #contact-email, #contact-msg { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 0.8em; }
+#conf { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 0.7em; }
+#contact li { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.0em; line-height: 1.2em; }
+
+/*** ^footer ***/
+#footer { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; line-height: 1.2em; } 
+#footer-nav { font-size: 1.6em; }
+#copyright { font-size: 1.2em; }

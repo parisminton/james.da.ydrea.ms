@@ -1,13 +1,13 @@
 * { outline: none; }
 body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
-#shade { display: none; position: fixed; background-color: #000; z-index: 20; opacity: 0.8; }
+#shade { display: none; position: fixed; background-color: #000; z-index: 20; opacity: 0.0; }
 
 #lightbox { display: none; position: absolute; width: 920px; margin: 60px auto; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; z-index: 30; }
 #lightbox-top { width: 920px; height: 52px; margin: 0; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; }
 #lightbox-body { background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }
 #lightbox-copy { position: relative; width: 580px; margin: 0 auto; padding-bottom: 20px; }
-#lightbox img { margin: 10px auto 18px; }
+#lightbox img { margin: 10px auto 0px; }
 #lightbox h3 { text-align: center; }
 #lightbox .shortdesc { text-align: center; display: block; }
 #lightbox .link { text-align: center; margin: 14px auto; }
@@ -20,49 +20,49 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
 #wrap { position: relative; width: 920px; margin: 0 auto; }
 
-#mast { position: relative; display: block; width: 557px; height: 109px; left: 77px; top: 38px; margin: 0; text-indent: -9999px; background: url('../a/mast_8bit.png') left top no-repeat; z-index: 1; }
+#mast { position: relative; display: block; width: 557px; height: 109px; left: 77px; top: 38px; margin: 0; text-indent: -9999px; background: url('../a/mast_8bit.png') left top no-repeat; z-index: 1; cursor: pointer; }
 
-#toon { position: relative; left: 669px; margin: -109px 0 0; z-index: 9; }
+#toon { position: relative; left: 669px; margin: -109px 0 0; z-index: 5; }
 /*  #ref { position: absolute; left: 0; top: 0; z-index: 1; opacity: 0.5 } */
 
-#nav { position: relative; width: 898px; height: 341px; margin: -183px 0 0; z-index: 5; background: url('../a/cloud_8bit_on.png') left top no-repeat; }
-#nav li { display: block; height: 226px; margin-top: 43px; float: left; text-indent: -9999px; }
+#nav { position: relative; width: 898px; height: 341px; margin: -183px 0 0; z-index: 10; background: url('../a/cloud_8bit_on.png') left top no-repeat; }
+#nav li { position: relative; display: block; height: 226px; margin-top: 43px; float: left; text-indent: -9999px; }
 #nav a { display: block; width: 100%; height: 100%; }
-#nav-about { width: 177px; margin-left: 95px; background: url('../a/about_8bit_off.png') left top no-repeat; }
-#nav-work { width: 177px; margin-left: 84px; background: url('../a/work_8bit_off.png') left top no-repeat; }
-#nav-contact { width: 212px; margin-left: 101px; background: url('../a/contact_8bit_off.png') left top no-repeat; }
+#nav-about { width: 177px; left: 95px; background: url('../a/about_8bit_off.png') left top no-repeat; }
+#nav-work { width: 177px; left: 179px; background: url('../a/work_8bit_off.png') left top no-repeat; }
+#nav-contact { width: 212px; left: 280px; background: url('../a/contact_8bit_off.png') left top no-repeat; }
 
 #content { margin: 0 auto; background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }
 
 #copy { position: relative; width: 680px; margin: 0 auto; }
 
-#welcome { display: none; top: 20px; }
+#welcome { top: 20px; }
 #welcome h2 { margin-bottom: 10px; } 
 #welcome p { width: 700px; margin: 0 0 20px 0; } 
 
 #about h2, #work h2, #contact h2 { display: none; }
-#about p, #work p { width: 660px; margin: 0 0 20px 0; }
+#about p { width: 650px; margin: 0 0 20px 0; }
 #about, #work, #contact { padding: 0 0 50px }
+#about-page #nav-about { background: url('../a/about_8bit_on.png') left top no-repeat; } 
 
-#about { display: none; }
+#portrait { width: 260px; height: 307px; float: left; margin: -6px 20px 20px -10px; }
+#photocredit { position: relative; left: 12px; top: -10px; }
 
-/* #work { display: none; } */
-#work h3 { text-align: center; display: none; }
+#work { text-align: center; }
+#work img { margin: 0 auto; }
+#work h3 { text-align: center; }
 .work-thumbnail { display: block; width: 132px; height: 132px; cursor:pointer; float: left; }
 #thumb-christchild { background: url('../a/thumb_christchild_sprite_8bit.png') left top no-repeat; }
 #thumb-spubble { background: url('../a/thumb_spubble_sprite_8bit.png') left top no-repeat; }
 #thumb-naomi { background: url('../a/thumb_naomi_sprite_8bit.png') left top no-repeat; }
 #thumb-histvotes { background: url('../a/thumb_histvotes_sprite_8bit.png') left top no-repeat; }
 #thumb-code { background: url('../a/thumb_code_sprite_8bit.png') left top no-repeat; }
-.shortdesc { text-align: center; display: none; }
-#work .link { display: none; }
-.longdesc { display: none; }
+#work .shortdesc { text-align: center; }
+#work .link { margin: 10px auto; }
+#work .longdesc { margin: 0 auto 20px; text-align: left; }
 #work-current-item { text-align: center; padding-top: 20px; margin: 0; clear: both; }
-#work-current-shortdesc { text-align: center }
-/* #work #christchild { position: absolute; } */
-
-
-#contact { display: none; }
+#work-current-shortdesc { text-align: center; margin: 0; }
+#work-page #nav-work { background: url('../a/work_8bit_on.png') left top no-repeat; } 
 
 #contact-form { position: relative; left: 150px; width: 376px; margin: 0 0 50px 0; }
 label { display: none; }
@@ -82,4 +82,15 @@ label { display: none; }
 #linkedin { background-position: left -71px; }
 #stackexchange { height: 28px; background-position: left -107px; }
 #lastfm { background-position: left -142px; margin-top: -4px; }
-#footer { position: relative; height: 100px; padding: 120px 0 0; background: url('../a/shelf_bottom_8bit.png') 48px top no-repeat; } 
+#contact-page #nav-contact { background: url('../a/contact_8bit_on.png') left top no-repeat; } 
+
+/*** ^footer ***/
+#footer { position: relative; height: 100px; padding: 120px 0 0; text-align: center; background: url('../a/shelf_bottom_8bit.png') 48px top no-repeat; } 
+#footer-nav { margin: 10px auto 20px; }
+#footer-logos img { margin: 10px 5px; }
+#copyright { margin: 10px auto 30px; }
+
+/*** ^sandboxing ***/
+#home-page #about, #home-page #contact, #home-page #work, #home-page #footer-nav { display: none; }
+#home-page #nav { background: url('../a/cloud_8bit_off.png') left top no-repeat; }
+#home-page #content, #home-page #footer { background: none; }

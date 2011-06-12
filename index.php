@@ -23,6 +23,8 @@
     <meta name="DC.subject" content="james thomas, web development" />
     <title>James Thomas' portfolio :: james.da.ydrea.ms</title>  
     <link rel="stylesheet" href="c/main.css" type="text/css"/>
+    <script type="text/javascript" src="http://use.typekit.com/lqc4nct.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     
     <?php
 
@@ -74,21 +76,19 @@
       
       };
 
-//      echo "I can take you there. Just follow me.";
-
     ?>
 
   </head>
 
-  <body id="home"> 
+  <body id="home-page"> 
     <div id="wrap">
       <!-- <img id="ref" src="a/reference_8bit.png" alt="Just a reference" width="921" height="522" /> -->
       <h1 id="mast">James Thomas is a Web developer and designer. He has more than a decade of experience building and maintaining digital content for news organizations.</h1>
       <img id="toon" src="a/james_logo_leadclouds_8bit.png" alt="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." title="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." width="252" height="360" />
       <ul id="nav">
-        <li id="nav-about"><a href="#">Work experience and interests</a></li>
-        <li id="nav-work"><a href="#">See my work</a></li>
-        <li id="nav-contact"><a href="#">Call, e-mail or find me on a social online</a></li>
+        <li id="nav-about"><a href="about.html">Work experience and interests</a></li>
+        <li id="nav-work"><a href="work.html">See my work</a></li>
+        <li id="nav-contact"><a href="contact.html">Call, e-mail or find me online</a></li>
       </ul>
       <div id="content">
         <div id="copy">
@@ -121,17 +121,17 @@
             
             <!-- spubble -->
             <div id="spubble" class="workitem">
-              <img id="img-spubble" src="a/christchild.jpg" alt="Alternate text goes here." />
+              <img id="img-spubble" src="a/spubble.jpg" alt="Alternate text goes here." />
               <h3><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new">Spubble Lite</a></h3>
               <p class="shortdesc">design</p>
               <p class="link"><a href="http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8" target="_new">See it in the iTunes Store</a></p>
-              <p class="longdesc">As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.</p>
-              <p class="longdesc">That weekend, I got to work with Wacom's draw-directly-on-screen-Cintiq display. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One.</p>
+              <p class="longdesc">As part of a University of Michigan 48-hour hackathon, I created most of the interface elements and several icons for this proof-of-concept mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.</p>
+              <p class="longdesc">That weekend, I got to work with Wacom's draw-directly-on-the-screen-Cintiq display. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One.</p>
             </div>
             
             <!-- naomi -->
             <div id="naomi" class="workitem">
-              <img id="img-naomi" src="a/christchild.jpg" alt="Alternate text goes here." />
+              <img id="img-naomi" src="a/naomi.jpg" alt="Alternate text goes here." />
               <h3><a href="http://www.naomirpatton.com" target="_new">naomirpatton.com</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
               <p class="link"><a href="http://www.naomirpatton.com" target="_new">http://www.naomirpatton.com</a></p>
@@ -140,10 +140,10 @@
 
             <!-- historicalvotes  -->
             <div id="histvotes" class="workitem">
-              <img id="img-histvotes" src="a/christchild.jpg" alt="Alternate text goes here." />
+              <img id="img-histvotes" src="a/histvotes.jpg" alt="Alternate text goes here." />
               <h3><a href="http://james.da.ydrea.ms" target="_new">SE Michigan's presidential votes</a></h3>
               <p class="shortdesc">design / markup / scripting</p>
-              <p class="link"><a href="http://james.da.ydrea.ms/historicalvotes" target="_new">http://www.naomirpatton.com</a></p>
+              <p class="link"><a href="http://james.da.ydrea.ms/historicalvotes" target="_new">http://james.da.ydrea.ms/historicalvotes</a></p>
               <p class="longdesc">This is a huge stats table that uses a slider animation for easier viewing.</p>
               <p class="longdesc">It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.</p>
               <p class="longdesc">I ended up using an improved version of this slider script in the Christ Child House project later that year.</p>
@@ -151,9 +151,10 @@
 
             <!-- github  -->
             <div id="code" class="workitem">
-              <img id="img-code" src="a/christchild.jpg" alt="Alternate text goes here." />
+              <img id="img-code" src="a/code.jpg" alt="Alternate text goes here." />
               <h3><a href="https://github.com/parisminton" target="_new">My GitHub repositories</a></h3>
               <p class="shortdesc">miscellaneous code</p>
+              <p class="link"><a href="https://github.com/parisminton" target="_new">https://github.com/parisminton</a></p>
               <p class="longdesc">Here's where I store my code, and where you can peek under the hood of much of my stuff.</p>
             </div>
           </div><!-- end #work -->
@@ -195,7 +196,14 @@
         </div><!-- end #copy -->
       </div><!-- end #content -->
       
-      <div id="footer"><p>A footer goes here?</p></div>
+      <div id="footer">
+        <p id="footer-nav"><a href="/">Home</a> | <a href="about.html">About</a> | <a href="work.html">Work</a> | <a href="contact.html">Contact</a></p>
+        <div id="footer-logos">
+          <img src="a/conday_logo_8bit.png" alt="This site rolls with Conday." title="This site rolls with Conday." />
+          <a href="http://www.dreamhost.com" target="_new"><img src="a/dreamhost_logo_8bit.png" alt="This site rests at Dreamhost." title="This site rests at Dreamhost." /></a>
+        </div>
+        <p id="copyright">All content and design &copy; 2005-2011 James Thomas (parisminton) unless noted otherwise. All rights reserved.</p>
+      </div>
     </div>
   </body>
   <script type="text/javascript" src="j/main.js"></script>
