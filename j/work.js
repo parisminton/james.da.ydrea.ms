@@ -278,8 +278,8 @@
       "http://web.archive.org/web/20090818101308/http://www.freep.com/christchild",
       "design / markup / scripting",
       [
-      "I designed and coded this Emmy-winning presentation about boys in foster care while I was at the Detroit Free Press. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor Pat and I turned them into SaxoTech templates.",
-      "Unfortunately, these templates were overwritten with Freep.com''s redesign in January. Right now, the Wayback Machine has the only live instance of this package as it originally appeared."
+      "I designed and coded this Emmy-winning presentation about boys in foster care while I was at the <a href=\"http://www.freep.com\" target=\"_new\">Detroit Free Press</a>. My editors got detailed Illustrator mock-ups for approval, then I took all the .ai files to Photoshop for layer work and cutting. I hand-coded all pages using XHTML, CSS and JavaScript, then my editor <a href=\"http://www.linkedin.com/in/pbyrne\" target=\"_new\">Pat Byrne</a> and I turned them into SaxoTech templates.",
+      "Unfortunately, these templates were overwritten with <a href=\"http://www.freep.com\" target=\"_new\">Freep.com</a>\'s redesign in January. Right now, the Wayback Machine has the only live instance of this package as it originally appeared."
       ],
       "code",
       "spubble"
@@ -293,7 +293,7 @@
       "http://itunes.apple.com/us/app/spubble-lite/id408355153?mt=8",
       "design",
       [
-        "As part of a 48-hour hackathon at the University of Michigan, I created most of the interface elements and several icons for this proof-of-concept mobile app designed to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.",
+        "As part of a 48-hour hackathon at the University of Michigan, I created most of the interface elements and several icons for this mobile app conceived by <a href=\"http://www.linkedin.com/in/jasteinerman\" target=\"_new\">Jake Steinerman</a> to help autistic kids learn and communicate. I created everything in Illustrator, then brought the vectors to Photoshop for resizing, cutting and layer work. I worked with the coding team side-by-side and virtually in a shared repository.",
         "That weekend, I got to work with Wacom\'s draw-directly-on-the-screen-Cintiq display. Very cool. Thanks, U-M, and thanks to Dan Fessahazion for letting us crash in Design Lab One."
       ],
       "christchild",
@@ -307,7 +307,7 @@
       "http://www.naomirpatton.com",
       "http://www.naomirpatton.com",
       "design / markup / scripting",
-      ["This portfolio site for Detroit Free Press reporter Naomi R. Patton uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library. It also uses the jQuery lightbox library, which inspired me to write my own lightbox functions for this site."],
+      ["This portfolio site for <a href=\"http://www.freep.com\" target=\"_new\">Detroit Free Press</a> reporter <a href=\"http://www.linkedin.com/in/naomirpatton\" target=\"_new\">Naomi R. Patton</a> uses <a href=\"http://www.typekit.com\" target=\"_new\">Typekit</a> to serve fonts to browsers that support the @font-face declaration. It also uses the jQuery lightbox library, which inspired me to write my own lightbox functions for this site."],
       "spubble",
       "histvotes"
     ),
@@ -321,8 +321,9 @@
       "design / markup / scripting",
       [
         "This huge stats table uses my easing animation script for easier viewing.",
-        "It was to be a project for the Detroit Free Press Web site during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company.",
-        "I ended up using an improved version of this easing script in the Christ Child House project later that year."
+        "It was to be a project for the <a href=\"http://www.freep.com\" target=\"_new\">Detroit Free Press Web site</a> during the 2008 presidential election, but was shelved when we needed to shift gears to accomodate an even bigger election package from Gannett, our parent company. It was never completed, and this is just a model to show off its functionality.",
+        "I ended up using an improved version of this easing script in the Christ Child House project later that year.",
+        "Click on the red buttons below the table to bring tallies into view."
       ],
       "naomi",
       "code"
