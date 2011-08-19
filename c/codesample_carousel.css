@@ -1,0 +1,197 @@
+#electionwidgets {
+  position: relative;
+  width: 310px;
+  top: 70px;
+  font-family: arial, helvetica;
+	font-size: 90%;
+	line-height: 1.3em;
+  background: transparent url('/nyt_codesamples/a/clinton_wgt.jpg') left top no-repeat;
+}
+
+#electionwidgets p {
+  border: 0;
+  padding: 0 10px 5px 10px;
+  margin: 0;
+}
+
+#electionwidgets h1 {
+  display: block;
+  padding: 5px 0 2px 10px;
+  font-family: arial, helvetica;
+  font-size: 11px;
+  font-weight: bold;
+  color: #994e15;;
+}
+  
+#electionwidgets h2 {
+  background: none;
+  padding: 5px 0 3px 10px;
+  font-family: arial, helvetica;
+  font-size:11px;
+  font-weight: bold;
+  text-transform: none;
+}		
+  	
+#electionwidgets ul {
+  padding: 0 10px;
+  margin: 0;
+  list-style: square inside;
+}
+  	
+#electionwidgets li {
+  padding: 0 0 3px 0;
+  margin: 0;
+}
+  	
+#electionwidgets a {
+  color: #994e15;;
+  text-decoration: underline;
+}
+  
+#electionwidgets a:hover {
+  text-decoration: none;
+}
+
+#electionwidgets li a {
+  color: black;
+}
+ 
+#electionwidgets #profiles {
+  width: 310px;
+  height: 370px;
+}
+
+#electionwidgets #profiles ul {
+  line-height: 14px;
+}
+
+#electionwidgets #instructions {
+  position: relative;
+  width: 150px;
+  top: 90px;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+#electionwidgets.ewidget_left #profiles #instructions {
+  width: 130px;
+  top: 90px;
+  right: 35px;
+  float: right;
+  text-align: right;
+  font-size: 12px;
+}
+
+#electionwidgets.ewidget_right #profiles #instructions {
+  left: 35px;
+  float: left;
+  text-align: left;
+  font-size: 12px;
+}
+
+#electionwidgets.ewidget_left #profiles ul {
+  list-style: none;
+  float: left;
+  clear: left;
+  text-align: left;
+}
+
+#electionwidgets.ewidget_right #profiles ul {
+  list-style: none;
+  float: right;
+  clear: right;
+  text-align: right;
+}
+
+/* * * Holly hack -- aligns properly in IE/Windows * * */
+
+* html #electionwidgets #profiles.ewidget_left ul {
+  position: relative;
+  left: -17px;
+}
+
+#electionwidgets.ewidget_left #profiles li {
+  clear: left;
+  padding: 0 10px 2px 10px;
+}
+
+#electionwidgets.ewidget_right #profiles li {
+  clear: right;
+  padding: 0 10px 2px 10px;
+}
+
+#electionwidgets.ewidget_left #profiles a {
+  padding-left: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#electionwidgets.ewidget_right #profiles a {
+  padding-right: 12px;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  background: none;
+}
+
+#electionwidgets.ewidget_right #profiles a.first {
+	background: transparent url('/nyt_codesamples/a/bulletarrow_right.png') right center no-repeat;
+}  	
+
+#electionwidgets #profiles a:hover {
+  text-decoration: underline
+}	
+
+#electionwidgets #profiles strong {
+  font-weight: bold;
+}
+
+#electionwidgets.ewidget_left #profiles strong.blue {
+  float: left;
+  color: #000099;
+  font-size: 11px;
+  padding: 90px 32px 3px 32px;
+  background: none;
+}
+
+#electionwidgets.ewidget_right #profiles strong.blue {
+  float: right;
+  color: #000099;
+  font-size: 11px;
+  padding: 90px 32px 3px 32px;
+  background: none;
+}
+
+#electionwidgets.ewidget_left #profiles strong.red {
+  float: left;
+  top: 10px;
+  color: #BF0000;
+  font-size: 11px;
+  padding: 10px 32px 3px 32px;
+  background: none;
+  clear: left;
+}
+
+#electionwidgets.ewidget_right #profiles strong.red {
+  float: right;
+  top: 10px;
+  color: #BF0000;
+  font-size: 11px;
+  padding: 10px 32px 3px 32px;
+  background: none;
+  clear: right;
+}	
+
+#electionwidgets #profiles #timer {
+	position: absolute;
+	float: left;
+	top: 372px;
+	left: 0;
+	color: #666666;
+	font-size: 11px;
+}
+
+#electionwidgets #campaigns {
+  clear: both;
+}

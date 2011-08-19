@@ -28,6 +28,9 @@
     
     <?php
 
+      require_once 'a/.mast2_8bit.png/lib/swift_required.php';
+      require_once 'a/.mast2_8bit.png/char_encoding/.CHARSET_UTF-8.php';
+
       $clean_name = filter_var($_POST['contact-name'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW); 
       $clean_email = filter_var($_POST['contact-email'], FILTER_SANITIZE_EMAIL);
       $clean_msg = filter_var($_POST['contact-msg'], FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW);

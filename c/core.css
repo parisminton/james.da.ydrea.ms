@@ -94,3 +94,20 @@ label { display: none; }
 #home-page #about, #home-page #contact, #home-page #work, #home-page #footer-nav { display: none; }
 #home-page #nav { background: url('../a/cloud_8bit_off.png') left top no-repeat; }
 #home-page #content, #home-page #footer { background: none; }
+
+/*** ^code-page ***/
+#code-page #mast { position: relative; left: 0; top: 20px; width: 458px; height: 72px; background: transparent url('../a/code_samples_mast_8bit.png') left top no-repeat; /* background-attachment: fixed; */ }
+#code-page #toon { position: absolute; left: 710px; top: 0; margin: 0; }
+#code-page #nav { position: relative; width: 690px; height: 90px; margin: 40px 0; background: none; }
+#code-page #nav li { position: relative; width: 230px; height: 90px; margin: 0; background: none; text-indent: 0 }
+#nav-carousel a strong, #nav-balloon a strong, #nav-widgetry a strong { margin: 0 0 10px 0; }
+#code-page #content { background: none; }
+#code-page #copy { width: 920px; margin: 0; }
+#code-page h2 { margin-bottom: 10px; } 
+#code-page p { margin: 0 0 20px 0; }
+#code-page .assets { width: 520px; float: right; }
+#code-page .windo { width: 520px; height: 840px; text-align: center; background: url('../a/code_samples_window_long_24bit.png') left top no-repeat; }
+#electionwidgets { margin: 0 auto; }
+#carousel-form label { display: inline; position: absolute; top: 490px; margin: 0 0 0 -10px; }
+#carousel-text { position: relative; left: 0; top: 130px; width: 350px; height: 220px; margin: 10px 0 30px 0; resize: none; background: none; border: none; }
+#code-page #footer { background: none;}

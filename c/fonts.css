@@ -26,3 +26,11 @@ input, select, th, td { font-size: 1em; }
 #footer { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; line-height: 1.2em; } 
 #footer-nav { font-size: 1.6em; }
 #copyright { font-size: 1.2em; }
+
+/*** ^code-page ***/
+#nav-carousel a, #nav-balloon a, #nav-widgetry a { font-family:"news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; text-decoration: none;}
+#nav-carousel a strong, #nav-balloon a strong, #nav-widgetry a strong { font-size: 3.0em; font-weight: 700;}
+#nav-carousel a em, #nav-balloon a em, #nav-widgetry a em { display: block; width: 150px; font-size: 1.6em; line-height: 1.3em; }
+#code-page #content h2 { font-family:"news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 3.4em; font-weight: 700; }
+#code-page #content p { font-family: "news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 2.4em; line-height: 1.2em; }
+#carousel-form label { font-family:"news-gothic-std-1","news-gothic-std-2", Arial, Helvetica; font-size: 1.8em; font-weight: 700; }
