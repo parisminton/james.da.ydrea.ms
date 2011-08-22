@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 
 
 <!--          :: CONCRETE ::
@@ -14,7 +14,7 @@
    once again, back is the incredible  -->
 
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="author" content="James Thomas" />
@@ -31,19 +31,26 @@
 
   <body id="code-page"> 
     <div id="wrap">
-
-      <h1 id="mast">James Thomas is a Web developer and designer. He has more than a decade of experience building and maintaining digital content for news organizations. Here's a look at some of his code.</h1>
+    
+      <header>
+        <div id="masthead">
+          <h1 id="mast">James Thomas is a Web developer and designer. He has more than a decade of experience building and maintaining digital content for news organizations. Here's a look at some of his code.</h1>
+          
+          <nav>
+            <ul>
+              <li id="nav-carousel"><a href="#navcarousel" onclick="scroller.scrollPage('carouselanchor'); return false;"><strong>Carousel</strong><br /> <em>A rotating 2008 election page widget</em></a></li>
+              <li id="nav-balloon"><a href="#navballoon" onclick="scroller.scrollPage('balloonanchor'); return false;"><strong>Balloon</strong><br /> <em>Inauguration Day photo galleries</em></a></li>
+              <li id="nav-widgetry"><a href="#navwidget" onclick="scroller.scrollPage('widgetanchor'); return false;"><strong>Widgetry</strong><br /> <em>A Google Gadgets implementation</em></a></li>
+            </ul>
+          </nav>
+          
+          <img id="toon" src="/a/code_samples_toon_8bit2.png" alt="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." title="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." width="80" height="84">
+        </div>
+      </header>
       
-      <img id="toon" src="/a/code_samples_toon_8bit.png" alt="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." title="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." width="193" height="202">
-      
-      <ul id="nav">
-        <li id="nav-carousel"><a href="about.html"><strong>Carousel:</strong><br /> <em>A rotating 2008 election page widget</em></a></li>
-        <li id="nav-balloon"><a href="work.html"><strong>Balloon:</strong><br /> <em>Inauguration Day photo galleries</em></a></li>
-        <li id="nav-widgetry"><a href="contact.html"><strong>Widgetry:</strong><br /> <em>A Google Gadgets implementation</em></a></li>
-      </ul>
-      <div id="content">
+      <section id="content">
         <div id="copy">
-          <div id="carousel">
+          <article id="carousel">
           
             <div class="assets">
               <div class="windo">
@@ -77,9 +84,8 @@
                 
                 <p id="carousel-wrap-text">
                   <form id="carousel-form" action="http://james.da.ydrea.ms" method="post">
-                    <label for="carousel-text">Inspect the text: Code you can paste</label>
-                    <textarea id="carousel-text" name="carousel-text" rows="10" cols="50">              
-<html>
+                    <label for="carousel-text">Inspect the text: Annotated code</label>
+                    <textarea id="carousel-text" name="carousel-text" rows="10" cols="50"><html>
 <head>
 <title>Code sample</title>
 
@@ -438,48 +444,79 @@
 	delayChangeBg();
 	delayCountDown();
 	
-	/* alert('Dilla put me up on all y\'all in Japan'); */
-
-	
 </script>
 
-</html>
-
-
-
-
-
-</textarea>
+</html></textarea>
                   </form>
                 </p>
               </div><!-- end .windo -->
             </div><!-- end .assets -->
             
-            <h2>An exercise in using JavaScript objects</h2>
-            <p>This rotating widget that ran on Freep.com's Politics category page for most of 2008 offered me a chance to create a class of JavaScript objects and coordinate their shared properties.</p>
+            <h2><a name="navcarousel" id="carouselanchor">An exercise in using JavaScript objects</a></h2>
+            <p>This rotating widget that ran on Freep.com's Politics category page for most of 2008 offered me a chance to create a class of JavaScript objects and coordinate their shared properties through a dozen instances.</p>
             <p>I know, I know... Technically, JavaScript doesn't have classes.</p>
-            <p>Still, each candidate has several properties in common with the others. They all have an image with identical dimensions that appears when they're on display. Those images all need to be pre-cached, and they all need to declare the path where my script can find them. They are all either left- or right-aligned. All had a destination: a page full of in-depth coverage that readers could see by clicking on their names.</p>
-            <p>My job was to swap these distinct values with new ones every 5 seconds.</p>
-          </div><!-- end #carousel -->
+            <p>Still, each candidate here has several properties in common with the others. My job was to sync the changes in these distinct values every 5 seconds.</p>
+            <p>They all have an image with identical dimensions. Those images all need to be pre-cached, and they all need to declare their path. They are all either left- or right-aligned. All had a destination: a page full of in-depth coverage that readers could see by clicking on their names. All this information was stored as a discrete property in each object.</p>
+            <p>I made all the visuals, starting the design in Illustrator and knocking out, sizing and, when necessary, fading each candidate's image in Photoshop. For many of the candidates, the photo that appears is the only one we had rights to publish on the Web. This made the layout challenging, and forced me to align some of the photos right and the rest left.</p>
+            <p>It was a bad idea to have navigation elements jump from one side to the other, even with the timer. Those links should've been somewhere that didn't require them to move.</p>
+          </article><!-- end #carousel -->
           
-          <div id="balloon">
-            <div class="assets"></div>
-            <h2>People seem to dig my expressive ability.</h2>
-            <p>It's all been fun ... the journalism, the programming, the graphic design. But it's also been meaningful.</p>
-            <p>My goal is to keep that balance of meaningful, challenging and fun work throughout my career.</p>
-          </div><!-- end #balloon -->
+          <article id="balloon">
+            <div class="assets">
+              <div class="windo">
+
+                 
+                <p>Something new will go here.</p>
+                
+                <p id="balloon-wrap-text">
+                  <form id="balloon-form" action="http://james.da.ydrea.ms" method="post">
+                    <label for="balloon-text">Inspect the text: Annotated code</label>
+                    <textarea id="balloon-text" name="carousel-text" rows="10" cols="50">
+                    
+                    </textarea>
+                  </form>
+                </p>
+              </div><!-- end .windo -->
+            </div><!-- end .assets -->
+            
+            <h2><a name="navballoon" id="balloonanchor">Jedi Mind Tricks: Making divs levitate</a></h2>
+            <p>My friend and co-worker Brian Todd was designing a special front page presence for Obama's inauguration in early 2009. He wanted to include a lot of links to photo galleries in a small space, without getting below the first screen. How would we display the gallery titles?</p>
+            <p>I made these translucent balloons to make the gallery titles appear on hover. It's an effect we've all seen, but I'd never done before. It involves almost as much trickery with CSS as with JavaScript.</p>
+            <p>Still, each candidate here has several properties in common with the others. My job was to sync the changes in these distinct values every 5 seconds.</p>
+            <p>My friend and co-worker Brian Todd was designing a special front page presence for Obama's inauguration in early 2009. He wanted to include a lot of links to photo galleries in a small space, without getting below the first screen. How would we display the gallery titles?</p>
+            <p>I made these translucent balloons to make the gallery titles appear on hover. It's an effect we've all seen, but I'd never done before. It involves almost as much trickery with CSS as with JavaScript.</p>
+            <p>Still, each candidate here has several properties in common with the others. My job was to sync the changes in these distinct values every 5 seconds.</p>
+          </article><!-- end #balloon -->
           
-          <div id="widgetry">
-            <div class="assets"></div>
-            <h2>People seem to dig my expressive ability.</h2>
-            <p>It's all been fun ... the journalism, the programming, the graphic design. But it's also been meaningful.</p>
-            <p>My goal is to keep that balance of meaningful, challenging and fun work throughout my career.</p>
-          </div><!-- end #widgetry -->
+          <article id="widgetry">
+            <div class="assets">
+              <div class="windo">
+
+                <img src="../a/google_gadget_mini_8bit.png" alt="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." title="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." />
+                 
+                
+                <p id="widgets-wrap-text">
+                  <form id="widgets-form" action="http://james.da.ydrea.ms" method="post">
+                    <label for="widgets-text">Inspect the text: Annotated code</label>
+                    <textarea id="widgets-text" name="carousel-text" rows="10" cols="50">You're my million dollar baby.</textarea>
+                  </form>
+                </p>
+              </div><!-- end .windo -->
+            </div><!-- end .assets -->
+            
+            <h2><a name="navwidget" id="widgetanchor">Channeling our content through Google's API</a></h2>
+            <p>This rotating widget that ran on Freep.com's Politics category page for most of 2008 offered me a chance to create a class of JavaScript objects and coordinate their shared properties through a dozen instances.</p>
+            <p>I know, I know... Technically, JavaScript doesn't have classes.</p>
+            <p>Still, each candidate here has several properties in common with the others. My job was to sync the changes in these distinct values every 5 seconds.</p>
+            <p>They all have an image with identical dimensions. Those images all need to be pre-cached, and they all need to declare their path. They are all either left- or right-aligned. All had a destination: a page full of in-depth coverage that readers could see by clicking on their names. All this information was stored as a discrete property in each object.</p>
+            <p>I made all the visuals, starting the design in Illustrator and knocking out, sizing and, when necessary, fading each candidate's image in Photoshop. For many of the candidates, the photo that appears is the only one we had rights to publish on the Web. This made the layout challenging, and forced me to block some of the photos to the right and the rest to the left.</p>
+            <p>It was a bad idea to have navigation elements jump from one side to the other, even with the timer. Those links should've been somewhere that didn't require them to move.</p>
+          </article><!-- end #widgetry -->
 
           
             
         </div><!-- end #copy -->
-      </div><!-- end #content -->
+      </section><!-- end #content -->
       
       <div id="footer">
         <p id="footer-nav"><a href="/">Home</a> | <a href="about.html">About</a> | <a href="work.html">Work</a> | <a href="contact.html">Contact</a></p>
@@ -493,4 +530,5 @@
   </body>
   <script type="text/javascript" src="j/main.js"></script>
   <script type="text/javascript" src="j/codesample_carousel.js"></script>
+  <script type="text/javascript" src="j/scroller.js"></script>
 </html>
