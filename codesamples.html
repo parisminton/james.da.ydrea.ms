@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+
+
+<!--          :: CONCRETE ::
+  ____  _____  ____      __  ___ ____ ___
+ /    \/     \|    \    |  |/   \ |  |   |
+|  |__    |      |  | __|  |  |      |   |
+|   __|   |      |  |/        |   |\__   |
+|  |      |      |      |     |   |___|  |
+ \____/\_____/|__|__|\_____|\___________/
+ 
+              :: DAYDREAMS ::
+
+   once again, back is the incredible  -->
+
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="author" content="James Thomas" />
+    <meta name="description" content="James Thomas is Web developer and designer with more than 14 years of experience building and maintaining digital content, mostly for large news organizations." />
+    <meta name="DC.creator" content="James Thomas" />
+    <meta name="DC.subject" content="james thomas, web development" />
+    <title>James Thomas' code samples :: james.da.ydrea.ms</title>  
+    <link rel="stylesheet" href="c/main.css" type="text/css"/>
+    <link rel="stylesheet" href="c/codesample_carousel.css" type="text/css"/>
+    <link rel="stylesheet" href="c/codesample_balloon.css" type="text/css"/>
+    <script type="text/javascript" src="http://use.typekit.com/lqc4nct.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  </head>
+
+  <body id="code-page"> 
+    <div id="wrap">
+    
+      <header>
+        <div id="masthead">
+          <h1 id="mast">James Thomas is a Web developer and designer. He has more than a decade of experience building and maintaining digital content for news organizations. Here's a look at some of his code.</h1>
+          
+          <nav>
+            <ul id="slider">
+              <li id="nav-carousel"><a href="#navcarousel"><strong>Carousel</strong><br /> <em>A rotating 2008 election page widget</em></a></li>
+              <li id="nav-balloon"><a href="#navballoon"><strong>Balloon</strong><br /> <em>Inauguration Day photo galleries</em></a></li>
+              <li id="nav-widgetry"><a href="#navwidget"><strong>Widgetry</strong><br /> <em>A Google Gadgets implementation</em></a></li>
+            </ul>
+          </nav>
+          
+          <a href="/" title="Go back to the home page."><img id="toon" src="/a/code_samples_toon_8bit.png" alt="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." title="Don't let James' stoic expression fool you... he's passionate about effective storytelling, handsome design and clean code." width="80" height="84"></a>
+        </div>
+      </header>
+      
+      <section id="content">
+        <div id="copy">
+          <article id="carousel">
+          
+            <div class="assets">
+              <div class="windo">
+                <div class="windo-item">
+                 
+                   <div id="electionwidgets" class="ewidget_right">
+                     <div id="profiles">
+                       <p id="instructions">Click on a candidate's name to learn more.</p>
+                       <strong class="blue">DEMS</strong>
+                       <ul id="dems">
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115070" name="hillary" class="first">Clinton</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115070" name="john">Edwards</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="rudy">Giuliani</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="mike">Gravel</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="dennis">Kucinich</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115097" name="barack">Obama</a></li>
+                       </ul>
+                           
+                       <strong class="red">GOP</strong>
+                       <ul id="gop">
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115105" name="mike">Huckabee</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115105" name="duncan">Hunter</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="johnm">McCain</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="ron">Paul</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="mitt">Romney</a></li>
+                         <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="fred">Thompson</a></li>
+                       </ul>
+                       <p id="timer">Next frame in <strong>5</strong> seconds</p> 
+                     </div><!-- end #profiles -->
+                   </div><!-- end #electionwidgets -->
+                  
+                  <p id="carousel-wrap-text">
+                    <form id="carousel-form" action="http://james.da.ydrea.ms" method="post">
+                      <label for="carousel-text">Inspect the text: Annotated code</label>
+                      <div class="textarea-wrapper">
+                        <textarea id="carousel-text" name="carousel-text" rows="10" cols="50"><html>
+  <head>
+  <!-- ### This was a test page, so I used a template without any metadata or doctype declarations. ### -->
+  
+  <title>Election widget</title>
+  
+  <script>
+  
+    var affil_domain = 'freep'; 
+      
+  </script>
+  
+  
+  
+  
+  
+  
+  <!-- ### THE STYLES ### -->
+  
+  <style type="text/css" media="screen">
+  
+  /* Since building this page, I\'ve taken to putting selectors and their rules on a single line to shorten the page length and make the selectors easier to find. But at the Free Press, we used to stack the rules indented under the selector. It was still neat. It  just took a little longer to scroll. */
+  
+  #electionwidgets {
+    position: relative;
+    width: 310px;
+    font-family: arial, helvetica;
+    font-size: 90%;
+    line-height: 1.3em;
+    background: transparent url('/codesamples/a/clinton_wgt.jpg') left top no-repeat;
+  }
+  
+  #electionwidgets p {
+    border: 0;
+    padding: 0 10px 5px 10px;
+    margin: 0;
+  }
+  
+  #electionwidgets h1 {
+    display: block;
+    padding: 5px 0 2px 10px;
+    font-family: arial, helvetica;
+    font-size: 11px;
+    font-weight: bold;
+    color: #994e15;;
+  }
+    
+  #electionwidgets h2 {
+    background: none;
+    padding: 5px 0 3px 10px;
+    font-family: arial, helvetica;
+    font-size:11px;
+    font-weight: bold;
+    text-transform: none;
+  }   
+      
+  #electionwidgets ul {
+    padding: 0 10px;
+    margin: 0;
+    list-style: square inside;
+  }
+      
+  #electionwidgets li {
+    padding: 0 0 3px 0;
+    margin: 0;
+  }
+      
+  #electionwidgets a {
+    color: #994e15;;
+    text-decoration: underline;
+  }
+    
+  #electionwidgets a:hover {
+    text-decoration: none;
+  }
+  
+  #electionwidgets li a {
+    color: black;
+  }
+   
+  #electionwidgets #profiles {
+    width: 310px;
+    height: 370px;
+  }
+  
+  #electionwidgets #profiles ul {
+    line-height: 14px;
+  }
+  
+  #electionwidgets #instructions {
+    position: relative;
+    width: 150px;
+    top: 90px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  
+  #electionwidgets.ewidget_left #profiles #instructions {
+    width: 130px;
+    top: 90px;
+    right: 35px;
+    float: right;
+    text-align: right;
+  }
+  
+  #electionwidgets.ewidget_right #profiles #instructions {
+    left: 35px;
+    float: left;
+  }
+  
+  #electionwidgets.ewidget_left #profiles ul {
+    list-style: none;
+    float: left;
+    clear: left;
+    text-align: left;
+  }
+  
+  #electionwidgets.ewidget_right #profiles ul {
+    list-style: none;
+    float: right;
+    clear: right;
+    text-align: right;
+  }
+  
+  /* * * Holly hack -- aligns properly in IE/Windows * * */
+  
+  * html #electionwidgets #profiles.ewidget_left ul {
+    position: relative;
+    left: -17px;
+  }
+  
+  #electionwidgets.ewidget_left #profiles li {
+    clear: left;
+    padding: 0 10px 2px 10px;
+  }
+  
+  #electionwidgets.ewidget_right #profiles li {
+    clear: right;
+    padding: 0 10px 2px 10px;
+  }
+  
+  #electionwidgets.ewidget_left #profiles a {
+    padding-left: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  #electionwidgets.ewidget_right #profiles a {
+    padding-right: 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    background: none;
+  }
+  
+  #electionwidgets.ewidget_right #profiles a.first {
+    background: transparent url('/codesamples/a/bulletarrow_right.png') right center no-repeat;
+  }   
+  
+  #electionwidgets #profiles a:hover {
+    text-decoration: underline
+  } 
+      
+  #electionwidgets.ewidget_left #profiles strong.blue {
+    float: left;
+    color: #000099;
+    font-size: 11px;
+    padding: 90px 32px 3px 32px;
+    background: none;
+  }
+  
+  #electionwidgets.ewidget_right #profiles strong.blue {
+    float: right;
+    color: #000099;
+    font-size: 11px;
+    padding: 90px 32px 3px 32px;
+    background: none;
+  }
+  
+  #electionwidgets.ewidget_left #profiles strong.red {
+    float: left;
+    top: 10px;
+    color: #BF0000;
+    font-size: 11px;
+    padding: 10px 32px 3px 32px;
+    background: none;
+    clear: left;
+  }
+  
+  #electionwidgets.ewidget_right #profiles strong.red {
+    float: right;
+    top: 10px;
+    color: #BF0000;
+    font-size: 11px;
+    padding: 10px 32px 3px 32px;
+    background: none;
+    clear: right;
+  } 
+  
+  #electionwidgets #profiles #timer {
+    position: absolute;
+    float: left;
+    top: 372px;
+    left: 0;
+    color: #666666;
+    font-size: 11px;
+  }
+  
+  #electionwidgets #campaigns {
+    clear: both;
+  }
+  
+  </style>
+  
+  
+  <head>
+  
+  
+  <body>
+  
+  <div id="electionwidgets" class="ewidget_right">
+    
+    <div id="profiles">
+      <p id="instructions">Click on a candidate's name to learn more.</p>
+      <strong class="blue">DEMS</strong>
+      <ul id="dems">
+        <li><a href="/apps/pbcs.dll/article?AID=999980115070" name="hillary" class="first">Clinton</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115070" name="john">Edwards</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="rudy">Giuliani</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="mike">Gravel</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115086" name="dennis">Kucinich</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115097" name="barack">Obama</a></li>
+      </ul>
+          
+      <strong class="red">GOP</strong>
+      <ul id="gop">
+        <li><a href="/apps/pbcs.dll/article?AID=999980115105" name="mike">Huckabee</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115105" name="duncan">Hunter</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="johnm">McCain</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="ron">Paul</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="mitt">Romney</a></li>
+        <li><a href="/apps/pbcs.dll/article?AID=999980115115" name="fred">Thompson</a></li>
+      </ul>
+      <p id="timer">Next frame in <strong>5</strong> seconds</p> 
+    </div>
+  
+  </body>
+
+
+  
+  
+  
+  
+  
+  <!-- ### THE SCRIPT ###
+  
+  Again, I\'ve since changed some of my conventions for JavaScript. I try to minimize the global variables by wrapping everything in an immediately-executing function.
+  
+  It wasn\'t always possible to have the script appear after the related markup. So I used to use a modified version of Simon Willison's addLoadEvent() function, which queued functions to fire after the whole page loaded. Now, I just move the script below the markup.
+  
+  Also, I try to declare all variables inside a function with a single \'var\' statement at the top. That's not reflected here.
+  
+  -->
+  <script type="text/javascript">
+  
+    /* constructor for our candidate object... */
+    function candidateObj(path, aligned) {
+      this.path = path;
+      this.aligned = aligned;
+      this.precache = new Image();
+      this.precache.src = '/codesamples/a/' + path;
+      this.precache.width = '310';
+      this.precache.height = '370';
+    }
+  
+    /* instantiates the candidateObj class and stores the instances in an array... */
+    var Clinton = new candidateObj('clinton_wgt.jpg', 'right'),
+        Edwards = new candidateObj('edwards_wgt.jpg', 'left'),
+        Giuliani = new candidateObj('giuliani_wgt.jpg', 'right'),
+        Gravel = new candidateObj('gravel_wgt.jpg', 'left'),
+        Kucinich = new candidateObj('kucinich_wgt.jpg', 'right'),
+        Obama = new candidateObj('obama_wgt.jpg', 'right'),
+        Huckabee = new candidateObj('huckabee_wgt.jpg', 'right'),
+        Hunter = new candidateObj('hunter_wgt.jpg', 'left'),
+        McCain = new candidateObj('mccain_wgt.jpg', 'left'),
+        Paul = new candidateObj('paul_wgt.jpg', 'right'),
+        Romney = new candidateObj('romney_wgt.jpg', 'right'),
+        Thompson = new candidateObj('thompson_wgt.jpg', 'right');
+        
+    var candidates = [Clinton, Edwards, Giuliani, Gravel, Kucinich, Obama, Huckabee, Hunter, McCain, Paul, Romney, Thompson];
+  
+    /* finds nodes and inserts them into candidateObj properties...
+    
+    we\'d be removing candidates throughout the year as the field narrowed, so I wanted to do these assignments with looping based on the length rather than explicitly... */ 
+    function nodeFinder() {
+      var dems_ul = document.getElementById('dems');
+      var gop_ul = document.getElementById('gop');
+      var bullets_length = 0;
+      for (var i = 0; i < dems_ul.childNodes.length; i++) {
+        if (dems_ul.childNodes[i].nodeName == 'LI') {
+          candidates[bullets_length].bullet = dems_ul.childNodes[i];
+          bullets_length++;
+        }
+      }
+      for (var i = 0; i < gop_ul.childNodes.length; i++) {
+        if (gop_ul.childNodes[i].nodeName == 'LI') {
+          candidates[bullets_length].bullet = gop_ul.childNodes[i];
+          bullets_length++;
+        }
+      }
+      for (var i = 0; i < candidates.length; i++) {
+        for (var j = 0; j < candidates[i].bullet.childNodes.length; j++) {
+          if (candidates[i].bullet.childNodes[j].nodeName == 'A') {
+            candidates[i].href_node = candidates[i].bullet.childNodes[j];         
+          }
+        }
+      }
+    }
+  
+    /* we need this global variable to keep count of the rotating picture... */
+    var j = 1;
+              
+    /* changes background... */
+    function changeBg() {
+      if (j == candidates.length) {
+        j = 0;
+      }
+      var cand_div = document.getElementById('electionwidgets');
+      cand_div.style.backgroundImage = 'url(/codesamples/a/' + candidates[j].path + ')';
+      for (var i = 0; i < candidates.length; i++) { // reset all the anchor nodes
+        candidates[i].href_node.style.background = 'none';      
+      }
+      if (candidates[j].aligned == 'right') {
+        candidates[j].href_node.style.background = 'transparent url(/codesamples/a/bulletarrow_right.png) right center no-repeat';
+        cand_div.className = 'ewidget_right';     
+      }
+      else {
+        candidates[j].href_node.style.background = 'transparent url(/codesamples/a/bulletarrow_left.png) left center no-repeat';
+        cand_div.className = 'ewidget_left';
+      }
+      j++;
+    }
+  
+  
+    /* runs our background-changing function every 5 seconds... */
+    function delayChangeBg() {
+      setInterval('changeBg()', 5000);
+    }
+  
+  
+    /* for testing -- loop through and alert all the style sheet links */
+    function testObjSs() {
+      /* for (var i = 0; i < candidates.length; i++) {
+        for (j in candidates[i]) {
+          alert('Property ' + j + ' is ' + candidates[i][j]);
+        }
+      } */
+      
+      for (var i = 0; i < document.styleSheets.length; i++) {
+        alert('Stylesheet number ' + i + ' is linked from ' + document.styleSheets[i].href);
+      }
+    }
+  
+    /* we need this variable to store our countdown... */
+    var ticker = 4; 
+  
+    /* change countdown number every second, then start over... */  
+    function countDown() {
+      var alert_location = document.getElementById('timer').childNodes[1].childNodes[0];    
+      alert_location.nodeValue = ticker;
+      ticker -= 1;
+      if (ticker == 0) {
+        ticker = 5;
+      }
+    } 
+  
+  /* runs countDown function every second... */ 
+  
+    function delayCountDown() {
+      setInterval('countDown()', 1000);
+    }
+  
+    nodeFinder();
+    delayChangeBg();
+    delayCountDown();
+    
+  </script>
+  
+</html></textarea><!-- end textarea -->
+                    </div>
+                    </form>
+                  </p>
+                  
+                </div><!-- end .windo-item -->
+              </div><!-- end .windo -->
+            </div><!-- end .assets -->
+            
+            <h2><a name="navcarousel" id="carouselanchor">An exercise in using JavaScript objects</a></h2>
+            <p>This rotating widget that ran on Freep.com's Politics category page for most of 2008 offered me a chance to create a class of JavaScript objects and coordinate their shared properties through a dozen instances.</p>
+            <p>I know, I know... Technically, JavaScript doesn't have classes.</p>
+            <p>Still, each candidate here has several properties in common with the others. My job was to sync the changes in these distinct values every 5 seconds.</p>
+            <p>They all have an image with identical dimensions. Those images all need to be pre-cached, and they all need to declare their path. They are all either left- or right-aligned. All had a destination: a page full of in-depth coverage that readers could see by clicking on their names. All this information was stored as a discrete property in each object.</p>
+            <p>I made all the visuals, starting the design in Illustrator and knocking out, sizing and, when necessary, fading each candidate's image in Photoshop. For many of the candidates, the photo that appears is the only one we had rights to publish on the Web. This made the layout challenging, and forced me to align some of the photos right and the rest left.</p>
+            <p>If I could do it again, I wouldn't have navigation elements jump from one side to the other, even with the timer. Those links should've been somewhere that didn't require them to move.</p>
+          </article><!-- end #carousel -->
+          
+          <article id="balloon">
+            <div class="assets">
+              <div class="windo">
+                <div class="windo-item">
+                
+                  <div id="inauguration-photos">
+                    <div id="balloonlayer">
+                      <p><a href="http://www.freep.com" id="thumblink">Click a thumbnail to see more photos.</a></p>
+                    </div>
+                  
+                    <a href="http://www.freep.com"><img src="/codesamples/inaug_test/art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.wired.com"><img src="/codesamples/inaug_test/art/thumb2.png" alt="D.C. prepares for inauguration" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.okayplayer.com"><img src="/codesamples/inaug_test/art/thumb3.png" alt="King H.S. band rehearses for inaugural parade" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.cartoonnetwork.com"><img src="/codesamples/inaug_test/art/thumb4.png" alt="Metro Detroiters are headed to the inauguration" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.hackszine.com"><img src="/codesamples/inaug_test/art/thumb5.png" alt="Celebrities on the inaugural agenda" class="inaugphotos"/></a>
+                        
+                    <a href="http://www.freep.com"><img src="/codesamples/inaug_test/art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.freep.com"><img src="/codesamples/inaug_test/art/thumb2.png" alt="D.C. prepares for inauguration"  class="inaugphotos"/></a>
+                    
+                    <a href="http://www.okayplayer.com"><img src="/codesamples/inaug_test/art/thumb3.png" alt="King H.S. band rehearses for inaugural parade" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.cartoonnetwork.com"><img src="/codesamples/inaug_test/art/thumb4.png" alt="Metro Detroiters are headed to the inauguration" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.freep.com"><img src="/codesamples/inaug_test/art/thumb5.png" alt="Celebrities on the inaugural agenda" class="inaugphotos" /></a>
+                    
+                    <a href="http://www.freep.com"><img src="/codesamples/inaug_test/art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+                        
+                    <a href="http://www.wired.com"><img src="/codesamples/inaug_test/art/thumb2.png" alt="D.C. prepares for inauguration" class="inaugphotos" /></a>
+                  
+                  <h4><a href="#">Photos <span>(More photos)</span></a></h4>
+                  
+                  </div><!-- end #inauguration-photos -->
+                                   
+                  <p id="balloon-wrap-text">
+                    <form id="balloon-form" action="http://james.da.ydrea.ms" method="post">
+                      <label for="balloon-text">Inspect the text: Annotated code</label>
+                      <div class="textarea-wrapper">
+                        <textarea id="balloon-text" name="carousel-text" rows="10" cols="50"><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+  <title>inaug</title>
+  
+  
+  <!-- ### THE SCRIPT ###
+  
+  Again, I\'ve since changed some of my conventions for JavaScript. I try to minimize the global variables by wrapping everything in an immediately-executing function.
+  
+  It wasn\'t always possible to have the script appear after the related markup. So I used to use a modified version of Simon Willison's addLoadEvent() function, which queued functions to fire after the whole page loaded. Now, I just move the script below the markup.
+  
+  Also, I try to declare all variables inside a function with a single \'var\' statement at the top. That's not reflected here.
+  
+  -->
+  
+  <script type="text/javascript">
+    
+    /* ... the SAXOTech newslist that generates the thumbnail grid would be adjusted at random times. this function calls another function that makes it easy to generate thumbnail objects based on how many columns are in that grid. it relies on a helper .  */
+    function initThumbnails() {
+      makeThumbnails(4);
+    }
+    
+    function columnCounter(columns, items) {
+      var the_number = 1;
+      for (var i = 0; i < items; i++) {
+        the_number++;
+        if (the_number > columns) {
+          the_number = 1;
+        }
+      }
+    }
+    
+    var BalloonObj = {};
+    
+    /* ...collect all the attributes we\'ll need for the balloon object. we\'ll need to know how to reference it in the markup, how to get to the hypertext it contains, its visibility state, and its x and y coordinates... */
+    function makeBalloon() {
+      var B = BalloonObj;
+      B.elem = document.getElementById('balloonlayer');
+      B.link_location = document.getElementById('thumblink');
+      B.visible = false;
+      B.left = 0;
+      B.top = 0;
+      /* ...cancel the balloon\'s default disappearing function once it\'s moused over... */
+      B.elem.onmouseover = function() {
+        clearTimeout(balloonpause);
+      };
+      B.link_location.onmouseover = function() {
+        clearTimeout(balloonpause);
+      };
+    }
+    
+    var balloonpause;
+    
+    var thumbObj_array = [];
+    
+    function ThumbObj(elem, xpos, ypos, xrepeat, yrepeat) {
+      this.elem = elem;
+      this.xpos = xpos;
+      this.ypos = ypos;
+      this.xrepeat = xrepeat;
+      this.yrepeat = yrepeat;
+    }
+    
+    /* ... the thumbnail object factory... */
+    function makeThumbnails(columns) {
+      
+      /* ... here\'s an example of where i\'d use a newer practice if i were to write this script over again in the present. here, i\'d declare a bunch of variables with one \'var\' statement... */
+      var thumb_array = document.getElementById('inauguration-photos').getElementsByTagName('img');
+      var quantity = thumb_array.length;
+      var column_counter = 1;
+      var row_counter = 1;
+      
+      for (var i = 0; i < quantity; i++) {
+        
+        /* ...if we've reached the last column, start a new row... */
+        if (column_counter > columns) {
+          column_counter = 1;
+          row_counter++;
+        }
+        
+        /* ...create thumbnail objects, assign them to the thumbObj array and give them unique x,y coordinates and names... */
+        thumbObj_array[i] = new ThumbObj(thumb_array[i], -40, -75, 70, 55);
+        thumbObj_array[i].xcoord = thumbObj_array[i].xpos + (thumbObj_array[i].xrepeat * ((column_counter == 1) ? 0 : (column_counter - 1)));
+        thumbObj_array[i].ycoord = thumbObj_array[i].ypos + (thumbObj_array[i].yrepeat * ((row_counter == 1) ? 0 : (row_counter - 1)));
+        thumbObj_array[i].name = 'x' + thumbObj_array[i].xcoord + 'y' + thumbObj_array[i].ycoord;
+        thumbObj_array[i].elem.setAttribute('name', thumbObj_array[i].name);
+        
+        
+        /* ...simulate a hash table... */
+        thumbObj_array[thumbObj_array[i].name] = thumbObj_array[i];
+        
+        /* ...define methods to make the balloon appear on mouseover... */
+        
+        /* ...BRANCH 1: use the addEventListener method for W3C browsers... */
+        if (thumbObj_array[i].elem.addEventListener) {
+          thumbObj_array[i].elem.addEventListener(
+            'mouseover',
+            function() {
+              var the_title = this.getAttribute('alt');
+              var the_link = this.parentNode.getAttribute('href');
+              var the_new_textnode = document.createTextNode(the_title);
+              var the_new_link = document.createElement('a');
+              the_new_link.setAttribute('href', the_link);
+              the_new_link.appendChild(the_new_textnode);
+              BalloonObj.link_location.replaceChild(the_new_link, BalloonObj.link_location.firstChild);
+              BalloonObj.elem.style.left = thumbObj_array[this.name].xcoord + 'px';
+              BalloonObj.elem.style.top = thumbObj_array[this.name].ycoord + 'px';
+              BalloonObj.elem.style.visibility = 'visible';
+              balloonpause = setTimeout(hideBalloon, 5000);
+            },
+            false
+          );
+        }
+        
+        /* ...BRANCH 2: use older event handlers for all other cases... */
+        else {
+          thumbObj_array[i].elem.onmouseover =  function() {
+            var the_title = this.attributes['alt'].nodeValue;
+            var the_link = this.parentNode.attributes['href'].nodeValue;
+            var the_new_link = document.createElement('a');
+            the_new_link.setAttribute('href', the_link);
+            the_new_link.innerHTML = the_title;             
+            BalloonObj.link_location.replaceChild(the_new_link, BalloonObj.link_location.firstChild);
+            BalloonObj.elem.style.left = thumbObj_array[this.name].xcoord + 'px';
+            BalloonObj.elem.style.top = thumbObj_array[this.name].ycoord + 'px';
+            BalloonObj.elem.style.visibility = 'visible';
+            balloonpause = setTimeout(hideBalloon, 5000);
+          }
+        }
+        
+        /* ...we\'ve reached the end of the function, so increase the column counter... */
+        column_counter++;
+      }
+    }
+    
+    function hideBalloon() {
+      BalloonObj.elem.style.visibility = 'hidden';    
+    }
+    
+    /* ... calls on an alternate set of coordinates for IE\'s box model rendering... */
+    function IEMoveBalloon() {
+      var the_title = this.attributes['alt'].nodeValue;
+            BalloonObj.link_location.innerHTML = the_title;
+            BalloonObj.elem.style.left = thumbObj_array[this.name].xcoord + 'px';
+            BalloonObj.elem.style.top = thumbObj_array[this.name].ycoord + 'px';
+            BalloonObj.elem.style.visibility = 'visible';
+    }
+    
+    /* ...Simon Willison's addLoadEvent() -- queues functions to run after the page has loaded... the page renders sooner when the script comes after the markup, but we didn\'t have that option on the Freep.com home page... */  
+    function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      }
+      else {
+        window.onload = function() {
+          if (oldonload) {
+            oldonload();
+          }
+        func();
+        }
+      }
+    }
+    
+    addLoadEvent(makeBalloon);
+    addLoadEvent(initThumbnails);
+        
+  </script>
+  
+  
+  
+  
+  
+  
+  
+  <!-- ### THE STYLES AND MARKUP ###
+  
+    I didn\'t write this; Brian did. But when he\'d ask me to script something he created, I always tried not to tamper with his markup and work within the classes and IDs he provided. If there was some unnecessarily painstaking processs that could be avoided by simply adding an ID, I'd suggest it. But mostly, I tried to tailor the script to the markup I was given.
+    
+    This is included so you can see the starting point.
+
+  -->
+  
+  <style type="text/css">
+  <!--
+  #inauguration-wrapper a {
+    text-decoration: none;
+  }
+  #inauguration-wrapper a:hover {
+    text-decoration: underline;
+  }
+  #inauguration-wrapper {
+    width: 920px;
+    height: 550px;
+    margin: 0px;
+    padding: 0px 10px;
+    background:url(inaugwrapperbg_8bit.png) top center no-repeat;
+  }
+  #inauguration-wrapper #inauguration-header {
+    margin: 0px;
+    padding: 10px 0px 0px 0px;
+    text-align: center;
+  }
+  #inauguration-wrapper #inauguration-header h1 a {
+    color: black;
+    text-decoration: nonoe;
+  }
+  #inauguration-wrapper #inauguration-header h1 a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+  #inauguration-wrapper #inauguration-header h1 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 60px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+  }
+  #inauguration-wrapper #inauguration-header h4 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #;
+    color: #2D60A2;
+  }
+  #inauguration-wrapper #inauguration-content-wrapper a {
+    color: white;
+  }
+  #inauguration-wrapper #inauguration-content-wrapper a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  #inauguration-wrapper #inauguration-content-wrapper {
+    position: absolute;
+    top: 330px;
+    left: 10px;
+    background: url(inaugcontentbg_8bit.png) top center no-repeat;
+    color: white;
+    height: 189px;
+    padding: 12px 0px;
+  }
+  #inauguration-wrapper #inauguration-content {
+    width: 579px;
+    float: left;
+  }
+  #inauguration-wrapper #inauguration-content-item {
+    position: relative;
+    margin: 0px;
+    padding: 0px 16px;
+    width: 547px;
+  }
+  #inauguration-wrapper #inauguration-content-item h3 {
+    font-size: 36px;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+    margin: 0px;
+  }
+  #inauguration-wrapper #inauguration-content-item p {
+    font-size: 11px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    line-height: 18px;
+  }
+  #inauguration-wrapper #inauguration-content-bullets {
+    float: left;
+    width: 248px;
+    margin: 10px 0px;
+    padding: 0px 16px;
+  }
+  #inauguration-wrapper #inauguration-content-bullets h4 {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  #inauguration-wrapper #inauguration-content-bullets h4 span {
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: none;
+  }
+  #inauguration-wrapper #inauguration-content-bullets h5 {
+    font-size: 10px;
+    font-weight: normal;
+  }
+  #inauguration-wrapper #inauguration-content-bullets h4, h5 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 2px 0px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-content-bullets ul {
+    font-family: Arial, Helvetica, sans-serif;  
+    font-size: 11px;
+    margin: 0px;
+    padding: 0px 0px;
+    list-style-type: square;
+    list-style-position: inside;
+  }
+  #inauguration-wrapper #inauguration-content-bullets li {
+    margin: 4px 0px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-multimedia {
+    clear: right;
+  }
+  #inauguration-wrapper #inauguration-multimedia a {
+    color: black;
+  }
+  #inauguration-wrapper #inauguration-multimedia a:hover {
+    color: black;
+    text-decoration: underline;
+  }
+  #inauguration-wrapper #inauguration-multimedia h4 {
+    float: left;
+    width: 270px;
+    margin: 4px 0px 4px 15px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  #inauguration-wrapper #inauguration-multimedia h4 span {
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: none;
+  }
+  
+  #inauguration-wrapper #inauguration-photos {
+    position: relative;
+    float: left;
+    width: 326px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    margin: 0px 0px 10px 15px;
+    padding: 0px;
+  }
+  
+  #inauguration-wrapper #balloonlayer {
+    position: absolute;
+    visibility: hidden;
+    width: 140px;
+    height: 121px;
+    top: 0px;
+    left: 0px;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    text-align: center;
+    overflow: hidden;
+    outline: none;
+    z-index: 5;
+    background: transparent url(art/balloonbg_24bit.png) left top no-repeat;
+  }
+  
+  #inauguration-wrapper #balloonlayer p {
+    position: absolute;
+    width: 90px;
+    left: 70px;
+    margin: 20px 0px 0px -45px;
+    text-align: left;
+    font-size: 13px;
+    line-height: 16px;
+    color: #009;
+  }
+  
+  #inauguration-wrapper #balloonlayer p a {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #009;
+  }
+  
+  #inauguration-wrapper #balloonlayer p a:hover {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #009;
+  }
+  
+  * html #inauguration-wrapper #balloonlayer {
+    position: absolute;
+    visibility: hidden;
+    width: 140px;
+    height: 121px;
+    top: 0px;
+    left: 0px;
+    text-align: center;
+    overflow: hidden;
+    outline: none;
+    background: transparent url(art/balloonbg_8bit.png) left top no-repeat;
+  }
+  
+  * html #inauguration-wrapper #balloonlayer p {
+    position: absolute;
+    width: 90px;
+    left: 70px;
+    margin: 20px 0px 0px -45px;
+    text-align: left;
+    font-size: 13px;
+    line-height: 16px;
+  }
+  
+  * html #inauguration-wrapper #balloonlayer p a {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #009;
+  }
+  
+  * html #inauguration-wrapper #balloonlayer p a:hover {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    color: #009;
+  }
+  
+  #inauguration-wrapper #inauguration-photos img {
+    width: 60px;
+    height: 45px;
+    margin: 10px 10px 0px 0px;
+    float: left;
+    border: 0px;
+  }
+  
+  #inauguration-wrapper #inauguration-videos {
+    float: left;
+    width: 326px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    line-height: 16px;
+    margin: 0px 0px 10px 15px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-videos img {
+    width: 70px;
+    float: left;
+    margin: 0px 12px 12px 0px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-videos h5 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    color: #2D60A2;
+    margin: 0px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-videos h3 {
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0px;
+    padding: 0px;
+  }
+  #inauguration-wrapper #inauguration-advertisement {
+    float: left;
+    width: 326px;
+    height: 50px;
+    font-size: 10px;
+    text-align: center;
+    margin: 10px 0px 0px 15px;
+    padding: 0px;
+    background: red;
+  }
+  -->
+  </style>
+</head>
+<body style="margin: 0px;">
+
+<div id="inauguration-wrapper">
+
+  <div id="inauguration-header">
+  
+  <h4>THE INAUGURATION OF BARACK OBAMA</h4>
+  <h1><a href="#">Hello, Mr. President lorem ipsum</a></h1>
+  
+  </div>
+
+  <div id="inauguration-content">
+  
+    <a href="#"><img src="numain.jpg" border="0" /></a>
+  
+    <div id="inauguration-content-wrapper">
+  
+      <div id="inauguration-content-item">
+    
+        <h3><a href="#">Obama praises  leaders' gathering</a></h3>
+        <p>Confronting a grim economy and a middle East on fire, Barack Obama turned today to perhaps the only people on the planet who understand what he's in for: the four living members of the U.S. presidents' club.</p>
+      </div>
+    
+      <div id="inauguration-content-bullets">   
+        <h4><a href="#">Local news <span>(More headlines)</span></a></h4>
+        <ul>
+          <li> <a href="#">Let me not to the marriage of true minds</a></li>
+          <li> <a href="#">Admit impediments; love is not love</a></li>
+          <li> <a href="#">Which alters when it alteration finds</a></li>
+          <li> <a href="#">Or bends with the remover to remove</a></li>
+        </ul>
+      </div>
+    
+      <div id="inauguration-content-bullets">
+        <h4><a href="#">Expanded coverage <span>(More headlines)</span></a></h4>
+        <ul>
+          <li> <a href="#">Working through a top-down approach</a></li>
+          <li> <a href="#">The vitality of conceptual synergies is  supreme</a> </li>
+          <li> <a href="#">Building a dynamic relationship between  players</a></li>
+          <li> <a href="#">Quantitative analysis  has a vital role to play</a></li>
+        </ul>
+      </div>
+    </div>
+  
+  </div>
+  
+<div id="inauguration-multimedia">
+  
+<h4><a href="#">Photos <span>(More photos)</span></a></h4>
+  
+  <div id="inauguration-photos">
+  
+      <div id="balloonlayer">
+      <p><a href="http://www.freep.com" id="thumblink">Click a thumbnail to see more photos.</a></p>
+    </div>
+  
+      <a href="http://www.freep.com"><img src="art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+        
+    <a href="http://www.wired.com"><img src="art/thumb2.png" alt="D.C. prepares for inauguration" class="inaugphotos" /></a>
+        
+    <a href="http://www.okayplayer.com"><img src="art/thumb3.png" alt="King H.S. band rehearses for inaugural parade" class="inaugphotos" /></a>
+        
+    <a href="http://www.cartoonnetwork.com"><img src="art/thumb4.png" alt="Metro Detroiters are headed to the inauguration" class="inaugphotos" /></a>
+        
+    <a href="http://www.hackszine.com"><img src="art/thumb5.png" alt="Celebrities on the inaugural agenda" class="inaugphotos"/></a>
+        
+    <a href="http://www.freep.com"><img src="art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+        
+    <a href="http://www.freep.com"><img src="art/thumb2.png" alt="D.C. prepares for inauguration"  class="inaugphotos"/></a>
+    
+    <a href="http://www.okayplayer.com"><img src="art/thumb3.png" alt="King H.S. band rehearses for inaugural parade" class="inaugphotos" /></a>
+        
+    <a href="http://www.cartoonnetwork.com"><img src="art/thumb4.png" alt="Metro Detroiters are headed to the inauguration" class="inaugphotos" /></a>
+        
+    <a href="http://www.freep.com"><img src="art/thumb5.png" alt="Celebrities on the inaugural agenda" class="inaugphotos" /></a>
+    
+    <a href="http://www.freep.com"><img src="art/thumb1.png" alt="Obama meets with past presidents" class="inaugphotos" /></a>
+        
+    <a href="http://www.wired.com"><img src="art/thumb2.png" alt="D.C. prepares for inauguration" class="inaugphotos" /></a>
+  
+  </div>
+  
+  
+  
+<h4><a href="#">Videos <span>(More videos)</span></a></h4>
+  
+    <div id="inauguration-videos">
+  
+      <a href="#"><img src="3.jpg" border="0" alt="Consectetur adipisicing elit" /></a>
+<h5>2009 INAUGURATION</h5>
+<h3><a href="#">Consectetur adipisicing elit</a></h3>
+ Or bends with the remover to remove. Admit impediments; love is not love it is the star.</div>
+  
+    <div id="inauguration-videos">
+  
+      <a href="#"><img src="4.jpg" border="0" alt /></a>
+<h5>2009 INAUGURATION</h5>
+<h3><a href="#">Sed do eiusmod tempor</a></h3>
+Let me not to the marriage of true minds oh, no, it is an ever fixed mark whose worth's unknown.</div>
+
+
+  <div id="inauguration-advertisement">advertisement<br />
+help support a hungry web designer</div>
+  
+  </div>
+  
+  
+</div>
+
+</body>
+
+</html></textarea><!-- end textarea -->
+                      </div>
+                    </form>
+                  </p>
+                  
+                </div><!-- end .windo-item -->
+              </div><!-- end .windo -->
+            </div><!-- end .assets -->
+            
+            <h2><a name="navballoon" id="balloonanchor">Jedi Mind Tricks: Making &lt;divs&gt; levitate</a></h2>
+            <p>My friend and former Free Press co-worker Brian Todd was designing <a href="/codesamples/inaug_test/index.html" title="A test version of the Freep.com template for our coverage of Obama's inauguration.">a special front page presence for Obama's inauguration</a> in early 2009. He wanted to include a lot of links to photo galleries in a small space, without getting below the first screen. How would we display the gallery titles without taking up too much room?</p>
+            <p>These translucent balloons reveal the gallery titles on hover. It's an effect we've all seen, but this was my first time doing it. It involves almost as much trickery with CSS as with JavaScript.</p>
+            <p>The thumbnails were dynamically generated by a SAXOTech newslist. My script reads the position of each thumbnail in the grid, passes that location to a &lt;div&gt; element hidden on a CSS layer, and makes the &lt;div&gt; visible.</p>
+            <p>It was designed to fail gracefully for users without JavaScript enabled. If my script didn't fire, clicking on a thumbnail still took readers to the gallery.</p> 
+          </article><!-- end #balloon -->
+          
+          <article id="widgetry">
+            <div class="assets">
+              
+              <div class="windo">
+                <div class="windo-item">
+                
+                  <img src="../a/google_gadget_mini_8bit_1.png" width="292" height="282" alt="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." title="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." />
+                  <img src="../a/google_gadget_mini_8bit_2.png" width="292" height="281" alt="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." title="This Google Gadgets presence for Freep.com still lives on the server and can still be loaded into an iGoogle page. It never went live." />
+                  
+                  <p id="widgets-wrap-text">
+                    <form id="widgets-form" action="http://james.da.ydrea.ms" method="post">
+                      <label for="widgets-text">Inspect the text: Annotated code</label>
+                      <div class="textarea-wrapper">
+                        <textarea id="widgets-text" name="carousel-text" rows="10" cols="50"><!-- ### starter_gadget.xml ###
+
+This markup is the empty container for the RSS feeds that populate the gadget. Within CDATA sections, it\'s styled as a normal HTML page would be.
+
+Notice that there are two <Content> tags, one with the value "home" for its view attribute and another using "canvas." Google offers two views of the gadget: the default home view and an optional larger canvas view the user can switch to if it\'s enabled.
+
+Also notice that the HTML-looking markup only takes up about 10 lines in each CDATA section. The rest of the code is mostly styling. I tried keeping the rules on a separate stylesheet and linking to it. No luck.
+
+I couldn\'t understand why it would let me link to an external script, but not an external stylesheet. Whatever works.
+
+-->
+
+
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="Freep.com test gadget" height="220">
+    <Require feature="opensocial-0.8" />
+    <Require feature="views" />
+  </ModulePrefs>
+  <Content type="html" view="home">
+    <![CDATA[
+      <style type="text/css">
+        * {
+          padding: 0px
+          margin: 0px;
+          border: 0px;
+        }
+        
+        #wrapperhome  {
+          position: absolute;
+          padding: 0px;
+          margin: 0px;
+          width: 245px;
+        }
+        
+        .item {
+          clear: both;
+          border-bottom: 1px solid #ccc;
+          width: 100%;
+        }
+        
+        .item img {
+          display: inline;
+          margin: 0px 10px 0px 10px;
+          float: left;
+        }
+        
+        .item p {
+          font-family: Georgia, serif;
+          font-size: 14px;
+          margin: 5px;
+        }
+        
+        .item p a {
+          color: #036;
+          text-decoration: underline;
+        }
+        
+        .item br {
+          clear: both;
+          margin: 0px;
+          padding: 0px;
+        }
+        
+        #basehome {
+          margin: 0px;
+          padding: 0px;
+          height: 40px;
+        }
+        
+        #basehome a {
+          position: relative;
+          display: block;
+          text-indent: -9999px;
+          overflow: hidden;
+          outline: none;
+          height: 40px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/freeplogo.png') 50% 50% no-repeat;
+        }
+        
+        #fpgnavhome {
+          position: relative;
+          list-style: none;
+          width: 245px;
+          height: 18px;
+          margin: 0px;
+          padding: 0px;
+          border: 0px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/topstoriesbg_on.png') left top no-repeat;
+        }
+        
+        #fpgnavhome li {
+          display: block;
+          float: left;
+          text-indent: -9999px;
+          outline: none;
+          overflow: hidden;
+        }
+        
+        #fpgtopstoriestabhome {
+          width: 83px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/topstoriestab.png') left top no-repeat;
+        }
+        
+        #fpgsportstabhome {
+          width: 53px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/sportstab.png') left top no-repeat;
+        }
+        
+        #fpgbiztabhome {
+          width: 109px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/biztab.png') left top no-repeat;
+        }
+        
+        #loadanim {
+          display: block;
+          width: 245px;
+          height: 90px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/gadgetloader.gif') 50% 10px no-repeat;
+        }
+        
+        #loadtext {
+          position: absolute;
+          top: 70px;
+          *top: 80px;
+          width: 245px;
+          font-family: arial, helvetica;
+          font-size: 12px;
+          font-style: italic;
+          color: #369;
+          text-align: center;
+        }
+      </style>
+      
+      <script type="text/javascript" src="http://www.freep.com/google_gadgets/gadget_home.js"></script>
+      
+      <div id="wrapperhome">
+        <ul id="fpgnavhome">
+          <li id="fpgtopstoriestabhome">Top stories</li>
+          <li id="fpgsportstabhome">Sports</li>
+          <li id="fpgbiztabhome">Autos/business</li>
+        </ul>
+
+        <div id="storylisthome"></div>
+        
+        <p id="basehome"><a href="http://www.freep.com" target="_blank">Read more live Detroit news at www.freep.com</a></p>
+        
+      </div>
+    ]]>
+  </Content>
+  
+  <Content type="html" view="canvas">
+    <![CDATA[
+      
+      <style type="text/css">
+        * {
+          padding: 0px
+          margin: 0px;
+          border: 0px;
+        }
+        
+        #wrappercanv  {
+          position: absolute;
+          padding: 0px;
+          margin: 0px;
+          border: 1px solid #ccc;
+          width: 800px;
+        }
+        
+        .item {
+          clear: both;
+          border-bottom: 1px solid #ccc;
+          width: 100%;
+        }
+        
+        .item img {
+          display: block;
+          margin: 0px 10px 0px 10px;
+          float: left;
+        }
+        
+        .item p {
+          font-family: Georgia, serif;
+          margin: 5px;
+        }
+        
+        .item p a {
+          font-size: 15px;
+          color: #036;
+          text-decoration: underline;
+        }
+        
+        .item p.timestamp {
+          font-family: lucida grande, arial, helvetica;
+          font-size: 11px;
+          float: right;
+          color: #667;
+        }
+        
+        .item p.summary {
+          font-family: lucida grande, arial, helvetica;
+          font-size: 12px;
+          color: #369;
+          text-decoration: none;
+        }
+        
+        .item br {
+          clear: both;
+          margin: 0px;
+          padding: 0px;
+        }
+        
+        #basecanv {
+          display: block;
+          margin: 0px;
+          padding: 0px;
+          text-indent: -9999px;
+          overflow: hidden:
+          outline: none;
+          height: 36px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/freeplogo.png') 50% 50% no-repeat;
+        }
+        
+        #fpgnavcanv {
+          position: relative;
+          list-style: none;
+          width: 250px;
+          height: 18px;
+          margin: 0px;
+          padding: 0px;
+          border: 0px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/topstoriesbg_on.png') left top no-repeat;
+        }
+        
+        #fpgnavcanv li {
+          display: block;
+          float: left;
+          text-indent: -9999px;
+          outline: none;
+          overflow: hidden;
+        }
+        
+        #fpgtopstoriestabcanv {
+          width: 83px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/topstoriestab.png') left top no-repeat;
+        }
+        
+        #fpgsportstabcanv {
+          width: 53px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/sportstab.png') left top no-repeat;
+        }
+        
+        #fpgbiztabcanv {
+          width: 109px;
+          height: 18px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/biztab.png') left top no-repeat;
+        }
+        
+        #loadanim {
+          display: block;
+          width: 800px;
+          height: 90px;
+          background: transparent url('http://www.freep.com/google_gadgets/art/gadgetloader.gif') 50% 10px no-repeat;
+        }
+        
+        #loadtext {
+          position: absolute;
+          top: 70px;
+          *top: 80px;
+          width: 800px;
+          font-family: arial, helvetica;
+          font-size: 12px;
+          font-style: italic;
+          color: #369;
+          text-align: center;
+        }
+      </style>
+      
+      <script type="text/javascript" src="http://www.freep.com/google_gadgets/gadget_canv.js"></script>
+      
+      <div id="wrappercanv">
+        
+        <ul id="fpgnavcanv">
+          <li id="fpgtopstoriestabcanv">Top stories</li>
+          <li id="fpgsportstabcanv">Sports</li>
+          <li id="fpgbiztabcanv">Autos/business</li>
+        </ul>
+
+        <div id="storylistcanv"></div>
+        
+        <p id="basecanv"><a href="http://www.freep.com" target="_blank">Read more live Detroit news at www.freep.com</a></p>
+        
+      </div>
+    ]]>
+  </Content>
+</Module>
+
+
+
+
+
+
+/* ### gadget_home.js ###
+
+This file and the one copied below it are mostly duplicates. Remember, there are two separate views, with minimal differences in logic.
+
+This is the smaller one. It offers 3 items.
+
+*/
+
+
+var Sniff = {
+  platform : 'I can\'t detect the platform this device is running.',
+  browser : 'I can\'t detect the browser this device is running.',
+  version : 'I can\'t detect the specific version of the browser this device is running.',
+  
+  browserTest : function() {
+    var bdna = navigator.userAgent;
+    var ndx;
+    var platform_set = ['Windows', 'iPhone', 'Mac OS'];
+    var browser_set = ['Firefox', 'MSIE', 'Safari',  'Opera'];
+    
+    for (var i = 0; i < platform_set.length; i++) {
+      if (bdna.indexOf(platform_set[i]) != -1) {
+        this.platform = platform_set[i];
+        break;
+      }
+    }
+    for (var j = 0; j < browser_set.length; j++) {
+      if (bdna.indexOf(browser_set[j]) != -1) {
+        ndx = bdna.indexOf(browser_set[j]);
+        this.browser = browser_set[j];
+        break;
+      }
+    }
+    switch (this.browser) {
+      case 'Firefox':
+        this.version = bdna.charAt((ndx + 8));
+        break;
+        
+      case 'MSIE':
+        this.version = bdna.charAt((ndx + 5));
+        break;
+      
+      case 'Safari':
+        switch (this.platform) {
+          case 'Mac OS':
+            this.version = bdna.charAt((ndx - 6));
+            break;
+          
+          case 'iPhone':
+            this.version = bdna.charAt((ndx - 17));
+            break;
+        }
+        break;
+      
+      case 'Opera':
+        this.version = bdna.charAt((ndx + 6));
+        break;
+    }
+    var setup = this.platform + ', ' + this.browser + ' ' + this.version;
+  }
+};
+Sniff.browserTest();
+
+var GadgetTabs;
+
+function createGadgetTabs() {
+
+  GadgetTabs = {
+    tab_row : document.getElementById('fpgnavhome'),
+    tabs : document.getElementById('fpgnavhome').getElementsByTagName('LI'),    
+    current_tab : 'topstories',
+    
+    feeds : {
+      topstories : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET01&template=RSS&mime=XML',
+      biz : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET02&template=RSS&mime=XML',
+      sports : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET03&template=RSS&mime=XML'
+    },
+    
+    preload : function() {
+      var basenames = ['topstories', 'sports', 'biz'];
+      for (var i = 0; i < basenames.length; i++) {
+        var tab_normal = new Image();
+        tab_normal.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'tab.png';
+        
+        var tab_hover = new Image();
+        tab_hover.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'tab_hover.png';
+        
+        var bg_on = new Image();
+        bg_on.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_on.png';
+        
+        var bg_hover1 = new Image();
+        bg_hover1.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_hover_on_off.png';
+        
+        var bg_hover2 = new Image();
+        bg_hover1.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_hover_off_on.png';
+      }
+    },
+    
+    /* ... chop the \'fpg\' from the beginning of the id string and the \'tab\' from the end of it... */
+    collectText : function(the_text) {
+      return the_text.slice(3, the_text.indexOf('tab'));
+    },
+    
+    rollover : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        /* ... do you recognize event.target or event.srcElement?... */
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          GadgetTabs.hover_tab = ident;
+          if (GadgetTabs.current_tab != ident) {
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab_hover.png') left top no-repeat";
+            switch (GadgetTabs.current_tab) {
+              case 'topstories':
+                GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_on_off.png') left top no-repeat";
+                break;
+                
+              case 'sports':
+                switch (ident) {
+                  case 'topstories':
+                    GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_on_off.png') left top no-repeat";
+                    break;
+                  
+                  case 'biz':
+                    GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_off_on.png') left top no-repeat";
+                    break;
+                }
+                break;
+                
+              case 'biz':
+                GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_off_on.png') left top no-repeat";
+                break;
+              
+            }
+          }
+        }
+      }
+    },
+    
+    rollout : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          if (GadgetTabs.current_tab != ident) {
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab.png') left top no-repeat";
+            // alert('art/' + GadgetTabs.current_tab + 'tab.png');
+            GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + GadgetTabs.current_tab + "bg_on.png') left top no-repeat";
+          }
+        }
+      }
+    },
+    
+    select : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          if (GadgetTabs.current_tab != ident) {
+            GadgetTabs.current_tab = ident;
+            GadgetXML.reloadDOM(GadgetTabs.feeds[ident]);
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab.png') left top no-repeat";
+            GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_on.png') left top no-repeat";
+          }             
+        }
+      }
+    },
+    
+    buttonBhvr : function() {
+      for (var i = 0; i < this.tabs.length; i++) {
+      
+        /* ...using addEvent here because we\'re overloading the onclick handler... */
+        addEvent(this.tabs[i], 'mouseover', this.rollover, false);
+        addEvent(this.tabs[i], 'mouseout', this.rollout, false);
+        addEvent(this.tabs[i], 'click', this.select, false);
+      }
+    },
+    
+    clearEvents : function() {
+      for (var i = 0; i < this.tabs.length; i++) {
+        removeEvent(this.tabs[i], 'mouseover', this.rollover, false);
+        removeEvent(this.tabs[i], 'mouseout', this.rollout, false);
+        removeEvent(this.tabs[i], 'click', this.select, false);
+      }
+    }
+  };
+  GadgetTabs.preload();
+  GadgetTabs.buttonBhvr();
+}
+
+function addEvent(elem, evtType, func, capture) {
+  if (elem.addEventListener) {
+    elem.addEventListener(evtType, func, capture);
+  }
+  else if (elem.attachEvent) {
+    elem.attachEvent('on' + evtType, func);
+  }
+  else {
+    elem['on' + evtType] = func;
+  }
+}
+
+function removeEvent(elem, evtType, func, capture) {
+  if (elem.removeEventListener) {
+    elem.removeEventListener(evtType, func, capture);
+  }
+  else if (elem.detachEvent) {
+    elem.detachEvent('on' + evtType, func);
+  }
+  else {
+    elem['on' + evtType] = null;
+  }
+}
+
+var ItemRollovers = {
+  itemHover : function() {
+    this.style.background = 'transparent url("http://www.freep.com/google_gadgets/art/item_hover_bg.png") left top repeat-x';
+  },
+  
+  itemRetreat : function() {  
+    this.style.background = 'none';
+  }
+}
+
+var GadgetXML  = {
+  
+  getView : function() {
+    alert(gadgets.views.getCurrentView().getName());
+  },
+  
+  insertLoader : function() {
+    GadgetXML.newsitems = document.getElementById('storylisthome');
+  
+    /* ...programmatically insert the loading animation... */
+    GadgetXML.load_div = document.createElement('div');
+    GadgetXML.load_div.setAttribute('id', 'loadanim');
+    
+    GadgetXML.load_p = document.createElement('p');
+    GadgetXML.load_p.setAttribute('id', 'loadtext');
+    GadgetXML.load_p.onclick = GadgetXML.removeLoader;
+    
+    GadgetXML.load_text = document.createTextNode('Loading');
+    
+    GadgetXML.load_p.appendChild(GadgetXML.load_text);
+    GadgetXML.load_div.appendChild(GadgetXML.load_p);
+    GadgetXML.newsitems.appendChild(GadgetXML.load_div);
+    
+    function ellipsis() {
+      var loadstring = GadgetXML.load_p.firstChild.nodeValue;
+        if (loadstring == 'Loading...') {
+          GadgetXML.load_p.firstChild.nodeValue = 'Loading';
+        }
+        else {
+          loadstring += '.';
+          GadgetXML.load_p.firstChild.nodeValue = loadstring;
+        }
+    }
+    
+    /* ...store the setInterval functions so we can turn them off later... */
+    GadgetXML.ellip = setInterval(ellipsis, 1000);
+    GadgetXML.loadTester = setInterval(GadgetXML.removeLoader, 250);
+  },
+  
+  removeLoader : function() {     
+    for (var i = 0; i < GadgetXML.newsitems.childNodes.length; i++) {
+      if (GadgetXML.newsitems.childNodes[i].className == 'item') {
+        GadgetXML.newsitems.removeChild(GadgetXML.load_div);
+        clearInterval(GadgetXML.ellip);
+        clearInterval(GadgetXML.loadTester);
+        break;
+      }
+    }
+  },
+  
+  getDOM : function() {
+      var params = {};
+      var url;
+      if (arguments.length == 0) {
+        url = GadgetTabs.feeds['topstories'];
+      }
+      else {
+        url = arguments[0];
+      }
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+      gadgets.io.makeRequest(url, GadgetXML.processDOM, params);
+      GadgetXML.insertLoader();
+    },
+  
+  processDOM : function(obj) {
+    
+    /* ... collect the items in an array... */
+    var items = [];
+    
+    for (var i = 0; i < obj.data.childNodes.length; i++) {
+      if (obj.data.childNodes[i].nodeName == 'rss') {
+        for (var j = 0; j < obj.data.childNodes[i].childNodes.length; j++) {
+          if (obj.data.childNodes[i].childNodes[j].nodeName == 'channel') {
+            for (var k = 0; k < obj.data.childNodes[i].childNodes[j].childNodes.length; k++) {
+              
+              /* ... if you find an \'item\' element, create an object for it and store this object in the \'items\' array... */
+              if (obj.data.childNodes[i].childNodes[j].childNodes[k].nodeName == 'item') {  
+                
+                items[items.length] = {
+                  ref : obj.data.childNodes[i].childNodes[j].childNodes[k],
+                  hasphoto : false
+                };
+                
+                /* ...browse the children of the \'items\' object and store what we need... */
+                for (var l = 0, c1 = (items.length -1); l < items[c1].ref.childNodes.length; l++) {
+                  if (items[c1].ref.childNodes[l].nodeName == 'title') {
+                    items[c1]['headline'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                  if (items[c1].ref.childNodes[l].nodeName == 'link') {
+                    items[c1]['link'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                  if (items[c1].ref.childNodes[l].nodeName == 'enclosure') {
+                    items[c1]['photolink'] = items[c1].ref.childNodes[l].getAttribute('url');
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    /* ...parse the \'items\' array to build our list... */
+    for (var i = 0; i < 3; i++) {
+    
+      var item_headline = items[i].headline;
+      var item_link = items[i].link;
+    
+      var item_div = document.createElement('div');
+      item_div.className = 'item';
+      item_div.onmouseover = ItemRollovers.itemHover;
+      item_div.onmouseout = ItemRollovers.itemRetreat;
+      
+      if (items[i].photolink) {
+        var item_img = document.createElement('img');
+        item_img.src = items[i].photolink;
+        item_img.width = '50';
+        item_img.height = '38';
+        item_div.appendChild(item_img);
+      }
+      
+      var item_p = document.createElement('p');
+      
+      var item_a = document.createElement('a');
+      item_a.setAttribute('target', '_blank');
+      item_a.href = item_link;
+      var item_text = document.createTextNode(item_headline);
+      item_a.appendChild(item_text);
+      
+      item_p.appendChild(item_a);
+      
+      var item_clear = document.createElement('br');
+      item_clear.style.clear = 'both';
+      item_p.appendChild(item_clear);
+
+      item_div.appendChild(item_p);
+      
+      GadgetXML.newsitems.appendChild(item_div);
+      
+    }       
+  },
+  
+  reloadDOM : function(url) { 
+    
+    while (GadgetXML.newsitems.childNodes.length != 0) {
+      GadgetXML.newsitems.removeChild(GadgetXML.newsitems.firstChild);
+    }
+    
+    GadgetXML.getDOM(url);
+  }
+};
+
+// GadgetXML.enumerate();
+
+gadgets.util.registerOnLoadHandler(createGadgetTabs);
+gadgets.util.registerOnLoadHandler(GadgetXML.getDOM);
+
+// alert('I can take you there. Just follow me.');    
+window.onunload = GadgetTabs.clearEvents();
+
+
+
+
+/* ### gadget_canv.js ###
+
+This file essentially duplicates gadget_home.js, but adds functions to take advantage of / the larger space when the user switches from the gadget\'s home view to canvas view. Kind of like when you go full-screen on a YouTube video.
+
+It adds logic for formatting the \"posted\" date and expands from 3 to 10 items.
+
+*/
+
+
+var Sniff = {
+  platform : 'I can\'t detect the platform this device is running.',
+  browser : 'I can\'t detect the browser this device is running.',
+  version : 'I can\'t detect the specific version of the browser this device is running.',
+  
+  browserTest : function() {
+    var bdna = navigator.userAgent;
+    var ndx;
+    var platform_set = ['Windows', 'iPhone', 'Mac OS'];
+    var browser_set = ['Firefox', 'MSIE', 'Safari',  'Opera'];
+    
+    for (var i = 0; i < platform_set.length; i++) {
+      if (bdna.indexOf(platform_set[i]) != -1) {
+        this.platform = platform_set[i];
+        break;
+      }
+    }
+    for (var j = 0; j < browser_set.length; j++) {
+      if (bdna.indexOf(browser_set[j]) != -1) {
+        ndx = bdna.indexOf(browser_set[j]);
+        this.browser = browser_set[j];
+        break;
+      }
+    }
+    switch (this.browser) {
+      case 'Firefox':
+        this.version = bdna.charAt((ndx + 8));
+        break;
+        
+      case 'MSIE':
+        this.version = bdna.charAt((ndx + 5));
+        break;
+      
+      case 'Safari':
+        switch (this.platform) {
+          case 'Mac OS':
+            this.version = bdna.charAt((ndx - 6));
+            break;
+          
+          case 'iPhone':
+            this.version = bdna.charAt((ndx - 17));
+            break;
+        }
+        break;
+      
+      case 'Opera':
+        this.version = bdna.charAt((ndx + 6));
+        break;
+    }
+    var setup = this.platform + ', ' + this.browser + ' ' + this.version;
+  }
+};
+Sniff.browserTest();
+
+var current_view; // are we in home or canvas view?
+
+var GadgetTabs;
+
+function createGadgetTabs() {
+
+  GadgetTabs = {
+    
+    getView : function() {
+      alert(gadgets.views.getCurrentView().getName());
+      
+      /* ### 8-25 ...div ID names below need to change based on the view... ### */
+    },
+    
+    tab_row : document.getElementById('fpgnavcanv'),
+    
+    tabs : document.getElementById('fpgnavcanv').getElementsByTagName('LI'),
+    
+    current_tab : 'topstories',
+    
+    feeds : {
+      topstories : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET01&template=RSS&mime=XML',
+      biz : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET02&template=RSS&mime=XML',
+      sports : 'http://www.freep.com/apps/pbcs.dll/section?Category=GADGET03&template=RSS&mime=XML'
+    },
+    
+    preload : function() {
+      var basenames = ['topstories', 'sports', 'biz'];
+      for (var i = 0; i < basenames.length; i++) {
+        var tab_normal = new Image();
+        tab_normal.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'tab.png';
+        
+        var tab_hover = new Image();
+        tab_hover.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'tab_hover.png';
+        
+        var bg_on = new Image();
+        bg_on.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_on.png';
+        
+        var bg_hover1 = new Image();
+        bg_hover1.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_hover_on_off.png';
+        
+        var bg_hover2 = new Image();
+        bg_hover1.src = 'http://www.freep.com/google_gadgets/art/' + basenames[i] + 'bg_hover_off_on.png';
+      }
+    },
+    
+    compressText : function(the_text) {
+      if (the_text.indexOf(' ') != -1) {
+        var re = /\s/g; // ...global regex search-and-replace
+        the_text = the_text.replace(re, '');
+      }
+      return the_text;
+    },
+    
+    /* ... chop the \'fpg\' from the beginning of the id string and the \'tab\' from the end of it... */
+    collectText : function(the_text) {
+      return the_text.slice(3, the_text.indexOf('tab'));
+    },
+    
+    rollover : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        /* ... do you recognize event.target or event.srcElement?... */
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          GadgetTabs.hover_tab = ident;
+          if (GadgetTabs.current_tab != ident) {
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab_hover.png') left top no-repeat";
+            switch (GadgetTabs.current_tab) {
+              case 'topstories':
+                GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_on_off.png') left top no-repeat";
+                break;
+                
+              case 'sports':
+                switch (ident) {
+                  case 'topstories':
+                    GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_on_off.png') left top no-repeat";
+                    break;
+                  
+                  case 'biz':
+                    GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_off_on.png') left top no-repeat";
+                    break;
+                }
+                break;
+                
+              case 'biz':
+                GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_hover_off_on.png') left top no-repeat";
+                break;
+              
+            }
+          }
+        }
+      }
+    },
+    
+    rollout : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          if (GadgetTabs.current_tab != ident) {
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab.png') left top no-repeat";
+            // alert('art/' + GadgetTabs.current_tab + 'tab.png');
+            GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + GadgetTabs.current_tab + "bg_on.png') left top no-repeat";
+          }
+        }
+      }
+    },
+    
+    select : function(evt) {
+      evt = (evt) ? evt : ((window.event) ? event : null);
+      if (evt) {
+        var elem = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+        if (elem) {
+          var ident = GadgetTabs.collectText(elem.getAttribute('id'));
+          if (GadgetTabs.current_tab != ident) {
+            GadgetTabs.current_tab = ident;
+            GadgetXML.reloadDOM(GadgetTabs.feeds[ident]);
+            elem.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "tab.png') left top no-repeat";
+            GadgetTabs.tab_row.style.background = "transparent url('http://www.freep.com/google_gadgets/art/" + ident + "bg_on.png') left top no-repeat";
+          }             
+        }
+      }
+    },
+    
+    buttonBhvr : function() {
+      for (var i = 0; i < this.tabs.length; i++) {
+      
+        /* ...using addEvent here because we\'re overloading the onclick handler... */
+        addEvent(this.tabs[i], 'mouseover', this.rollover, false);
+        addEvent(this.tabs[i], 'mouseout', this.rollout, false);
+        addEvent(this.tabs[i], 'click', this.select, false);
+      }
+    },
+    
+    clearEvents : function() {
+      for (var i = 0; i < this.tabs.length; i++) {
+        removeEvent(this.tabs[i], 'mouseover', this.rollover, false);
+        removeEvent(this.tabs[i], 'mouseout', this.rollout, false);
+        removeEvent(this.tabs[i], 'click', this.select, false);
+      }
+    }
+  };
+  GadgetTabs.preload();
+  GadgetTabs.buttonBhvr();
+}
+
+function addEvent(elem, evtType, func, capture) {
+  if (elem.addEventListener) {
+    elem.addEventListener(evtType, func, capture);
+  }
+  else if (elem.attachEvent) {
+    elem.attachEvent('on' + evtType, func);
+  }
+  else {
+    elem['on' + evtType] = func;
+  }
+}
+
+function removeEvent(elem, evtType, func, capture) {
+  if (elem.removeEventListener) {
+    elem.removeEventListener(evtType, func, capture);
+  }
+  else if (elem.detachEvent) {
+    elem.detachEvent('on' + evtType, func);
+  }
+  else {
+    elem['on' + evtType] = null;
+  }
+}
+
+/* ...window load queue. queues functions to fire after the page is done loading... */
+function wlq(func) {
+  if (window.addLoadEvent || window.attachEvent) {
+    addEvent(window, 'load', func, false);
+  }
+  else {
+    var old_queue = (window.onload) ? window.onload : function() {};
+    window.onload = function() {
+      old_queue();
+      func();
+    }
+  }
+}
+
+var ItemRollovers = {
+  itemHover : function() {
+    this.style.background = 'transparent url("http://www.freep.com/google_gadgets/art/item_hover_bg.png") left top repeat-x';
+  },
+  
+  itemRetreat : function() {  
+    this.style.background = 'none';
+  }
+}
+
+var GadgetXML  = {
+  
+  insertLoader : function() {
+    GadgetXML.newsitems = document.getElementById('storylistcanv');
+  
+    /* ...programmatically insert the loading animation... */
+    GadgetXML.load_div = document.createElement('div');
+    GadgetXML.load_div.setAttribute('id', 'loadanim');
+    
+    GadgetXML.load_p = document.createElement('p');
+    GadgetXML.load_p.setAttribute('id', 'loadtext');
+    GadgetXML.load_p.onclick = GadgetXML.removeLoader;
+    
+    GadgetXML.load_text = document.createTextNode('Loading');
+    
+    GadgetXML.load_p.appendChild(GadgetXML.load_text);
+    GadgetXML.load_div.appendChild(GadgetXML.load_p);
+    GadgetXML.newsitems.appendChild(GadgetXML.load_div);
+    
+    function ellipsis() {
+      var loadstring = GadgetXML.load_p.firstChild.nodeValue;
+        if (loadstring == 'Loading...') {
+          GadgetXML.load_p.firstChild.nodeValue = 'Loading';
+        }
+        else {
+          loadstring += '.';
+          GadgetXML.load_p.firstChild.nodeValue = loadstring;
+        }
+    }
+    
+    /* ...store the setInterval functions so we can turn them off later... */
+    GadgetXML.ellip = setInterval(ellipsis, 1000);
+    GadgetXML.loadTester = setInterval(GadgetXML.removeLoader, 250);
+  },
+  
+  removeLoader : function() {     
+    for (var i = 0; i < GadgetXML.newsitems.childNodes.length; i++) {
+      if (GadgetXML.newsitems.childNodes[i].className == 'item') {
+        GadgetXML.newsitems.removeChild(GadgetXML.load_div);
+        clearInterval(GadgetXML.ellip);
+        clearInterval(GadgetXML.loadTester);
+        break;
+      }
+    }
+  },
+  
+  getDOM : function() {
+      var params = {};
+      var url;
+      if (arguments.length == 0) {
+        url = GadgetTabs.feeds['topstories'];
+      }
+      else {
+        url = arguments[0];
+      }
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+      gadgets.io.makeRequest(url, GadgetXML.processDOM, params);
+      GadgetXML.insertLoader();
+    },
+  
+  processDOM : function(obj) {
+    
+    /* ... collect the items in an array... */
+    var items = [];
+    
+    for (var i = 0; i < obj.data.childNodes.length; i++) {
+      if (obj.data.childNodes[i].nodeName == 'rss') {
+        for (var j = 0; j < obj.data.childNodes[i].childNodes.length; j++) {
+          if (obj.data.childNodes[i].childNodes[j].nodeName == 'channel') {
+            for (var k = 0; k < obj.data.childNodes[i].childNodes[j].childNodes.length; k++) {
+              
+              /* ... if you find an \'item\' element, create an object for it and store this object in the \'items\' array... */
+              if (obj.data.childNodes[i].childNodes[j].childNodes[k].nodeName == 'item') {  
+                
+                items[items.length] = {
+                  ref : obj.data.childNodes[i].childNodes[j].childNodes[k],
+                  hasphoto : false
+                };
+                
+                /* ...browse the children of the \'items\' object and store what we need... */
+                for (var l = 0, c1 = (items.length -1); l < items[c1].ref.childNodes.length; l++) {
+                  if (items[c1].ref.childNodes[l].nodeName == 'title') {
+                    items[c1]['headline'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                  if (items[c1].ref.childNodes[l].nodeName == 'link') {
+                    items[c1]['link'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                  
+                  if (items[c1].ref.childNodes[l].nodeName == 'enclosure') {
+                    items[c1]['photolink'] = items[c1].ref.childNodes[l].getAttribute('url');
+                  }
+                  if (items[c1].ref.childNodes[l].nodeName == 'description') {
+                    items[c1]['summary'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                  if (items[c1].ref.childNodes[l].nodeName == 'pubDate') {
+                    items[c1]['date'] = items[c1].ref.childNodes[l].firstChild.nodeValue;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    function parseDate(str) {
+      var day_of_week;
+      switch (str.substr(0, 3)) {
+        case 'Sun':
+          day_of_week = 'Sunday';
+          break;
+          
+        case 'Mon':
+          day_of_week = 'Monday';
+          break;
+          
+        case 'Tue':
+          day_of_week = 'Tuesday';
+          break;
+          
+        case 'Wed':
+          day_of_week = 'Wednesday';
+          break;
+        
+        case 'Thu':
+          day_of_week = 'Thursday';
+          break;
+          
+        case 'Fri':
+          day_of_week = 'Friday';
+          break;
+          
+        case 'Sat':
+          day_of_week = 'Saturday';
+          break;
+      }
+      
+      var day_of_month = parseInt(str.substr(5), 10);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var month;
+      for (var i = 0; i < months.length; i++) {
+        if (str.indexOf(months[i]) != -1) {
+          var month_name = months[i];
+          month = (i + 1);
+        }
+      }
+      
+      var year = parseInt(str.substr((str.indexOf(month_name) + 3)));
+      var truncated_year = str.substr((str.indexOf(month_name) + 6), 2);
+      var hour = parseInt(str.substr(17, 2));
+      var minute = str.substr((str.indexOf(':') + 1), 2);
+      var daypart = 'a.m.';
+      if (hour > 12 || hour >= 12) {
+        daypart = 'p.m.';
+      }
+      if (hour > 12) {
+        hour -= 12;
+      }
+      if (hour == 00) {
+        hour = 12;
+      }
+      
+      var time_stamp = hour + ':' + minute + ' ' + daypart + ' - ' + day_of_week + ', ' + month + '/' + day_of_month + '/' + truncated_year;
+      return time_stamp;
+    };
+    
+    /* ...parse the \'items\' array to build our list... */
+    for (var i = 0; i < 10; i++) {
+    
+      var item_headline = items[i].headline;
+      var item_link = items[i].link;
+      var item_summary = items[i].summary;
+      var item_date = items[i].date;
+    
+      var item_div = document.createElement('div');
+      item_div.className = 'item';
+      item_div.onmouseover = ItemRollovers.itemHover;
+      item_div.onmouseout = ItemRollovers.itemRetreat;
+      
+      if (items[i].photolink) {
+        var item_img = document.createElement('img');
+        item_img.src = items[i].photolink;
+        item_img.width = '50';
+        item_img.height = '38';
+        item_div.appendChild(item_img);
+      }
+      
+      var item_date_p = document.createElement('p');
+      item_date_p.className = 'timestamp';
+      var item_date_text = document.createTextNode(parseDate(item_date));
+      item_date_p.appendChild(item_date_text);
+      
+      var item_head_p = document.createElement('p');
+      
+      var item_a = document.createElement('a');
+      item_a.setAttribute('target', '_blank');
+      item_a.href = item_link;
+      var item_head_text = document.createTextNode(item_headline);
+      item_a.appendChild(item_head_text);
+      
+      item_head_p.appendChild(item_a);
+      
+      var item_sum_p = document.createElement('p');
+          
+      var item_sum_text = document.createTextNode(item_summary);
+      item_sum_p.appendChild(item_sum_text);
+      item_sum_p.className = 'summary';
+      
+      var item_clear = document.createElement('br');
+      item_clear.style.clear = 'both';
+      item_sum_p.appendChild(item_clear);
+
+      item_div.appendChild(item_date_p);
+      item_div.appendChild(item_head_p);
+      item_div.appendChild(item_sum_p);
+      
+      GadgetXML.newsitems.appendChild(item_div);
+      
+    }       
+  },
+  
+  reloadDOM : function(url) { 
+    
+    while (GadgetXML.newsitems.childNodes.length != 0) {
+      GadgetXML.newsitems.removeChild(GadgetXML.newsitems.firstChild);
+    }
+    
+    GadgetXML.getDOM(url);
+  }
+};
+
+gadgets.util.registerOnLoadHandler(createGadgetTabs);
+gadgets.util.registerOnLoadHandler(GadgetXML.getDOM);
+
+// alert('I can take you there. Just follow me.');    
+window.onunload = GadgetTabs.clearEvents();</textarea>
+                      </div>
+                    </form>
+                  </p>
+                  
+                </div><!-- end .windo-item -->
+              </div><!-- end .windo -->
+            </div><!-- end .assets -->
+            
+            <h2><a name="navwidget" id="widgetanchor">Channeling our content through Google's API</a></h2>
+            <p>In 2009, My editor Nancy had the idea of making our content available to users on their iGoogle home pages. She asked me to see if I could make a Freep.com Google Gadget.</p>
+            <p>This was a lot of fun. I hadn't before dealt with an API this huge. The whole thing processes Freep.com's RSS feeds, and I designed a special template that sent photos along with the hypertext.</p>
+            <p>Most of the other news gadgets all looked the same, with identical typefaces and colors. I wanted ours to stand out, so I designed it with Georgia as a base font, created a timer animation, highlighted selections on hover and added our logo. The "tabs" at the top are simply a .png image that uses JavaScript to swap out when the user changes the feed.</p>
+            <p>I hit all our milestones, but we never pushed this live to the iGoogle directory. This project fell off the radar as we dealt with print and Web redesigns, staffing changes and a new delivery schedule.</p>
+            <p>I thought this might've been deleted from the server or broken by Freep's latest redesign since I left in August 2010. I was surprised to find it mostly intact, though the thumbnail photos no longer appear.</p>
+            <p>You can still load this beta version into your iGoogle home page by visiting <a href="http://www.google.com/ig/directory" title="The iGoogle gadgets directory" target="_new">the directory</a>, clicking the "Add feed or gadget" link in the left rail and pasting in this address: <a href="http://www.freep.com/google_gadgets/starter_gadget.xml" title="A link to a beta version of the Freep.com Google Gadget." target="_new">http://www.freep.com/google_gadgets/starter_gadget.xml</a></p>
+            <p>It's only visible in working form on the iGoogle home page, so unfortunately, I can't show you a live version here. Still, here's the code.</p>
+            
+          </article><!-- end #widgetry -->
+
+          
+            
+        </div><!-- end #copy -->
+      </section><!-- end #content -->
+      
+      <div id="footer">
+        <p id="footer-nav"><a href="/">Home</a> | <a href="about.html">About</a> | <a href="work.html">Work</a> | <a href="contact.html">Contact</a></p>
+        <div id="footer-logos">
+          <img src="a/conday_logo_8bit.png" alt="This site rolls with ConDay." title="This site rolls with ConDay." />
+          <a href="http://www.dreamhost.com" target="_new"><img src="a/dreamhost_logo_8bit.png" alt="This site rests at Dreamhost." title="This site rests at Dreamhost." /></a>
+        </div>
+        <p id="copyright">All content and design &copy; 2005-2011 James Thomas (parisminton) unless noted otherwise. All rights reserved.</p>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="j/codesample_carousel.js"></script>
+  <script type="text/javascript" src="j/codesample_balloon.js"></script>
+  <script type="text/javascript" src="j/codesample.js"></script>
+</html>

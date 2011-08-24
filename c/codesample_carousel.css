@@ -1,11 +1,10 @@
 #electionwidgets {
   position: relative;
   width: 310px;
-  top: 70px;
   font-family: arial, helvetica;
 	font-size: 90%;
 	line-height: 1.3em;
-  background: transparent url('/nyt_codesamples/a/clinton_wgt.jpg') left top no-repeat;
+  background: transparent url('/codesamples/a/clinton_wgt.jpg') left top no-repeat;
 }
 
 #electionwidgets p {
@@ -136,7 +135,7 @@
 }
 
 #electionwidgets.ewidget_right #profiles a.first {
-	background: transparent url('/nyt_codesamples/a/bulletarrow_right.png') right center no-repeat;
+	background: transparent url('/codesamples/a/bulletarrow_right.png') right center no-repeat;
 }  	
 
 #electionwidgets #profiles a:hover {

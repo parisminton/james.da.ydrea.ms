@@ -6,7 +6,7 @@ function candidateObj(path, aligned) {
   this.path = path;
   this.aligned = aligned;
   this.precache = new Image();
-  this.precache.src = '/nyt_codesamples/a/' + path;
+  this.precache.src = '/codesamples/a/' + path;
   this.precache.width = '310';
   this.precache.height = '370';
 }
@@ -62,16 +62,16 @@ function changeBg() {
     j = 0;
   }
   var cand_div = document.getElementById('electionwidgets');
-  cand_div.style.backgroundImage = 'url(/nyt_codesamples/a/' + candidates[j].path + ')';
+  cand_div.style.backgroundImage = 'url(/codesamples/a/' + candidates[j].path + ')';
   for (var i = 0; i < candidates.length; i++) { // reset all the anchor nodes
     candidates[i].href_node.style.background = 'none';			
   }
   if (candidates[j].aligned == 'right') {
-    candidates[j].href_node.style.background = 'transparent url(/nyt_codesamples/a/bulletarrow_right.png) right center no-repeat';
+    candidates[j].href_node.style.background = 'transparent url(/codesamples/a/bulletarrow_right.png) right center no-repeat';
     cand_div.className = 'ewidget_right';			
   }
   else {
-    candidates[j].href_node.style.background = 'transparent url(/nyt_codesamples/a/bulletarrow_left.png) left center no-repeat';
+    candidates[j].href_node.style.background = 'transparent url(/codesamples/a/bulletarrow_left.png) left center no-repeat';
     cand_div.className = 'ewidget_left';
   }
   j++;
@@ -119,4 +119,4 @@ nodeFinder();
 delayChangeBg();
 delayCountDown();
 
-/* alert('Dilla put me up on all y\'all in Japan'); */
+/* alert('I can take you there. Just follow me.'); */

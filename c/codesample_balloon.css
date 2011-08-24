@@ -1,0 +1,119 @@
+#code-page #inauguration-multimedia {
+	clear: right;
+}
+
+#code-page #inauguration-multimedia a {
+	color: black;
+}
+
+#code-page #inauguration-multimedia a:hover {
+	color: black;
+	text-decoration: underline;
+}
+
+#code-page #inauguration-photos {
+	position: relative;
+	width: 280px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	margin: 0 auto;
+}
+
+#code-page #inauguration-photos h4 {
+  float: none;
+	clear: both;
+	margin: 10px;
+	padding: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 14px;
+	text-transform: uppercase;
+}
+
+#code-page #inauguration-photos h4 a {
+  color: #000;
+}
+
+#code-page #inauguration-photos h4 span {
+	font-size: 10px;
+	font-weight: normal;
+	text-transform: none;
+}
+
+#code-page #balloonlayer {
+	position: absolute;
+	visibility: hidden;
+	width: 140px;
+	height: 121px;
+	top: 0px;
+	left: 0px;
+	opacity: 0.9;
+	filter: alpha(opacity=90);
+	text-align: center;
+	overflow: hidden;
+	outline: none;
+	z-index: 5;
+	background: transparent url('/codesamples/inaug_test/art/balloonbg_24bit.png') left top no-repeat;
+}
+
+#code-page #balloonlayer p {
+	position: absolute;
+	width: 90px;
+	left: 70px;
+	margin: 20px 0px 0px -45px;
+	text-align: left;
+	font-size: 13px;
+	line-height: 16px;
+	color: #009;
+}
+
+#code-page #balloonlayer p a {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #009;
+}
+
+#code-page #balloonlayer p a:hover {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #009;
+}
+
+* html #code-page #balloonlayer {
+	position: absolute;
+	visibility: hidden;
+	width: 140px;
+	height: 121px;
+	top: 0px;
+	left: 0px;
+	text-align: center;
+	overflow: hidden;
+	outline: none;
+	background: transparent url(art/balloonbg_8bit.png) left top no-repeat;
+}
+
+* html #code-page #balloonlayer p {
+	position: absolute;
+	width: 90px;
+	left: 70px;
+	margin: 20px 0px 0px -45px;
+	text-align: left;
+	font-size: 13px;
+	line-height: 16px;
+}
+
+* html #code-page #balloonlayer p a {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #009;
+}
+
+* html #code-page #balloonlayer p a:hover {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #009;
+}
+
+#code-page #inauguration-photos img {
+	width: 60px;
+	height: 45px;
+	margin: 10px 10px 0px 0px;
+	float: left;
+	border: 0px;
+}
