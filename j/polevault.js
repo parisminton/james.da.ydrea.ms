@@ -20,8 +20,8 @@ function canvasApp () {
   var the_canvas = document.getElementById("main-stage"),
       context = the_canvas.getContext("2d"),
       vaulter = new Image(),
-      cells = [],
-      current_cell = 0,
+      cels = [],
+      current_cel = 0,
       w = 460,
       h = 344,
       i, len, xpos, ypos, 
@@ -29,36 +29,32 @@ function canvasApp () {
   vaulter.src = "a/polevault_sprites_24bit.png";
   vaulter.addEventListener("load", eventVaulterLoaded, false);
 
+  /* ... populate the cels array and set the breakpoint to the last cel ... */
   for (i = 0; i < 58; i += 1) {
-    cells[cells.length] = i;
+    cels[cels.length] = i;
   }
-  breakpoint = cells.length;
+  breakpoint = cels.length;
 
   function drawScreen () {
-    if (current_cell >= breakpoint) {
-      current_cell = 0;
+    if (current_cel >= breakpoint) {
+      current_cel = 0;
     }
     else {
       // context.fillStyle = "#ffffff";
       context.clearRect(0, 0, 460, 344);
-      xpos = ((w * Math.floor(cells[current_cell])) % 4600);
-      ypos = (h * Math.floor((cells[current_cell] * w) / 4600));
+      xpos = ((w * Math.floor(cels[current_cel])) % 4600);
+      ypos = (h * Math.floor((cels[current_cel] * w) / 4600));
       context.drawImage(vaulter, xpos, ypos, 460, 344, 0, 0, 460, 344);
-      current_cell += 1;
+      current_cel += 1;
       variableTimer(drawScreen, 75);  
     }
   }
   
-  function startUp () {
-    setInterval(drawScreen, 75);
-  }
-
   function variableTimer (func, inc) {
     setTimeout(func, inc);
   }
 
   function eventVaulterLoaded () {
-    // startUp(); 
     drawScreen();
   }
   
