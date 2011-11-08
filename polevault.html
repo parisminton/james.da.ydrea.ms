@@ -7,7 +7,6 @@
 
 <style type="text/css">
   body { background: #d7e2e6 url("a/bg_8bit.png") left top repeat-x; }
-  .janky { font-family: nyt-cheltenham, sans-serif; size: 20px; }
   .homely { font-family: arial, helvetica, sans-serif}
 </style>
 
@@ -18,13 +17,16 @@
     <h1 class="janky">Raising the Bar</h1>
     <h3 class="homely">The pole vaulter combines the skills of a sprinter and a gymnast to lift himself over a crossbar between two uprights.</h3>
     <div id="wrapper">
-      <canvas id="main-stage" width="460" height="544">Your browser does not support the HTML5 canvas element.</canvas>
+      <canvas id="main-stage" width="566" height="484">Your browser does not support the HTML5 canvas element.</canvas>
     </div>
 
-    <p>Beginning with a relaxed run-up, the vaulter sprints immediately before planting the pole.</p>
-
+    <p>Beginning with a <span id="boxyload" style="font-weight: bold;">relaxed</span> run-up, the <span id="triangload" style="font-weight: bold;">vaulter</span> sprints immediately before <span style="font-weight: bold;">planting</span> the pole.</p>
+    <p id="fireit">Fire ftha</p>
+    <p id="inspect">Inspect anim_queue</p>
   </div><!-- end #shell -->
 </body>
 </html>
 
-<script src="j/polevault.js"></script>
+<script src="j/pv_cels.js"></script>
+<script src="j/new_polevault.js"></script>
+<!-- <script src="j/polevault.js"></script> -->
