@@ -6,7 +6,8 @@ function stage () {
       context = the_canvas.getContext("2d"),
       button_sprite = new Image(),
       fps = 75,
-      breakpoint = 59,
+      breakpoints = [ 59 ],
+      current_bp = 0,
       current_frame = 0,
       anim_queue = {},
       boxy,
@@ -53,6 +54,7 @@ function stage () {
     this.current_seq = "main";
     this.sequence = {
       main : {
+        starting_frame : 0,
         cache : [],
         iterations : 1,
         current_cel : 0,
@@ -61,6 +63,7 @@ function stage () {
     };
     this.makeSequence = function (seq_name) {
       this.sequence[seq_name] = {
+        starting_frame : 0,
         cache : [],
         iterations : 1,
         current_cel : 0,
@@ -73,6 +76,9 @@ function stage () {
     this.load = function () { 
       anim_queue[obj_name] = this;
     };
+    this.create = function (obj_name, touchable, boundary) {
+      return new Charcter(obj_name, touchable, boundary);
+    }
   };
   
   function renderCharacter (obj, ctx) {
@@ -344,6 +350,10 @@ function stage () {
       current_frame = 0;
       return "done";
     }
+    if (current_frame == breakpoints[current_bp]) {
+      console.log("animate() is paused and has exited.");
+      return "paused";
+    }
     console.log(length);
     drawFrame(); 
     ftha(anim_queue);
@@ -416,7 +426,7 @@ function stage () {
       // touchables[i].renderBoundary()...
       playButtonBoundary(context);
       if (context.isPointInPath(x, y)) {
-        breakpoint = 59;
+        current_bp = 0;
         animate();
       }
       else {
@@ -434,7 +444,7 @@ function stage () {
       // touchables[i].renderBoundary()...
       playButtonBoundary(context);
       if (context.isPointInPath(x, y)) {
-        breakpoint = 59;
+        current_bp = 0;
         animate();
       }
       else {
