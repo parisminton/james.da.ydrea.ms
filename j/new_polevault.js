@@ -35,6 +35,7 @@ function stage () {
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
   
   function CharACTer (obj_name, touchable, boundary) {
+    this.name = obj_name;
     this.visible = false;
     this.show = function () {
       this.visible = true;
@@ -50,6 +51,25 @@ function stage () {
       this.boundary = false;
     }
     this.current_seq = "main";
+    this.sequence = {
+      main : {
+        cache : [],
+        iterations : 1,
+        current_cel : 0,
+        cels : []
+      }
+    };
+    this.makeSequence = function (seq_name) {
+      this.sequence[seq_name] = {
+        cache : [],
+        iterations : 1,
+        current_cel : 0,
+        cels : []
+      }
+    };
+    this.reset = function () {
+      this.sequence[this.current_seq].current_cel = 0;
+    };
     this.load = function () { 
       anim_queue[obj_name] = this;
     };
@@ -62,207 +82,190 @@ function stage () {
 
   boxy = new CharACTer("boxy", false);
   boxy.show();
-  boxy.sequence = {
-    main : {
-      cache : [],
-      iterations : 1,
-      current_cel : 0,
-
-      cels : [
-        function (ctx) {
-          if (boxy.visible) {
-            recordStrokeRect(boxy, ctx, 100, 100, 250, 250);
-          }
-        },
-        
-        function (ctx) {
-          if (boxy.visible) {
-            recordStrokeRect(boxy, ctx, 110, 110, 250, 250);
-          }
-        },
-
-        function (ctx) {
-          if (boxy.visible) {
-            recordStrokeRect(boxy, ctx, 120, 120, 250, 250);
-          }
-        },
-
-        function (ctx) {
-          if (boxy.visible) {
-            recordStrokeRect(boxy, ctx, 130, 130, 250, 250);
-          }
-        }
-      ]
+  boxy.sequence.main.cels = [
+    function (ctx) {
+      if (boxy.visible) {
+        recordStrokeRect(boxy, ctx, 100, 100, 250, 250);
+      }
+    },
     
+    function (ctx) {
+      if (boxy.visible) {
+        recordStrokeRect(boxy, ctx, 110, 110, 250, 250);
+      }
+    },
+
+    function (ctx) {
+      if (boxy.visible) {
+        recordStrokeRect(boxy, ctx, 120, 120, 250, 250);
+      }
+    },
+
+    function (ctx) {
+      if (boxy.visible) {
+        recordStrokeRect(boxy, ctx, 130, 130, 250, 250);
+      }
     }
-  }; 
+  ];
 
   triang = new CharACTer("triang", false);
   triang.show();
-  triang.sequence = {
-    main : {
-      cache : [],
-      iterations : 1,
-      current_cel : 0,
+  triang.sequence.main.cels = [
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 300, 170);
+        recordLineTo(triang, ctx, 400, 250);
+        recordLineTo(triang, ctx, 200, 250);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-      cels : [
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 300, 170);
-            recordLineTo(triang, ctx, 400, 250);
-            recordLineTo(triang, ctx, 200, 250);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 310, 180);
+        recordLineTo(triang, ctx, 410, 260);
+        recordLineTo(triang, ctx, 210, 260);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 310, 180);
-            recordLineTo(triang, ctx, 410, 260);
-            recordLineTo(triang, ctx, 210, 260);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 320, 190);
+        recordLineTo(triang, ctx, 420, 270);
+        recordLineTo(triang, ctx, 220, 270);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 320, 190);
-            recordLineTo(triang, ctx, 420, 270);
-            recordLineTo(triang, ctx, 220, 270);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 330, 200);
+        recordLineTo(triang, ctx, 430, 280);
+        recordLineTo(triang, ctx, 230, 280);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 330, 200);
-            recordLineTo(triang, ctx, 430, 280);
-            recordLineTo(triang, ctx, 230, 280);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 340, 210);
+        recordLineTo(triang, ctx, 440, 290);
+        recordLineTo(triang, ctx, 240, 290);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 340, 210);
-            recordLineTo(triang, ctx, 440, 290);
-            recordLineTo(triang, ctx, 240, 290);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 350, 220);
+        recordLineTo(triang, ctx, 450, 300);
+        recordLineTo(triang, ctx, 250, 300);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 350, 220);
-            recordLineTo(triang, ctx, 450, 300);
-            recordLineTo(triang, ctx, 250, 300);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 360, 230);
+        recordLineTo(triang, ctx, 460, 310);
+        recordLineTo(triang, ctx, 260, 310);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 360, 230);
-            recordLineTo(triang, ctx, 460, 310);
-            recordLineTo(triang, ctx, 260, 310);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 370, 240);
+        recordLineTo(triang, ctx, 470, 320);
+        recordLineTo(triang, ctx, 270, 320);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 370, 240);
-            recordLineTo(triang, ctx, 470, 320);
-            recordLineTo(triang, ctx, 270, 320);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 380, 250);
+        recordLineTo(triang, ctx, 480, 330);
+        recordLineTo(triang, ctx, 280, 330);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 380, 250);
-            recordLineTo(triang, ctx, 480, 330);
-            recordLineTo(triang, ctx, 280, 330);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 390, 260);
+        recordLineTo(triang, ctx, 490, 340);
+        recordLineTo(triang, ctx, 290, 340);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
+    },
 
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 390, 260);
-            recordLineTo(triang, ctx, 490, 340);
-            recordLineTo(triang, ctx, 290, 340);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        },
-
-        function (ctx) {
-          if (triang.visible) {
-            ctx.save();
-            ctx.beginPath();
-            recordMoveTo(triang, ctx, 400, 270);
-            recordLineTo(triang, ctx, 500, 350);
-            recordLineTo(triang, ctx, 300, 350);
-            ctx.closePath();
-            ctx.strokeStyle = "rgb(255, 0, 0)";
-            ctx.stroke();
-            ctx.restore();
-          }
-        }
-
-      ]
+    function (ctx) {
+      if (triang.visible) {
+        ctx.save();
+        ctx.beginPath();
+        recordMoveTo(triang, ctx, 400, 270);
+        recordLineTo(triang, ctx, 500, 350);
+        recordLineTo(triang, ctx, 300, 350);
+        ctx.closePath();
+        ctx.strokeStyle = "rgb(255, 0, 0)";
+        ctx.stroke();
+        ctx.restore();
+      }
     }
-  };
+
+  ];
 
   function recordMoveTo (obj, ctx, xpos, ypos) {
     obj.sequence[obj.current_seq].cache.push( {moveTo: [xpos, ypos]} );
