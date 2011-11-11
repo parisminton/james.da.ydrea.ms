@@ -13,13 +13,19 @@ Changelog
 
 **11/10/11** 
 
-- CharACTer.create() isn't necessary. I removed it.
+- Renamed `ftha()` to `updateCels()`. Renamed `CharACTer` to `Character`. The internal capitlization was designed to help avoid namespace collisions, but really, it was annoying. I'll keep it out of the global space or wrap it or something.
 
-- CharACTer's methods have been moved into a prototype. Don't see why each instance needs its own unique copy.
+- Modified the last `if` test in updateCels to compare `current_cel` to `cels.length`.
 
-- animate() once again increments current_frame on every draw. It's clear there needs to be a master count of which frame we're on.
+- Added a condition to `renderCharacter()` to check whether it's been passed an function. If not, it renders the last cel in the sequence.
 
-- ftha doesn't reset current_cel when a CharACTer leaves anim_queue. This leaves the CharACTer at its last position on the stage while others continue to move.
+- `CharACTer.create()` isn't necessary. I removed it.
+
+- `CharACTer`'s methods have been moved into a prototype. Don't see why each instance needs its own unique copy.
+
+- `animate()` once again increments `current_frame` on every draw. It's clear there needs to be a master count of which frame we're on.
+
+- `ftha` doesn't reset `current_cel` when a `CharACTer` leaves anim_queue. This leaves the `CharACTer` at its last position on the stage while others continue to move.
 
 ***
 

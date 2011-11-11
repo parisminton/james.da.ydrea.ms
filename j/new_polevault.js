@@ -23,7 +23,7 @@ function stage () {
       };
 
       fi.onclick = function () {
-        ftha(anim_queue);
+        updateCels(anim_queue);
       };
 
       lo.onclick = function () {
@@ -36,7 +36,7 @@ function stage () {
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
   
-  function CharACTer (obj_name, touchable, boundary) {
+  function Character (obj_name, touchable, boundary) {
     this.name = obj_name;
     this.visible = false;
     this.touchable = touchable;
@@ -57,7 +57,7 @@ function stage () {
       }
     };
   };
-  CharACTer.prototype = {
+  Character.prototype = {
     show : function () {
       this.visible = true;
     },
@@ -83,11 +83,18 @@ function stage () {
   };
 
   function renderCharacter (obj, ctx) {
-   ctx = (ctx) ? ctx : context;
-   obj.sequence[obj.current_seq].cels[obj.sequence[obj.current_seq].current_cel](ctx);
+    var cs = obj.current_seq,
+        cc = obj.sequence[obj.current_seq].current_cel;
+    ctx = (ctx) ? ctx : context;
+    if (typeof obj.sequence[cs].cels[cc] == "function") {
+      obj.sequence[cs].cels[cc](ctx);
+    }
+    else {
+      obj.sequence[cs].cels[(obj.sequence[cs].cels.length - 1)](ctx);
+    }
   };
 
-  boxy = new CharACTer("boxy", false);
+  boxy = new Character("boxy", false);
   boxy.show();
   boxy.sequence.main.cels = [
     function (ctx) {
@@ -115,7 +122,7 @@ function stage () {
     }
   ];
 
-  triang = new CharACTer("triang", false);
+  triang = new Character("triang", false);
   triang.show();
   triang.sequence.main.cels = [
     function (ctx) {
@@ -310,27 +317,28 @@ function stage () {
   // need a way to change the object's current sequence.
 
   /* ...only thinks about updating the values in anim_queue. does this once per drawn frame... */ 
-  function ftha (q_obj) {
+  function updateCels (q_obj) {
     var length = getObjectLength(q_obj),
-        cc,
         cs,
-        // cc_length,
         cs_length;
   
     // ### ...current_cel shouldn\'t reset until the whole animation is done ### ... 
     if (length > 0) {
       for (item in q_obj) {
-        // if cs
         cs = q_obj[item].current_seq;
         cs_length = getObjectLength(q_obj[item].sequence[cs]);
         
-        q_obj[item].sequence[cs].current_cel += 1;
-
-        if (q_obj[item].sequence[cs].current_cel >= (q_obj[item].sequence[cs].cels.length - 1)) {
+        if (q_obj[item].sequence[cs].current_cel >= (q_obj[item].sequence[cs].cels.length)) {
           delete q_obj[item];
+          continue;
           // console.log("Deleted: " + q_obj);
           return "reset";
         }
+
+        console.log(q_obj[item].sequence[cs].current_cel);
+
+        q_obj[item].sequence[cs].current_cel += 1;
+
       }
     }
     else {
@@ -338,7 +346,7 @@ function stage () {
     }
   };
 
-  /* ...only thinks about calling drawFrame and ftha repetitively... */ 
+  /* ...only thinks about calling drawFrame and updateCels repetitively... */ 
   function animate () {
     var length = getObjectLength(anim_queue);
     if (length == 0) {
@@ -351,7 +359,7 @@ function stage () {
       return "paused";
     }
     drawFrame(); 
-    ftha(anim_queue);
+    updateCels(anim_queue);
     current_frame += 1;
     setTimeout(animate, fps);
   };
