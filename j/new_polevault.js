@@ -9,6 +9,7 @@ function stage () {
       breakpoints = [ 59 ],
       current_bp = 0,
       current_frame = 0,
+      timeline,
       anim_queue = {},
       boxy,
       triang,
@@ -38,12 +39,6 @@ function stage () {
   function CharACTer (obj_name, touchable, boundary) {
     this.name = obj_name;
     this.visible = false;
-    this.show = function () {
-      this.visible = true;
-    }
-    this.hide = function () {
-      this.visible = false;
-    }
     this.touchable = touchable;
     if (arguments.length > 2) {
       this.boundary = boundary;
@@ -61,7 +56,15 @@ function stage () {
         cels : []
       }
     };
-    this.makeSequence = function (seq_name) {
+  };
+  CharACTer.prototype = {
+    show : function () {
+      this.visible = true;
+    },
+    hide : function () {
+      this.visible = false;
+    },
+    makeSequence : function (seq_name) {
       this.sequence[seq_name] = {
         starting_frame : 0,
         cache : [],
@@ -69,18 +72,16 @@ function stage () {
         current_cel : 0,
         cels : []
       }
-    };
-    this.reset = function () {
+    },
+    reset : function () {
       this.sequence[this.current_seq].current_cel = 0;
-    };
-    this.load = function () { 
-      anim_queue[obj_name] = this;
-    };
-    this.create = function (obj_name, touchable, boundary) {
-      return new Charcter(obj_name, touchable, boundary);
+    },
+    load : function () { 
+      this.reset();
+      anim_queue[this.name] = this;
     }
   };
-  
+
   function renderCharacter (obj, ctx) {
    ctx = (ctx) ? ctx : context;
    obj.sequence[obj.current_seq].cels[obj.sequence[obj.current_seq].current_cel](ctx);
@@ -325,12 +326,7 @@ function stage () {
         
         q_obj[item].sequence[cs].current_cel += 1;
 
-        // console.log(q_obj[item].sequence[cs].cels[q_obj[item].sequence[cs].current_cel]); // drawFrame();
-        // console.log("Current cels length: " + q_obj[item].sequence[cs].cels.length + ".");
-        // console.log("Current cel: " + q_obj[item].sequence[cs].current_cel + ".");
-
         if (q_obj[item].sequence[cs].current_cel >= (q_obj[item].sequence[cs].cels.length - 1)) {
-          q_obj[item].sequence[cs].current_cel = 0;
           delete q_obj[item];
           // console.log("Deleted: " + q_obj);
           return "reset";
@@ -354,12 +350,11 @@ function stage () {
       console.log("animate() is paused and has exited.");
       return "paused";
     }
-    console.log(length);
     drawFrame(); 
     ftha(anim_queue);
-    // current_frame += 1;
+    current_frame += 1;
     setTimeout(animate, fps);
-  }
+  };
 
   /* ...only thinks about drawing... */
   function drawFrame () {

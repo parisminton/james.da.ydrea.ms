@@ -11,6 +11,30 @@ Right now, there's a separate repo for */historicalvotes*, though it lives at th
 Changelog
 ---------
 
+**11/10/11** 
+
+- CharACTer.create() isn't necessary. I removed it.
+
+- CharACTer's methods have been moved into a prototype. Don't see why each instance needs its own unique copy.
+
+- animate() once again increments current_frame on every draw. It's clear there needs to be a master count of which frame we're on.
+
+- ftha doesn't reset current_cel when a CharACTer leaves anim_queue. This leaves the CharACTer at its last position on the stage while others continue to move.
+
+***
+
+
+**11/9/11** 
+
+- CharACTer gets a create() method for instantiation.
+
+- The sequence object in every CharACTer now has a starting_frame member. This tells ftha the frame on which to start animating the CharActer.
+
+- breakpoints is now an array, using current_bp to identify the index of the current breakpoint.
+
+***
+
+
 **11/8/11** - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
 
 The files *polevault.js*, *new\_polevault.js*, *polevault.html* and *pv\_cels.js* all include code for running canvas animations. This will become a subset of [bigwheel.js][1], but I'm testing it [here][2]. The project isn't complete, but these are all working. The highlights:
