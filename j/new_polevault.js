@@ -17,12 +17,17 @@ function stage () {
       lo = document.getElementById("boxyload"), // throw away post-test
       tr = document.getElementById("triangload"), // throw away post-test
       ins_aq = document.getElementById("inspect_aq"), // throw away post-test
+      ins_naq = document.getElementById("inspect_naq"), // throw away post-test
       ins_cf = document.getElementById("inspect_cf"), // throw away post-test
       ins_bp = document.getElementById("inspect_bp"), // throw away post-test
       ins_ft = document.getElementById("inspect_ft"); // throw away post-test
 
       ins_aq.onclick = function () {
         console.log(anim_queue);
+      };
+
+      ins_naq.onclick = function () {
+        console.log(a_queue);
       };
 
       ins_cf.onclick = function () {
@@ -80,17 +85,36 @@ function stage () {
         starting_frame : 0,
         cache : [],
         iterations : 1,
+        current_iteration : 0,
         current_cel : 0,
         cels : []
       }
     },
     reset : function () {
       this.sequence[this.current_seq].current_cel = 0;
+      this.sequence[this.current_seq].current_iteration = 0;
     },
     load : function () { 
       this.reset();
-      frame_total = (frame_total > ( this.sequence[this.current_seq].starting_frame + this.sequence[this.current_seq].cels.length)) ? frame_total : (this.sequence[this.current_seq].starting_frame + this.sequence[this.current_seq].cels.length);
-      anim_queue[this.name] = this;
+      // anim_queue[this.name] = this;
+      a_queue.push(this);
+      setFrameTotal();
+    },
+    advanceCels : function () {
+      if (this.sequence[this.current_seq].current_iteration < this.sequence[this.current_seq].iterations) {
+        this.sequence[this.current_seq].current_cel += 1;
+
+        if (this.sequence[this.current_seq].current_cel >= this.sequence[this.current_seq].cels.length) {
+          this.sequence[this.current_seq].current_iteration += 1;
+          if (this.sequence[this.current_seq].current_iteration >= this.sequence[this.current_seq].iterations) {
+            this.sequence[this.current_seq].current_cel = (this.sequence[this.current_seq].cels.length - 1);
+          }
+          else {
+            this.sequence[this.current_seq].current_iteration += 1;
+            this.sequence[this.current_seq].current_cel = 0;
+          }
+        }
+      }
     }
   };
 
@@ -330,7 +354,7 @@ function stage () {
   
   // need a way to change the object's current sequence.
 
-  /* ...only thinks about updating the values in anim_queue. does this once per drawn frame... */ 
+  /* ...only thinks about updating the values in anim_queue. does this once per drawn frame... 
   function updateCels (q_obj) {
     var length = getObjectLength(q_obj),
         cs,
@@ -357,7 +381,32 @@ function stage () {
       alert("Nothing to do.");
     }
   };
+  */
 
+  function setFrameTotal () {
+    var i,
+        len = a_queue.length;
+    for (i = 0; i < len; i += 1) {
+      frame_total = (frame_total > ( a_queue[i].sequence[a_queue[i].current_seq].starting_frame + (a_queue[i].sequence[a_queue[i].current_seq].cels.length * a_queue[i].sequence[a_queue[i].current_seq].iterations))) ? frame_total : (a_queue[i].sequence[a_queue[i].current_seq].starting_frame + (a_queue[i].sequence[a_queue[i].current_seq].cels.length * a_queue[i].sequence[a_queue[i].current_seq].iterations));
+    }
+  };
+
+  function getAllCels (method_string) {
+    var i,
+        len = a_queue.length;
+    for (i = 0; i < len; i += 1) {
+      a_queue[i][method_string]();
+    }
+  };
+  
+  function advanceAllCels () {
+    getAllCels("advanceCels");
+  };
+
+  function resetAllCels () {
+    getAllCels("reset");
+  }
+  
   function advanceBreakpoint () {
     current_bp += 1;
     if (current_bp >= breakpoints.length) {
@@ -367,33 +416,30 @@ function stage () {
 
   /* ...only thinks about calling drawFrame and updateCels repetitively... */ 
   function animate () {
-    var length = getObjectLength(anim_queue);
-    if (length == 0) {
-      console.log("animate() exited on the first condition on frame " + current_frame + ".");
-      current_frame = 0;
-      return "done";
-    }
-    if (current_frame == breakpoints[current_bp]) {
-      console.log("animate() exited on the second condition on frame " + current_frame + ".");
-      // console.log(breakpoints[current_bp]);
+    // var length = getObjectLength(anim_queue);
+    if (current_frame >= breakpoints[current_bp]) {
+      console.log("animate() exited on frame " + current_frame + ".");
       advanceBreakpoint(); 
-      return "paused";
+      return "done";
     }
     drawFrame(a_queue); 
     console.log(current_frame);
-    updateCels(anim_queue);
+    // updateCels(anim_queue);
+    advanceAllCels();
     current_frame += 1;
     setTimeout(animate, fps);
   };
 
   function play () {
-    current_bp = (frame_total - 1);  // ### a chance current_bp becomes a negative number ###
-    console.log("Whiplash.");
+    current_bp = (breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
+    current_frame = 0;
+    resetAllCels();
+    console.log("Play button.");
     animate();
   };
 
   function stepThrough () {
-    console.log("Imagine.");
+    console.log("Step through button.");
     animate();
   };
 
@@ -467,8 +513,8 @@ function stage () {
     console.log("This is how it is.");
   }
 
-  a_queue = [boxy, triang];
-
+  // a_queue = [boxy, triang];
+  setFrameTotal();
   drawFrame(a_queue);
   // animate();
   
@@ -507,12 +553,16 @@ function stage () {
 
   function playButtonBoundary (ctx) {
     ctx.save();
+    ctx.strokeStyle = "rgb(0, 255, 0)";
+    // ctx.strokeRect(42.8, 424.8, 104, 51);
     ctx.rect(42.8, 424.8, 104, 51);
     ctx.restore();
   };
 
   function stepButtonBoundary (ctx) {
     ctx.save();
+    ctx.strokeStyle = "rgb(0, 0, 255)";
+    // ctx.strokeRect(170.8, 424.8, 355, 51);
     ctx.rect(170.8, 424.8, 355, 51);
     ctx.restore();
   };

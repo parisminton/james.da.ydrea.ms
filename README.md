@@ -11,6 +11,19 @@ Right now, there's a separate repo for */historicalvotes*, though it lives at th
 Changelog
 ---------
 
+**11/12/11** 
+
+- Moved `updateCels()` into the `Character` prototype.
+
+- Added an `advanceCels()` method to the `Character` prototype.
+
+- Changed `drawFrame()` to expect an argument: an array of `Character`s. All these measures are designed to replace the `anim_queue` object I was using before, which added an extra step to the animation looping.
+
+- Added a `setFrameTotal` method.
+
+***
+
+
 **11/11/11** 
 
 - Put 5 new members in the breakpoints array to test it out.
