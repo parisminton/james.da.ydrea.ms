@@ -6,24 +6,35 @@ function stage () {
       context = the_canvas.getContext("2d"),
       button_sprite = new Image(),
       fps = 75,
-      breakpoints = [ 59 ],
-      current_bp = 0,
+      breakpoints = [2, 3, 4, 5, 10],
+      current_bp = 0, // by default, the first breakpoint
       current_frame = 0,
-      timeline,
+      frame_total = 0,
       anim_queue = {},
+      a_queue = [],
       boxy,
       triang,
       lo = document.getElementById("boxyload"), // throw away post-test
       tr = document.getElementById("triangload"), // throw away post-test
-      ins = document.getElementById("inspect"), // throw away post-test
-      fi = document.getElementById("fireit"); // throw away post-test
+      ins_aq = document.getElementById("inspect_aq"), // throw away post-test
+      ins_cf = document.getElementById("inspect_cf"), // throw away post-test
+      ins_bp = document.getElementById("inspect_bp"), // throw away post-test
+      ins_ft = document.getElementById("inspect_ft"); // throw away post-test
 
-      ins.onclick = function () {
+      ins_aq.onclick = function () {
         console.log(anim_queue);
       };
 
-      fi.onclick = function () {
-        updateCels(anim_queue);
+      ins_cf.onclick = function () {
+        console.log(current_frame);
+      };
+
+      ins_bp.onclick = function () {
+        console.log(breakpoints[current_bp]);
+      };
+
+      ins_ft.onclick = function () {
+        console.log(frame_total);
       };
 
       lo.onclick = function () {
@@ -78,6 +89,7 @@ function stage () {
     },
     load : function () { 
       this.reset();
+      frame_total = (frame_total > ( this.sequence[this.current_seq].starting_frame + this.sequence[this.current_seq].cels.length)) ? frame_total : (this.sequence[this.current_seq].starting_frame + this.sequence[this.current_seq].cels.length);
       anim_queue[this.name] = this;
     }
   };
@@ -281,6 +293,7 @@ function stage () {
 
   ];
 
+  /* ... drawing instructions that cache the last set of coordinates... */
   function recordMoveTo (obj, ctx, xpos, ypos) {
     obj.sequence[obj.current_seq].cache.push( {moveTo: [xpos, ypos]} );
     ctx.moveTo(xpos, ypos);
@@ -301,6 +314,7 @@ function stage () {
     ctx.fillRect(xpos, ypos, width, height);
   };
   
+  /* ...because objects don\'t offer a length property, this counter helps in loops... */
   function getObjectLength(obj, prop) {
     var length = 0;
     if (arguments.length == 2) {
@@ -322,7 +336,6 @@ function stage () {
         cs,
         cs_length;
   
-    // ### ...current_cel shouldn\'t reset until the whole animation is done ### ... 
     if (length > 0) {
       for (item in q_obj) {
         cs = q_obj[item].current_seq;
@@ -330,12 +343,11 @@ function stage () {
         
         if (q_obj[item].sequence[cs].current_cel >= (q_obj[item].sequence[cs].cels.length)) {
           delete q_obj[item];
-          continue;
-          // console.log("Deleted: " + q_obj);
+          if (getObjectLength(q_obj) == 0) {
+            frame_total = 0;
+          }
           return "reset";
         }
-
-        console.log(q_obj[item].sequence[cs].current_cel);
 
         q_obj[item].sequence[cs].current_cel += 1;
 
@@ -346,25 +358,46 @@ function stage () {
     }
   };
 
+  function advanceBreakpoint () {
+    current_bp += 1;
+    if (current_bp >= breakpoints.length) {
+      current_bp = 0;
+    }
+  };
+
   /* ...only thinks about calling drawFrame and updateCels repetitively... */ 
   function animate () {
     var length = getObjectLength(anim_queue);
     if (length == 0) {
-      console.log("animate() is done and has exited.");
+      console.log("animate() exited on the first condition on frame " + current_frame + ".");
       current_frame = 0;
       return "done";
     }
     if (current_frame == breakpoints[current_bp]) {
-      console.log("animate() is paused and has exited.");
+      console.log("animate() exited on the second condition on frame " + current_frame + ".");
+      // console.log(breakpoints[current_bp]);
+      advanceBreakpoint(); 
       return "paused";
     }
-    drawFrame(); 
+    drawFrame(a_queue); 
+    console.log(current_frame);
     updateCels(anim_queue);
     current_frame += 1;
     setTimeout(animate, fps);
   };
 
-  /* ...only thinks about drawing... */
+  function play () {
+    current_bp = (frame_total - 1);  // ### a chance current_bp becomes a negative number ###
+    console.log("Whiplash.");
+    animate();
+  };
+
+  function stepThrough () {
+    console.log("Imagine.");
+    animate();
+  };
+
+  /* ...only thinks about drawing... 
   function drawFrame () {
     context.clearRect(0, 0, 566, 476);
     context.drawImage(button_sprite, 0, 51, 104, 51, 42.8, 424.8, 104, 51);
@@ -374,6 +407,21 @@ function stage () {
     // pv.cels[current_frame].render(context);
     renderCharacter(boxy, context);
     renderCharacter(triang, context);
+  };
+  */
+
+  /* ...only thinks about drawing... */
+  function drawFrame () {
+    var i, len;
+    context.clearRect(0, 0, 566, 476);
+    context.drawImage(button_sprite, 0, 51, 104, 51, 42.8, 424.8, 104, 51);
+    context.drawImage(button_sprite, 104, 51, 355, 51, 170.8, 424.8, 355, 51);
+    if (arguments.length == 1 && Array.isArray(arguments[0]) ){
+      len = arguments[0].length;
+      for (i = 0; i < len; i += 1) {
+        renderCharacter(arguments[0][i], context);
+      }
+    }
   };
 
   the_canvas.addEventListener("mouseover", dela, false);
@@ -418,43 +466,43 @@ function stage () {
   function dela () {
     console.log("This is how it is.");
   }
-  drawFrame();
+
+  a_queue = [boxy, triang];
+
+  drawFrame(a_queue);
   // animate();
   
   function getClick (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
         y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
         i, len;
-    // for (i = 0; i < len; i += 1) {
-      // touchables[i].renderBoundary()...
-      playButtonBoundary(context);
-      if (context.isPointInPath(x, y)) {
-        current_bp = 0;
-        animate();
-      }
-      else {
-        console.log("This didn\'t work, player.");
-        console.log(x + ", " + y);
-      }
-    // } 
+        
+    playButtonBoundary(context);
+    if (context.isPointInPath(x, y)) {
+      play();
+      return "play";
+    }
+    stepButtonBoundary(context);
+    if (context.isPointInPath(x, y)) {
+      stepThrough();
+      return "stepThrough";
+    }
   };
 
   function getHover (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
         y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
         i, len;
-    // for (i = 0; i < len; i += 1) {
-      // touchables[i].renderBoundary()...
-      playButtonBoundary(context);
-      if (context.isPointInPath(x, y)) {
-        current_bp = 0;
-        animate();
-      }
-      else {
-        console.log("This didn\'t work, player.");
-        console.log(x + ", " + y);
-      }
-    // } 
+    playButtonBoundary(context);
+    /*
+    if (context.isPointInPath(x, y)) {
+      play();
+    }
+    stepButtonBoundary(context);
+    if (context.isPointInPath(x, y)) {
+      stepThrough();
+    }
+    */
   };
 
   function playButtonBoundary (ctx) {

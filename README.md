@@ -11,9 +11,20 @@ Right now, there's a separate repo for */historicalvotes*, though it lives at th
 Changelog
 ---------
 
+**11/11/11** 
+
+- Put 5 new members in the breakpoints array to test it out.
+
+- Added `advanceBreakpoint()` to increment `currentBreakpoint`.
+
+- Made `play()` and `stepThrough()` functions that set different breakpoints before running `animate()`.
+
+***
+
+
 **11/10/11** 
 
-- Renamed `ftha()` to `updateCels()`. Renamed `CharACTer` to `Character`. The internal capitlization was designed to help avoid namespace collisions, but really, it was annoying. I'll keep it out of the global space or wrap it or something.
+- Renamed `ftha()` to `updateCels()`. Renamed `CharACTer()` to `Character()`. The internal capitlization was designed to help avoid namespace collisions, but really, it was annoying. I'll keep it out of the global space or wrap it or something.
 
 - Modified the last `if` test in updateCels to compare `current_cel` to `cels.length`.
 
