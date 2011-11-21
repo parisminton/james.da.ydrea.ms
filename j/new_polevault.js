@@ -131,6 +131,10 @@ function stage () {
           }
         }
       }
+      if (current_frame >= frame_total) {
+        this.sequence[this.current_seq].current_iteration = 0;
+        this.sequence[this.current_seq].current_cel = 0;
+      }
     }
   };
 
@@ -439,10 +443,11 @@ function stage () {
     }
   };
 
-  /* ...only thinks about calling drawFrame and updateCels repetitively... */ 
+  /* ...only thinks about calling drawFrame and updateCels repeatedly... */ 
   function animate () {
     if (current_frame >= frame_total) {
       console.log("First condition: animate() exited on frame " + current_frame + ".");
+      advanceAllCels();
       current_frame = 0;
       current_bp = 0;
       return "done";
