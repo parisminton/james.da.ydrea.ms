@@ -11,6 +11,15 @@ Right now, there's a separate repo for */historicalvotes*, though it lives at th
 Changelog
 ---------
 
+**11/20/11** 
+
+- Created a `setFinalBreakpoint` function to programatically set the last breakpoint to the last frame in the animation. The user (the developer) doesn't have to do this manually.
+
+- Added a condition to `animate` to exit when `current_frame` is equal or greater than `total_frames`. 
+
+***
+
+
 **11/12/11** 
 
 - Moved `updateCels()` into the `Character` prototype.
@@ -49,7 +58,7 @@ Changelog
 
 - `animate()` once again increments `current_frame` on every draw. It's clear there needs to be a master count of which frame we're on.
 
-- `ftha` doesn't reset `current_cel` when a `CharACTer` leaves anim_queue. This leaves the `CharACTer` at its last position on the stage while others continue to move.
+- `ftha` doesn't reset `current_cel` when a `CharACTer` leaves `anim_queue`. This leaves the `CharACTer` at its last position on the stage while others continue to move.
 
 ***
 

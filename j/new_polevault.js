@@ -16,11 +16,22 @@ function stage () {
       triang,
       lo = document.getElementById("boxyload"), // throw away post-test
       tr = document.getElementById("triangload"), // throw away post-test
+      pl = document.getElementById("fire_play"); // throw away post-test
+      st = document.getElementById("fire_step"); // throw away post-test
       ins_aq = document.getElementById("inspect_aq"), // throw away post-test
       ins_naq = document.getElementById("inspect_naq"), // throw away post-test
       ins_cf = document.getElementById("inspect_cf"), // throw away post-test
+      ins_ps = document.getElementById("inspect_ps"), // throw away post-test
       ins_bp = document.getElementById("inspect_bp"), // throw away post-test
       ins_ft = document.getElementById("inspect_ft"); // throw away post-test
+
+      pl.onclick = function () {
+        play();
+      };
+
+      st.onclick = function () {
+        stepThrough();
+      };
 
       ins_aq.onclick = function () {
         console.log(anim_queue);
@@ -28,6 +39,10 @@ function stage () {
 
       ins_naq.onclick = function () {
         console.log(a_queue);
+      };
+
+      ins_ps.onclick = function () {
+        console.log(breakpoints);
       };
 
       ins_cf.onclick = function () {
@@ -99,6 +114,7 @@ function stage () {
       // anim_queue[this.name] = this;
       a_queue.push(this);
       setFrameTotal();
+      setFinalBreakpoint();
     },
     advanceCels : function () {
       if (this.sequence[this.current_seq].current_iteration < this.sequence[this.current_seq].iterations) {
@@ -391,6 +407,14 @@ function stage () {
     }
   };
 
+  function setFinalBreakpoint () {
+    if (setFinalBreakpoint.alreadySet) {
+      setFinalBreakpoint.lastRemovedValue = breakpoints.pop();
+    }
+    breakpoints.push(frame_total);
+    setFinalBreakpoint.alreadySet = true;
+  }
+
   function getAllCels (method_string) {
     var i,
         len = a_queue.length;
@@ -410,15 +434,22 @@ function stage () {
   function advanceBreakpoint () {
     current_bp += 1;
     if (current_bp >= breakpoints.length) {
+      // (breakpoints[breakpoints.length] >= frame_total) 
       current_bp = 0;
     }
   };
 
   /* ...only thinks about calling drawFrame and updateCels repetitively... */ 
   function animate () {
+    if (current_frame >= frame_total) {
+      console.log("First condition: animate() exited on frame " + current_frame + ".");
+      current_frame = 0;
+      current_bp = 0;
+      return "done";
+    }
     // var length = getObjectLength(anim_queue);
     if (current_frame >= breakpoints[current_bp]) {
-      console.log("animate() exited on frame " + current_frame + ".");
+      console.log("Second condition: animate() exited on frame " + current_frame + ".");
       advanceBreakpoint(); 
       return "done";
     }
