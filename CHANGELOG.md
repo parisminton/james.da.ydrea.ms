@@ -4,13 +4,18 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**11/22/11** 
+
+1. Added `recordBezierCurveTo()`.
+
+
+
 **11/21/11** 
 
 1. Added a condition to `advanceCels()` to reset `current_cel` and `current_iteration` to 0 when the `breakpoints` array rolls over.
 
 2. Added another call to `advanceCels()` from `animate()` 
 
-***
 
 
 **11/20/11** 
@@ -19,7 +24,6 @@ Changelog
 
 2. Added a condition to `animate()` to exit when `current_frame` is equal to or greater than `total_frames`. 
 
-***
 
 
 **11/12/11** 
@@ -32,18 +36,16 @@ Changelog
 
 4. Added a `setFrameTotal` method.
 
-***
 
 
 **11/11/11** 
 
-1. Put 5 new members in the breakpoints array to test it out.
+1. Put 5 new members in the `breakpoints` array to test it out.
 
 2. Added `advanceBreakpoint()` to increment `currentBreakpoint`.
 
 3. Made `play()` and `stepThrough()` functions that set different breakpoints before running `animate()`.
 
-***
 
 
 **11/10/11** 
@@ -62,18 +64,16 @@ Changelog
 
 7. `ftha` doesn't reset `current_cel` when a `CharACTer` leaves `anim_queue`. This leaves the `CharACTer` at its last position on the stage while others continue to move.
 
-***
 
 
 **11/9/11** 
 
-1. CharACTer gets a create() method for instantiation.
+1. `CharACTer` gets a `create()` method for instantiation.
 
-2. The sequence object in every CharACTer now has a starting_frame member. This tells ftha the frame on which to start animating the CharActer.
+2. The `sequence` object in every `CharACTer` now has a `starting_frame` member. This tells `ftha` the frame on which to start animating the `CharActer`.
 
-3. breakpoints is now an array, using current_bp to identify the index of the current breakpoint.
+3. `breakpoints` is now an array, using `current_bp` to identify the index of the current breakpoint.
 
-***
 
 
 **11/8/11** - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
@@ -86,7 +86,7 @@ The files *polevault.js*, *new\_polevault.js*, *polevault.html* and *pv\_cels.js
 
 3. `recordMoveTo`, `recordLineTo`, `recordStrokeRect`, and `recordFillRect`, which create paths and cache the results of the coordinates passed to them. This is designed to make it easier to do math on the coordinates between redraws. More of these recorder functions to come.
 
-***
+
 
 [1]: https://github.com/parisminton/bigwheel.js "parisminton's bigwheel.js repo on GitHub"
 

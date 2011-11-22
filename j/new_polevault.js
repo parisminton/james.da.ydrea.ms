@@ -343,6 +343,11 @@ function stage () {
     ctx.moveTo(xpos, ypos);
   };
   
+  function recordBezierCurveTo (obj, ctx, xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
+    obj.sequence[obj.current_seq].cache.push( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
+    ctx.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
+  };
+  
   function recordLineTo (obj, ctx, xpos, ypos) {
     obj.sequence[obj.current_seq].cache.push( {lineTo : [xpos, ypos]} );
     ctx.lineTo(xpos, ypos);
