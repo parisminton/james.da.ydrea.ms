@@ -4,13 +4,23 @@ james.da.ydrea.ms
 Changelog
 ---------
 
-**11/22/11** 
+*11/25/11* 
+
+1. Combined *new_polevault.js* and *polevault.js* into one file named *polevault.js*. Got rid of obsolete comments. Commented out the tests.
+
+2. `vaulter` is an instance of `Character`.
+
+3. Commented out the triggers in *polevault.html*
+
+
+
+*11/22/11* 
 
 1. Added `recordBezierCurveTo()`.
 
 
 
-**11/21/11** 
+*11/21/11* 
 
 1. Added a condition to `advanceCels()` to reset `current_cel` and `current_iteration` to 0 when the `breakpoints` array rolls over.
 
@@ -18,7 +28,7 @@ Changelog
 
 
 
-**11/20/11** 
+*11/20/11* 
 
 1. Created a `setFinalBreakpoint` function to programatically set the last breakpoint to the last frame in the animation. The user (the developer) doesn't have to do this manually.
 
@@ -26,7 +36,7 @@ Changelog
 
 
 
-**11/12/11** 
+*11/12/11* 
 
 1. Moved `updateCels()` into the `Character` prototype.
 
@@ -38,7 +48,7 @@ Changelog
 
 
 
-**11/11/11** 
+*11/11/11* 
 
 1. Put 5 new members in the `breakpoints` array to test it out.
 
@@ -48,7 +58,7 @@ Changelog
 
 
 
-**11/10/11** 
+*11/10/11* 
 
 1. Renamed `ftha()` to `updateCels()`. Renamed `CharACTer()` to `Character()`. The internal capitlization was designed to help avoid namespace collisions, but really, it was annoying. I'll keep it out of the global space or wrap it or something.
 
@@ -66,7 +76,7 @@ Changelog
 
 
 
-**11/9/11** 
+*11/9/11* 
 
 1. `CharACTer` gets a `create()` method for instantiation.
 
@@ -76,7 +86,7 @@ Changelog
 
 
 
-**11/8/11** - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
+*11/8/11* - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
 
 The files *polevault.js*, *new\_polevault.js*, *polevault.html* and *pv\_cels.js* all include code for running canvas animations. This will become a subset of [bigwheel.js][1], but I'm testing it [here][2]. The project isn't complete, but these are all working. The highlights:
 
