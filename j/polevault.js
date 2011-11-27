@@ -8862,14 +8862,18 @@ function stage () {
   };
 
   function play () {
-    current_bp = (breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
-    current_frame = 0;
-    resetAllCels();
-    animate();
+    if (!animate.running) {
+      current_bp = (breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
+      current_frame = 0;
+      resetAllCels();
+      animate();
+    }
   };
 
   function stepThrough () {
-    animate();
+    if (!animate.running) {
+      animate();
+    }
   };
 
   /* ...only thinks about drawing... */

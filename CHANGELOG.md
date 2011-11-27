@@ -6,11 +6,13 @@ Changelog
 
 *11/27/11* 
 
-1. Gave `animate()` a `running` property.
+1. Added a condition to `play()` and `stepThrough()` that prevents them from being fired before the previous animation is finished running. 
 
-2. Added `emptyCache()` to the `Character` prototype and the helper `emptyAllCaches()`. These clear the `cace` array of saved coordinates inside each `Character`'s sequence.
+2. Gave `animate()` a `running` property.
 
-3. Gave each `Character` a `queue_index` property that stores the `Character`'s index position within `a_queue`.
+3. Added `emptyCache()` to the `Character` prototype and the helper `emptyAllCaches()`. These clear the `cache` array of saved coordinates inside each `Character`'s sequence.
+
+4. Gave each `Character` a `queue_index` property that stores the `Character`'s index position within `a_queue`.
 
 
 
