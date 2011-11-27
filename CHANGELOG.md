@@ -4,6 +4,16 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*11/27/11* 
+
+1. Gave `animate()` a `running` property.
+
+2. Added `emptyCache()` to the `Character` prototype and the helper `emptyAllCaches()`. These clear the `cace` array of saved coordinates inside each `Character`'s sequence.
+
+3. Gave each `Character` a `queue_index` property that stores the `Character`'s index position within `a_queue`.
+
+
+
 *11/25/11* 
 
 1. Combined *new_polevault.js* and *polevault.js* into one file named *polevault.js*. Got rid of obsolete comments. Commented out the tests.

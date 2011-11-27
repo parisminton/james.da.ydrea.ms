@@ -12,44 +12,6 @@ function stage () {
       frame_total = 0,
       a_queue = [],
       vaulter;
-      /*
-      lo = document.getElementById("boxyload"), // throw away post-test
-      tr = document.getElementById("triangload"), // throw away post-test
-      ins_aq = document.getElementById("inspect_aq"), // throw away post-test
-      ins_naq = document.getElementById("inspect_naq"), // throw away post-test
-      ins_cf = document.getElementById("inspect_cf"), // throw away post-test
-      ins_ps = document.getElementById("inspect_ps"), // throw away post-test
-      ins_bp = document.getElementById("inspect_bp"), // throw away post-test
-      ins_ft = document.getElementById("inspect_ft"); // throw away post-test
-
-      ins_naq.onclick = function () {
-        console.log(a_queue);
-      };
-
-      ins_ps.onclick = function () {
-        console.log(breakpoints);
-      };
-
-      ins_cf.onclick = function () {
-        console.log(current_frame);
-      };
-
-      ins_bp.onclick = function () {
-        console.log(breakpoints[current_bp]);
-      };
-
-      ins_ft.onclick = function () {
-        console.log(frame_total);
-      };
-
-      lo.onclick = function () {
-        boxy.load();
-      };
-
-      tr.onclick = function () {
-        triang.load();
-      };
-      */
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
   
@@ -97,6 +59,7 @@ function stage () {
     },
     load : function () { 
       this.reset();
+      this.queue_index = (a_queue.length) ? a_queue.length : 0;
       a_queue.push(this);
       setFrameTotal();
       setFinalBreakpoint();
@@ -120,6 +83,9 @@ function stage () {
         this.sequence[this.current_seq].current_iteration = 0;
         this.sequence[this.current_seq].current_cel = 0;
       }
+    },
+    emptyCache : function () {
+      this.sequence[this.current_seq].cache.length = 0;
     }
   };
 
@@ -8857,7 +8823,11 @@ function stage () {
 
   function resetAllCels () {
     getAllCels("reset");
-  }
+  };
+  
+  function emptyAllCaches () {
+    getAllCels("emptyCache");
+  };
   
   function advanceBreakpoint () {
     current_bp += 1;
@@ -8866,22 +8836,26 @@ function stage () {
     }
   };
 
-  /* ...only thinks about calling drawFrame and updateCels repeatedly... */ 
+  /* ...only thinks about repeating calls to drawFrame()... */ 
   function animate () {
     if (current_frame >= frame_total) {
-      console.log("First condition: animate() exited on frame " + current_frame + ".");
+      // console.log("First condition: animate() exited on frame " + current_frame + ".");
       advanceAllCels();
       current_frame = 0;
+      emptyAllCaches();
       current_bp = 0;
+      animate.running = false;
       return "done";
     }
     if (current_frame >= breakpoints[current_bp]) {
-      console.log("Second condition: animate() exited on frame " + current_frame + ".");
+      // console.log("Second condition: animate() exited on frame " + current_frame + ".");
       advanceBreakpoint(); 
+      animate.running = false;
       return "done";
     }
+    animate.running = true;
     drawFrame(a_queue); 
-    console.log(current_frame);
+    // console.log(current_frame);
     advanceAllCels();
     current_frame += 1;
     setTimeout(animate, fps);
@@ -8891,12 +8865,10 @@ function stage () {
     current_bp = (breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
     current_frame = 0;
     resetAllCels();
-    console.log("Play button.");
     animate();
   };
 
   function stepThrough () {
-    console.log("Step through button.");
     animate();
   };
 
