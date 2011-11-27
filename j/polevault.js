@@ -101,6 +101,21 @@ function stage () {
     }
   };
 
+  track = new Character("track", false);
+  track.show();
+  track.sequence.main.cels = [
+    function (ctx) {
+      if (track.visible) {
+
+      // track/Path
+      ctx.save();
+      ctx.fillStyle = "rgb(227, 215, 196)";
+      recordFillRect(track, ctx, 0.0, 334.0, 564.4, 13);
+      ctx.restore();
+      }
+    }
+  ];
+
   vaulter = new Character("vaulter", false);
   vaulter.show();
   vaulter.sequence.main.cels = [
@@ -8932,6 +8947,7 @@ function stage () {
     console.log("This is how it is.");
   }
   
+  track.load();
   vaulter.load();
   setFrameTotal();
   drawFrame(a_queue);

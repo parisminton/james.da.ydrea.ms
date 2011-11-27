@@ -6,13 +6,15 @@ Changelog
 
 *11/27/11* 
 
-1. Added a condition to `play()` and `stepThrough()` that prevents them from being fired before the previous animation is finished running. 
+1. Made a `Character` instance called `track`, drawing a track on the canvas. 
 
-2. Gave `animate()` a `running` property.
+2. Added a condition to `play()` and `stepThrough()` that prevents them from being fired before the previous animation is finished running. 
 
-3. Added `emptyCache()` to the `Character` prototype and the helper `emptyAllCaches()`. These clear the `cache` array of saved coordinates inside each `Character`'s sequence.
+3. Gave `animate()` a `running` property.
 
-4. Gave each `Character` a `queue_index` property that stores the `Character`'s index position within `a_queue`.
+4. Added `emptyCache()` to the `Character` prototype and the helper `emptyAllCaches()`. These clear the `cache` array of saved coordinates inside each `Character`'s sequence.
+
+5. Gave each `Character` a `queue_index` property that stores the `Character`'s index position within `a_queue`.
 
 
 
