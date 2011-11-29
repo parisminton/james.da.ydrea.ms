@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*11/28/11* 
+
+1. Added new `Character` instances: `slider`, `scrubber`, `back` and `forward`. These draw controls on the stage, though they're not active yet.
+
+
+
 *11/27/11* 
 
 1. Made a `Character` instance called `track`, drawing a track on the canvas. 
