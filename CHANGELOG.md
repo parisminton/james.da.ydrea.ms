@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*11/30/11* 
+
+1. Made the new controls a little bigger for easier use on touch screens. 
+
+
+
 *11/28/11* 
 
 1. Added new `Character` instances: `slider`, `scrubber`, `back` and `forward`. These draw controls on the stage, though they're not active yet.
