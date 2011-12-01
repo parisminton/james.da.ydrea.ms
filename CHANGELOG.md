@@ -6,7 +6,9 @@ Changelog
 
 *11/30/11* 
 
-1. Made the new controls a little bigger for easier use on touch screens. 
+1. Gave the new controls `record` methods.
+
+2. Made the new controls a little bigger for easier use on touch screens. 
 
 
 
