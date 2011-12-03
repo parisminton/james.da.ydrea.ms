@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*12/3/11* 
+
+1. Moved the scrubber to the far left of the track (by subtracting 155.8 from all the x-values). 
+
+
+
 *11/30/11* 
 
 1. Gave the new controls `record` methods.

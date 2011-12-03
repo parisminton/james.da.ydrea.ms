@@ -170,18 +170,18 @@ function stage () {
         // scrubber/Group/Path
         ctx.save();
         ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 228.2, 388.0);
-        recordLineTo(scrubber, ctx, 228.2, 381.1);
-        recordBezierCurveTo(scrubber, ctx, 228.2, 378.2, 230.5, 375.9, 233.4, 375.9);
-        recordLineTo(scrubber, ctx, 249.5, 375.9);
-        recordBezierCurveTo(scrubber, ctx, 252.4, 375.9, 254.7, 378.2, 254.7, 381.1);
-        recordLineTo(scrubber, ctx, 254.7, 388.0);
-        recordBezierCurveTo(scrubber, ctx, 254.7, 390.9, 254.0, 393.2, 252.0, 395.2);
-        recordLineTo(scrubber, ctx, 241.4, 405.5);
-        recordLineTo(scrubber, ctx, 230.9, 395.2);
-        recordBezierCurveTo(scrubber, ctx, 228.9, 393.2, 228.2, 390.9, 228.2, 388.0);
+        recordMoveTo(scrubber, ctx, 72.4, 388.0);
+        recordLineTo(scrubber, ctx, 72.4, 381.1);
+        recordBezierCurveTo(scrubber, ctx, 72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
+        recordLineTo(scrubber, ctx, 93.7, 375.9);
+        recordBezierCurveTo(scrubber, ctx, 96.6, 375.9, 98.9, 378.2, 98.9, 381.1);
+        recordLineTo(scrubber, ctx, 98.9, 388.0);
+        recordBezierCurveTo(scrubber, ctx, 98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
+        recordLineTo(scrubber, ctx, 85.6, 405.5);
+        recordLineTo(scrubber, ctx, 75.1, 395.2);
+        recordBezierCurveTo(scrubber, ctx, 73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
         ctx.closePath();
-        gradient = ctx.createLinearGradient(251.7, 376.0, 229.4, 397.4);
+        gradient = ctx.createLinearGradient(95.9, 376.0, 73.6, 397.4);
         gradient.addColorStop(0.00, "rgb(234, 236, 236)");
         gradient.addColorStop(1.00, "rgb(203, 203, 203)");
         ctx.fillStyle = gradient;
@@ -189,66 +189,35 @@ function stage () {
 
         // scrubber/Group/Path
         ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 229.3, 380.3);
-        recordBezierCurveTo(scrubber, ctx, 229.7, 378.4, 231.4, 376.9, 233.4, 376.9);
-        recordLineTo(scrubber, ctx, 249.5, 376.9);
-        recordBezierCurveTo(scrubber, ctx, 250.3, 376.9, 251.0, 377.1, 251.7, 377.6);
-        recordBezierCurveTo(scrubber, ctx, 252.0, 377.3, 252.1, 377.0, 252.2, 376.7);
-        recordBezierCurveTo(scrubber, ctx, 251.4, 376.2, 250.5, 375.9, 249.5, 375.9);
-        recordLineTo(scrubber, ctx, 233.4, 375.9);
-        recordBezierCurveTo(scrubber, ctx, 230.9, 375.9, 228.8, 377.7, 228.3, 380.1);
-        recordBezierCurveTo(scrubber, ctx, 228.6, 380.3, 228.9, 380.4, 229.3, 380.3);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(247, 247, 247)";
-        ctx.fill();
-
-        // scrubber/Group/Path
-        ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 241.1, 406.1);
-        recordLineTo(scrubber, ctx, 230.5, 395.7);
-        recordBezierCurveTo(scrubber, ctx, 228.4, 393.7, 227.8, 391.4, 227.8, 388.5);
-        recordLineTo(scrubber, ctx, 227.8, 381.6);
-        recordBezierCurveTo(scrubber, ctx, 227.8, 380.6, 228.1, 379.7, 228.5, 378.9);
-        recordBezierCurveTo(scrubber, ctx, 227.7, 379.9, 227.1, 381.1, 227.1, 382.5);
-        recordLineTo(scrubber, ctx, 227.1, 389.4);
-        recordBezierCurveTo(scrubber, ctx, 227.1, 392.2, 227.8, 394.6, 229.8, 396.5);
-        recordLineTo(scrubber, ctx, 240.4, 406.9);
-        recordLineTo(scrubber, ctx, 241.1, 406.1);
+        recordMoveTo(scrubber, ctx, 85.3, 406.1);
+        recordLineTo(scrubber, ctx, 74.7, 395.7);
+        recordBezierCurveTo(scrubber, ctx, 72.6, 393.7, 72.0, 391.4, 72.0, 388.5);
+        recordLineTo(scrubber, ctx, 72.0, 381.6);
+        recordBezierCurveTo(scrubber, ctx, 72.0, 380.6, 72.3, 379.7, 72.7, 378.9);
+        recordBezierCurveTo(scrubber, ctx, 71.9, 379.9, 71.3, 381.1, 71.3, 382.5);
+        recordLineTo(scrubber, ctx, 71.3, 389.4);
+        recordBezierCurveTo(scrubber, ctx, 71.3, 392.2, 72.0, 394.6, 74.0, 396.5);
+        recordLineTo(scrubber, ctx, 84.6, 406.9);
+        recordLineTo(scrubber, ctx, 85.3, 406.1);
         ctx.closePath();
         ctx.fillStyle = "rgb(139, 149, 159)";
         ctx.fill();
 
         // scrubber/Group/Path
         ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 228.2, 388.0);
-        recordLineTo(scrubber, ctx, 228.2, 381.1);
-        recordBezierCurveTo(scrubber, ctx, 228.2, 378.2, 230.5, 375.9, 233.4, 375.9);
-        recordLineTo(scrubber, ctx, 249.5, 375.9);
-        recordBezierCurveTo(scrubber, ctx, 252.4, 375.9, 254.7, 378.2, 254.7, 381.1);
-        recordLineTo(scrubber, ctx, 254.7, 388.0);
-        recordBezierCurveTo(scrubber, ctx, 254.7, 390.9, 254.0, 393.2, 252.0, 395.2);
-        recordLineTo(scrubber, ctx, 241.4, 405.5);
-        recordLineTo(scrubber, ctx, 230.9, 395.2);
-        recordBezierCurveTo(scrubber, ctx, 228.9, 393.2, 228.2, 390.9, 228.2, 388.0);
+        recordMoveTo(scrubber, ctx, 72.4, 388.0);
+        recordLineTo(scrubber, ctx, 72.4, 381.1);
+        recordBezierCurveTo(scrubber, ctx, 72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
+        recordLineTo(scrubber, ctx, 93.7, 375.9);
+        recordBezierCurveTo(scrubber, ctx, 98.6, 375.9, 98.9, 378.2, 98.9, 381.1);
+        recordLineTo(scrubber, ctx, 98.9, 388.0);
+        recordBezierCurveTo(scrubber, ctx, 98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
+        recordLineTo(scrubber, ctx, 85.6, 405.5);
+        recordLineTo(scrubber, ctx, 75.1, 395.2);
+        recordBezierCurveTo(scrubber, ctx, 73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
         ctx.closePath();
-        ctx.strokeStyle = "rgb(159, 159, 159)";
+        ctx.strokeStyle = "rgb(153, 153, 153)";
         ctx.stroke();
-
-        // scrubber/Group/Path
-        ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 228.2, 388.0);
-        recordLineTo(scrubber, ctx, 228.2, 381.1);
-        recordBezierCurveTo(scrubber, ctx, 228.2, 378.2, 230.5, 375.9, 233.4, 375.9);
-        recordLineTo(scrubber, ctx, 249.5, 375.9);
-        recordBezierCurveTo(scrubber, ctx, 252.4, 375.9, 254.7, 378.2, 254.7, 381.1);
-        recordLineTo(scrubber, ctx, 254.7, 388.0);
-        recordBezierCurveTo(scrubber, ctx, 254.7, 390.9, 254.0, 393.2, 252.0, 395.2);
-        recordLineTo(scrubber, ctx, 241.4, 405.5);
-        recordLineTo(scrubber, ctx, 230.9, 395.2);
-        recordBezierCurveTo(scrubber, ctx, 228.9, 393.2, 228.2, 390.9, 228.2, 388.0);
-        ctx.closePath();
-        ctx.stroke();
-        ctx.restore();
         ctx.restore();
       }
     }
