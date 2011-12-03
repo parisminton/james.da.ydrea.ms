@@ -6,7 +6,9 @@ Changelog
 
 *12/3/11* 
 
-1. Moved the scrubber to the far left of the track (by subtracting 155.8 from all the x-values). 
+1. Renamed `advanceCels()` to `advance()` and `advanceAllCels()` to `advanceAll()`.  
+
+2. Moved the scrubber to the far left of the track (by subtracting 155.8 from all the x-values). 
 
 
 

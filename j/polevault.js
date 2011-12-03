@@ -1,5 +1,3 @@
-
-
 function stage () {
   
   var the_canvas = document.getElementById("main-stage"),
@@ -64,7 +62,7 @@ function stage () {
       setFrameTotal();
       setFinalBreakpoint();
     },
-    advanceCels : function () {
+    advance : function () {
       if (this.sequence[this.current_seq].current_iteration < this.sequence[this.current_seq].iterations) {
         this.sequence[this.current_seq].current_cel += 1;
 
@@ -186,6 +184,8 @@ function stage () {
         gradient.addColorStop(1.00, "rgb(203, 203, 203)");
         ctx.fillStyle = gradient;
         ctx.fill();
+        ctx.strokeStyle = "rgb(153, 153, 153)";
+        ctx.stroke();
 
         // scrubber/Group/Path
         ctx.beginPath();
@@ -202,22 +202,6 @@ function stage () {
         ctx.closePath();
         ctx.fillStyle = "rgb(139, 149, 159)";
         ctx.fill();
-
-        // scrubber/Group/Path
-        ctx.beginPath();
-        recordMoveTo(scrubber, ctx, 72.4, 388.0);
-        recordLineTo(scrubber, ctx, 72.4, 381.1);
-        recordBezierCurveTo(scrubber, ctx, 72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
-        recordLineTo(scrubber, ctx, 93.7, 375.9);
-        recordBezierCurveTo(scrubber, ctx, 98.6, 375.9, 98.9, 378.2, 98.9, 381.1);
-        recordLineTo(scrubber, ctx, 98.9, 388.0);
-        recordBezierCurveTo(scrubber, ctx, 98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
-        recordLineTo(scrubber, ctx, 85.6, 405.5);
-        recordLineTo(scrubber, ctx, 75.1, 395.2);
-        recordBezierCurveTo(scrubber, ctx, 73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
-        ctx.closePath();
-        ctx.strokeStyle = "rgb(153, 153, 153)";
-        ctx.stroke();
         ctx.restore();
       }
     }
@@ -9195,8 +9179,8 @@ function stage () {
     }
   };
   
-  function advanceAllCels () {
-    getAllCels("advanceCels");
+  function advanceAll () {
+    getAllCels("advance");
   };
 
   function resetAllCels () {
@@ -9218,7 +9202,7 @@ function stage () {
   function animate () {
     if (current_frame >= frame_total) {
       // console.log("First condition: animate() exited on frame " + current_frame + ".");
-      advanceAllCels();
+      advanceAll();
       current_frame = 0;
       emptyAllCaches();
       current_bp = 0;
@@ -9234,7 +9218,7 @@ function stage () {
     animate.running = true;
     drawFrame(a_queue); 
     // console.log(current_frame);
-    advanceAllCels();
+    advanceAll();
     current_frame += 1;
     setTimeout(animate, fps);
   };
