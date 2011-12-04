@@ -82,6 +82,74 @@ function stage () {
         this.sequence[this.current_seq].current_cel = 0;
       }
     },
+    store: function (member) {
+      this.sequence[this.current_seq].cache.push(member);
+    },
+    emptyCache : function () {
+      this.sequence[this.current_seq].cache.length = 0;
+    }
+  };
+
+  function Scrubber (obj_name, touchable, boundary) {
+    this.name = obj_name;
+    this.visible = false;
+    // this.touchable = touchable;
+    if (arguments.length > 2) {
+      this.boundary = boundary;
+    }
+    else {
+      this.boundary = false;
+    }
+    this.current_seq = "scrubber";
+    this.sequence = {
+      track : {
+        starting_frame : 0,
+        cache : [],
+        iterations : 1,
+        current_cel : 0,
+        cels : []
+      },
+      scrubber : {
+        starting_frame : 0,
+        cache : [],
+        iterations : 1,
+        current_cel : 0,
+        cels : []
+      }
+    };
+  };
+  Scrubber.prototype = {
+    show : function () {
+      this.visible = true;
+    },
+    hide : function () {
+      this.visible = false;
+    },
+    makeSequence : function (seq_name) {
+      this.sequence[seq_name] = {
+        starting_frame : 0,
+        cache : [],
+        iterations : 1,
+        current_iteration : 0,
+        current_cel : 0,
+        cels : []
+      }
+    },
+    reset : function () {
+      this.sequence[this.current_seq].current_cel = 0;
+      this.sequence[this.current_seq].current_iteration = 0;
+    },
+    load : function () { 
+      this.reset();
+      this.queue_index = (a_queue.length) ? a_queue.length : 0;
+      a_queue.push(this);
+      setFrameTotal();
+      setFinalBreakpoint();
+    },
+    advance : function () {
+      // add ipf to each x- or y-value in the cache
+      // current_something becomes all the new drawing instructions
+    },
     emptyCache : function () {
       this.sequence[this.current_seq].cache.length = 0;
     }
@@ -106,50 +174,50 @@ function stage () {
       if (slider.visible) {
 
         // slider/Path
-        ctx.save();
-        ctx.beginPath();
+        recordSave(slider, ctx);
+        recordBeginPath(slider, ctx);
         recordMoveTo(slider, ctx, 380.6, 393.7);
         recordLineTo(slider, ctx, 85.6, 393.7);
         recordLineTo(slider, ctx, 85.6, 388.7);
         recordLineTo(slider, ctx, 380.6, 388.7);
         recordLineTo(slider, ctx, 380.6, 393.7);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.fill();
+        recordClosePath(slider, ctx);
+        recordFillStyle(slider, ctx, "rgb(255, 255, 255)");
+        recordFill(slider, ctx);
 
         // slider/Path
-        ctx.beginPath();
+        recordBeginPath(slider, ctx);
         recordMoveTo(slider, ctx, 381.6, 392.5);
         recordLineTo(slider, ctx, 86.6, 392.5);
         recordLineTo(slider, ctx, 86.6, 387.5);
         recordLineTo(slider, ctx, 381.6, 387.5);
         recordLineTo(slider, ctx, 381.6, 392.5);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(32, 85, 138)";
-        ctx.fill();
+        recordClosePath(slider, ctx);
+        recordFillStyle(slider, ctx, "rgb(32, 85, 138)");
+        recordFill(slider, ctx);
 
         // slider/Path
-        ctx.beginPath();
+        recordBeginPath(slider, ctx);
         recordMoveTo(slider, ctx, 380.2, 388.7);
         recordLineTo(slider, ctx, 86.6, 388.7);
         recordLineTo(slider, ctx, 86.6, 392.5);
         recordLineTo(slider, ctx, 380.2, 392.5);
         recordLineTo(slider, ctx, 380.2, 388.7);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(115, 153, 206)";
-        ctx.fill();
+        recordClosePath(slider, ctx);
+        recordFillStyle(slider, ctx, "rgb(115, 153, 206)");
+        recordFill(slider, ctx);
 
         // slider/Path
-        ctx.beginPath();
+        recordBeginPath(slider, ctx);
         recordMoveTo(slider, ctx, 381.6, 392.5);
         recordLineTo(slider, ctx, 86.6, 392.5);
         recordLineTo(slider, ctx, 86.6, 387.5);
         recordLineTo(slider, ctx, 381.6, 387.5);
         recordLineTo(slider, ctx, 381.6, 392.5);
-        ctx.closePath();
-        ctx.strokeStyle = "rgb(159, 159, 159)";
-        ctx.stroke();
-        ctx.restore();
+        recordClosePath(slider, ctx);
+        recordStrokeStyle(slider, ctx, "rgb(159, 159, 159)");
+        recordStroke(slider, ctx);
+        recordRestore(slider, ctx);
       }
     }
   ];
@@ -163,11 +231,11 @@ function stage () {
         var gradient;
 
         // scrubber/Group
-        ctx.save();
+        recordSave(scrubber, ctx);
 
         // scrubber/Group/Path
-        ctx.save();
-        ctx.beginPath();
+        recordSave(scrubber, ctx);
+        recordBeginPath(scrubber, ctx);
         recordMoveTo(scrubber, ctx, 72.4, 388.0);
         recordLineTo(scrubber, ctx, 72.4, 381.1);
         recordBezierCurveTo(scrubber, ctx, 72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
@@ -178,17 +246,17 @@ function stage () {
         recordLineTo(scrubber, ctx, 85.6, 405.5);
         recordLineTo(scrubber, ctx, 75.1, 395.2);
         recordBezierCurveTo(scrubber, ctx, 73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
-        ctx.closePath();
-        gradient = ctx.createLinearGradient(95.9, 376.0, 73.6, 397.4);
-        gradient.addColorStop(0.00, "rgb(234, 236, 236)");
-        gradient.addColorStop(1.00, "rgb(203, 203, 203)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
-        ctx.strokeStyle = "rgb(153, 153, 153)";
-        ctx.stroke();
+        recordClosePath(scrubber, ctx);
+        gradient = recordLinearGradient("gradient", scrubber, ctx, 95.9, 376.0, 73.6, 397.4)
+        recordAddColorStop(gradient, scrubber, 0.00, "rgb(234, 236, 236)");
+        recordAddColorStop(gradient, scrubber, 1.00, "rgb(203, 203, 203)");
+        recordFillStyle(scrubber, ctx, gradient);
+        recordFill(scrubber, ctx);
+        recordStrokeStyle(scrubber, ctx, "rgb(153, 153, 153)");
+        recordStroke(scrubber, ctx);
 
         // scrubber/Group/Path
-        ctx.beginPath();
+        recordBeginPath(scrubber, ctx);
         recordMoveTo(scrubber, ctx, 85.3, 406.1);
         recordLineTo(scrubber, ctx, 74.7, 395.7);
         recordBezierCurveTo(scrubber, ctx, 72.6, 393.7, 72.0, 391.4, 72.0, 388.5);
@@ -199,10 +267,10 @@ function stage () {
         recordBezierCurveTo(scrubber, ctx, 71.3, 392.2, 72.0, 394.6, 74.0, 396.5);
         recordLineTo(scrubber, ctx, 84.6, 406.9);
         recordLineTo(scrubber, ctx, 85.3, 406.1);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(139, 149, 159)";
-        ctx.fill();
-        ctx.restore();
+        recordClosePath(scrubber, ctx);
+        recordFillStyle(scrubber, ctx, "rgb(139, 149, 159)");
+        recordFill(scrubber, ctx);
+        recordRestore(scrubber, ctx);
       }
     }
   ];
@@ -216,11 +284,11 @@ function stage () {
         var gradient;
 
         // back/Group
-        ctx.save();
+        recordSave(back, ctx);
 
         // back/Group/Path
-        ctx.save();
-        ctx.beginPath();
+        recordSave(back, ctx);
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 440.3, 381.8);
         recordBezierCurveTo(back, ctx, 440.3, 377.8, 437.0, 374.5, 433.0, 374.5);
         recordLineTo(back, ctx, 411.0, 374.5);
@@ -232,15 +300,15 @@ function stage () {
         recordBezierCurveTo(back, ctx, 436.3, 407.7, 438.5, 406.3, 439.8, 404.4);
         recordBezierCurveTo(back, ctx, 440.1, 403.6, 440.3, 402.8, 440.3, 401.9);
         recordLineTo(back, ctx, 440.3, 381.8);
-        ctx.closePath();
-        gradient = ctx.createLinearGradient(422.4, 373.1, 422.4, 407.7);
-        gradient.addColorStop(0.00, "rgb(234, 236, 236)");
-        gradient.addColorStop(1.00, "rgb(203, 203, 203)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        recordClosePath(back, ctx);
+        gradient = recordLinearGradient("gradient", back, ctx, 422.4, 373.1, 422.4, 407.7);;
+        recordAddColorStop(gradient, back, 0.00, "rgb(234, 236, 236)");
+        recordAddColorStop(gradient, back, 1.00, "rgb(203, 203, 203)");
+        recordFillStyle(back, ctx, gradient);
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 441.0, 400.4);
         recordBezierCurveTo(back, ctx, 441.0, 404.4, 437.8, 407.7, 433.8, 407.7);
         recordLineTo(back, ctx, 411.7, 407.7);
@@ -250,15 +318,15 @@ function stage () {
         recordLineTo(back, ctx, 433.8, 373.1);
         recordBezierCurveTo(back, ctx, 437.8, 373.1, 441.0, 376.3, 441.0, 380.3);
         recordLineTo(back, ctx, 441.0, 400.4);
-        ctx.closePath();
-        gradient = ctx.createLinearGradient(422.8, 373.1, 422.8, 407.7);
-        gradient.addColorStop(0.00, "rgb(234, 236, 236)");
-        gradient.addColorStop(1.00, "rgb(203, 203, 203)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        recordClosePath(back, ctx);
+        gradient = recordLinearGradient("gradient", back, ctx, 422.8, 373.1, 422.8, 407.7);
+        recordAddColorStop(gradient, back, 0.00, "rgb(234, 236, 236)");
+        recordAddColorStop(gradient, back, 1.00, "rgb(203, 203, 203)");
+        recordFillStyle(back, ctx, gradient);
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 406.1, 379.2);
         recordBezierCurveTo(back, ctx, 406.6, 376.5, 409.0, 374.5, 411.7, 374.5);
         recordLineTo(back, ctx, 433.8, 374.5);
@@ -268,12 +336,12 @@ function stage () {
         recordLineTo(back, ctx, 411.7, 373.1);
         recordBezierCurveTo(back, ctx, 408.3, 373.1, 405.4, 375.6, 404.7, 378.9);
         recordBezierCurveTo(back, ctx, 405.1, 379.2, 405.5, 379.3, 406.1, 379.2);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(247, 247, 247)";
-        ctx.fill();
+        recordClosePath(back, ctx);
+        recordFillStyle(back, ctx, "rgb(247, 247, 247)");
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 433.3, 408.2);
         recordLineTo(back, ctx, 411.3, 408.2);
         recordBezierCurveTo(back, ctx, 407.3, 408.2, 404.1, 404.9, 404.1, 401.0);
@@ -285,12 +353,12 @@ function stage () {
         recordLineTo(back, ctx, 432.6, 409.6);
         recordBezierCurveTo(back, ctx, 435.7, 409.6, 438.3, 407.7, 439.4, 404.9);
         recordBezierCurveTo(back, ctx, 438.1, 406.9, 435.8, 408.2, 433.3, 408.2);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(139, 149, 159)";
-        ctx.fill();
+        recordClosePath(back, ctx);
+        recordFillStyle(back, ctx, "rgb(139, 149, 159)");
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 441.0, 400.4);
         recordBezierCurveTo(back, ctx, 441.0, 404.4, 437.8, 407.7, 433.8, 407.7);
         recordLineTo(back, ctx, 411.7, 407.7);
@@ -300,12 +368,12 @@ function stage () {
         recordLineTo(back, ctx, 433.8, 373.1);
         recordBezierCurveTo(back, ctx, 437.8, 373.1, 441.0, 376.3, 441.0, 380.3);
         recordLineTo(back, ctx, 441.0, 400.4);
-        ctx.closePath();
-        ctx.strokeStyle = "rgb(159, 159, 159)";
-        ctx.stroke();
+        recordClosePath(back, ctx);
+        recordStrokeStyle(back, ctx, "rgb(159, 159, 159)");
+        recordStroke(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 419.5, 402.1);
         recordLineTo(back, ctx, 422.9, 398.7);
         recordLineTo(back, ctx, 417.9, 393.7);
@@ -316,12 +384,12 @@ function stage () {
         recordLineTo(back, ctx, 419.4, 380.7);
         recordLineTo(back, ctx, 408.8, 391.3);
         recordLineTo(back, ctx, 419.5, 402.1);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.fill();
+        recordClosePath(back, ctx);
+        recordFillStyle(back, ctx, "rgb(255, 255, 255)");
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 421.5, 400.1);
         recordLineTo(back, ctx, 424.9, 396.8);
         recordLineTo(back, ctx, 419.9, 391.8);
@@ -332,12 +400,12 @@ function stage () {
         recordLineTo(back, ctx, 421.4, 378.7);
         recordLineTo(back, ctx, 410.7, 389.4);
         recordLineTo(back, ctx, 421.5, 400.1);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(32, 85, 138)";
-        ctx.fill();
+        recordClosePath(back, ctx);
+        recordFillStyle(back, ctx, "rgb(32, 85, 138)");
+        recordFill(back, ctx);
 
         // back/Group/Path
-        ctx.beginPath();
+        recordBeginPath(back, ctx);
         recordMoveTo(back, ctx, 420.6, 401.1);
         recordLineTo(back, ctx, 423.9, 397.7);
         recordLineTo(back, ctx, 419.0, 392.7);
@@ -348,11 +416,11 @@ function stage () {
         recordLineTo(back, ctx, 420.5, 379.6);
         recordLineTo(back, ctx, 409.8, 390.3);
         recordLineTo(back, ctx, 420.6, 401.1);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(115, 153, 206)";
-        ctx.fill();
-        ctx.restore();
-        ctx.restore();
+        recordClosePath(back, ctx);
+        recordFillStyle(back, ctx, "rgb(115, 153, 206)");
+        recordFill(back, ctx);
+        recordRestore(back, ctx);
+        recordRestore(back, ctx);
 
       }
     }
@@ -366,12 +434,9 @@ function stage () {
 
         var gradient;
 
-        // forward/Group
-        ctx.save();
-
         // forward/Group/Path
-        ctx.save();
-        ctx.beginPath();
+        recordSave(forward, ctx);
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 487.4, 381.8);
         recordBezierCurveTo(forward, ctx, 487.4, 377.8, 484.2, 374.5, 480.2, 374.5);
         recordLineTo(forward, ctx, 458.2, 374.5);
@@ -383,15 +448,15 @@ function stage () {
         recordBezierCurveTo(forward, ctx, 483.5, 407.7, 485.7, 406.3, 487.0, 404.4);
         recordBezierCurveTo(forward, ctx, 487.3, 403.6, 487.4, 402.8, 487.4, 401.9);
         recordLineTo(forward, ctx, 487.4, 381.8);
-        ctx.closePath();
-        gradient = ctx.createLinearGradient(469.6, 373.1, 469.6, 407.7);
-        gradient.addColorStop(0.00, "rgb(234, 236, 236)");
-        gradient.addColorStop(1.00, "rgb(203, 203, 203)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        gradient = recordLinearGradient("gradient", forward, ctx, 469.6, 373.1, 469.6, 407.7);;
+        recordAddColorStop(gradient, forward, 0.00, "rgb(234, 236, 236)");
+        recordAddColorStop(gradient, forward, 1.00, "rgb(203, 203, 203)");
+        recordFillStyle(forward, ctx, gradient);
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 488.2, 400.4);
         recordBezierCurveTo(forward, ctx, 488.2, 404.4, 484.9, 407.7, 480.9, 407.7);
         recordLineTo(forward, ctx, 458.9, 407.7);
@@ -401,15 +466,15 @@ function stage () {
         recordLineTo(forward, ctx, 480.9, 373.1);
         recordBezierCurveTo(forward, ctx, 484.9, 373.1, 488.2, 376.3, 488.2, 380.3);
         recordLineTo(forward, ctx, 488.2, 400.4);
-        ctx.closePath();
-        gradient = ctx.createLinearGradient(469.9, 373.1, 469.9, 407.7);
-        gradient.addColorStop(0.00, "rgb(234, 236, 236)");
-        gradient.addColorStop(1.00, "rgb(203, 203, 203)");
-        ctx.fillStyle = gradient;
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        gradient = recordLinearGradient("gradient", forward, ctx, 469.9, 373.1, 469.9, 407.7);;
+        recordAddColorStop(gradient, forward, 0.00, "rgb(234, 236, 236)");
+        recordAddColorStop(gradient, forward, 1.00, "rgb(203, 203, 203)");
+        recordFillStyle(forward, ctx, gradient);
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 453.3, 379.2);
         recordBezierCurveTo(forward, ctx, 453.8, 376.5, 456.1, 374.5, 458.9, 374.5);
         recordLineTo(forward, ctx, 480.9, 374.5);
@@ -419,12 +484,12 @@ function stage () {
         recordLineTo(forward, ctx, 458.9, 373.1);
         recordBezierCurveTo(forward, ctx, 455.4, 373.1, 452.5, 375.6, 451.8, 378.9);
         recordBezierCurveTo(forward, ctx, 452.3, 379.2, 452.7, 379.3, 453.3, 379.2);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(247, 247, 247)";
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        recordFillStyle(forward, ctx, "rgb(247, 247, 247)");
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 480.5, 408.2);
         recordLineTo(forward, ctx, 458.5, 408.2);
         recordBezierCurveTo(forward, ctx, 454.5, 408.2, 451.2, 404.9, 451.2, 401.0);
@@ -436,12 +501,12 @@ function stage () {
         recordLineTo(forward, ctx, 479.8, 409.6);
         recordBezierCurveTo(forward, ctx, 482.9, 409.6, 485.5, 407.7, 486.5, 404.9);
         recordBezierCurveTo(forward, ctx, 485.2, 406.9, 483.0, 408.2, 480.5, 408.2);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(139, 149, 159)";
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        recordFillStyle(forward, ctx, "rgb(139, 149, 159)");
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 488.2, 400.4);
         recordBezierCurveTo(forward, ctx, 488.2, 404.4, 484.9, 407.7, 480.9, 407.7);
         recordLineTo(forward, ctx, 458.9, 407.7);
@@ -451,12 +516,12 @@ function stage () {
         recordLineTo(forward, ctx, 480.9, 373.1);
         recordBezierCurveTo(forward, ctx, 484.9, 373.1, 488.2, 376.3, 488.2, 380.3);
         recordLineTo(forward, ctx, 488.2, 400.4);
-        ctx.closePath();
-        ctx.strokeStyle = "rgb(159, 159, 159)";
-        ctx.stroke();
+        recordClosePath(forward, ctx);
+        recordStrokeStyle(forward, ctx, "rgb(159, 159, 159)");
+        recordStroke(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 469.4, 380.7);
         recordLineTo(forward, ctx, 466.0, 384.0);
         recordLineTo(forward, ctx, 471.0, 389.1);
@@ -467,12 +532,12 @@ function stage () {
         recordLineTo(forward, ctx, 469.5, 402.1);
         recordLineTo(forward, ctx, 480.1, 391.4);
         recordLineTo(forward, ctx, 469.4, 380.7);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(255, 255, 255)";
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        recordFillStyle(forward, ctx, "rgb(255, 255, 255)");
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 471.3, 378.7);
         recordLineTo(forward, ctx, 468.0, 382.1);
         recordLineTo(forward, ctx, 472.9, 387.1);
@@ -483,12 +548,12 @@ function stage () {
         recordLineTo(forward, ctx, 471.4, 400.1);
         recordLineTo(forward, ctx, 482.1, 389.5);
         recordLineTo(forward, ctx, 471.3, 378.7);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(32, 85, 138)";
-        ctx.fill();
+        recordClosePath(forward, ctx);
+        recordFillStyle(forward, ctx, "rgb(32, 85, 138)");
+        recordFill(forward, ctx);
 
         // forward/Group/Path
-        ctx.beginPath();
+        recordBeginPath(forward, ctx);
         recordMoveTo(forward, ctx, 470.4, 379.6);
         recordLineTo(forward, ctx, 467.0, 383.0);
         recordLineTo(forward, ctx, 472.0, 388.0);
@@ -499,11 +564,10 @@ function stage () {
         recordLineTo(forward, ctx, 470.5, 401.1);
         recordLineTo(forward, ctx, 481.2, 390.4);
         recordLineTo(forward, ctx, 470.4, 379.6);
-        ctx.closePath();
-        ctx.fillStyle = "rgb(115, 153, 206)";
-        ctx.fill();
-        ctx.restore();
-        ctx.restore();
+        recordClosePath(forward, ctx);
+        recordFillStyle(forward, ctx, "rgb(115, 153, 206)");
+        recordFill(forward, ctx);
+        recordRestore(forward, ctx);
       }
     }
   ];
@@ -515,10 +579,10 @@ function stage () {
       if (track.visible) {
 
       // track/Path
-      ctx.save();
-      ctx.fillStyle = "rgb(227, 215, 196)";
+      recordSave(track, ctx);
+      recordFillStyle(track, ctx, "rgb(227, 215, 196)");
       recordFillRect(track, ctx, 0.0, 334.0, 564.4, 13);
-      ctx.restore();
+      recordRestore(track, ctx);
       }
     }
   ];
@@ -9114,29 +9178,94 @@ function stage () {
   ];
 
   /* ... drawing instructions that cache the last set of coordinates... */
+  function recordBeginPath(obj, ctx) {
+    obj.store("beginPath");
+    ctx.beginPath();
+  };
+  
   function recordMoveTo (obj, ctx, xpos, ypos) {
-    obj.sequence[obj.current_seq].cache.push( {moveTo: [xpos, ypos]} );
+    obj.store( {moveTo : [xpos, ypos]} );
     ctx.moveTo(xpos, ypos);
   };
   
   function recordLineTo (obj, ctx, xpos, ypos) {
-    obj.sequence[obj.current_seq].cache.push( {lineTo : [xpos, ypos]} );
+    obj.store( {lineTo : [xpos, ypos]} );
     ctx.lineTo(xpos, ypos);
   };
   
+  function recordLineWidth(obj, ctx, line_width) {
+    obj.store( {lineWidth : line_width} );
+    ctx.lineWidth = line_width;
+  };
+  
+  function recordLineJoin(obj, ctx, line_join) {
+    obj.store( {lineJoin : line_join} );
+    ctx.lineJoin = line_join;
+  };
+  
+  function recordMiterLimit(obj, ctx, miter_limit) {
+    obj.store( {miterLimit : miter_limit} );
+    ctx.miterLimit = miter_limit;
+  };
+  
   function recordBezierCurveTo (obj, ctx, xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
-    obj.sequence[obj.current_seq].cache.push( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
+    obj.store( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
     ctx.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
   };
   
   function recordStrokeRect(obj, ctx, xpos, ypos, width, height) {
-    obj.sequence[obj.current_seq].cache.push( {strokeRect: [xpos, ypos, width, height]} );
+    obj.store( {strokeRect : [xpos, ypos, width, height]} );
     ctx.strokeRect(xpos, ypos, width, height);
   };
 
   function recordFillRect(obj, ctx, xpos, ypos, width, height) {
-    obj.sequence[obj.current_seq].cache.push( {fillRect: [xpos, ypos, width, height]} );
+    obj.store( {fillRect : [xpos, ypos, width, height]} );
     ctx.fillRect(xpos, ypos, width, height);
+  };
+  
+  function recordClosePath(obj, ctx) {
+    obj.store("closePath");
+    ctx.closePath();
+  };
+  
+  function recordLinearGradient(gradient, obj, ctx, xstart, ystart, xend, yend) {
+    obj.store( {gradient : ctx.createLinearGradient(xstart, ystart, xend, yend) } );
+    return ctx.createLinearGradient(xstart, ystart, xend, yend);
+  }
+
+  function recordAddColorStop(gradient, obj, offset, color_string) {
+    obj.store( {addColorStop : [offset, color_string]} );
+    gradient.addColorStop(offset, color_string);
+  }
+
+  function recordFill(obj, ctx) {
+    obj.store("fill");
+    ctx.fill();
+  };
+  
+  function recordFillStyle(obj, ctx, style_string) {
+    obj.store( {fillStyle : style_string} );
+    ctx.fillStyle = style_string;
+  };
+  
+  function recordStroke(obj, ctx) {
+    obj.store("stroke");
+    ctx.stroke();
+  };
+  
+  function recordStrokeStyle(obj, ctx, style_string) {
+    obj.store( {strokeStyle : style_string} );
+    ctx.strokeStyle = style_string;
+  };
+  
+  function recordSave(obj, ctx) {
+    obj.store("save");
+    ctx.save();
+  };
+  
+  function recordRestore(obj, ctx) {
+    obj.store("restore");
+    ctx.restore();
   };
   
   /* ...because objects don\'t offer a length property, this counter helps in loops... */
@@ -9204,7 +9333,6 @@ function stage () {
       // console.log("First condition: animate() exited on frame " + current_frame + ".");
       advanceAll();
       current_frame = 0;
-      emptyAllCaches();
       current_bp = 0;
       animate.running = false;
       return "done";
@@ -9242,6 +9370,7 @@ function stage () {
   function drawFrame () {
     var i, len;
     context.clearRect(0, 0, 566, 476);
+    emptyAllCaches();
     context.drawImage(button_sprite, 0, 51, 104, 51, 42.8, 424.8, 104, 51);
     context.drawImage(button_sprite, 104, 51, 355, 51, 170.8, 424.8, 355, 51);
     if (arguments.length == 1 && Array.isArray(arguments[0]) ){

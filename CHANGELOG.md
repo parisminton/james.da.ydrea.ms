@@ -6,9 +6,15 @@ Changelog
 
 *12/3/11* 
 
-1. Renamed `advanceCels()` to `advance()` and `advanceAllCels()` to `advanceAll()`.  
+1. Moved `emptyAllCaches()` to the top of `drawFrame()`. This is a better solution than calling it from `animate()`, ensuring it gets called once per drawing cycle -- even the first one.
 
-2. Moved the scrubber to the far left of the track (by subtracting 155.8 from all the x-values). 
+2. Added `store()` to the `Character` prototype.
+
+3. Added `recordBeginPath()`, `recordClosePath()`, `recordFillStyle()`, `recordLineWidth()`, `recordLineJoin()`, `recordMiterLimit()`, `recordLinearGradient()`, `recordAddColorStop()`, `recordStroke()`, `recordStrokeStyle()`, `recordSave()` and `recordRestore()`.
+
+4. Renamed `advanceCels()` to `advance()` and `advanceAllCels()` to `advanceAll()`.  
+
+5. Moved the scrubber to the far left of the track (by subtracting 155.8 from all the x-values). 
 
 
 
