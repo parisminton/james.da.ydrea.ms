@@ -4,6 +4,17 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*12/5/11* 
+
+1. Moved the `record` methods into the `Character` prototype. This means the functions can accept less arguments to know to which objects they're applied -- almost all of them are back to the arguments they'd expect as regular `CRC` methods.
+This also means I removed the "record" part of the name. They live in the namespace of their parent and that's how you call them: `vaulter.lineTo(100.0, 200.0);`.
+
+2. Started making a `Scrubber` class that inherits from `Character`.
+
+3. Added a `coords` object to each sequence in `Character`.
+
+
+
 *12/3/11* 
 
 1. Moved `emptyAllCaches()` to the top of `drawFrame()`. This is a better solution than calling it from `animate()`, ensuring it gets called once per drawing cycle -- even the first one.
