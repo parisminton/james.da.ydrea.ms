@@ -9,6 +9,11 @@ function stage () {
       current_frame = 0,
       frame_total = 0,
       a_queue = [],
+      slider,
+      scrubber,
+      back,
+      forward,
+      track,
       vaulter;
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
@@ -26,12 +31,10 @@ function stage () {
     this.current_seq = "main";
     this.sequence = {
       main : {
-        coords : {
-          xdistance : 0,
-          ydistance : 0,
-          xinc : 0,
-          yinc : 0
-        },
+        xdistance : 0,
+        ydistance : 0,
+        xinc : 0,
+        yinc : 0,
         starting_frame : 0,
         cache : [],
         iterations : 1,
@@ -50,12 +53,10 @@ function stage () {
     },
     makeSequence : function (seq_name) {
       this.sequence[seq_name] = {
-        coords : {
-          xdistance : 0,
-          ydistance : 0,
-          xinc : 0,
-          yinc : 0
-        },
+        xdistance : 0,
+        ydistance : 0,
+        xinc : 0,
+        yinc : 0,
         starting_frame : 0,
         cache : [],
         iterations : 1,
@@ -67,6 +68,7 @@ function stage () {
     reset : function () {
       this.sequence[this.current_seq].current_cel = 0;
       this.sequence[this.current_seq].current_iteration = 0;
+      this.sequence[this.current_seq].xdistance = 0; 
     },
     load : function () { 
       this.reset();
@@ -76,6 +78,8 @@ function stage () {
       setFinalBreakpoint();
     },
     advance : function () {
+      this.sequence[this.current_seq].xdistance += this.sequence[this.current_seq].xinc;
+      this.sequence[this.current_seq].ydistance += this.sequence[this.current_seq].yinc;
       if (this.sequence[this.current_seq].current_iteration < this.sequence[this.current_seq].iterations) {
         this.sequence[this.current_seq].current_cel += 1;
 
@@ -91,14 +95,13 @@ function stage () {
         }
       }
       if (current_frame >= frame_total) {
-        this.sequence[this.current_seq].current_iteration = 0;
-        this.sequence[this.current_seq].current_cel = 0;
+        this.reset();
       }
     },
     store : function (member) {
       this.sequence[this.current_seq].cache.push(member);
     },
-    convertCoords : function () {
+    computeCoords : function () {
       alert("Quicker than a job could.");
     },
     emptyCache : function () {
@@ -112,10 +115,14 @@ function stage () {
     },
     moveTo : function (xpos, ypos) {
       this.store( {moveTo : [xpos, ypos]} );
+      xpos = (xpos + this.sequence[this.current_seq].xdistance);
+      ypos = (ypos + this.sequence[this.current_seq].ydistance);
       context.moveTo(xpos, ypos);
     },
     lineTo : function (xpos, ypos) {
       this.store( {lineTo : [xpos, ypos]} );
+      xpos = (xpos + this.sequence[this.current_seq].xdistance);
+      ypos = (ypos + this.sequence[this.current_seq].ydistance);
       context.lineTo(xpos, ypos);
     },
     lineWidth : function (line_width) {
@@ -132,14 +139,24 @@ function stage () {
     },
     bezierCurveTo : function (xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
       this.store( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
+      xctrl_1 = (xctrl_1 + this.sequence[this.current_seq].xdistance);
+      yctrl_1 = (yctrl_1 + this.sequence[this.current_seq].ydistance);
+      xctrl_2 = (xctrl_2 + this.sequence[this.current_seq].xdistance);
+      yctrl_2 = (yctrl_2 + this.sequence[this.current_seq].ydistance);
+      xpos = (xpos + this.sequence[this.current_seq].xdistance);
+      ypos = (ypos + this.sequence[this.current_seq].ydistance);
       context.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
     },
     strokeRect : function (xpos, ypos, width, height) {
       this.store( {strokeRect : [xpos, ypos, width, height]} );
+      xpos = (xpos + this.sequence[this.current_seq].xdistance);
+      ypos = (ypos + this.sequence[this.current_seq].ydistance);
       context.strokeRect(xpos, ypos, width, height);
     },
     fillRect : function (xpos, ypos, width, height) {
       this.store( {fillRect : [xpos, ypos, width, height]} );
+      xpos = (xpos + this.sequence[this.current_seq].xdistance);
+      ypos = (ypos + this.sequence[this.current_seq].ydistance);
       context.fillRect(xpos, ypos, width, height);
     },
     closePath : function () {
@@ -201,14 +218,10 @@ function stage () {
         cels : []
       },
       scrubber : {
-        coords : {
-          xdistance : 0,
-          ydistance : 0,
-          xinc : 0,
-          yinc : 0
-        },
-        xipf : 5.0,
-        yipf : 0.0,
+        xdistance : 0,
+        ydistance : 0,
+        xinc : 0,
+        yinc : 0,
         starting_frame : 0,
         cache : [],
         iterations : 1,
@@ -397,6 +410,7 @@ function stage () {
 
   scrubber = new Character("scrubber", false);
   scrubber.show();
+  scrubber.sequence.main.xinc = 5.0;
   scrubber.sequence.main.cels = [
     function () {
       if (scrubber.visible) {
@@ -9529,7 +9543,6 @@ function stage () {
   drawFrame(a_queue);
 
   // ... click detection ...
-  // ### TODO: Fix - clicking outside the buttons makes play() fire on next click ###
   function getClick (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
         y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
@@ -9556,16 +9569,20 @@ function stage () {
 
   function playButtonBoundary (ctx) {
     ctx.save();
-    ctx.strokeStyle = "rgb(0, 255, 0)";
+    ctx.beginPath();
     ctx.rect(42.8, 424.8, 104, 51);
+    ctx.closePath();
+    ctx.strokeStyle = "rgb(0, 255, 0)";
     // ctx.stroke();
     ctx.restore();
   };
 
   function stepButtonBoundary (ctx) {
     ctx.save();
-    ctx.strokeStyle = "rgb(0, 0, 255)";
+    ctx.beginPath();
     ctx.rect(170.8, 424.8, 355, 51);
+    ctx.closePath();
+    ctx.strokeStyle = "rgb(0, 0, 255)";
     // ctx.stroke();
     ctx.restore();
   };

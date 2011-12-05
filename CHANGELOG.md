@@ -6,12 +6,15 @@ Changelog
 
 *12/5/11* 
 
-1. Moved the `record` methods into the `Character` prototype. This means the functions can accept less arguments to know to which objects they're applied -- almost all of them are back to the arguments they'd expect as regular `CRC` methods.
-This also means I removed the "record" part of the name. They live in the namespace of their parent and that's how you call them: `vaulter.lineTo(100.0, 200.0);`.
+1. The scrubber now moves in time with the action, thanks to the new drawing methods. `Character.cache` is almost obsolete. The methods do all the calculations before rendering.
 
-2. Started making a `Scrubber` class that inherits from `Character`.
+2. Fixed the problems with the Play and Step Through button boundaries. The Play path never closed before the Step Through path was drawn. 
 
-3. Added a `coords` object to each sequence in `Character`.
+3. Moved the `record` methods into the `Character` prototype. This means the functions can accept fewer arguments to know to which objects they're applied -- almost all of them are back to the arguments they'd expect as regular `CRC` methods. This also means I removed the "record" part of the name. They live in the namespace of their parent and that's how you call them: `vaulter.lineTo(100.0, 200.0);`.
+
+4. Started making a `Scrubber` class that inherits from `Character`.
+
+4. Added `xdistance`, `ydistance`, `xinc` and `yinc` members to each sequence in `Character`. These are meant to remember x and y increments and total distances from the axes as a `Character` moves across the stage.
 
 
 
