@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*12/9/11*
+
+1. Added the pit, the shadow and the updated vaulter to the stage.
+
+
+
 *12/5/11* 
 
 1. The scrubber now moves in time with the action, thanks to the new drawing methods. `Character.cache` is almost obsolete. The methods do all the calculations before rendering.
