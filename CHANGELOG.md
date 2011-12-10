@@ -12,6 +12,12 @@ Changelog
 
 3. Added a `runup` sequence to `vaulter`: a loopable series of strides to showthe vaulter approaching the pit.
 
+4. Moved `sequenceOrder` out of the `Character` prototype and into its constructor, fixing the mistake I just introduced.
+
+5. `sequenceOrder` is now called `sequence_order` to stick with the naming convention for variables.
+
+6. Updated `advance()` to cycle through sequences.
+
 
 
 *12/9/11*

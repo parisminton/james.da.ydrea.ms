@@ -31,7 +31,8 @@ function stage () {
     else {
       this.boundary = false;
     }
-    this.current_seq = "main";
+    this.current_seq = 0; 
+    this.sequence_order = ["main"];
     this.sequence = {
       main : {
         xdistance : 0,
@@ -57,12 +58,11 @@ function stage () {
     setSequenceOrder : function() {
       var i,
           len = arguments.length;
-      this.sequenceOrder.length = 0;
+      this.sequence_order.length = 0;
       for (i = 0; i < len; i += 1) {
-        this.sequenceOrder.push([arguments[i]]);
+        this.sequence_order.push([arguments[i]]);
       }
     },
-    sequenceOrder : ["main"],
     makeSequence : function (seq_name) {
       this.sequence[seq_name] = {
         xdistance : 0,
@@ -78,9 +78,9 @@ function stage () {
       }
     },
     reset : function () {
-      this.sequence[this.current_seq].current_cel = 0;
-      this.sequence[this.current_seq].current_iteration = 0;
-      this.sequence[this.current_seq].xdistance = 0; 
+      this.sequence[this.sequence_order[this.current_seq]].current_cel = 0;
+      this.sequence[this.sequence_order[this.current_seq]].current_iteration = 0;
+      this.sequence[this.sequence_order[this.current_seq]].xdistance = 0; 
     },
     load : function () { 
       this.reset();
@@ -90,20 +90,23 @@ function stage () {
       setFinalBreakpoint();
     },
     advance : function () {
-      this.sequence[this.current_seq].xdistance += this.sequence[this.current_seq].xinc;
-      this.sequence[this.current_seq].ydistance += this.sequence[this.current_seq].yinc;
-      if (this.sequence[this.current_seq].current_iteration < this.sequence[this.current_seq].iterations) {
-        this.sequence[this.current_seq].current_cel += 1;
+      var cs = this.current_seq,
+          order = this.sequence_order;
 
-        if (this.sequence[this.current_seq].current_cel >= this.sequence[this.current_seq].cels.length) {
-          this.sequence[this.current_seq].current_iteration += 1;
-          if (this.sequence[this.current_seq].current_iteration >= this.sequence[this.current_seq].iterations) {
-            this.sequence[this.current_seq].current_cel = (this.sequence[this.current_seq].cels.length - 1);
+      this.sequence[order[cs]].xdistance += this.sequence[order[cs]].xinc;
+      this.sequence[order[cs]].ydistance += this.sequence[order[cs]].yinc;
+      
+      this.sequence[order[cs]].current_cel += 1;
+      if (this.sequence[order[cs]].current_cel >= this.sequence[order[cs]].cels.length) {
+        this.sequence[order[cs]].current_iteration += 1;
+        if (this.sequence[order[cs]].current_iteration >= this.sequence[order[cs]].iterations) {
+          this.current_seq += 1;
+          if (cs >= order.length) {
+            this.current_seq = (order.length - 1);
           }
-          else {
-            this.sequence[this.current_seq].current_iteration += 1;
-            this.sequence[this.current_seq].current_cel = 0;
-          }
+        }
+        else {
+          this.sequence[order[cs]].current_cel = 0;
         }
       }
       if (current_frame >= frame_total) {
@@ -111,10 +114,12 @@ function stage () {
       }
     },
     store : function (member) {
-      this.sequence[this.current_seq].cache.push(member);
+      this.sequence[this.sequence_order[this.current_seq]].cache.push(member);
     },
     emptyCache : function () {
-      this.sequence[this.current_seq].cache.length = 0;
+      if (this.sequence[this.sequence_order[this.current_seq]] && this.sequence[this.sequence_order[this.current_seq]].cache) {
+        this.sequence[this.sequence_order[this.current_seq]].cache.length = 0;
+      }
     },
 
     /* ... drawing instructions that update their coordinates before processing ... */
@@ -124,14 +129,14 @@ function stage () {
     },
     moveTo : function (xpos, ypos) {
       this.store( {moveTo : [xpos, ypos]} );
-      xpos = (xpos + this.sequence[this.current_seq].xdistance);
-      ypos = (ypos + this.sequence[this.current_seq].ydistance);
+      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
       context.moveTo(xpos, ypos);
     },
     lineTo : function (xpos, ypos) {
       this.store( {lineTo : [xpos, ypos]} );
-      xpos = (xpos + this.sequence[this.current_seq].xdistance);
-      ypos = (ypos + this.sequence[this.current_seq].ydistance);
+      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
       context.lineTo(xpos, ypos);
     },
     lineWidth : function (line_width) {
@@ -148,24 +153,24 @@ function stage () {
     },
     bezierCurveTo : function (xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
       this.store( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
-      xctrl_1 = (xctrl_1 + this.sequence[this.current_seq].xdistance);
-      yctrl_1 = (yctrl_1 + this.sequence[this.current_seq].ydistance);
-      xctrl_2 = (xctrl_2 + this.sequence[this.current_seq].xdistance);
-      yctrl_2 = (yctrl_2 + this.sequence[this.current_seq].ydistance);
-      xpos = (xpos + this.sequence[this.current_seq].xdistance);
-      ypos = (ypos + this.sequence[this.current_seq].ydistance);
+      xctrl_1 = (xctrl_1 + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      yctrl_1 = (yctrl_1 + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xctrl_2 = (xctrl_2 + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      yctrl_2 = (yctrl_2 + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
       context.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
     },
     strokeRect : function (xpos, ypos, width, height) {
       this.store( {strokeRect : [xpos, ypos, width, height]} );
-      xpos = (xpos + this.sequence[this.current_seq].xdistance);
-      ypos = (ypos + this.sequence[this.current_seq].ydistance);
+      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
       context.strokeRect(xpos, ypos, width, height);
     },
     fillRect : function (xpos, ypos, width, height) {
       this.store( {fillRect : [xpos, ypos, width, height]} );
-      xpos = (xpos + this.sequence[this.current_seq].xdistance);
-      ypos = (ypos + this.sequence[this.current_seq].ydistance);
+      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
       context.fillRect(xpos, ypos, width, height);
     },
     closePath : function () {
@@ -216,7 +221,7 @@ function stage () {
     else {
       this.boundary = false;
     }
-    this.current_seq = "scrubber";
+    this.sequence_order[this.current_seq] = "scrubber";
     this.sequence = {
       track : {
         starting_frame : 0,
@@ -245,8 +250,8 @@ function stage () {
       // add ipf to each x- or y-value in the cache
       // current_something becomes all the new drawing instructions
       var i,
-          c = this.sequence[this.current_seq].cache,
-          len = this.sequence[this.current_seq].cache.length,
+          c = this.sequence[this.sequence_order[this.current_seq]].cache,
+          len = this.sequence[this.sequence_order[this.current_seq]].cache.length,
           xpos,
           ypos,
           xctrl_1,
@@ -351,8 +356,8 @@ function stage () {
   };
 
   function renderCharacter (obj, ctx) {
-    var cs = obj.current_seq,
-        cc = obj.sequence[obj.current_seq].current_cel;
+    var cs = obj.sequence_order[obj.current_seq],
+        cc = obj.sequence[obj.sequence_order[obj.current_seq]].current_cel;
     ctx = (ctx) ? ctx : context;
     if (typeof obj.sequence[cs].cels[cc] == "function") {
       obj.sequence[cs].cels[cc](ctx);
@@ -10596,6 +10601,7 @@ function stage () {
     }
   ];
   vaulter.makeSequence("runup");
+  vaulter.setSequenceOrder("runup", "main");
   vaulter.sequence.runup.cels = [
     function () {
       if (vaulter.visible) {
@@ -11850,11 +11856,12 @@ function stage () {
         order;
 
     for (i = 0; i < len; i += 1) {
-      len2 = a_queue[i].sequenceOrder.length;
+      len2 = a_queue[i].sequence_order.length;
       seq = a_queue[i].sequence;
-      order = a_queue[i].sequenceOrder;
+      order = a_queue[i].sequence_order;
 
       for (j = 0; j < len2; j += 1) {
+        // console.log("Iterated " + j + " times.");
         frame_total = (frame_total > ( seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
       }
     }
