@@ -14,6 +14,9 @@ function stage () {
       back,
       forward,
       track,
+      pit,
+      pitforeground,
+      shadow,
       vaulter;
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
@@ -51,6 +54,15 @@ function stage () {
     hide : function () {
       this.visible = false;
     },
+    setSequenceOrder : function() {
+      var i,
+          len = arguments.length;
+      this.sequenceOrder.length = 0;
+      for (i = 0; i < len; i += 1) {
+        this.sequenceOrder.push([arguments[i]]);
+      }
+    },
+    sequenceOrder : ["main"],
     makeSequence : function (seq_name) {
       this.sequence[seq_name] = {
         xdistance : 0,
@@ -10583,6 +10595,1160 @@ function stage () {
       }
     }
   ];
+  vaulter.makeSequence("runup");
+  vaulter.sequence.runup.cels = [
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Group
+        vaulter.save();
+
+        // vaulter/Group/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(59.1, 301.8);
+        vaulter.bezierCurveTo(57.9, 305.4, 51.7, 315.9, 49.2, 316.5);
+        vaulter.bezierCurveTo(46.7, 317.2, 36.1, 312.7, 36.1, 312.7);
+        vaulter.bezierCurveTo(36.1, 312.7, 28.6, 310.5, 22.4, 311.4);
+        vaulter.bezierCurveTo(16.1, 312.3, 14.7, 314.0, 13.6, 314.0);
+        vaulter.bezierCurveTo(12.5, 314.0, 12.1, 312.8, 12.1, 312.8);
+        vaulter.bezierCurveTo(12.9, 312.2, 21.5, 303.7, 23.0, 303.5);
+        vaulter.bezierCurveTo(24.5, 303.4, 25.5, 305.2, 25.5, 305.2);
+        vaulter.bezierCurveTo(25.5, 305.2, 28.1, 306.5, 31.6, 306.8);
+        vaulter.bezierCurveTo(35.1, 307.0, 46.4, 308.2, 46.4, 308.2);
+        vaulter.bezierCurveTo(46.5, 304.5, 49.2, 293.7, 49.2, 293.7);
+        vaulter.lineTo(59.1, 301.8);
+        vaulter.closePath();
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(57.4, 259.8);
+        vaulter.bezierCurveTo(57.4, 259.8, 59.2, 259.0, 60.9, 259.3);
+        vaulter.bezierCurveTo(62.6, 259.5, 65.7, 261.5, 65.5, 263.7);
+        vaulter.bezierCurveTo(65.5, 263.7, 69.4, 267.9, 69.9, 268.5);
+        vaulter.bezierCurveTo(70.4, 269.2, 74.7, 271.7, 74.6, 273.9);
+        vaulter.bezierCurveTo(74.6, 276.1, 74.1, 277.4, 74.3, 278.5);
+        vaulter.lineTo(71.2, 279.9);
+        vaulter.bezierCurveTo(71.2, 279.9, 69.4, 278.7, 69.1, 277.0);
+        vaulter.bezierCurveTo(68.8, 275.4, 69.2, 274.7, 68.5, 274.2);
+        vaulter.bezierCurveTo(67.8, 273.7, 66.7, 272.7, 65.8, 271.7);
+        vaulter.bezierCurveTo(64.8, 270.7, 64.2, 270.0, 63.7, 269.6);
+        vaulter.bezierCurveTo(63.3, 269.2, 63.0, 269.3, 61.8, 269.9);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(49.1, 288.9);
+        vaulter.bezierCurveTo(49.1, 288.9, 49.4, 278.5, 47.9, 274.3);
+        vaulter.bezierCurveTo(46.5, 270.2, 48.6, 259.2, 50.8, 259.7);
+        vaulter.bezierCurveTo(53.0, 260.2, 52.5, 257.7, 52.5, 257.7);
+        vaulter.bezierCurveTo(52.5, 257.7, 50.1, 252.4, 50.0, 250.2);
+        vaulter.bezierCurveTo(49.9, 248.0, 51.2, 242.6, 55.8, 242.3);
+        vaulter.bezierCurveTo(60.3, 242.1, 62.0, 247.0, 62.0, 247.0);
+        vaulter.bezierCurveTo(62.0, 247.0, 62.6, 251.3, 62.6, 252.5);
+        vaulter.bezierCurveTo(62.6, 253.7, 60.2, 258.3, 60.2, 258.3);
+        vaulter.bezierCurveTo(60.2, 258.3, 64.8, 264.8, 64.6, 267.9);
+        vaulter.bezierCurveTo(64.6, 267.9, 64.6, 282.8, 63.5, 285.2);
+        vaulter.bezierCurveTo(62.3, 287.5, 62.3, 292.2, 63.1, 294.2);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.4, 277.2);
+        vaulter.bezierCurveTo(48.4, 277.2, 54.2, 277.9, 55.2, 270.5);
+        vaulter.bezierCurveTo(56.2, 263.0, 53.3, 260.5, 51.3, 260.3);
+        vaulter.bezierCurveTo(49.4, 260.1, 46.0, 263.6, 46.0, 268.7);
+        vaulter.bezierCurveTo(46.0, 273.8, 46.2, 275.4, 48.4, 277.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(60.1, 290.0);
+        vaulter.bezierCurveTo(67.3, 294.9, 76.1, 304.5, 76.5, 305.2);
+        vaulter.bezierCurveTo(77.0, 305.9, 77.5, 310.5, 77.5, 310.5);
+        vaulter.lineTo(81.8, 325.5);
+        vaulter.bezierCurveTo(81.8, 325.5, 84.4, 329.9, 86.0, 330.7);
+        vaulter.bezierCurveTo(87.7, 331.5, 91.3, 333.5, 91.9, 333.8);
+        vaulter.bezierCurveTo(92.4, 334.1, 92.7, 335.4, 92.7, 335.4);
+        vaulter.bezierCurveTo(92.7, 335.4, 93.5, 336.7, 92.1, 337.1);
+        vaulter.bezierCurveTo(90.1, 337.8, 85.1, 335.6, 82.7, 335.1);
+        vaulter.bezierCurveTo(80.4, 334.5, 80.8, 331.6, 80.8, 331.6);
+        vaulter.lineTo(78.2, 325.9);
+        vaulter.bezierCurveTo(71.6, 319.1, 70.7, 308.9, 70.7, 308.9);
+        vaulter.bezierCurveTo(70.7, 308.9, 54.5, 301.4, 51.5, 300.1);
+        vaulter.bezierCurveTo(46.8, 298.0, 49.1, 288.9, 49.1, 288.9);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.7, 305.1);
+        vaulter.bezierCurveTo(25.7, 305.1, 25.0, 305.3, 24.6, 304.6);
+        vaulter.bezierCurveTo(24.3, 303.8, 24.8, 303.3, 24.8, 303.3);
+        vaulter.bezierCurveTo(25.3, 303.1, 75.6, 275.8, 129.9, 253.8);
+        vaulter.lineTo(265.3, 198.7);
+        vaulter.lineTo(266.1, 200.6);
+        vaulter.lineTo(130.6, 255.7);
+        vaulter.bezierCurveTo(76.4, 277.7, 26.2, 304.9, 25.7, 305.1);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.1, 281.3);
+        vaulter.bezierCurveTo(71.1, 281.3, 72.1, 279.4, 72.8, 279.1);
+        vaulter.bezierCurveTo(73.5, 278.8, 75.0, 278.9, 75.0, 278.9);
+        vaulter.lineTo(75.6, 280.1);
+        vaulter.lineTo(75.0, 281.8);
+        vaulter.lineTo(73.0, 282.2);
+        vaulter.bezierCurveTo(73.0, 282.2, 72.7, 282.8, 72.0, 282.6);
+        vaulter.bezierCurveTo(71.4, 282.4, 71.1, 281.3, 71.1, 281.3);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Group/Path
+        vaulter.beginPath();
+        vaulter.moveTo(52.9, 261.8);
+        vaulter.bezierCurveTo(52.9, 261.8, 51.0, 260.2, 48.8, 260.8);
+        vaulter.bezierCurveTo(46.7, 261.5, 43.6, 264.5, 41.7, 266.5);
+        vaulter.bezierCurveTo(39.8, 268.5, 37.2, 274.3, 36.5, 275.8);
+        vaulter.bezierCurveTo(35.7, 277.3, 36.5, 278.3, 37.1, 282.5);
+        vaulter.bezierCurveTo(37.7, 286.6, 39.6, 292.7, 39.6, 292.7);
+        vaulter.bezierCurveTo(39.6, 292.7, 39.1, 293.8, 39.1, 294.3);
+        vaulter.bezierCurveTo(39.1, 294.7, 38.8, 297.2, 40.0, 297.6);
+        vaulter.bezierCurveTo(41.1, 297.9, 43.6, 297.1, 43.6, 297.1);
+        vaulter.bezierCurveTo(43.6, 297.1, 45.0, 296.1, 44.7, 294.5);
+        vaulter.bezierCurveTo(44.7, 294.5, 44.5, 292.4, 42.9, 292.3);
+        vaulter.lineTo(41.9, 291.6);
+        vaulter.bezierCurveTo(41.9, 291.6, 40.8, 288.1, 41.2, 284.3);
+        vaulter.bezierCurveTo(41.6, 280.6, 41.2, 275.0, 41.2, 275.0);
+        vaulter.lineTo(47.0, 270.8);
+        vaulter.bezierCurveTo(50.5, 271.5, 52.9, 268.7, 52.9, 268.7);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 265.5);
+        vaulter.bezierCurveTo(57.6, 265.5, 59.3, 264.8, 61.1, 265.0);
+        vaulter.bezierCurveTo(62.8, 265.3, 65.8, 267.2, 65.6, 269.4);
+        vaulter.bezierCurveTo(65.6, 269.4, 69.5, 273.6, 70.0, 274.3);
+        vaulter.bezierCurveTo(70.5, 275.0, 74.8, 277.5, 74.8, 279.6);
+        vaulter.bezierCurveTo(74.7, 281.8, 74.2, 283.1, 74.5, 284.3);
+        vaulter.lineTo(71.3, 285.6);
+        vaulter.bezierCurveTo(71.3, 285.6, 69.6, 284.4, 69.2, 282.8);
+        vaulter.bezierCurveTo(68.9, 281.1, 69.3, 280.4, 68.6, 279.9);
+        vaulter.bezierCurveTo(68.0, 279.4, 66.8, 278.5, 65.9, 277.5);
+        vaulter.bezierCurveTo(65.0, 276.5, 64.3, 275.7, 63.9, 275.3);
+        vaulter.bezierCurveTo(63.4, 274.9, 63.2, 275.0, 61.9, 275.7);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 282.9);
+        vaulter.bezierCurveTo(48.5, 282.9, 54.4, 283.7, 55.4, 276.2);
+        vaulter.bezierCurveTo(56.3, 268.8, 53.4, 266.2, 51.4, 266.0);
+        vaulter.bezierCurveTo(49.5, 265.8, 46.2, 269.4, 46.2, 274.4);
+        vaulter.bezierCurveTo(46.2, 279.5, 46.4, 281.1, 48.5, 282.9);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(67.9, 307.4);
+        vaulter.bezierCurveTo(64.9, 303.6, 63.2, 299.9, 63.2, 299.9);
+        vaulter.bezierCurveTo(62.4, 298.0, 62.4, 293.3, 63.6, 290.9);
+        vaulter.bezierCurveTo(64.8, 288.6, 64.8, 273.7, 64.8, 273.7);
+        vaulter.bezierCurveTo(64.9, 270.5, 60.3, 264.0, 60.3, 264.0);
+        vaulter.bezierCurveTo(60.3, 264.0, 62.7, 259.4, 62.7, 258.2);
+        vaulter.bezierCurveTo(62.7, 257.1, 62.2, 252.8, 62.2, 252.8);
+        vaulter.bezierCurveTo(62.2, 252.8, 60.5, 247.8, 55.9, 248.1);
+        vaulter.bezierCurveTo(51.3, 248.3, 50.0, 253.7, 50.1, 255.9);
+        vaulter.bezierCurveTo(50.3, 258.2, 52.6, 263.5, 52.6, 263.5);
+        vaulter.bezierCurveTo(52.6, 263.5, 53.1, 266.0, 50.9, 265.4);
+        vaulter.bezierCurveTo(48.7, 264.9, 46.6, 275.9, 48.1, 280.1);
+        vaulter.bezierCurveTo(49.5, 284.2, 49.3, 294.6, 49.3, 294.6);
+        vaulter.bezierCurveTo(47.8, 296.1, 49.1, 300.3, 49.1, 300.3);
+        vaulter.bezierCurveTo(49.1, 300.3, 53.1, 307.6, 57.9, 311.3);
+        vaulter.lineTo(46.9, 308.0);
+        vaulter.bezierCurveTo(46.6, 307.5, 46.0, 306.6, 45.4, 306.3);
+        vaulter.bezierCurveTo(44.5, 305.9, 43.6, 306.2, 43.6, 306.2);
+        vaulter.bezierCurveTo(43.3, 306.4, 40.8, 307.6, 40.8, 307.6);
+        vaulter.bezierCurveTo(40.8, 307.6, 36.8, 309.1, 36.4, 309.1);
+        vaulter.bezierCurveTo(36.0, 309.1, 31.4, 310.7, 31.6, 312.0);
+        vaulter.bezierCurveTo(31.7, 313.2, 33.2, 313.9, 33.9, 313.7);
+        vaulter.bezierCurveTo(34.6, 313.6, 38.6, 312.6, 42.3, 312.1);
+        vaulter.bezierCurveTo(46.1, 311.6, 54.9, 315.6, 58.7, 317.6);
+        vaulter.bezierCurveTo(62.4, 319.6, 67.9, 319.9, 67.9, 319.9);
+        vaulter.bezierCurveTo(67.9, 319.9, 71.2, 319.0, 71.4, 317.8);
+        vaulter.bezierCurveTo(71.5, 316.6, 70.8, 311.2, 67.9, 307.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 282.9);
+        vaulter.bezierCurveTo(48.5, 282.9, 54.4, 283.7, 55.4, 276.2);
+        vaulter.bezierCurveTo(56.3, 268.8, 53.4, 266.2, 51.4, 266.0);
+        vaulter.bezierCurveTo(49.5, 265.8, 46.2, 269.4, 46.2, 274.4);
+        vaulter.bezierCurveTo(46.2, 279.5, 46.4, 281.1, 48.5, 282.9);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(49.3, 295.0);
+        vaulter.bezierCurveTo(47.9, 297.2, 49.3, 300.9, 49.3, 300.9);
+        vaulter.bezierCurveTo(49.3, 300.9, 54.6, 311.5, 59.1, 315.2);
+        vaulter.lineTo(59.1, 316.9);
+        vaulter.bezierCurveTo(59.1, 316.9, 55.4, 324.5, 55.2, 326.4);
+        vaulter.bezierCurveTo(54.9, 328.3, 54.9, 332.6, 54.9, 333.2);
+        vaulter.bezierCurveTo(54.9, 333.8, 54.8, 337.4, 54.9, 338.3);
+        vaulter.bezierCurveTo(55.0, 339.2, 55.8, 339.9, 56.2, 341.0);
+        vaulter.bezierCurveTo(56.3, 341.3, 59.7, 342.5, 59.7, 342.5);
+        vaulter.bezierCurveTo(59.7, 342.5, 61.2, 342.7, 61.9, 342.6);
+        vaulter.bezierCurveTo(63.4, 342.3, 64.6, 341.6, 64.6, 341.6);
+        vaulter.bezierCurveTo(64.6, 341.6, 64.4, 339.4, 63.6, 339.2);
+        vaulter.bezierCurveTo(62.9, 339.0, 60.7, 337.8, 60.0, 337.3);
+        vaulter.bezierCurveTo(59.3, 336.7, 58.1, 335.0, 58.1, 335.0);
+        vaulter.bezierCurveTo(58.1, 335.0, 58.5, 332.2, 60.2, 328.7);
+        vaulter.bezierCurveTo(61.9, 325.2, 63.0, 321.9, 64.7, 320.3);
+        vaulter.bezierCurveTo(66.0, 319.1, 65.6, 315.3, 65.6, 315.3);
+        vaulter.bezierCurveTo(65.6, 315.3, 65.7, 312.1, 65.0, 309.1);
+        vaulter.bezierCurveTo(64.4, 306.2, 61.7, 299.9, 61.5, 299.5);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.8, 310.8);
+        vaulter.bezierCurveTo(25.8, 310.8, 25.2, 311.0, 24.8, 310.3);
+        vaulter.bezierCurveTo(24.4, 309.6, 24.9, 309.1, 24.9, 309.1);
+        vaulter.bezierCurveTo(25.4, 308.8, 75.7, 281.6, 130.0, 259.5);
+        vaulter.lineTo(265.5, 204.4);
+        vaulter.lineTo(266.2, 206.3);
+        vaulter.lineTo(130.8, 261.4);
+        vaulter.bezierCurveTo(76.5, 283.4, 26.3, 310.6, 25.8, 310.8);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.2, 287.0);
+        vaulter.bezierCurveTo(71.2, 287.0, 72.2, 285.1, 72.9, 284.8);
+        vaulter.bezierCurveTo(73.6, 284.5, 75.1, 284.6, 75.1, 284.6);
+        vaulter.lineTo(75.7, 285.8);
+        vaulter.lineTo(75.1, 287.6);
+        vaulter.lineTo(73.2, 288.0);
+        vaulter.bezierCurveTo(73.2, 288.0, 72.8, 288.5, 72.2, 288.3);
+        vaulter.bezierCurveTo(71.5, 288.2, 71.2, 287.0, 71.2, 287.0);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.0, 267.6);
+        vaulter.bezierCurveTo(53.0, 267.6, 51.1, 265.9, 49.0, 266.6);
+        vaulter.bezierCurveTo(46.8, 267.2, 43.7, 270.2, 41.8, 272.2);
+        vaulter.bezierCurveTo(40.0, 274.2, 37.3, 280.1, 36.6, 281.5);
+        vaulter.bezierCurveTo(35.8, 283.0, 36.6, 284.1, 37.2, 288.2);
+        vaulter.bezierCurveTo(37.8, 292.3, 39.8, 298.4, 39.8, 298.4);
+        vaulter.bezierCurveTo(39.8, 298.4, 39.2, 299.5, 39.2, 300.0);
+        vaulter.bezierCurveTo(39.2, 300.4, 38.9, 303.0, 40.1, 303.3);
+        vaulter.bezierCurveTo(41.3, 303.6, 43.7, 302.8, 43.7, 302.8);
+        vaulter.bezierCurveTo(43.7, 302.8, 45.2, 301.8, 44.9, 300.3);
+        vaulter.bezierCurveTo(44.9, 300.3, 44.7, 298.1, 43.0, 298.0);
+        vaulter.lineTo(42.1, 297.3);
+        vaulter.bezierCurveTo(42.1, 297.3, 41.0, 293.8, 41.3, 290.1);
+        vaulter.bezierCurveTo(41.7, 286.3, 41.3, 280.7, 41.3, 280.7);
+        vaulter.lineTo(47.2, 276.6);
+        vaulter.bezierCurveTo(50.7, 277.2, 53.0, 274.4, 53.0, 274.4);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 271.6);
+        vaulter.bezierCurveTo(57.6, 271.6, 59.3, 270.8, 61.1, 271.1);
+        vaulter.bezierCurveTo(62.8, 271.3, 65.8, 273.2, 65.6, 275.4);
+        vaulter.bezierCurveTo(65.6, 275.4, 69.5, 279.6, 70.0, 280.3);
+        vaulter.bezierCurveTo(70.5, 281.0, 74.8, 283.5, 74.8, 285.7);
+        vaulter.bezierCurveTo(74.7, 287.9, 74.2, 289.1, 74.5, 290.3);
+        vaulter.lineTo(71.3, 291.7);
+        vaulter.bezierCurveTo(71.3, 291.7, 69.6, 290.4, 69.2, 288.8);
+        vaulter.bezierCurveTo(68.9, 287.2, 69.3, 286.4, 68.6, 285.9);
+        vaulter.bezierCurveTo(68.0, 285.4, 66.8, 284.5, 65.9, 283.5);
+        vaulter.bezierCurveTo(65.0, 282.5, 64.3, 281.7, 63.9, 281.3);
+        vaulter.bezierCurveTo(63.4, 281.0, 63.2, 281.1, 61.9, 281.7);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(52.0, 305.0);
+        vaulter.bezierCurveTo(52.0, 305.0, 59.0, 310.6, 66.5, 311.2);
+        vaulter.bezierCurveTo(66.5, 311.2, 60.6, 313.6, 56.9, 315.3);
+        vaulter.bezierCurveTo(53.3, 317.0, 52.4, 317.3, 50.9, 317.3);
+        vaulter.bezierCurveTo(50.1, 317.3, 49.7, 317.4, 49.1, 317.8);
+        vaulter.bezierCurveTo(48.6, 318.1, 48.6, 319.0, 48.7, 319.6);
+        vaulter.bezierCurveTo(49.2, 321.2, 52.2, 324.8, 52.2, 324.8);
+        vaulter.bezierCurveTo(52.2, 324.8, 55.2, 328.6, 55.8, 328.5);
+        vaulter.bezierCurveTo(57.0, 328.1, 56.7, 326.5, 56.7, 326.5);
+        vaulter.lineTo(54.5, 320.6);
+        vaulter.lineTo(56.9, 319.8);
+        vaulter.lineTo(67.4, 317.6);
+        vaulter.bezierCurveTo(67.4, 317.6, 75.8, 315.0, 77.2, 314.0);
+        vaulter.bezierCurveTo(78.6, 313.1, 77.5, 310.8, 77.2, 309.8);
+        vaulter.bezierCurveTo(77.0, 308.8, 65.1, 299.5, 65.1, 299.5);
+        vaulter.bezierCurveTo(62.8, 297.7, 58.4, 295.8, 58.4, 295.8);
+        vaulter.lineTo(52.0, 305.0);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(60.7, 303.4);
+        vaulter.bezierCurveTo(59.1, 309.5, 55.5, 321.3, 54.8, 323.0);
+        vaulter.bezierCurveTo(53.8, 325.4, 52.2, 326.5, 52.2, 326.5);
+        vaulter.bezierCurveTo(52.2, 326.5, 41.6, 331.3, 41.3, 332.2);
+        vaulter.bezierCurveTo(41.0, 333.1, 40.4, 334.5, 40.4, 334.5);
+        vaulter.bezierCurveTo(40.4, 334.5, 41.0, 336.1, 41.9, 337.4);
+        vaulter.bezierCurveTo(43.0, 339.0, 42.6, 340.4, 42.4, 341.3);
+        vaulter.bezierCurveTo(42.3, 341.7, 42.0, 342.9, 41.4, 343.0);
+        vaulter.bezierCurveTo(41.0, 343.1, 40.4, 342.8, 39.7, 342.4);
+        vaulter.bezierCurveTo(38.0, 341.6, 37.2, 338.5, 37.3, 337.5);
+        vaulter.bezierCurveTo(37.5, 335.6, 35.6, 334.1, 35.6, 333.2);
+        vaulter.bezierCurveTo(35.7, 332.1, 36.4, 330.6, 36.4, 330.6);
+        vaulter.bezierCurveTo(36.4, 330.6, 36.6, 330.3, 38.0, 330.0);
+        vaulter.bezierCurveTo(39.4, 329.6, 49.4, 320.4, 49.4, 319.8);
+        vaulter.bezierCurveTo(49.4, 319.8, 49.0, 303.4, 49.3, 300.7);
+        vaulter.bezierCurveTo(49.3, 300.7, 49.5, 290.3, 48.1, 286.1);
+        vaulter.bezierCurveTo(46.6, 281.9, 48.7, 270.9, 50.9, 271.5);
+        vaulter.bezierCurveTo(53.1, 272.0, 52.6, 269.5, 52.6, 269.5);
+        vaulter.bezierCurveTo(52.6, 269.5, 50.3, 264.2, 50.1, 262.0);
+        vaulter.bezierCurveTo(50.0, 259.8, 51.3, 254.4, 55.9, 254.1);
+        vaulter.bezierCurveTo(60.5, 253.8, 62.2, 258.8, 62.2, 258.8);
+        vaulter.bezierCurveTo(62.2, 258.8, 62.7, 263.1, 62.7, 264.3);
+        vaulter.bezierCurveTo(62.7, 265.4, 60.3, 270.0, 60.3, 270.0);
+        vaulter.bezierCurveTo(60.3, 270.0, 64.9, 276.6, 64.8, 279.7);
+        vaulter.bezierCurveTo(64.8, 279.7, 64.8, 294.6, 63.6, 296.9);
+        vaulter.bezierCurveTo(63.2, 297.7, 63.0, 298.7, 62.8, 299.8);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 288.9);
+        vaulter.bezierCurveTo(48.5, 288.9, 54.4, 289.7, 55.4, 282.2);
+        vaulter.bezierCurveTo(56.3, 274.8, 53.4, 272.3, 51.4, 272.1);
+        vaulter.bezierCurveTo(49.5, 271.9, 46.2, 275.4, 46.2, 280.5);
+        vaulter.bezierCurveTo(46.2, 285.6, 46.4, 287.2, 48.5, 288.9);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.8, 316.9);
+        vaulter.bezierCurveTo(25.8, 316.9, 25.2, 317.0, 24.8, 316.3);
+        vaulter.bezierCurveTo(24.4, 315.6, 24.9, 315.1, 24.9, 315.1);
+        vaulter.bezierCurveTo(25.4, 314.8, 75.7, 287.6, 130.0, 265.6);
+        vaulter.lineTo(265.5, 210.5);
+        vaulter.lineTo(266.2, 212.3);
+        vaulter.lineTo(130.8, 267.4);
+        vaulter.bezierCurveTo(76.5, 289.4, 26.3, 316.6, 25.8, 316.9);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.2, 293.0);
+        vaulter.bezierCurveTo(71.2, 293.0, 72.2, 291.2, 72.9, 290.8);
+        vaulter.bezierCurveTo(73.6, 290.5, 75.1, 290.6, 75.1, 290.6);
+        vaulter.lineTo(75.7, 291.8);
+        vaulter.lineTo(75.1, 293.6);
+        vaulter.lineTo(73.2, 294.0);
+        vaulter.bezierCurveTo(73.2, 294.0, 72.8, 294.5, 72.2, 294.4);
+        vaulter.bezierCurveTo(71.5, 294.2, 71.2, 293.0, 71.2, 293.0);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.0, 273.6);
+        vaulter.bezierCurveTo(53.0, 273.6, 51.1, 272.0, 49.0, 272.6);
+        vaulter.bezierCurveTo(46.8, 273.2, 43.7, 276.2, 41.8, 278.2);
+        vaulter.bezierCurveTo(40.0, 280.2, 37.3, 286.1, 36.6, 287.6);
+        vaulter.bezierCurveTo(35.8, 289.0, 36.6, 290.1, 37.2, 294.2);
+        vaulter.bezierCurveTo(37.8, 298.4, 39.8, 304.5, 39.8, 304.5);
+        vaulter.bezierCurveTo(39.8, 304.5, 39.2, 305.6, 39.2, 306.0);
+        vaulter.bezierCurveTo(39.2, 306.5, 38.9, 309.0, 40.1, 309.3);
+        vaulter.bezierCurveTo(41.3, 309.6, 43.7, 308.9, 43.7, 308.9);
+        vaulter.bezierCurveTo(43.7, 308.9, 45.2, 307.9, 44.9, 306.3);
+        vaulter.bezierCurveTo(44.9, 306.3, 44.7, 304.2, 43.0, 304.0);
+        vaulter.lineTo(42.1, 303.3);
+        vaulter.bezierCurveTo(42.1, 303.3, 41.0, 299.9, 41.3, 296.1);
+        vaulter.bezierCurveTo(41.7, 292.4, 41.3, 286.7, 41.3, 286.7);
+        vaulter.lineTo(47.2, 282.6);
+        vaulter.bezierCurveTo(50.7, 283.2, 53.0, 280.5, 53.0, 280.5);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 265.9);
+        vaulter.bezierCurveTo(57.6, 265.9, 59.3, 265.1, 61.1, 265.4);
+        vaulter.bezierCurveTo(62.8, 265.6, 65.8, 267.6, 65.6, 269.8);
+        vaulter.bezierCurveTo(65.6, 269.8, 69.5, 273.9, 70.0, 274.6);
+        vaulter.bezierCurveTo(70.5, 275.3, 74.8, 277.8, 74.8, 280.0);
+        vaulter.bezierCurveTo(74.7, 282.2, 74.2, 283.5, 74.5, 284.6);
+        vaulter.lineTo(71.3, 286.0);
+        vaulter.bezierCurveTo(71.3, 286.0, 69.6, 284.8, 69.2, 283.1);
+        vaulter.bezierCurveTo(68.9, 281.5, 69.3, 280.8, 68.6, 280.3);
+        vaulter.bezierCurveTo(68.0, 279.8, 66.8, 278.8, 65.9, 277.8);
+        vaulter.bezierCurveTo(65.0, 276.8, 64.3, 276.1, 63.9, 275.7);
+        vaulter.bezierCurveTo(63.4, 275.3, 63.2, 275.4, 61.9, 276.0);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(56.9, 306.4);
+        vaulter.bezierCurveTo(63.2, 308.3, 71.5, 307.1, 71.5, 307.1);
+        vaulter.bezierCurveTo(71.5, 307.1, 70.9, 313.0, 70.9, 315.0);
+        vaulter.bezierCurveTo(70.9, 316.9, 69.2, 327.6, 69.2, 327.6);
+        vaulter.bezierCurveTo(69.2, 327.6, 67.2, 329.5, 67.4, 330.0);
+        vaulter.bezierCurveTo(67.5, 330.5, 67.6, 331.9, 69.4, 332.4);
+        vaulter.bezierCurveTo(70.2, 332.6, 72.5, 333.6, 74.6, 334.6);
+        vaulter.bezierCurveTo(76.7, 335.5, 78.6, 336.4, 78.6, 336.4);
+        vaulter.bezierCurveTo(78.6, 336.4, 79.5, 336.0, 79.6, 335.1);
+        vaulter.bezierCurveTo(79.7, 334.3, 76.5, 331.1, 75.5, 330.2);
+        vaulter.bezierCurveTo(74.4, 329.2, 73.1, 328.9, 73.1, 328.9);
+        vaulter.bezierCurveTo(73.1, 328.9, 77.4, 314.3, 77.6, 312.8);
+        vaulter.bezierCurveTo(77.9, 311.3, 80.6, 307.1, 80.4, 305.5);
+        vaulter.bezierCurveTo(80.3, 305.1, 80.6, 304.3, 79.7, 303.5);
+        vaulter.bezierCurveTo(77.4, 301.2, 71.8, 298.9, 64.7, 296.3);
+        vaulter.lineTo(58.1, 294.8);
+        vaulter.bezierCurveTo(58.1, 294.8, 56.1, 296.8, 55.6, 300.3);
+        vaulter.bezierCurveTo(55.0, 303.8, 56.9, 306.4, 56.9, 306.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 297.0);
+        vaulter.bezierCurveTo(62.6, 295.0, 62.9, 292.7, 63.6, 291.3);
+        vaulter.bezierCurveTo(64.8, 288.9, 64.8, 274.0, 64.8, 274.0);
+        vaulter.bezierCurveTo(64.9, 270.9, 60.3, 264.4, 60.3, 264.4);
+        vaulter.bezierCurveTo(60.3, 264.4, 62.7, 259.8, 62.7, 258.6);
+        vaulter.bezierCurveTo(62.7, 257.4, 62.2, 253.1, 62.2, 253.1);
+        vaulter.bezierCurveTo(62.2, 253.1, 60.5, 248.2, 55.9, 248.4);
+        vaulter.bezierCurveTo(51.3, 248.7, 50.0, 254.1, 50.1, 256.3);
+        vaulter.bezierCurveTo(50.3, 258.5, 52.6, 263.8, 52.6, 263.8);
+        vaulter.bezierCurveTo(52.6, 263.8, 53.1, 266.3, 50.9, 265.8);
+        vaulter.bezierCurveTo(48.7, 265.3, 46.6, 276.2, 48.1, 280.4);
+        vaulter.bezierCurveTo(49.5, 284.6, 49.3, 295.0, 49.3, 295.0);
+        vaulter.bezierCurveTo(49.3, 295.0, 48.4, 296.8, 48.6, 299.0);
+        vaulter.lineTo(47.1, 301.6);
+        vaulter.bezierCurveTo(42.9, 308.6, 41.7, 319.8, 41.7, 319.8);
+        vaulter.bezierCurveTo(35.2, 323.0, 27.1, 330.9, 27.1, 330.9);
+        vaulter.bezierCurveTo(27.1, 330.9, 26.0, 332.1, 25.4, 332.1);
+        vaulter.bezierCurveTo(24.7, 332.1, 23.0, 331.8, 22.5, 332.1);
+        vaulter.bezierCurveTo(22.0, 332.5, 21.2, 333.8, 21.2, 334.0);
+        vaulter.bezierCurveTo(21.2, 334.1, 22.4, 340.0, 22.9, 341.3);
+        vaulter.bezierCurveTo(23.4, 342.5, 26.0, 343.0, 26.0, 343.0);
+        vaulter.lineTo(30.5, 343.0);
+        vaulter.bezierCurveTo(30.5, 343.0, 30.9, 341.0, 30.1, 340.6);
+        vaulter.bezierCurveTo(29.4, 340.3, 28.5, 340.1, 28.5, 340.1);
+        vaulter.bezierCurveTo(28.5, 340.1, 27.0, 336.5, 27.1, 335.5);
+        vaulter.bezierCurveTo(27.2, 334.5, 29.2, 334.0, 29.2, 334.0);
+        vaulter.lineTo(41.2, 327.3);
+        vaulter.bezierCurveTo(41.2, 327.3, 43.4, 326.5, 45.9, 324.6);
+        vaulter.bezierCurveTo(48.4, 322.8, 60.4, 303.5, 60.4, 303.5);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 283.2);
+        vaulter.bezierCurveTo(48.5, 283.2, 54.4, 284.0, 55.4, 276.6);
+        vaulter.bezierCurveTo(56.3, 269.1, 53.4, 266.6, 51.4, 266.4);
+        vaulter.bezierCurveTo(49.5, 266.2, 46.2, 269.7, 46.2, 274.8);
+        vaulter.bezierCurveTo(46.2, 279.9, 46.4, 281.5, 48.5, 283.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.8, 311.2);
+        vaulter.bezierCurveTo(25.8, 311.2, 25.2, 311.4, 24.8, 310.6);
+        vaulter.bezierCurveTo(24.4, 309.9, 24.9, 309.4, 24.9, 309.4);
+        vaulter.bezierCurveTo(25.4, 309.2, 75.7, 281.9, 130.0, 259.9);
+        vaulter.lineTo(265.5, 204.8);
+        vaulter.lineTo(266.2, 206.7);
+        vaulter.lineTo(130.8, 261.8);
+        vaulter.bezierCurveTo(76.5, 283.8, 26.3, 311.0, 25.8, 311.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.2, 287.4);
+        vaulter.bezierCurveTo(71.2, 287.4, 72.2, 285.5, 72.9, 285.2);
+        vaulter.bezierCurveTo(73.6, 284.9, 75.1, 285.0, 75.1, 285.0);
+        vaulter.lineTo(75.7, 286.2);
+        vaulter.lineTo(75.1, 287.9);
+        vaulter.lineTo(73.2, 288.3);
+        vaulter.bezierCurveTo(73.2, 288.3, 72.8, 288.9, 72.2, 288.7);
+        vaulter.bezierCurveTo(71.5, 288.5, 71.2, 287.4, 71.2, 287.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.0, 267.9);
+        vaulter.bezierCurveTo(53.0, 267.9, 51.1, 266.3, 49.0, 266.9);
+        vaulter.bezierCurveTo(46.8, 267.6, 43.7, 270.6, 41.8, 272.6);
+        vaulter.bezierCurveTo(40.0, 274.6, 37.3, 280.4, 36.6, 281.9);
+        vaulter.bezierCurveTo(35.8, 283.4, 36.6, 284.4, 37.2, 288.6);
+        vaulter.bezierCurveTo(37.8, 292.7, 39.8, 298.8, 39.8, 298.8);
+        vaulter.bezierCurveTo(39.8, 298.8, 39.2, 299.9, 39.2, 300.4);
+        vaulter.bezierCurveTo(39.2, 300.8, 38.9, 303.3, 40.1, 303.6);
+        vaulter.bezierCurveTo(41.3, 304.0, 43.7, 303.2, 43.7, 303.2);
+        vaulter.bezierCurveTo(43.7, 303.2, 45.2, 302.2, 44.9, 300.6);
+        vaulter.bezierCurveTo(44.9, 300.6, 44.7, 298.5, 43.0, 298.4);
+        vaulter.lineTo(42.1, 297.7);
+        vaulter.bezierCurveTo(42.1, 297.7, 41.0, 294.2, 41.3, 290.4);
+        vaulter.bezierCurveTo(41.7, 286.7, 41.3, 281.1, 41.3, 281.1);
+        vaulter.lineTo(47.2, 276.9);
+        vaulter.bezierCurveTo(50.7, 277.6, 53.0, 274.8, 53.0, 274.8);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 261.9);
+        vaulter.bezierCurveTo(57.6, 261.9, 59.3, 261.1, 61.1, 261.4);
+        vaulter.bezierCurveTo(62.8, 261.6, 65.8, 263.6, 65.6, 265.8);
+        vaulter.bezierCurveTo(65.6, 265.8, 69.5, 269.9, 70.0, 270.6);
+        vaulter.bezierCurveTo(70.5, 271.3, 74.8, 273.8, 74.8, 276.0);
+        vaulter.bezierCurveTo(74.7, 278.2, 74.2, 279.5, 74.5, 280.6);
+        vaulter.lineTo(71.3, 282.0);
+        vaulter.bezierCurveTo(71.3, 282.0, 69.6, 280.8, 69.2, 279.1);
+        vaulter.bezierCurveTo(68.9, 277.5, 69.3, 276.8, 68.6, 276.3);
+        vaulter.bezierCurveTo(68.0, 275.8, 66.8, 274.8, 65.9, 273.8);
+        vaulter.bezierCurveTo(65.0, 272.8, 64.3, 272.1, 63.9, 271.7);
+        vaulter.bezierCurveTo(63.4, 271.3, 63.2, 271.4, 61.9, 272.0);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 292.0);
+        vaulter.bezierCurveTo(69.7, 295.0, 78.1, 301.3, 79.9, 302.1);
+        vaulter.bezierCurveTo(81.7, 302.9, 82.3, 303.5, 82.8, 305.2);
+        vaulter.bezierCurveTo(83.3, 306.9, 84.0, 313.7, 85.3, 319.0);
+        vaulter.bezierCurveTo(86.7, 324.4, 89.5, 327.5, 89.5, 327.5);
+        vaulter.bezierCurveTo(89.5, 327.5, 91.0, 329.2, 93.5, 329.0);
+        vaulter.bezierCurveTo(96.0, 328.9, 98.0, 328.2, 99.5, 329.4);
+        vaulter.bezierCurveTo(101.0, 330.5, 96.5, 332.7, 94.8, 333.3);
+        vaulter.bezierCurveTo(93.2, 333.8, 91.2, 333.2, 88.5, 334.0);
+        vaulter.bezierCurveTo(85.8, 334.9, 85.3, 334.0, 85.0, 333.0);
+        vaulter.bezierCurveTo(84.7, 332.0, 85.0, 330.4, 85.0, 330.4);
+        vaulter.lineTo(82.3, 324.7);
+        vaulter.bezierCurveTo(78.8, 318.0, 75.7, 308.5, 75.7, 308.5);
+        vaulter.lineTo(59.2, 303.6);
+        vaulter.lineTo(62.7, 292.0);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 293.3);
+        vaulter.bezierCurveTo(62.6, 291.2, 62.8, 288.8, 63.6, 287.3);
+        vaulter.bezierCurveTo(64.8, 284.9, 64.8, 270.0, 64.8, 270.0);
+        vaulter.bezierCurveTo(64.9, 266.9, 60.3, 260.4, 60.3, 260.4);
+        vaulter.bezierCurveTo(60.3, 260.4, 62.7, 255.8, 62.7, 254.6);
+        vaulter.bezierCurveTo(62.7, 253.4, 62.2, 249.1, 62.2, 249.1);
+        vaulter.bezierCurveTo(62.2, 249.1, 60.5, 244.2, 55.9, 244.4);
+        vaulter.bezierCurveTo(51.3, 244.7, 50.0, 250.1, 50.1, 252.3);
+        vaulter.bezierCurveTo(50.3, 254.5, 52.6, 259.8, 52.6, 259.8);
+        vaulter.bezierCurveTo(52.6, 259.8, 53.1, 262.3, 50.9, 261.8);
+        vaulter.bezierCurveTo(48.7, 261.3, 46.6, 272.2, 48.1, 276.4);
+        vaulter.bezierCurveTo(49.5, 280.6, 49.3, 291.0, 49.3, 291.0);
+        vaulter.bezierCurveTo(49.3, 291.0, 48.5, 292.7, 48.6, 294.8);
+        vaulter.bezierCurveTo(44.9, 306.4, 42.8, 317.7, 42.8, 317.7);
+        vaulter.bezierCurveTo(41.8, 317.3, 36.8, 317.7, 32.6, 318.5);
+        vaulter.bezierCurveTo(27.9, 319.5, 23.3, 319.3, 23.3, 319.3);
+        vaulter.bezierCurveTo(23.3, 319.3, 22.4, 318.5, 21.2, 318.5);
+        vaulter.bezierCurveTo(19.9, 318.4, 19.3, 319.0, 18.0, 322.0);
+        vaulter.bezierCurveTo(16.9, 324.7, 14.8, 326.9, 14.8, 326.9);
+        vaulter.bezierCurveTo(14.8, 326.9, 13.5, 330.4, 14.8, 330.7);
+        vaulter.bezierCurveTo(16.2, 331.0, 16.8, 328.9, 19.3, 326.7);
+        vaulter.bezierCurveTo(21.8, 324.5, 26.5, 323.7, 26.5, 323.7);
+        vaulter.bezierCurveTo(26.5, 323.7, 42.3, 323.9, 46.0, 322.5);
+        vaulter.bezierCurveTo(49.7, 321.2, 60.7, 301.0, 60.7, 301.0);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 279.2);
+        vaulter.bezierCurveTo(48.5, 279.2, 54.4, 280.0, 55.4, 272.6);
+        vaulter.bezierCurveTo(56.3, 265.1, 53.4, 262.6, 51.4, 262.4);
+        vaulter.bezierCurveTo(49.5, 262.2, 46.2, 265.7, 46.2, 270.8);
+        vaulter.bezierCurveTo(46.2, 275.9, 46.4, 277.5, 48.5, 279.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.8, 307.2);
+        vaulter.bezierCurveTo(25.8, 307.2, 25.2, 307.4, 24.8, 306.6);
+        vaulter.bezierCurveTo(24.4, 305.9, 24.9, 305.4, 24.9, 305.4);
+        vaulter.bezierCurveTo(25.4, 305.2, 75.7, 277.9, 130.0, 255.9);
+        vaulter.lineTo(265.5, 200.8);
+        vaulter.lineTo(266.2, 202.7);
+        vaulter.lineTo(130.8, 257.8);
+        vaulter.bezierCurveTo(76.5, 279.8, 26.3, 307.0, 25.8, 307.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.2, 283.4);
+        vaulter.bezierCurveTo(71.2, 283.4, 72.2, 281.5, 72.9, 281.2);
+        vaulter.bezierCurveTo(73.6, 280.9, 75.1, 281.0, 75.1, 281.0);
+        vaulter.lineTo(75.7, 282.2);
+        vaulter.lineTo(75.1, 283.9);
+        vaulter.lineTo(73.2, 284.3);
+        vaulter.bezierCurveTo(73.2, 284.3, 72.8, 284.9, 72.2, 284.7);
+        vaulter.bezierCurveTo(71.5, 284.5, 71.2, 283.4, 71.2, 283.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.0, 263.9);
+        vaulter.bezierCurveTo(53.0, 263.9, 51.1, 262.3, 49.0, 262.9);
+        vaulter.bezierCurveTo(46.8, 263.6, 43.7, 266.6, 41.8, 268.6);
+        vaulter.bezierCurveTo(40.0, 270.6, 37.3, 276.4, 36.6, 277.9);
+        vaulter.bezierCurveTo(35.8, 279.4, 36.6, 280.4, 37.2, 284.6);
+        vaulter.bezierCurveTo(37.8, 288.7, 39.8, 294.8, 39.8, 294.8);
+        vaulter.bezierCurveTo(39.8, 294.8, 39.2, 295.9, 39.2, 296.4);
+        vaulter.bezierCurveTo(39.2, 296.8, 38.9, 299.3, 40.1, 299.6);
+        vaulter.bezierCurveTo(41.3, 300.0, 43.7, 299.2, 43.7, 299.2);
+        vaulter.bezierCurveTo(43.7, 299.2, 45.2, 298.2, 44.9, 296.6);
+        vaulter.bezierCurveTo(44.9, 296.6, 44.7, 294.5, 43.0, 294.4);
+        vaulter.lineTo(42.1, 293.7);
+        vaulter.bezierCurveTo(42.1, 293.7, 41.0, 290.2, 41.3, 286.4);
+        vaulter.bezierCurveTo(41.7, 282.7, 41.3, 277.1, 41.3, 277.1);
+        vaulter.lineTo(47.2, 272.9);
+        vaulter.bezierCurveTo(50.7, 273.6, 53.0, 270.8, 53.0, 270.8);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 269.8);
+        vaulter.bezierCurveTo(57.6, 269.8, 59.3, 269.1, 61.1, 269.3);
+        vaulter.bezierCurveTo(62.8, 269.6, 65.8, 271.5, 65.6, 273.7);
+        vaulter.bezierCurveTo(65.6, 273.7, 69.5, 277.9, 70.0, 278.6);
+        vaulter.bezierCurveTo(70.5, 279.3, 74.8, 281.8, 74.8, 284.0);
+        vaulter.bezierCurveTo(74.7, 286.2, 74.2, 287.4, 74.5, 288.6);
+        vaulter.lineTo(71.3, 290.0);
+        vaulter.bezierCurveTo(71.3, 290.0, 69.6, 288.7, 69.2, 287.1);
+        vaulter.bezierCurveTo(68.9, 285.5, 69.3, 284.7, 68.6, 284.2);
+        vaulter.bezierCurveTo(68.0, 283.7, 66.8, 282.8, 65.9, 281.8);
+        vaulter.bezierCurveTo(65.0, 280.8, 64.3, 280.0, 63.9, 279.6);
+        vaulter.bezierCurveTo(63.4, 279.2, 63.2, 279.4, 61.9, 280.0);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 300.1);
+        vaulter.bezierCurveTo(62.7, 298.3, 63.0, 296.4, 63.6, 295.2);
+        vaulter.bezierCurveTo(64.8, 292.9, 64.8, 278.0, 64.8, 278.0);
+        vaulter.bezierCurveTo(64.9, 274.9, 60.3, 268.3, 60.3, 268.3);
+        vaulter.bezierCurveTo(60.3, 268.3, 62.7, 263.7, 62.7, 262.6);
+        vaulter.bezierCurveTo(62.7, 261.4, 62.2, 257.1, 62.2, 257.1);
+        vaulter.bezierCurveTo(62.2, 257.1, 60.5, 252.1, 55.9, 252.4);
+        vaulter.bezierCurveTo(51.3, 252.6, 50.0, 258.1, 50.1, 260.3);
+        vaulter.bezierCurveTo(50.3, 262.5, 52.6, 267.8, 52.6, 267.8);
+        vaulter.bezierCurveTo(52.6, 267.8, 53.1, 270.3, 50.9, 269.8);
+        vaulter.bezierCurveTo(48.7, 269.2, 46.6, 280.2, 48.1, 284.4);
+        vaulter.bezierCurveTo(49.5, 288.6, 49.3, 299.0, 49.3, 299.0);
+        vaulter.bezierCurveTo(49.3, 299.0, 49.2, 310.7, 50.0, 317.7);
+        vaulter.bezierCurveTo(50.0, 317.7, 46.7, 319.9, 44.2, 323.6);
+        vaulter.bezierCurveTo(41.7, 327.2, 32.5, 332.4, 32.5, 332.4);
+        vaulter.bezierCurveTo(32.5, 332.4, 31.2, 333.4, 30.5, 334.4);
+        vaulter.bezierCurveTo(29.8, 335.4, 31.3, 337.1, 31.3, 337.1);
+        vaulter.bezierCurveTo(31.3, 337.1, 33.9, 340.2, 34.7, 340.9);
+        vaulter.bezierCurveTo(35.2, 341.3, 35.6, 342.4, 36.0, 342.7);
+        vaulter.bezierCurveTo(36.3, 343.0, 38.0, 343.3, 38.5, 342.3);
+        vaulter.bezierCurveTo(39.0, 341.3, 37.1, 341.3, 37.0, 340.1);
+        vaulter.bezierCurveTo(36.8, 338.1, 35.3, 335.1, 35.3, 335.1);
+        vaulter.bezierCurveTo(35.3, 335.1, 45.5, 330.4, 49.3, 326.8);
+        vaulter.bezierCurveTo(49.3, 326.8, 55.3, 321.9, 56.8, 318.6);
+        vaulter.bezierCurveTo(58.3, 315.2, 60.5, 303.0, 60.7, 302.0);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(60.3, 298.2);
+        vaulter.bezierCurveTo(71.2, 300.0, 78.5, 305.7, 78.5, 305.7);
+        vaulter.bezierCurveTo(78.5, 305.7, 80.5, 307.3, 80.5, 309.0);
+        vaulter.bezierCurveTo(80.4, 311.6, 79.7, 312.0, 75.2, 315.5);
+        vaulter.bezierCurveTo(70.7, 319.0, 62.1, 325.0, 62.1, 325.0);
+        vaulter.bezierCurveTo(62.3, 325.3, 63.4, 327.2, 63.9, 328.1);
+        vaulter.bezierCurveTo(64.9, 329.9, 66.2, 331.4, 65.9, 332.3);
+        vaulter.bezierCurveTo(65.7, 332.7, 64.8, 332.4, 64.5, 332.3);
+        vaulter.bezierCurveTo(64.0, 332.1, 62.0, 330.3, 60.8, 329.2);
+        vaulter.bezierCurveTo(59.7, 328.0, 56.7, 324.8, 56.8, 324.0);
+        vaulter.bezierCurveTo(56.9, 323.7, 57.2, 323.0, 57.6, 322.7);
+        vaulter.bezierCurveTo(58.6, 322.0, 59.9, 321.7, 59.9, 321.7);
+        vaulter.bezierCurveTo(59.9, 321.7, 63.3, 318.7, 65.2, 316.7);
+        vaulter.bezierCurveTo(67.0, 314.7, 70.3, 310.3, 70.3, 310.3);
+        vaulter.bezierCurveTo(70.3, 310.3, 65.5, 310.4, 57.0, 309.7);
+        vaulter.bezierCurveTo(48.5, 309.1, 48.7, 300.8, 48.7, 300.8);
+        vaulter.bezierCurveTo(48.7, 299.9, 48.9, 299.1, 49.3, 298.4);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.5, 287.2);
+        vaulter.bezierCurveTo(48.5, 287.2, 54.4, 288.0, 55.4, 280.5);
+        vaulter.bezierCurveTo(56.3, 273.1, 53.4, 270.5, 51.4, 270.3);
+        vaulter.bezierCurveTo(49.5, 270.1, 46.2, 273.7, 46.2, 278.8);
+        vaulter.bezierCurveTo(46.2, 283.9, 46.4, 285.4, 48.5, 287.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.8, 315.2);
+        vaulter.bezierCurveTo(25.8, 315.2, 25.2, 315.3, 24.8, 314.6);
+        vaulter.bezierCurveTo(24.4, 313.9, 24.9, 313.4, 24.9, 313.4);
+        vaulter.bezierCurveTo(25.4, 313.1, 75.7, 285.9, 130.0, 263.8);
+        vaulter.lineTo(265.5, 208.8);
+        vaulter.lineTo(266.2, 210.6);
+        vaulter.lineTo(130.8, 265.7);
+        vaulter.bezierCurveTo(76.5, 287.7, 26.3, 314.9, 25.8, 315.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.2, 291.3);
+        vaulter.bezierCurveTo(71.2, 291.3, 72.2, 289.4, 72.9, 289.1);
+        vaulter.bezierCurveTo(73.6, 288.8, 75.1, 288.9, 75.1, 288.9);
+        vaulter.lineTo(75.7, 290.1);
+        vaulter.lineTo(75.1, 291.9);
+        vaulter.lineTo(73.2, 292.3);
+        vaulter.bezierCurveTo(73.2, 292.3, 72.8, 292.8, 72.2, 292.7);
+        vaulter.bezierCurveTo(71.5, 292.5, 71.2, 291.3, 71.2, 291.3);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.0, 271.9);
+        vaulter.bezierCurveTo(53.0, 271.9, 51.1, 270.3, 49.0, 270.9);
+        vaulter.bezierCurveTo(46.8, 271.5, 43.7, 274.5, 41.8, 276.5);
+        vaulter.bezierCurveTo(40.0, 278.5, 37.3, 284.4, 36.6, 285.9);
+        vaulter.bezierCurveTo(35.8, 287.3, 36.6, 288.4, 37.2, 292.5);
+        vaulter.bezierCurveTo(37.8, 296.6, 39.8, 302.8, 39.8, 302.8);
+        vaulter.bezierCurveTo(39.8, 302.8, 39.2, 303.8, 39.2, 304.3);
+        vaulter.bezierCurveTo(39.2, 304.8, 38.9, 307.3, 40.1, 307.6);
+        vaulter.bezierCurveTo(41.3, 307.9, 43.7, 307.2, 43.7, 307.2);
+        vaulter.bezierCurveTo(43.7, 307.2, 45.2, 306.2, 44.9, 304.6);
+        vaulter.bezierCurveTo(44.9, 304.6, 44.7, 302.5, 43.0, 302.3);
+        vaulter.lineTo(42.1, 301.6);
+        vaulter.bezierCurveTo(42.1, 301.6, 41.0, 298.1, 41.3, 294.4);
+        vaulter.bezierCurveTo(41.7, 290.6, 41.3, 285.0, 41.3, 285.0);
+        vaulter.lineTo(47.2, 280.9);
+        vaulter.bezierCurveTo(50.7, 281.5, 53.0, 278.8, 53.0, 278.8);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 263.9);
+        vaulter.bezierCurveTo(57.6, 263.9, 59.4, 263.1, 61.1, 263.4);
+        vaulter.bezierCurveTo(62.8, 263.6, 65.9, 265.6, 65.7, 267.8);
+        vaulter.bezierCurveTo(65.7, 267.8, 69.6, 271.9, 70.1, 272.6);
+        vaulter.bezierCurveTo(70.6, 273.3, 74.9, 275.8, 74.8, 278.0);
+        vaulter.bezierCurveTo(74.8, 280.2, 74.3, 281.5, 74.5, 282.6);
+        vaulter.lineTo(71.4, 284.0);
+        vaulter.bezierCurveTo(71.4, 284.0, 69.6, 282.8, 69.3, 281.1);
+        vaulter.bezierCurveTo(69.0, 279.5, 69.4, 278.8, 68.7, 278.3);
+        vaulter.bezierCurveTo(68.0, 277.8, 66.9, 276.8, 66.0, 275.8);
+        vaulter.bezierCurveTo(65.0, 274.8, 64.4, 274.1, 63.9, 273.7);
+        vaulter.bezierCurveTo(63.5, 273.3, 63.2, 273.4, 62.0, 274.0);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(61.1, 288.1);
+        vaulter.bezierCurveTo(64.6, 294.9, 67.1, 305.1, 68.0, 306.9);
+        vaulter.bezierCurveTo(68.9, 308.7, 68.9, 309.5, 68.2, 311.1);
+        vaulter.bezierCurveTo(67.6, 312.7, 66.5, 318.3, 65.8, 323.8);
+        vaulter.bezierCurveTo(65.1, 329.2, 65.7, 333.5, 65.7, 333.5);
+        vaulter.lineTo(70.9, 338.4);
+        vaulter.bezierCurveTo(72.8, 340.0, 74.1, 339.9, 74.4, 341.7);
+        vaulter.bezierCurveTo(74.7, 343.6, 70.0, 341.9, 68.3, 341.3);
+        vaulter.bezierCurveTo(65.3, 340.0, 66.1, 339.1, 63.3, 338.9);
+        vaulter.bezierCurveTo(60.5, 338.7, 60.3, 337.8, 60.4, 336.7);
+        vaulter.bezierCurveTo(60.4, 335.7, 61.3, 334.2, 61.3, 334.2);
+        vaulter.lineTo(60.9, 328.0);
+        vaulter.bezierCurveTo(60.1, 320.5, 60.6, 309.1, 60.6, 309.1);
+        vaulter.lineTo(51.1, 294.8);
+        vaulter.lineTo(61.1, 288.1);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 295.3);
+        vaulter.bezierCurveTo(62.6, 293.2, 62.9, 290.8, 63.7, 289.3);
+        vaulter.bezierCurveTo(64.8, 286.9, 64.8, 272.0, 64.8, 272.0);
+        vaulter.bezierCurveTo(65.0, 268.9, 60.4, 262.4, 60.4, 262.4);
+        vaulter.bezierCurveTo(60.4, 262.4, 62.8, 257.8, 62.8, 256.6);
+        vaulter.bezierCurveTo(62.8, 255.4, 62.2, 251.1, 62.2, 251.1);
+        vaulter.bezierCurveTo(62.2, 251.1, 60.5, 246.2, 56.0, 246.4);
+        vaulter.bezierCurveTo(51.4, 246.7, 50.1, 252.1, 50.2, 254.3);
+        vaulter.bezierCurveTo(50.3, 256.5, 52.7, 261.8, 52.7, 261.8);
+        vaulter.bezierCurveTo(52.7, 261.8, 53.2, 264.3, 51.0, 263.8);
+        vaulter.bezierCurveTo(48.8, 263.3, 46.7, 274.2, 48.1, 278.4);
+        vaulter.bezierCurveTo(49.6, 282.6, 49.3, 293.0, 49.3, 293.0);
+        vaulter.bezierCurveTo(49.3, 296.2, 49.3, 297.7, 50.4, 300.1);
+        vaulter.bezierCurveTo(53.0, 306.1, 59.7, 309.1, 59.7, 309.1);
+        vaulter.bezierCurveTo(57.0, 308.2, 53.3, 310.5, 49.2, 309.5);
+        vaulter.bezierCurveTo(44.5, 308.4, 39.7, 306.9, 39.7, 306.9);
+        vaulter.bezierCurveTo(39.7, 306.9, 39.2, 305.8, 38.1, 305.3);
+        vaulter.bezierCurveTo(37.0, 304.7, 36.2, 305.0, 33.7, 307.2);
+        vaulter.bezierCurveTo(31.7, 309.2, 28.9, 310.4, 28.9, 310.4);
+        vaulter.bezierCurveTo(28.9, 310.4, 26.2, 313.0, 27.3, 313.9);
+        vaulter.bezierCurveTo(28.4, 314.7, 29.9, 313.0, 33.1, 312.1);
+        vaulter.bezierCurveTo(36.2, 311.1, 40.8, 312.2, 40.8, 312.2);
+        vaulter.bezierCurveTo(40.8, 312.2, 65.6, 319.3, 68.9, 317.2);
+        vaulter.bezierCurveTo(73.4, 314.4, 69.8, 308.0, 68.4, 305.2);
+        vaulter.bezierCurveTo(65.8, 299.9, 61.0, 295.1, 61.0, 295.1);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.6, 281.2);
+        vaulter.bezierCurveTo(48.6, 281.2, 54.5, 282.0, 55.4, 274.6);
+        vaulter.bezierCurveTo(56.4, 267.1, 53.5, 264.6, 51.5, 264.4);
+        vaulter.bezierCurveTo(49.6, 264.2, 46.2, 267.7, 46.2, 272.8);
+        vaulter.bezierCurveTo(46.2, 277.9, 46.4, 279.5, 48.6, 281.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.9, 309.2);
+        vaulter.bezierCurveTo(25.9, 309.2, 25.2, 309.4, 24.8, 308.6);
+        vaulter.bezierCurveTo(24.5, 307.9, 25.0, 307.4, 25.0, 307.4);
+        vaulter.bezierCurveTo(25.5, 307.2, 75.8, 279.9, 130.1, 257.9);
+        vaulter.lineTo(265.5, 202.8);
+        vaulter.lineTo(266.3, 204.7);
+        vaulter.lineTo(130.8, 259.7);
+        vaulter.bezierCurveTo(76.6, 281.8, 26.4, 309.0, 25.9, 309.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.3, 285.4);
+        vaulter.bezierCurveTo(71.3, 285.4, 72.3, 283.5, 73.0, 283.2);
+        vaulter.bezierCurveTo(73.7, 282.9, 75.2, 283.0, 75.2, 283.0);
+        vaulter.lineTo(75.8, 284.2);
+        vaulter.lineTo(75.2, 285.9);
+        vaulter.lineTo(73.2, 286.3);
+        vaulter.bezierCurveTo(73.2, 286.3, 72.9, 286.9, 72.2, 286.7);
+        vaulter.bezierCurveTo(71.6, 286.5, 71.3, 285.4, 71.3, 285.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.1, 265.9);
+        vaulter.bezierCurveTo(53.1, 265.9, 51.2, 264.3, 49.0, 264.9);
+        vaulter.bezierCurveTo(46.9, 265.6, 43.8, 268.6, 41.9, 270.6);
+        vaulter.bezierCurveTo(40.0, 272.6, 37.4, 278.4, 36.7, 279.9);
+        vaulter.bezierCurveTo(35.9, 281.4, 36.7, 282.4, 37.3, 286.6);
+        vaulter.bezierCurveTo(37.9, 290.7, 39.8, 296.8, 39.8, 296.8);
+        vaulter.bezierCurveTo(39.8, 296.8, 39.3, 297.9, 39.3, 298.4);
+        vaulter.bezierCurveTo(39.3, 298.8, 39.0, 301.3, 40.2, 301.6);
+        vaulter.bezierCurveTo(41.3, 302.0, 43.8, 301.2, 43.8, 301.2);
+        vaulter.bezierCurveTo(43.8, 301.2, 45.2, 300.2, 44.9, 298.6);
+        vaulter.bezierCurveTo(44.9, 298.6, 44.7, 296.5, 43.1, 296.4);
+        vaulter.lineTo(42.1, 295.7);
+        vaulter.bezierCurveTo(42.1, 295.7, 41.0, 292.2, 41.4, 288.4);
+        vaulter.bezierCurveTo(41.8, 284.7, 41.4, 279.1, 41.4, 279.1);
+        vaulter.lineTo(47.2, 274.9);
+        vaulter.bezierCurveTo(50.7, 275.6, 53.1, 272.8, 53.1, 272.8);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    },
+
+    function () {
+      if (vaulter.visible) {
+
+        // vaulter/Path
+        vaulter.save();
+        vaulter.beginPath();
+        vaulter.moveTo(57.6, 266.9);
+        vaulter.bezierCurveTo(57.6, 266.9, 59.4, 266.1, 61.1, 266.4);
+        vaulter.bezierCurveTo(62.8, 266.6, 65.9, 268.6, 65.7, 270.8);
+        vaulter.bezierCurveTo(65.7, 270.8, 69.6, 274.9, 70.1, 275.6);
+        vaulter.bezierCurveTo(70.6, 276.3, 74.9, 278.8, 74.8, 281.0);
+        vaulter.bezierCurveTo(74.8, 283.2, 74.3, 284.5, 74.5, 285.6);
+        vaulter.lineTo(71.4, 287.0);
+        vaulter.bezierCurveTo(71.4, 287.0, 69.6, 285.8, 69.3, 284.1);
+        vaulter.bezierCurveTo(69.0, 282.5, 69.4, 281.8, 68.7, 281.3);
+        vaulter.bezierCurveTo(68.0, 280.8, 66.9, 279.8, 66.0, 278.8);
+        vaulter.bezierCurveTo(65.0, 277.8, 64.4, 277.1, 63.9, 276.7);
+        vaulter.bezierCurveTo(63.5, 276.3, 63.2, 276.4, 62.0, 277.0);
+        vaulter.fillStyle("rgb(38, 90, 137)");
+        vaulter.fill();
+        vaulter.lineWidth(0.5);
+        vaulter.strokeStyle("rgb(152, 203, 255)");
+        vaulter.lineJoin("miter");
+        vaulter.miterLimit(4.0);
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.8, 294.9);
+        vaulter.bezierCurveTo(62.6, 302.6, 60.0, 312.7, 60.0, 314.7);
+        vaulter.bezierCurveTo(59.9, 316.7, 59.5, 317.5, 58.2, 318.6);
+        vaulter.bezierCurveTo(56.8, 319.7, 53.2, 321.0, 50.0, 325.4);
+        vaulter.bezierCurveTo(46.8, 329.9, 45.3, 333.9, 45.3, 333.9);
+        vaulter.lineTo(46.9, 339.4);
+        vaulter.bezierCurveTo(49.2, 340.5, 50.5, 340.0, 51.2, 341.8);
+        vaulter.bezierCurveTo(51.9, 343.5, 46.9, 343.1, 45.2, 342.8);
+        vaulter.bezierCurveTo(42.0, 342.4, 43.0, 339.1, 40.7, 337.6);
+        vaulter.bezierCurveTo(38.3, 336.1, 38.6, 335.2, 39.2, 334.3);
+        vaulter.bezierCurveTo(39.7, 333.4, 41.2, 332.5, 41.2, 332.5);
+        vaulter.lineTo(43.8, 326.8);
+        vaulter.bezierCurveTo(46.6, 319.8, 52.4, 313.2, 52.4, 313.2);
+        vaulter.bezierCurveTo(52.4, 313.2, 50.3, 307.4, 50.2, 299.0);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(62.7, 298.3);
+        vaulter.bezierCurveTo(62.6, 296.2, 62.9, 293.8, 63.7, 292.3);
+        vaulter.bezierCurveTo(64.8, 289.9, 64.8, 275.0, 64.8, 275.0);
+        vaulter.bezierCurveTo(65.0, 271.9, 60.4, 265.4, 60.4, 265.4);
+        vaulter.bezierCurveTo(60.4, 265.4, 62.8, 260.8, 62.8, 259.6);
+        vaulter.bezierCurveTo(62.8, 258.4, 62.2, 254.1, 62.2, 254.1);
+        vaulter.bezierCurveTo(62.2, 254.1, 60.5, 249.2, 56.0, 249.4);
+        vaulter.bezierCurveTo(51.4, 249.7, 50.1, 255.1, 50.2, 257.3);
+        vaulter.bezierCurveTo(50.3, 259.5, 52.7, 264.8, 52.7, 264.8);
+        vaulter.bezierCurveTo(52.7, 264.8, 53.2, 267.3, 51.0, 266.8);
+        vaulter.bezierCurveTo(48.8, 266.3, 46.7, 277.2, 48.1, 281.4);
+        vaulter.bezierCurveTo(49.6, 285.6, 49.3, 296.0, 49.3, 296.0);
+        vaulter.bezierCurveTo(49.3, 299.2, 49.3, 300.7, 50.4, 303.1);
+        vaulter.bezierCurveTo(53.0, 309.1, 67.9, 311.4, 67.9, 311.4);
+        vaulter.bezierCurveTo(65.0, 311.5, 62.3, 320.6, 59.3, 323.6);
+        vaulter.bezierCurveTo(55.9, 327.0, 54.2, 328.4, 54.2, 328.4);
+        vaulter.bezierCurveTo(54.2, 328.4, 53.0, 328.3, 52.0, 328.9);
+        vaulter.bezierCurveTo(50.9, 329.6, 50.9, 332.0, 53.4, 334.2);
+        vaulter.bezierCurveTo(55.5, 336.2, 56.9, 338.8, 56.9, 338.8);
+        vaulter.bezierCurveTo(56.9, 338.8, 59.7, 341.3, 60.5, 340.1);
+        vaulter.bezierCurveTo(61.2, 339.0, 59.6, 336.7, 58.4, 333.6);
+        vaulter.bezierCurveTo(57.2, 330.6, 59.2, 329.5, 59.2, 329.5);
+        vaulter.bezierCurveTo(59.2, 329.5, 72.8, 317.2, 75.1, 314.0);
+        vaulter.bezierCurveTo(78.3, 309.8, 72.5, 305.1, 70.2, 303.0);
+        vaulter.bezierCurveTo(65.8, 299.0, 61.5, 297.6, 61.5, 297.6);
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(48.6, 284.2);
+        vaulter.bezierCurveTo(48.6, 284.2, 54.5, 285.0, 55.4, 277.6);
+        vaulter.bezierCurveTo(56.4, 270.1, 53.5, 267.6, 51.5, 267.4);
+        vaulter.bezierCurveTo(49.6, 267.2, 46.2, 270.7, 46.2, 275.8);
+        vaulter.bezierCurveTo(46.2, 280.9, 46.4, 282.5, 48.6, 284.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(25.9, 312.2);
+        vaulter.bezierCurveTo(25.9, 312.2, 25.2, 312.4, 24.8, 311.6);
+        vaulter.bezierCurveTo(24.5, 310.9, 25.0, 310.4, 25.0, 310.4);
+        vaulter.bezierCurveTo(25.5, 310.2, 75.8, 282.9, 130.1, 260.9);
+        vaulter.lineTo(265.5, 205.8);
+        vaulter.lineTo(266.3, 207.7);
+        vaulter.lineTo(130.8, 262.8);
+        vaulter.bezierCurveTo(76.6, 284.8, 26.4, 312.0, 25.9, 312.2);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(71.3, 288.4);
+        vaulter.bezierCurveTo(71.3, 288.4, 72.3, 286.5, 73.0, 286.2);
+        vaulter.bezierCurveTo(73.7, 285.9, 75.2, 286.0, 75.2, 286.0);
+        vaulter.lineTo(75.8, 287.2);
+        vaulter.lineTo(75.2, 288.9);
+        vaulter.lineTo(73.2, 289.3);
+        vaulter.bezierCurveTo(73.2, 289.3, 72.9, 289.9, 72.2, 289.7);
+        vaulter.bezierCurveTo(71.6, 289.5, 71.3, 288.4, 71.3, 288.4);
+        vaulter.closePath();
+        vaulter.fill();
+        vaulter.stroke();
+
+        // vaulter/Path
+        vaulter.beginPath();
+        vaulter.moveTo(53.1, 268.9);
+        vaulter.bezierCurveTo(53.1, 268.9, 51.2, 267.3, 49.0, 267.9);
+        vaulter.bezierCurveTo(46.9, 268.6, 43.8, 271.6, 41.9, 273.6);
+        vaulter.bezierCurveTo(40.0, 275.6, 37.4, 281.4, 36.7, 282.9);
+        vaulter.bezierCurveTo(35.9, 284.4, 36.7, 285.4, 37.3, 289.6);
+        vaulter.bezierCurveTo(37.9, 293.7, 39.8, 299.8, 39.8, 299.8);
+        vaulter.bezierCurveTo(39.8, 299.8, 39.3, 300.9, 39.3, 301.4);
+        vaulter.bezierCurveTo(39.3, 301.8, 39.0, 304.3, 40.2, 304.6);
+        vaulter.bezierCurveTo(41.3, 305.0, 43.8, 304.2, 43.8, 304.2);
+        vaulter.bezierCurveTo(43.8, 304.2, 45.2, 303.2, 44.9, 301.6);
+        vaulter.bezierCurveTo(44.9, 301.6, 44.7, 299.5, 43.1, 299.4);
+        vaulter.lineTo(42.1, 298.7);
+        vaulter.bezierCurveTo(42.1, 298.7, 41.0, 295.2, 41.4, 291.4);
+        vaulter.bezierCurveTo(41.8, 287.7, 41.4, 282.1, 41.4, 282.1);
+        vaulter.lineTo(47.2, 277.9);
+        vaulter.bezierCurveTo(50.7, 278.6, 53.1, 275.8, 53.1, 275.8);
+        vaulter.fill();
+        vaulter.stroke();
+        vaulter.restore();
+      }
+    }
+  ];
 
   pitforeground = new Character("pitforeground", false);
   pitforeground.show();
@@ -10677,10 +11843,20 @@ function stage () {
   /* ...need a way to change the object's current sequence... */
 
   function setFrameTotal () {
-    var i,
-        len = a_queue.length;
+    var i, j,
+        len = a_queue.length,
+        len2,
+        seq,
+        order;
+
     for (i = 0; i < len; i += 1) {
-      frame_total = (frame_total > ( a_queue[i].sequence[a_queue[i].current_seq].starting_frame + (a_queue[i].sequence[a_queue[i].current_seq].cels.length * a_queue[i].sequence[a_queue[i].current_seq].iterations))) ? frame_total : (a_queue[i].sequence[a_queue[i].current_seq].starting_frame + (a_queue[i].sequence[a_queue[i].current_seq].cels.length * a_queue[i].sequence[a_queue[i].current_seq].iterations));
+      len2 = a_queue[i].sequenceOrder.length;
+      seq = a_queue[i].sequence;
+      order = a_queue[i].sequenceOrder;
+
+      for (j = 0; j < len2; j += 1) {
+        frame_total = (frame_total > ( seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
+      }
     }
   };
 

@@ -4,6 +4,16 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*12/10/11*
+
+1. Added a `sequenceOrder` property and a `setSequenceOrder()` method to the `Character` prototype. These store and alter the calling order of drawing instructions for a `Character`'s sequences.
+
+2. Modified `setFrameTotal()` to work with these new values. 
+
+3. Added a `runup` sequence to `vaulter`: a loopable series of strides to showthe vaulter approaching the pit.
+
+
+
 *12/9/11*
 
 1. Added the pit, the shadow and the updated vaulter to the stage.
@@ -106,7 +116,7 @@ Changelog
 
 3. Changed `drawFrame()` to expect an argument: an array of `Character`s. All these measures are designed to replace the `anim_queue` object I was using before, which added an extra step to the animation looping.
 
-4. Added a `setFrameTotal` method.
+4. Added a `setFrameTotal()` method.
 
 
 
