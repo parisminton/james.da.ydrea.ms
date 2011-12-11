@@ -16,6 +16,8 @@ Changelog
 
 5. For testing, made `vaulter`'s run-up sequence loop for 4 iterations. It, and the functions above, seem to work.
 
+6. Removed comments and the unused call to *pv_cels.js* from *polevault.html*.
+
 
 
 **12/10/11**
