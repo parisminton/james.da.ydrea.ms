@@ -4,6 +4,18 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/11/11**
+
+1. Updated `Character.reset()` to cycle through all sequences within a `Character` and set `current_seq` to zero when it's finished.
+
+2. Updated `Character.setSequenceOrder()` to automatically reset `starting_frame` for any sequence following the first one. This lets `setFrameTotal` keep an accurate count and saves the developer from having to set this value explicitly.
+
+3. Found out the hard way that `Character.setSequenceOrder()` can't set the `starting_frame`s accurately if it's called on a sequence that hasn't yet been populated with cels. It fails silently. So I added an error message to catch this.
+
+4. For testing, made `vaulter`'s run-up sequence loop for 7 iterations. It, and the functions above, seem to work.
+
+
+
 **12/10/11**
 
 1. Added a `sequenceOrder` property and a `setSequenceOrder()` method to the `Character` prototype. These store and alter the calling order of drawing instructions for a `Character`'s sequences.

@@ -60,7 +60,14 @@ function stage () {
           len = arguments.length;
       this.sequence_order.length = 0;
       for (i = 0; i < len; i += 1) {
-        this.sequence_order.push([arguments[i]]);
+        if (this.sequence[arguments[i]].cels.length == 0) {
+          console.log("ERROR from setSequenceOrder(): *" + arguments[i] + "* looks like it hasn't been created yet. If you want to add *" + arguments[i] + "* to the sequence, create it first, then run me.");
+        }
+          this.sequence_order.push(arguments[i]);
+        /* ... for every sequence that follows the first, set the new starting_frame to the length of the previous member's sequence multiplied by its number of iterations. */ 
+        if (i > 0) {
+          this.sequence[arguments[i]].starting_frame = this.sequence[arguments[(i - 1)]].cels.length * this.sequence[arguments[(i - 1)]].iterations;
+        }
       }
     },
     makeSequence : function (seq_name) {
@@ -78,9 +85,14 @@ function stage () {
       }
     },
     reset : function () {
-      this.sequence[this.sequence_order[this.current_seq]].current_cel = 0;
-      this.sequence[this.sequence_order[this.current_seq]].current_iteration = 0;
-      this.sequence[this.sequence_order[this.current_seq]].xdistance = 0; 
+      var i = 0,
+          len = this.sequence_order.length;
+      for (i = 0; i < len; i += 1) {
+        this.sequence[this.sequence_order[i]].current_cel = 0;
+        this.sequence[this.sequence_order[i]].current_iteration = 0;
+        this.sequence[this.sequence_order[i]].xdistance = 0; 
+      }
+      this.current_seq = 0;
     },
     load : function () { 
       this.reset();
@@ -424,7 +436,7 @@ function stage () {
 
   scrubber = new Character("scrubber", false);
   scrubber.show();
-  scrubber.sequence.main.xinc = 5.0;
+  scrubber.sequence.main.xinc = 2.54; 
   scrubber.sequence.main.cels = [
     function () {
       if (scrubber.visible) {
@@ -10600,8 +10612,8 @@ function stage () {
       }
     }
   ];
+  // vaulter.sequence.main.starting_frame = 8;
   vaulter.makeSequence("runup");
-  vaulter.setSequenceOrder("runup", "main");
   vaulter.sequence.runup.cels = [
     function () {
       if (vaulter.visible) {
@@ -11755,6 +11767,8 @@ function stage () {
       }
     }
   ];
+  vaulter.sequence.runup.iterations = 7;
+  vaulter.setSequenceOrder("runup", "main");
 
   pitforeground = new Character("pitforeground", false);
   pitforeground.show();
@@ -11861,7 +11875,6 @@ function stage () {
       order = a_queue[i].sequence_order;
 
       for (j = 0; j < len2; j += 1) {
-        // console.log("Iterated " + j + " times.");
         frame_total = (frame_total > ( seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
       }
     }
@@ -12024,7 +12037,7 @@ function stage () {
   setFrameTotal();
   drawFrame(a_queue);
 
-  // ... click detection ...
+  /* ... click detection ... */
   function getClick (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
         y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
