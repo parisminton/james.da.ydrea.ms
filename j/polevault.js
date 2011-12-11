@@ -101,7 +101,7 @@ function stage () {
         this.sequence[order[cs]].current_iteration += 1;
         if (this.sequence[order[cs]].current_iteration >= this.sequence[order[cs]].iterations) {
           this.current_seq += 1;
-          if (cs >= order.length) {
+          if (this.current_seq >= order.length) {
             this.current_seq = (order.length - 1);
           }
         }

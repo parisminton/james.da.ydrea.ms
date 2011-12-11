@@ -4,7 +4,7 @@ james.da.ydrea.ms
 Changelog
 ---------
 
-*12/10/11*
+**12/10/11**
 
 1. Added a `sequenceOrder` property and a `setSequenceOrder()` method to the `Character` prototype. These store and alter the calling order of drawing instructions for a `Character`'s sequences.
 
@@ -18,15 +18,17 @@ Changelog
 
 6. Updated `advance()` to cycle through sequences.
 
+7. Fixed a bad assignment in `advance()` that incremented `current_seq` too early.
 
 
-*12/9/11*
+
+**12/9/11**
 
 1. Added the pit, the shadow and the updated vaulter to the stage.
 
 
 
-*12/5/11* 
+**12/5/11** 
 
 1. The scrubber now moves in time with the action, thanks to the new drawing methods. `Character.cache` is almost obsolete. The methods do all the calculations before rendering.
 
@@ -40,7 +42,7 @@ Changelog
 
 
 
-*12/3/11* 
+**12/3/11** 
 
 1. Moved `emptyAllCaches()` to the top of `drawFrame()`. This is a better solution than calling it from `animate()`, ensuring it gets called once per drawing cycle -- even the first one.
 
@@ -54,7 +56,7 @@ Changelog
 
 
 
-*11/30/11* 
+**11/30/11** 
 
 1. Gave the new controls `record` methods.
 
@@ -62,13 +64,13 @@ Changelog
 
 
 
-*11/28/11* 
+**11/28/11** 
 
 1. Added new `Character` instances: `slider`, `scrubber`, `back` and `forward`. These draw controls on the stage, though they're not active yet.
 
 
 
-*11/27/11* 
+**11/27/11** 
 
 1. Made a `Character` instance called `track`, drawing a track on the canvas. 
 
@@ -82,7 +84,7 @@ Changelog
 
 
 
-*11/25/11* 
+**11/25/11** 
 
 1. Combined *new_polevault.js* and *polevault.js* into one file named *polevault.js*. Got rid of obsolete comments. Commented out the tests.
 
@@ -92,13 +94,13 @@ Changelog
 
 
 
-*11/22/11* 
+**11/22/11** 
 
 1. Added `recordBezierCurveTo()`.
 
 
 
-*11/21/11* 
+**11/21/11** 
 
 1. Added a condition to `advanceCels()` to reset `current_cel` and `current_iteration` to 0 when the `breakpoints` array rolls over.
 
@@ -106,7 +108,7 @@ Changelog
 
 
 
-*11/20/11* 
+**11/20/11** 
 
 1. Created a `setFinalBreakpoint` function to programatically set the last breakpoint to the last frame in the animation. The user (the developer) doesn't have to do this manually.
 
@@ -114,7 +116,7 @@ Changelog
 
 
 
-*11/12/11* 
+**11/12/11** 
 
 1. Moved `updateCels()` into the `Character` prototype.
 
@@ -126,7 +128,7 @@ Changelog
 
 
 
-*11/11/11* 
+**11/11/11** 
 
 1. Put 5 new members in the `breakpoints` array to test it out.
 
@@ -136,7 +138,7 @@ Changelog
 
 
 
-*11/10/11* 
+**11/10/11** 
 
 1. Renamed `ftha()` to `updateCels()`. Renamed `CharACTer()` to `Character()`. The internal capitlization was designed to help avoid namespace collisions, but really, it was annoying. I'll keep it out of the global space or wrap it or something.
 
@@ -154,7 +156,7 @@ Changelog
 
 
 
-*11/9/11* 
+**11/9/11** 
 
 1. `CharACTer` gets a `create()` method for instantiation.
 
@@ -164,7 +166,7 @@ Changelog
 
 
 
-*11/8/11* - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
+**11/8/11** - *Updates go back to May, but alas, the log starts here. The plan is to be way more atomic from now on.*
 
 The files *polevault.js*, *new\_polevault.js*, *polevault.html* and *pv\_cels.js* all include code for running canvas animations. This will become a subset of [bigwheel.js][1], but I'm testing it [here][2]. The project isn't complete, but these are all working. The highlights:
 
