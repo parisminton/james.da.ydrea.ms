@@ -4,11 +4,12 @@ function stage () {
       context = the_canvas.getContext("2d"),
       button_sprite = new Image(),
       fps = 75,
-      breakpoints = [14, 17, 49],
+      breakpoints = [46, 49, 81],
       current_bp = 0, // by default, the first breakpoint
       current_frame = 0,
       frame_total = 0,
       a_queue = [],
+      timeline = [],
       slider,
       scrubber,
       back,
@@ -33,19 +34,17 @@ function stage () {
     }
     this.current_seq = 0; 
     this.sequence_order = ["main"];
-    this.sequence = {
-      main : {
-        xdistance : 0,
-        ydistance : 0,
-        xinc : 0,
-        yinc : 0,
-        starting_frame : 0,
-        cache : [],
-        iterations : 1,
-        current_iteration : 0,
-        current_cel : 0,
-        cels : []
-      }
+    this.main = {
+      xdistance : 0,
+      ydistance : 0,
+      xinc : 0,
+      yinc : 0,
+      starting_frame : 0,
+      cache : [],
+      iterations : 1,
+      current_iteration : 0,
+      current_cel : 0,
+      cels : []
     };
   };
   Character.prototype = {
@@ -60,18 +59,18 @@ function stage () {
           len = arguments.length;
       this.sequence_order.length = 0;
       for (i = 0; i < len; i += 1) {
-        if (this.sequence[arguments[i]].cels.length == 0) {
+        if (this[arguments[i]].cels.length == 0) {
           console.log("ERROR from setSequenceOrder(): *" + arguments[i] + "* looks like it hasn't been created yet. If you want to add *" + arguments[i] + "* to the sequence, create it first, then run me.");
         }
           this.sequence_order.push(arguments[i]);
         /* ... for every sequence that follows the first, set the new starting_frame to the length of the previous member's sequence multiplied by its number of iterations. */ 
         if (i > 0) {
-          this.sequence[arguments[i]].starting_frame = this.sequence[arguments[(i - 1)]].cels.length * this.sequence[arguments[(i - 1)]].iterations;
+          this[arguments[i]].starting_frame = this[arguments[(i - 1)]].cels.length * this[arguments[(i - 1)]].iterations;
         }
       }
     },
     makeSequence : function (seq_name) {
-      this.sequence[seq_name] = {
+      this[seq_name] = {
         xdistance : 0,
         ydistance : 0,
         xinc : 0,
@@ -82,15 +81,15 @@ function stage () {
         current_iteration : 0,
         current_cel : 0,
         cels : []
-      }
+      };
     },
     reset : function () {
       var i = 0,
           len = this.sequence_order.length;
       for (i = 0; i < len; i += 1) {
-        this.sequence[this.sequence_order[i]].current_cel = 0;
-        this.sequence[this.sequence_order[i]].current_iteration = 0;
-        this.sequence[this.sequence_order[i]].xdistance = 0; 
+        this[this.sequence_order[i]].current_cel = 0;
+        this[this.sequence_order[i]].current_iteration = 0;
+        this[this.sequence_order[i]].xdistance = 0; 
       }
       this.current_seq = 0;
     },
@@ -105,20 +104,20 @@ function stage () {
       var cs = this.current_seq,
           order = this.sequence_order;
 
-      this.sequence[order[cs]].xdistance += this.sequence[order[cs]].xinc;
-      this.sequence[order[cs]].ydistance += this.sequence[order[cs]].yinc;
+      this[order[cs]].xdistance += this[order[cs]].xinc;
+      this[order[cs]].ydistance += this[order[cs]].yinc;
       
-      this.sequence[order[cs]].current_cel += 1;
-      if (this.sequence[order[cs]].current_cel >= this.sequence[order[cs]].cels.length) {
-        this.sequence[order[cs]].current_iteration += 1;
-        if (this.sequence[order[cs]].current_iteration >= this.sequence[order[cs]].iterations) {
+      this[order[cs]].current_cel += 1;
+      if (this[order[cs]].current_cel >= this[order[cs]].cels.length) {
+        this[order[cs]].current_iteration += 1;
+        if (this[order[cs]].current_iteration >= this[order[cs]].iterations) {
           this.current_seq += 1;
           if (this.current_seq >= order.length) {
             this.current_seq = (order.length - 1);
           }
         }
         else {
-          this.sequence[order[cs]].current_cel = 0;
+          this[order[cs]].current_cel = 0;
         }
       }
       if (current_frame >= frame_total) {
@@ -126,11 +125,11 @@ function stage () {
       }
     },
     store : function (member) {
-      this.sequence[this.sequence_order[this.current_seq]].cache.push(member);
+      this[this.sequence_order[this.current_seq]].cache.push(member);
     },
     emptyCache : function () {
-      if (this.sequence[this.sequence_order[this.current_seq]] && this.sequence[this.sequence_order[this.current_seq]].cache) {
-        this.sequence[this.sequence_order[this.current_seq]].cache.length = 0;
+      if (this[this.sequence_order[this.current_seq]] && this[this.sequence_order[this.current_seq]].cache) {
+        this[this.sequence_order[this.current_seq]].cache.length = 0;
       }
     },
 
@@ -141,14 +140,14 @@ function stage () {
     },
     moveTo : function (xpos, ypos) {
       this.store( {moveTo : [xpos, ypos]} );
-      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.moveTo(xpos, ypos);
     },
     lineTo : function (xpos, ypos) {
       this.store( {lineTo : [xpos, ypos]} );
-      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.lineTo(xpos, ypos);
     },
     lineWidth : function (line_width) {
@@ -165,24 +164,24 @@ function stage () {
     },
     bezierCurveTo : function (xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
       this.store( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
-      xctrl_1 = (xctrl_1 + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      yctrl_1 = (yctrl_1 + this.sequence[this.sequence_order[this.current_seq]].ydistance);
-      xctrl_2 = (xctrl_2 + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      yctrl_2 = (yctrl_2 + this.sequence[this.sequence_order[this.current_seq]].ydistance);
-      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xctrl_1 = (xctrl_1 + this[this.sequence_order[this.current_seq]].xdistance);
+      yctrl_1 = (yctrl_1 + this[this.sequence_order[this.current_seq]].ydistance);
+      xctrl_2 = (xctrl_2 + this[this.sequence_order[this.current_seq]].xdistance);
+      yctrl_2 = (yctrl_2 + this[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
     },
     strokeRect : function (xpos, ypos, width, height) {
       this.store( {strokeRect : [xpos, ypos, width, height]} );
-      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.strokeRect(xpos, ypos, width, height);
     },
     fillRect : function (xpos, ypos, width, height) {
       this.store( {fillRect : [xpos, ypos, width, height]} );
-      xpos = (xpos + this.sequence[this.sequence_order[this.current_seq]].xdistance);
-      ypos = (ypos + this.sequence[this.sequence_order[this.current_seq]].ydistance);
+      xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
+      ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.fillRect(xpos, ypos, width, height);
     },
     closePath : function () {
@@ -234,27 +233,25 @@ function stage () {
       this.boundary = false;
     }
     this.sequence_order[this.current_seq] = "scrubber";
-    this.sequence = {
-      track : {
-        starting_frame : 0,
-        cache : [],
-        iterations : 1,
-        current_iteration : 0,
-        current_cel : 0,
-        cels : []
-      },
-      scrubber : {
-        xdistance : 0,
-        ydistance : 0,
-        xinc : 0,
-        yinc : 0,
-        starting_frame : 0,
-        cache : [],
-        iterations : 1,
-        current_iteration : 0,
-        current_cel : 0,
-        cels : []
-      }
+    this.track = {
+      starting_frame : 0,
+      cache : [],
+      iterations : 1,
+      current_iteration : 0,
+      current_cel : 0,
+      cels : []
+    };
+    this.scrubber = {
+      xdistance : 0,
+      ydistance : 0,
+      xinc : 0,
+      yinc : 0,
+      starting_frame : 0,
+      cache : [],
+      iterations : 1,
+      current_iteration : 0,
+      current_cel : 0,
+      cels : []
     };
   };
   Scrubber.prototype = {
@@ -262,8 +259,8 @@ function stage () {
       // add ipf to each x- or y-value in the cache
       // current_something becomes all the new drawing instructions
       var i,
-          c = this.sequence[this.sequence_order[this.current_seq]].cache,
-          len = this.sequence[this.sequence_order[this.current_seq]].cache.length,
+          c = this[this.sequence_order[this.current_seq]].cache,
+          len = this[this.sequence_order[this.current_seq]].cache.length,
           xpos,
           ypos,
           xctrl_1,
@@ -369,19 +366,19 @@ function stage () {
 
   function renderCharacter (obj, ctx) {
     var cs = obj.sequence_order[obj.current_seq],
-        cc = obj.sequence[obj.sequence_order[obj.current_seq]].current_cel;
+        cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
     ctx = (ctx) ? ctx : context;
-    if (typeof obj.sequence[cs].cels[cc] == "function") {
-      obj.sequence[cs].cels[cc](ctx);
+    if (typeof obj[cs].cels[cc] == "function") {
+      obj[cs].cels[cc](ctx);
     }
     else {
-      obj.sequence[cs].cels[(obj.sequence[cs].cels.length - 1)](ctx);
+      obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
     }
   };
 
   slider = new Character("slider", false);
   slider.show();
-  slider.sequence.main.cels = [
+  slider.main.cels = [
     function () {
       if (slider.visible) {
 
@@ -436,8 +433,8 @@ function stage () {
 
   scrubber = new Character("scrubber", false);
   scrubber.show();
-  scrubber.sequence.main.xinc = 2.54; 
-  scrubber.sequence.main.cels = [
+  scrubber.main.xinc = 3.21; 
+  scrubber.main.cels = [
     function () {
       if (scrubber.visible) {
 
@@ -490,7 +487,7 @@ function stage () {
 
   back = new Character("back", false);
   back.show();
-  back.sequence.main.cels = [
+  back.main.cels = [
     function () {
       if (back.visible) {
 
@@ -641,7 +638,7 @@ function stage () {
 
   forward = new Character("forward", false);
   forward.show();
-  forward.sequence.main.cels = [
+  forward.main.cels = [
     function ddFrameForward() {
       if (forward.visible) {
 
@@ -787,7 +784,7 @@ function stage () {
 
   track = new Character("track", false);
   track.show();
-  track.sequence.main.cels = [
+  track.main.cels = [
     function () {
       if (track.visible) {
 
@@ -802,7 +799,7 @@ function stage () {
 
   pit = new Character("pit", false);
   pit.show()
-  pit.sequence.main.cels = [
+  pit.main.cels = [
     function pit(ctx) {
 
       var gradient;
@@ -935,7 +932,7 @@ function stage () {
 
   shadow = new Character("shadow", false);
   shadow.show();
-  shadow.sequence.main.cels = [
+  shadow.main.cels = [
     function () {
       if (shadow.visible) {
 
@@ -1509,7 +1506,7 @@ function stage () {
 
   vaulter = new Character("vaulter", false);
   vaulter.show();
-  vaulter.sequence.main.cels = [
+  vaulter.main.cels = [
     function () {
       if (vaulter.visible) {
 
@@ -10612,9 +10609,8 @@ function stage () {
       }
     }
   ];
-  // vaulter.sequence.main.starting_frame = 8;
   vaulter.makeSequence("runup");
-  vaulter.sequence.runup.cels = [
+  vaulter.runup.cels = [
     function () {
       if (vaulter.visible) {
 
@@ -11767,12 +11763,12 @@ function stage () {
       }
     }
   ];
-  vaulter.sequence.runup.iterations = 7;
+  vaulter.runup.iterations = 4;
   vaulter.setSequenceOrder("runup", "main");
 
   pitforeground = new Character("pitforeground", false);
   pitforeground.show();
-  pitforeground.sequence.main.cels = [
+  pitforeground.main.cels = [
     function pitforeground(ctx) {
 
       var gradient;
@@ -11860,8 +11856,6 @@ function stage () {
     return length;
   };
   
-  /* ...need a way to change the object's current sequence... */
-
   function setFrameTotal () {
     var i, j,
         len = a_queue.length,
@@ -11871,11 +11865,24 @@ function stage () {
 
     for (i = 0; i < len; i += 1) {
       len2 = a_queue[i].sequence_order.length;
-      seq = a_queue[i].sequence;
+      seq = a_queue[i];
       order = a_queue[i].sequence_order;
 
       for (j = 0; j < len2; j += 1) {
-        frame_total = (frame_total > ( seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
+        frame_total = (frame_total > (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
+      }
+    }
+  };
+
+  function Timeline () {
+    this.frame_total = 0;
+  };
+  Timeline.prototype = {
+    load : function () {
+      var i,
+          len = arguments.length;
+      for (i = 0; i < len; i += 1) {
+        this.queue.push(arguments[i]);
       }
     }
   };
@@ -11886,7 +11893,7 @@ function stage () {
     }
     breakpoints.push(frame_total);
     setFinalBreakpoint.alreadySet = true;
-  }
+  };
 
   function getAllCels (method_string) {
     var i,

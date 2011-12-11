@@ -6,13 +6,15 @@ Changelog
 
 **12/11/11**
 
-1. Updated `Character.reset()` to cycle through all sequences within a `Character` and set `current_seq` to zero when it's finished.
+1. Painstakingly removed all references to `Character.sequence`. I initially thought it would be a true collection, but it never got used that way. Leaving it seems like it costs an unnecessary lookup. So far, no ill effects. 
 
-2. Updated `Character.setSequenceOrder()` to automatically reset `starting_frame` for any sequence following the first one. This lets `setFrameTotal` keep an accurate count and saves the developer from having to set this value explicitly.
+2. Updated `Character.reset()` to cycle through all sequences within a `Character` and set `current_seq` to zero when it's finished.
 
-3. Found out the hard way that `Character.setSequenceOrder()` can't set the `starting_frame`s accurately if it's called on a sequence that hasn't yet been populated with cels. It fails silently. So I added an error message to catch this.
+3. Updated `Character.setSequenceOrder()` to automatically reset `starting_frame` for any sequence following the first one. This lets `setFrameTotal` keep an accurate count and saves the developer from having to set this value explicitly.
 
-4. For testing, made `vaulter`'s run-up sequence loop for 7 iterations. It, and the functions above, seem to work.
+4. Found out the hard way that `Character.setSequenceOrder()` can't set the `starting_frame`s accurately if it's called on a sequence that hasn't yet been populated with cels. It fails silently. So I added an error message to catch this.
+
+5. For testing, made `vaulter`'s run-up sequence loop for 4 iterations. It, and the functions above, seem to work.
 
 
 
@@ -28,9 +30,9 @@ Changelog
 
 5. `sequenceOrder` is now called `sequence_order` to stick with the naming convention for variables.
 
-6. Updated `advance()` to cycle through sequences.
+6. Updated `Character.advance()` to cycle through sequences.
 
-7. Fixed a bad assignment in `advance()` that incremented `current_seq` too early.
+7. Fixed a bad assignment in `Character.advance()` that incremented `current_seq` too early.
 
 
 
@@ -114,9 +116,9 @@ Changelog
 
 **11/21/11** 
 
-1. Added a condition to `advanceCels()` to reset `current_cel` and `current_iteration` to 0 when the `breakpoints` array rolls over.
+1. Added a condition to `Character.advanceCels()` to reset `current_cel` and `current_iteration` to 0 when the `breakpoints` array rolls over.
 
-2. Added another call to `advanceCels()` from `animate()` 
+2. Added another call to `Character.advanceCels()` from `animate()` 
 
 
 
