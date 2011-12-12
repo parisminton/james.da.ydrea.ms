@@ -8,6 +8,8 @@ Changelog
 
 1. Added a constructor and prototype for a `Timeline` class. `Timeline` stores history and methods for every frame in the animation. `frame_total`, `current_frame`, the `breakpoints` array, `current_breakpoint` and `fps` are moving into this class.
 
+2. `Timeline.init()` is now working.
+
 
 
 **12/11/11**

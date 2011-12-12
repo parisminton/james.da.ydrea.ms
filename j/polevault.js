@@ -7,7 +7,6 @@ function stage () {
       breakpoints = [46, 49, 81],
       current_bp = 0, // by default, the first breakpoint
       current_frame = 0,
-      frame_total = 0,
       a_queue = [],
       timeline = [],
       slider,
@@ -97,7 +96,7 @@ function stage () {
       this.reset();
       this.queue_index = (a_queue.length) ? a_queue.length : 0;
       a_queue.push(this);
-      setFrameTotal();
+      t.setFrameTotal();
       setFinalBreakpoint();
     },
     advance : function () {
@@ -120,7 +119,7 @@ function stage () {
           this[order[cs]].current_cel = 0;
         }
       }
-      if (current_frame >= frame_total) {
+      if (current_frame >= t.frame_total) {
         this.reset();
       }
     },
@@ -11856,24 +11855,6 @@ function stage () {
     return length;
   };
   
-  function setFrameTotal () {
-    var i, j,
-        len = a_queue.length,
-        len2,
-        seq,
-        order;
-
-    for (i = 0; i < len; i += 1) {
-      len2 = a_queue[i].sequence_order.length;
-      seq = a_queue[i];
-      order = a_queue[i].sequence_order;
-
-      for (j = 0; j < len2; j += 1) {
-        frame_total = (frame_total > (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations))) ? frame_total : (seq[order[j]].starting_frame + (seq[order[j]].cels.length * seq[order[j]].iterations));
-      }
-    }
-  };
-
   function Timeline (fps) {
     this.queue = [];
     this.frame_total = 0;
@@ -11907,6 +11888,14 @@ function stage () {
           this.frame_total = (this.frame_total > (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations))) ? this.frame_total : (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations));
         }
       }
+      return this.frame_total;
+    },
+    declareFrames : function () {
+      var i;
+
+      for (i = 0; i < this.frame_total; i += 1) {
+        this.frames[i] = [];
+      }
     },
     init : function () {
       var i, j, k, m, n,
@@ -11934,6 +11923,7 @@ function stage () {
       };
 
       this.setFrameTotal();
+      this.declareFrames();
 
       /* ... for each Character on the stage ... */
       for (i = 0; i < q_len; i += 1) {
@@ -11941,16 +11931,17 @@ function stage () {
 
         /* ... for each sequence in that Character... */
         for (j = 0; j < seq_len; j += 1) {
-          cel_len = this.queue[i][sequence_order[j]].cels.length;
-          iterations = this.queue[i][sequence_order[j]].iterations;
+          seq = this.queue[i].sequence_order[j];
+          cel_len = this.queue[i][seq].cels.length;
+          iterations = this.queue[i][seq].iterations;
 
           /* ... for each iteration of that Character's current sequence ... */
           for (k = 0; k < iterations; k += 1) {
 
             /* ... if there's a gap between the end of the last sequence and the start of the next one,
             fill it with null values ... */
-            if (frame_counter != 0 && this.queue[i][sequence_order[j]].starting_frame > (frame_counter + 1)) {
-              gap = (this.queue[i][sequence_order[j]].starting_frame + (0 - frame_counter));
+            if (frame_counter != 0 && this.queue[i][seq].starting_frame > (frame_counter + 1)) {
+              gap = (this.queue[i][seq].starting_frame + (0 - frame_counter));
               for (n = 0; n < gap; n += 1) {
                 this.frames[frame_counter].push(objKeyMaker(this.queue[i].name));
               }
@@ -11959,17 +11950,18 @@ function stage () {
 
             for (m = 0; m < cel_len; m += 1) { 
               this.frames[frame_counter].push(
-                objKeyMaker(this.queue[i].name, this.queue[i].current_seq, this.queue[i][sequence_order[j]].cels[m], this.queue[i].visible)
+                objKeyMaker(this.queue[i].name, this.queue[i].sequence_order[j], m, this.queue[i].visible)
               );
               frame_counter += 1;
             }
 
           }
           
-          /* ... the rest of the array could be filled out here ... */
-          if (frame_counter < (frame_total - 1)) {
+          /* ... the rest of the array could be filled out here ... 
+          if (frame_counter < (this.frame_total - 1)) {
             alert("boom boom");
           }
+          */
         }
         frame_counter = 0;
       }
@@ -11983,7 +11975,7 @@ function stage () {
     if (setFinalBreakpoint.alreadySet) {
       setFinalBreakpoint.lastRemovedValue = breakpoints.pop();
     }
-    breakpoints.push(frame_total);
+    breakpoints.push(t.frame_total);
     setFinalBreakpoint.alreadySet = true;
   };
 
@@ -12016,7 +12008,7 @@ function stage () {
 
   /* ...only thinks about repeating calls to drawFrame()... */ 
   function animate () {
-    if (current_frame >= frame_total) {
+    if (current_frame >= t.frame_total) {
       // console.log("First condition: animate() exited on frame " + current_frame + ".");
       advanceAll();
       current_frame = 0;
@@ -12133,8 +12125,7 @@ function stage () {
   shadow.load();
   vaulter.load();
   pitforeground.load();
-  setFrameTotal();
-  t.setFrameTotal();
+  t.init();
   drawFrame(a_queue);
 
   /* ... click detection ... */
