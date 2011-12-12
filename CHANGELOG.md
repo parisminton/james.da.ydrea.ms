@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/12/11**
+
+1. Added a constructor and prototype for a `Timeline` class. `Timeline` stores history and methods for every frame in the animation. `frame_total`, `current_frame`, the `breakpoints` array, `current_breakpoint` and `fps` are moving into this class.
+
+
+
 **12/11/11**
 
 1. Painstakingly removed all references to `Character.sequence`. I initially thought it would be a true collection, but it never got used that way. Leaving it seems like it costs an unnecessary lookup. So far, no ill effects. 

@@ -11874,18 +11874,110 @@ function stage () {
     }
   };
 
-  function Timeline () {
+  function Timeline (fps) {
+    this.queue = [];
     this.frame_total = 0;
+    this.frames = [];
+    this.current_frame = 0;
+    this.breakpoints = [];
+    this.current_breakpoint = 0;
+    this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
   };
   Timeline.prototype = {
     load : function () {
       var i,
           len = arguments.length;
+
       for (i = 0; i < len; i += 1) {
         this.queue.push(arguments[i]);
       }
+    },
+    setFrameTotal : function () {
+      var i, j,
+          len = this.queue.length,
+          len2,
+          seq;
+
+      for (i = 0; i < len; i += 1) {
+        len2 = this.queue[i].sequence_order.length;
+
+        for (j = 0; j < len2; j += 1) {
+          seq = this.queue[i].sequence_order[j];
+
+          this.frame_total = (this.frame_total > (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations))) ? this.frame_total : (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations));
+        }
+      }
+    },
+    init : function () {
+      var i, j, k, m, n,
+          frame_counter = 0,
+          q_len = this.queue.length,
+          seq_len,
+          cel_len,
+          seq,
+          iterations;
+
+      function objKeyMaker(key, current_seq, current_cel, visible) {
+        var i,
+            obj = {};
+        if (arguments.length == 4) {
+          obj[arguments[0]] = {
+            cs : arguments[1],
+            cc : arguments[2],
+            vis : arguments[3]
+          };
+        }
+        if (arguments.length == 1) {
+          obj[arguments[0]] = null;
+        }
+        return obj;
+      };
+
+      this.setFrameTotal();
+
+      /* ... for each Character on the stage ... */
+      for (i = 0; i < q_len; i += 1) {
+        seq_len = this.queue[i].sequence_order.length;
+
+        /* ... for each sequence in that Character... */
+        for (j = 0; j < seq_len; j += 1) {
+          cel_len = this.queue[i][sequence_order[j]].cels.length;
+          iterations = this.queue[i][sequence_order[j]].iterations;
+
+          /* ... for each iteration of that Character's current sequence ... */
+          for (k = 0; k < iterations; k += 1) {
+
+            /* ... if there's a gap between the end of the last sequence and the start of the next one,
+            fill it with null values ... */
+            if (frame_counter != 0 && this.queue[i][sequence_order[j]].starting_frame > (frame_counter + 1)) {
+              gap = (this.queue[i][sequence_order[j]].starting_frame + (0 - frame_counter));
+              for (n = 0; n < gap; n += 1) {
+                this.frames[frame_counter].push(objKeyMaker(this.queue[i].name));
+              }
+              frame_counter += (n + 1);
+            }
+
+            for (m = 0; m < cel_len; m += 1) { 
+              this.frames[frame_counter].push(
+                objKeyMaker(this.queue[i].name, this.queue[i].current_seq, this.queue[i][sequence_order[j]].cels[m], this.queue[i].visible)
+              );
+              frame_counter += 1;
+            }
+
+          }
+          
+          /* ... the rest of the array could be filled out here ... */
+          if (frame_counter < (frame_total - 1)) {
+            alert("boom boom");
+          }
+        }
+        frame_counter = 0;
+      }
     }
   };
+
+  t = new Timeline(75);
+  t.load(slider, scrubber, back, forward, track, pit, shadow, vaulter);
 
   function setFinalBreakpoint () {
     if (setFinalBreakpoint.alreadySet) {
@@ -12042,6 +12134,7 @@ function stage () {
   vaulter.load();
   pitforeground.load();
   setFrameTotal();
+  t.setFrameTotal();
   drawFrame(a_queue);
 
   /* ... click detection ... */
