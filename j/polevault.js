@@ -813,133 +813,135 @@ function stage () {
   pit = new Character("pit", false);
   pit.show()
   pit.main.cels = [
-    function pit(ctx) {
+    function () {
+      if (pit.visible) {
 
-      var gradient;
+        var gradient;
 
-      // pit/Path
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(367.3, 314.3);
-      ctx.lineTo(367.3, 360.0);
-      ctx.lineTo(519.2, 360.1);
-      ctx.lineTo(519.2, 314.3);
-      ctx.lineTo(367.3, 314.3);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(123, 162, 212)";
-      ctx.fill();
+        // pit/Path
+        pit.save();
+        pit.beginPath();
+        pit.moveTo(367.3, 314.3);
+        pit.lineTo(367.3, 360.0);
+        pit.lineTo(519.2, 360.1);
+        pit.lineTo(519.2, 314.3);
+        pit.lineTo(367.3, 314.3);
+        pit.closePath();
+        pit.fillStyle("rgb(123, 162, 212)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(367.3, 314.3);
-      ctx.lineTo(367.3, 360.0);
-      ctx.lineTo(297.1, 332.3);
-      ctx.lineTo(297.1, 286.6);
-      ctx.lineTo(367.3, 314.3);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(79, 134, 198)";
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(367.3, 314.3);
+        pit.lineTo(367.3, 360.0);
+        pit.lineTo(297.1, 332.3);
+        pit.lineTo(297.1, 286.6);
+        pit.lineTo(367.3, 314.3);
+        pit.closePath();
+        pit.fillStyle("rgb(79, 134, 198)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(519.2, 314.3);
-      ctx.lineTo(449.0, 286.6);
-      ctx.lineTo(297.1, 286.6);
-      ctx.lineTo(367.3, 314.3);
-      ctx.lineTo(519.2, 314.3);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(198, 213, 237)";
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(519.2, 314.3);
+        pit.lineTo(449.0, 286.6);
+        pit.lineTo(297.1, 286.6);
+        pit.lineTo(367.3, 314.3);
+        pit.lineTo(519.2, 314.3);
+        pit.closePath();
+        pit.fillStyle("rgb(198, 213, 237)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(302.9, 37.0);
-      ctx.lineTo(306.1, 37.0);
-      ctx.lineTo(306.1, 336.7);
-      ctx.lineTo(302.9, 336.7);
-      ctx.lineTo(302.9, 37.0);
-      ctx.closePath();
-      gradient = ctx.createLinearGradient(302.6, 186.8, 306.4, 186.8);
-      gradient.addColorStop(0.00, "rgb(198, 199, 201)");
-      gradient.addColorStop(0.35, "rgb(255, 255, 255)");
-      gradient.addColorStop(1.00, "rgb(146, 148, 151)");
-      ctx.fillStyle = gradient;
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(302.9, 37.0);
+        pit.lineTo(306.1, 37.0);
+        pit.lineTo(306.1, 336.7);
+        pit.lineTo(302.9, 336.7);
+        pit.lineTo(302.9, 37.0);
+        pit.closePath();
+        gradient = pit.createLinearGradient(302.6, 186.8, 306.4, 186.8);
+        pit.addColorStop(gradient, 0.00, "rgb(198, 199, 201)");
+        pit.addColorStop(gradient, 0.35, "rgb(255, 255, 255)");
+        pit.addColorStop(gradient, 1.00, "rgb(146, 148, 151)");
+        pit.fillStyle(gradient);
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(298.8, 56.0);
-      ctx.lineTo(355.7, 43.1);
-      ctx.lineTo(356.4, 46.2);
-      ctx.lineTo(299.4, 59.2);
-      ctx.lineTo(298.8, 56.0);
-      ctx.closePath();
-      gradient = ctx.createLinearGradient(327.2, 49.3, 327.9, 52.6);
-      gradient.addColorStop(0.00, "rgb(198, 199, 201)");
-      gradient.addColorStop(0.35, "rgb(255, 255, 255)");
-      gradient.addColorStop(1.00, "rgb(146, 148, 151)");
-      ctx.fillStyle = gradient;
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(298.8, 56.0);
+        pit.lineTo(355.7, 43.1);
+        pit.lineTo(356.4, 46.2);
+        pit.lineTo(299.4, 59.2);
+        pit.lineTo(298.8, 56.0);
+        pit.closePath();
+        gradient = pit.createLinearGradient(327.2, 49.3, 327.9, 52.6);
+        pit.addColorStop(gradient, 0.00, "rgb(198, 199, 201)");
+        pit.addColorStop(gradient, 0.35, "rgb(255, 255, 255)");
+        pit.addColorStop(gradient, 1.00, "rgb(146, 148, 151)");
+        pit.fillStyle(gradient);
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(309.0, 291.3);
-      ctx.lineTo(242.8, 309.3);
-      ctx.lineTo(185.8, 309.3);
-      ctx.lineTo(185.8, 337.0);
-      ctx.lineTo(309.0, 337.0);
-      ctx.lineTo(309.0, 291.3);
-      ctx.fillStyle = "rgb(79, 134, 198)";
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(309.0, 291.3);
+        pit.lineTo(242.8, 309.3);
+        pit.lineTo(185.8, 309.3);
+        pit.lineTo(185.8, 337.0);
+        pit.lineTo(309.0, 337.0);
+        pit.lineTo(309.0, 291.3);
+        pit.fillStyle("rgb(79, 134, 198)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(185.8, 309.3);
-      ctx.lineTo(199.0, 314.4);
-      ctx.lineTo(199.0, 342.1);
-      ctx.lineTo(185.8, 337.0);
-      ctx.lineTo(185.8, 309.3);
-      ctx.closePath();
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(185.8, 309.3);
+        pit.lineTo(199.0, 314.4);
+        pit.lineTo(199.0, 342.1);
+        pit.lineTo(185.8, 337.0);
+        pit.lineTo(185.8, 309.3);
+        pit.closePath();
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(311.6, 342.1);
-      ctx.lineTo(311.6, 299.3);
-      ctx.lineTo(256.1, 314.4);
-      ctx.lineTo(199.0, 314.4);
-      ctx.lineTo(199.0, 342.1);
-      ctx.lineTo(311.6, 342.1);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(123, 162, 212)";
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(311.6, 342.1);
+        pit.lineTo(311.6, 299.3);
+        pit.lineTo(256.1, 314.4);
+        pit.lineTo(199.0, 314.4);
+        pit.lineTo(199.0, 342.1);
+        pit.lineTo(311.6, 342.1);
+        pit.closePath();
+        pit.fillStyle("rgb(123, 162, 212)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(311.6, 299.3);
-      ctx.lineTo(321.7, 303.3);
-      ctx.lineTo(321.7, 346.1);
-      ctx.lineTo(311.6, 342.1);
-      ctx.lineTo(311.6, 299.3);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(79, 134, 198)";
-      ctx.fill();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(311.6, 299.3);
+        pit.lineTo(321.7, 303.3);
+        pit.lineTo(321.7, 346.1);
+        pit.lineTo(311.6, 342.1);
+        pit.lineTo(311.6, 299.3);
+        pit.closePath();
+        pit.fillStyle("rgb(79, 134, 198)");
+        pit.fill();
 
-      // pit/Path
-      ctx.beginPath();
-      ctx.moveTo(309.0, 291.3);
-      ctx.lineTo(242.8, 309.3);
-      ctx.lineTo(185.8, 309.3);
-      ctx.lineTo(199.0, 314.4);
-      ctx.lineTo(256.1, 314.4);
-      ctx.lineTo(311.6, 299.3);
-      ctx.lineTo(321.7, 303.3);
-      ctx.lineTo(348.2, 306.8);
-      ctx.lineTo(309.0, 291.3);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(198, 213, 237)";
-      ctx.fill();
-      ctx.restore();
+        // pit/Path
+        pit.beginPath();
+        pit.moveTo(309.0, 291.3);
+        pit.lineTo(242.8, 309.3);
+        pit.lineTo(185.8, 309.3);
+        pit.lineTo(199.0, 314.4);
+        pit.lineTo(256.1, 314.4);
+        pit.lineTo(311.6, 299.3);
+        pit.lineTo(321.7, 303.3);
+        pit.lineTo(348.2, 306.8);
+        pit.lineTo(309.0, 291.3);
+        pit.closePath();
+        pit.fillStyle("rgb(198, 213, 237)");
+        pit.fill();
+        pit.restore();
+      }
     }
   ];
 
@@ -11782,76 +11784,78 @@ function stage () {
   pitforeground = new Character("pitforeground", false);
   pitforeground.show();
   pitforeground.main.cels = [
-    function pitforeground(ctx) {
+    function () {
+      if (pitforeground.visible) {
 
       var gradient;
 
-      // pitforeground/Path
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(349.1, 25.8);
-      ctx.lineTo(352.3, 25.8);
-      ctx.lineTo(352.3, 355.3);
-      ctx.lineTo(349.1, 355.3);
-      ctx.lineTo(349.1, 25.8);
-      ctx.closePath();
-      gradient = ctx.createLinearGradient(348.8, 190.5, 352.6, 190.5);
-      gradient.addColorStop(0.00, "rgb(198, 199, 201)");
-      gradient.addColorStop(0.35, "rgb(255, 255, 255)");
-      gradient.addColorStop(1.00, "rgb(146, 148, 151)");
-      ctx.fillStyle = gradient;
-      ctx.fill();
+        // pitforeground/Path
+        pitforeground.save();
+        pitforeground.beginPath();
+        pitforeground.moveTo(349.1, 25.8);
+        pitforeground.lineTo(352.3, 25.8);
+        pitforeground.lineTo(352.3, 355.3);
+        pitforeground.lineTo(349.1, 355.3);
+        pitforeground.lineTo(349.1, 25.8);
+        pitforeground.closePath();
+        gradient = pitforeground.createLinearGradient(348.8, 190.5, 352.6, 190.5);
+        pitforeground.addColorStop(gradient, 0.00, "rgb(198, 199, 201)");
+        pitforeground.addColorStop(gradient, 0.35, "rgb(255, 255, 255)");
+        pitforeground.addColorStop(gradient, 1.00, "rgb(146, 148, 151)");
+        pitforeground.fillStyle(gradient);
+        pitforeground.fill();
 
-      // pitforeground/Path
-      ctx.beginPath();
-      ctx.moveTo(348.2, 306.8);
-      ctx.lineTo(281.9, 324.8);
-      ctx.lineTo(224.9, 324.8);
-      ctx.lineTo(224.9, 352.4);
-      ctx.lineTo(348.2, 352.4);
-      ctx.lineTo(348.2, 306.8);
-      ctx.fillStyle = "rgb(123, 162, 212)";
-      ctx.fill();
+        // pitforeground/Path
+        pitforeground.beginPath();
+        pitforeground.moveTo(348.2, 306.8);
+        pitforeground.lineTo(281.9, 324.8);
+        pitforeground.lineTo(224.9, 324.8);
+        pitforeground.lineTo(224.9, 352.4);
+        pitforeground.lineTo(348.2, 352.4);
+        pitforeground.lineTo(348.2, 306.8);
+        pitforeground.fillStyle("rgb(123, 162, 212)");
+        pitforeground.fill();
 
-      // pitforeground/Path
-      ctx.beginPath();
-      ctx.moveTo(208.9, 318.4);
-      ctx.lineTo(224.9, 324.8);
-      ctx.lineTo(224.9, 352.4);
-      ctx.lineTo(208.9, 346.1);
-      ctx.lineTo(208.9, 318.4);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(79, 134, 198)";
-      ctx.fill();
+        // pitforeground/Path
+        pitforeground.beginPath();
+        pitforeground.moveTo(208.9, 318.4);
+        pitforeground.lineTo(224.9, 324.8);
+        pitforeground.lineTo(224.9, 352.4);
+        pitforeground.lineTo(208.9, 346.1);
+        pitforeground.lineTo(208.9, 318.4);
+        pitforeground.closePath();
+        pitforeground.fillStyle("rgb(79, 134, 198)");
+        pitforeground.fill();
 
-      // pitforeground/Path
-      ctx.beginPath();
-      ctx.moveTo(332.2, 300.4);
-      ctx.lineTo(266.0, 318.4);
-      ctx.lineTo(208.9, 318.4);
-      ctx.lineTo(224.9, 324.8);
-      ctx.lineTo(281.9, 324.8);
-      ctx.lineTo(348.2, 306.8);
-      ctx.lineTo(332.2, 300.4);
-      ctx.closePath();
-      ctx.fillStyle = "rgb(198, 213, 237)";
-      ctx.fill();
+        // pitforeground/Path
+        pitforeground.beginPath();
+        pitforeground.moveTo(332.2, 300.4);
+        pitforeground.lineTo(266.0, 318.4);
+        pitforeground.lineTo(208.9, 318.4);
+        pitforeground.lineTo(224.9, 324.8);
+        pitforeground.lineTo(281.9, 324.8);
+        pitforeground.lineTo(348.2, 306.8);
+        pitforeground.lineTo(332.2, 300.4);
+        pitforeground.closePath();
+        pitforeground.fillStyle("rgb(198, 213, 237)");
+        pitforeground.fill();
 
-      // pitforeground/Path
-      ctx.beginPath();
-      ctx.moveTo(328.7, 49.2);
-      ctx.lineTo(355.7, 43.1);
-      ctx.lineTo(356.4, 46.2);
-      ctx.lineTo(329.4, 52.3);
-      ctx.lineTo(328.7, 49.2);
-      ctx.closePath();
-      gradient = ctx.createLinearGradient(342.2, 46.0, 342.9, 49.2);
-      gradient.addColorStop(0.00, "rgb(198, 199, 201)");
-      gradient.addColorStop(0.35, "rgb(255, 255, 255)");
-      gradient.addColorStop(1.00, "rgb(146, 148, 151)");
-      ctx.fillStyle = gradient;
-      ctx.fill();
-      ctx.restore();
+        // pitforeground/Path
+        pitforeground.beginPath();
+        pitforeground.moveTo(328.7, 49.2);
+        pitforeground.lineTo(355.7, 43.1);
+        pitforeground.lineTo(356.4, 46.2);
+        pitforeground.lineTo(329.4, 52.3);
+        pitforeground.lineTo(328.7, 49.2);
+        pitforeground.closePath();
+        gradient = pitforeground.createLinearGradient(342.2, 46.0, 342.9, 49.2);
+        pitforeground.addColorStop(gradient, 0.00, "rgb(198, 199, 201)");
+        pitforeground.addColorStop(gradient, 0.35, "rgb(255, 255, 255)");
+        pitforeground.addColorStop(gradient, 1.00, "rgb(146, 148, 151)");
+        pitforeground.fillStyle(gradient);
+        pitforeground.fill();
+        pitforeground.restore();
+      }
     }
   ];
 

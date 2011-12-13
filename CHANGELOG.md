@@ -12,6 +12,8 @@ Changelog
 
 3. Added `Character.countSpan()` to store the total number of cels a `Character` puts on the timeline. Having this number handy makes it easier to do some of the math `Timeline.init()` needs.
 
+4. Switched `pit` and `pitforeground` to the `Character` drawing methods.
+
 
 
 **12/11/11**
