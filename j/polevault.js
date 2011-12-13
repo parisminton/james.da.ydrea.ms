@@ -2,11 +2,8 @@ function stage () {
   
   var the_canvas = document.getElementById("main-stage"),
       context = the_canvas.getContext("2d"),
-      button_sprite = new Image(),
-      fps = 75,
-      breakpoints = [46, 49, 81],
-      current_bp = 0, // by default, the first breakpoint
-      current_frame = 0,
+      t,
+      button_sprite = new Image(), 
       a_queue = [],
       slider,
       scrubber,
@@ -132,7 +129,7 @@ function stage () {
           this[order[cs]].current_cel = 0;
         }
       }
-      if (current_frame >= t.frame_total) {
+      if (t.current_frame >= t.frame_total) {
         this.reset();
       }
     },
@@ -11877,8 +11874,8 @@ function stage () {
     this.frame_total = 0;
     this.frames = [];
     this.current_frame = 0;
-    this.breakpoints = [];
-    this.current_breakpoint = 0;
+    this.breakpoints = [46, 49, 81];
+    this.current_bp = 0; // by default, the first breakpoint
     this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
   };
   Timeline.prototype = {
@@ -11986,9 +11983,9 @@ function stage () {
 
   function setFinalBreakpoint () {
     if (setFinalBreakpoint.alreadySet) {
-      setFinalBreakpoint.lastRemovedValue = breakpoints.pop();
+      setFinalBreakpoint.lastRemovedValue = t.breakpoints.pop();
     }
-    breakpoints.push(t.frame_total);
+    t.breakpoints.push(t.frame_total);
     setFinalBreakpoint.alreadySet = true;
   };
 
@@ -12013,40 +12010,40 @@ function stage () {
   };
   
   function advanceBreakpoint () {
-    current_bp += 1;
-    if (current_bp >= breakpoints.length) {
-      current_bp = 0;
+    t.current_bp += 1;
+    if (t.current_bp >= t.breakpoints.length) {
+      t.current_bp = 0;
     }
   };
 
   /* ...only thinks about repeating calls to drawFrame()... */ 
   function animate () {
-    if (current_frame >= t.frame_total) {
-      // console.log("First condition: animate() exited on frame " + current_frame + ".");
+    if (t.current_frame >= t.frame_total) {
+      // console.log("First condition: animate() exited on frame " + t.current_frame + ".");
       advanceAll();
-      current_frame = 0;
-      current_bp = 0;
+      t.current_frame = 0;
+      t.current_bp = 0;
       animate.running = false;
       return "done";
     }
-    if (current_frame >= breakpoints[current_bp]) {
-      // console.log("Second condition: animate() exited on frame " + current_frame + ".");
+    if (t.current_frame >= t.breakpoints[t.current_bp]) {
+      // console.log("Second condition: animate() exited on frame " + t.current_frame + ".");
       advanceBreakpoint(); 
       animate.running = false;
       return "done";
     }
     animate.running = true;
     drawFrame(a_queue); 
-    // console.log(current_frame);
+    // console.log(t.current_frame);
     advanceAll();
-    current_frame += 1;
-    setTimeout(animate, fps);
+    t.current_frame += 1;
+    setTimeout(animate, t.fps);
   };
 
   function play () {
     if (!animate.running) {
-      current_bp = (breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
-      current_frame = 0;
+      t.current_bp = (t.breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
+      t.current_frame = 0;
       resetAllCels();
       animate();
     }

@@ -8,6 +8,8 @@ Changelog
 
 1. Fixed `Timeline.init()`. The timeline remembers the current cel, current sequence and current iteration for every `Character` instance on every frame in the animation. 
 
+2. Moved `current_frame`, `current_bp` and `breakpoints` inside `Timeline`. Scrapped these and `fps` from `stage`'s scope. Everything works.
+
 
 
 **12/12/11**
