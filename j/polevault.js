@@ -8,7 +8,6 @@ function stage () {
       current_bp = 0, // by default, the first breakpoint
       current_frame = 0,
       a_queue = [],
-      timeline = [],
       slider,
       scrubber,
       back,
@@ -11888,6 +11887,7 @@ function stage () {
           len = arguments.length;
 
       for (i = 0; i < len; i += 1) {
+        arguments[i].countSpan();
         this.queue.push(arguments[i]);
       }
     },
@@ -11915,104 +11915,74 @@ function stage () {
         this.frames[i] = [];
       }
     },
-    test_init : function () {
-      var i, j, k, m, n,
-          frame_counter = 0;
-      
-      /* ### object should be all you need here ### */
-      function objKeyMaker(key, current_seq, current_cel, visible) {
-        var i,
-            obj = {};
-        if (arguments.length == 4) {
-          obj[arguments[0]] = {
-            cs : arguments[1],
-            cc : arguments[2],
-            vis : arguments[3]
-          };
-        }
-        if (arguments.length == 1) {
-          obj[arguments[0]] = null;
-        }
+    storeInFrames : function (character) {
+      var i, 
+          frame_count = 0,
+          cs = 0,
+          cc = 0,
+          it = 0,
+          visible = true;
+
+      /* ... variables won't work as keys in an object literal. this helper gets around that ... */
+      function objKeyMaker (name, current_seq, current_cel, visible) {
+        var obj = {};
+
+        obj[name] = {
+          cs : current_seq,
+          cc : current_cel,
+          vis : visible 
+        };
+        
+        /* ### how will we check for visibility on a specified frame? ### */
         return obj;
       };
 
-      this.setFrameTotal();
-      this.declareFrames();
+      for (i = 0; i < this.frame_total; i += 1) {
 
+        this.frames[frame_count].push(
+          objKeyMaker(character.name, character.sequence_order[cs], cc, visible)
+        );
+        frame_count += 1;
+
+        /* ... if this Character has cels that haven't been drawn ... */
+        if (frame_count < character.span) {
+          cc += 1;
+
+          /* ... if frame_count reaches the end of a sequence before it's done iterating ... */
+          if (character[character.sequence_order[cs]].iterations > 1 && 
+              frame_count % character[character.sequence_order[cs]].cels.length == 0) {
+            it += 1;
+            cc = 0;
+          }
+          /* ... if frame_count reaches the end of a sequence that's done iterating
+          and there's another sequence on deck ... */
+          if (character.sequence_order[(cs + 1)]) {
+            if (it == character[character.sequence_order[cs]].iterations &&
+                frame_count == character[character.sequence_order[(cs + 1)]].starting_frame) {
+              cs += 1;
+              it = 0;
+              cc = 0;
+            }
+          }
+        }
+      }
     },
     init : function () {
-      var i, j, k, m, n,
-          frame_counter = 0,
-          q_len = this.queue.length,
-          seq_len,
-          cel_len,
-          seq,
-          iterations;
-
-      function objKeyMaker(key, current_seq, current_cel, visible) {
-        var i,
-            obj = {};
-        if (arguments.length == 4) {
-          obj[arguments[0]] = {
-            cs : arguments[1],
-            cc : arguments[2],
-            vis : arguments[3]
-          };
-        }
-        if (arguments.length == 1) {
-          obj[arguments[0]] = null;
-        }
-        return obj;
-      };
-
+      var i, j, 
+          len = this.queue.length;
+      
       this.setFrameTotal();
       this.declareFrames();
 
-      /* ... for each Character on the stage ... */
-      for (i = 0; i < q_len; i += 1) {
-        seq_len = this.queue[i].sequence_order.length;
-
-        /* ... for each sequence in that Character... */
-        for (j = 0; j < seq_len; j += 1) {
-          seq = this.queue[i].sequence_order[j];
-          cel_len = this.queue[i][seq].cels.length;
-          iterations = this.queue[i][seq].iterations;
-
-          /* ... for each iteration of that Character's current sequence ... */
-          for (k = 0; k < iterations; k += 1) {
-
-            /* ... if there's a gap between the end of the last sequence and the start of the next one,
-            fill it with null values ... */
-            if (frame_counter != 0 && this.queue[i][seq].starting_frame > (frame_counter + 1)) {
-              gap = (this.queue[i][seq].starting_frame + (0 - frame_counter));
-              for (n = 0; n < gap; n += 1) {
-                this.frames[frame_counter].push(objKeyMaker(this.queue[i].name));
-              }
-              frame_counter += (n + 1);
-            }
-
-            for (m = 0; m < cel_len; m += 1) { 
-              this.frames[frame_counter].push(
-                objKeyMaker(this.queue[i].name, this.queue[i].sequence_order[j], m, this.queue[i].visible)
-              );
-              frame_counter += 1;
-            }
-
-          }
-          
-          /* ... the rest of the array could be filled out here ... 
-          if (frame_counter < (this.frame_total - 1)) {
-            alert("boom boom");
-          }
-          */
-        }
-        frame_counter = 0;
+      for (i = 0; i < len; i += 1) {
+        this.storeInFrames(this.queue[i]);
       }
-    }
+    },
   };
 
   t = new Timeline(75);
   t.load(slider, scrubber, back, forward, track, pit, shadow, vaulter, pitforeground);
+  t.init();
 
   function setFinalBreakpoint () {
     if (setFinalBreakpoint.alreadySet) {
@@ -12168,7 +12138,6 @@ function stage () {
   shadow.load();
   vaulter.load();
   pitforeground.load();
-  t.init();
   drawFrame(a_queue);
 
   /* ... click detection ... */

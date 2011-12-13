@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/13/11**
+
+1. Fixed `Timeline.init()`. The timeline remembers the current cel, current sequence and current iteration for every `Character` instance on every frame in the animation. 
+
+
+
 **12/12/11**
 
 1. Added a constructor and prototype for a `Timeline` class. `Timeline` stores history and methods for every frame in the animation. `frame_total`, `current_frame`, the `breakpoints` array, `current_breakpoint` and `fps` are moving into this class.
