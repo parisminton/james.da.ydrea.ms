@@ -92,12 +92,26 @@ function stage () {
       }
       this.current_seq = 0;
     },
+    countSpan : function () {
+      var i, cs;
+
+      for (i = 0; i < this.sequence_order.length; i += 1) {
+        cs = this.sequence_order[i];
+        if (this.span) {
+          this.span = (this.span > ((this[cs].cels.length * this[cs].iterations) + this[cs].starting_frame)) ? this.span : ((this[cs].cels.length * this[cs].iterations) + this[cs].starting_frame);
+        }
+        else {
+          this.span = ((this[cs].cels.length * this[cs].iterations) + this[cs].starting_frame);
+        }
+      }
+    },
     load : function () { 
       this.reset();
       this.queue_index = (a_queue.length) ? a_queue.length : 0;
       a_queue.push(this);
       t.setFrameTotal();
       setFinalBreakpoint();
+      this.countSpan();
     },
     advance : function () {
       var cs = this.current_seq,
@@ -11897,6 +11911,31 @@ function stage () {
         this.frames[i] = [];
       }
     },
+    test_init : function () {
+      var i, j, k, m, n,
+          frame_counter = 0;
+      
+      /* ### object should be all you need here ### */
+      function objKeyMaker(key, current_seq, current_cel, visible) {
+        var i,
+            obj = {};
+        if (arguments.length == 4) {
+          obj[arguments[0]] = {
+            cs : arguments[1],
+            cc : arguments[2],
+            vis : arguments[3]
+          };
+        }
+        if (arguments.length == 1) {
+          obj[arguments[0]] = null;
+        }
+        return obj;
+      };
+
+      this.setFrameTotal();
+      this.declareFrames();
+
+    },
     init : function () {
       var i, j, k, m, n,
           frame_counter = 0,
@@ -11969,7 +12008,7 @@ function stage () {
   };
 
   t = new Timeline(75);
-  t.load(slider, scrubber, back, forward, track, pit, shadow, vaulter);
+  t.load(slider, scrubber, back, forward, track, pit, shadow, vaulter, pitforeground);
 
   function setFinalBreakpoint () {
     if (setFinalBreakpoint.alreadySet) {

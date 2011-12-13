@@ -8,7 +8,9 @@ Changelog
 
 1. Added a constructor and prototype for a `Timeline` class. `Timeline` stores history and methods for every frame in the animation. `frame_total`, `current_frame`, the `breakpoints` array, `current_breakpoint` and `fps` are moving into this class.
 
-2. `Timeline.init()` is now working.
+2. `Timeline.init()` is now working, though I was wrong about how the `frames` array should store members. I'm revising this function. 
+
+3. Added `Character.countSpan()` to store the total number of cels a `Character` puts on the timeline. Having this number handy makes it easier to do some of the math `Timeline.init()` needs.
 
 
 
