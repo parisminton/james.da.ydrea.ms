@@ -4,6 +4,14 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/14/11**
+
+1. Finished making the `Slider` class and combined the previous `slider` and `scrubber` into a new instance of it. `Slider` inherits from `Character` -- it borrows its prototype.
+
+2. Adapted `renderCharacter()` to sniff out `Slider` instances and make sure the track is drawn before the scrubber on each frame.
+
+
+
 **12/13/11**
 
 1. Fixed `Timeline.init()`. The timeline remembers the current cel, current sequence and current iteration for every `Character` instance on every frame in the animation. 

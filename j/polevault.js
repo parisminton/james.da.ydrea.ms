@@ -6,7 +6,6 @@ function stage () {
       button_sprite = new Image(), 
       a_queue = [],
       slider,
-      scrubber,
       back,
       forward,
       track,
@@ -17,16 +16,10 @@ function stage () {
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
   
-  function Character (obj_name, touchable, boundary) {
+  function Character (obj_name, touchable) {
     this.name = obj_name;
     this.visible = false;
     this.touchable = touchable;
-    if (arguments.length > 2) {
-      this.boundary = boundary;
-    }
-    else {
-      this.boundary = false;
-    }
     this.current_seq = 0; 
     this.sequence_order = ["main"];
     this.main = {
@@ -41,6 +34,7 @@ function stage () {
       current_cel : 0,
       cels : []
     };
+    this.constructor = Character;
   };
   Character.prototype = {
     show : function () {
@@ -111,7 +105,34 @@ function stage () {
     },
     advance : function () {
       var cs = this.current_seq,
-          order = this.sequence_order;
+          order = this.sequence_order,
+          i,
+          c_len;
+
+      /* ### drawing instructions should go elsewhere ###
+      
+      if this sequence has a boundary, add xdistance and ydistance to those coordinates, too.
+
+      if (typeof this[cs].boundary == "function") {
+        c_len = this[cs].cache.length;
+
+        this[cs].boundary = function = () {
+          if (this.visible) {
+            for (i = 0; i < c_len; i += 1) {
+              if (typeof this[cs].cache[i] == "string") {
+                context[this[cs].cache[i]](); 
+              }
+              if (type of this[cs].cache[i] == "object") {
+                for (key in this[cs].cache[i]) {
+                  context[key].apply(null, this[cs].cache[i][key]);
+                }
+              }
+            }
+          }
+        }
+
+      }
+      */
 
       this[order[cs]].xdistance += this[order[cs]].xinc;
       this[order[cs]].ydistance += this[order[cs]].yinc;
@@ -228,21 +249,30 @@ function stage () {
     restore : function () {
       this.store("restore");
       context.restore();
+    },
+
+    getMousedown : function (evt) {
+      var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
+          y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
+      
+      this.boundary();
+      if (context.isPointInPath(x, y)) {
+        alert("Come Wit Me.");
+      }
     }
   };
 
-  function Scrubber (obj_name, touchable, boundary) {
+  function Slider (obj_name) {
     this.name = obj_name;
     this.visible = true;
     this.touchable = true;
-    if (arguments.length > 2) {
-      this.boundary = boundary;
-    }
-    else {
-      this.boundary = false;
-    }
-    this.sequence_order[this.current_seq] = "scrubber";
+    this.current_seq = 0; 
+    this.sequence_order = ["track", "scrubber"];
     this.track = {
+      xdistance : 0,
+      ydistance : 0,
+      xinc : 0,
+      yinc : 0,
       starting_frame : 0,
       cache : [],
       iterations : 1,
@@ -262,132 +292,45 @@ function stage () {
       current_cel : 0,
       cels : []
     };
+    this.constructor = Slider;
   };
-  Scrubber.prototype = {
-    setCurrentCoords : function () {
-      // add ipf to each x- or y-value in the cache
-      // current_something becomes all the new drawing instructions
-      var i,
-          c = this[this.sequence_order[this.current_seq]].cache,
-          len = this[this.sequence_order[this.current_seq]].cache.length,
-          xpos,
-          ypos,
-          xctrl_1,
-          yctrl_1,
-          xctrl_2,
-          yctrl_2,
-          width,
-          height,
-          xstart,
-          ystart,
-          xend,
-          yend,
-          offset;
-          
-      for (i = 0; i < len; i += 1) {
-        if (typeof c[i] == "string") {
-          ctx[c[i]](); // ### this[c[i]](); ### 
-        }
-        else if (typeof c[i] == "object") {
-          for (key in c[i]) {
-            if (key == "gradient") {
-              gradient = c[i][key]; // ### this may not have been stored ###
-            }
-            else {
-              switch (key) {
-
-              /* ### TODO: addInc() function to add the increment based on odd/even value ### */
-
-              case "moveTo":
-                xpos = (c[i][key][0] + xipf);
-                ypos = (c[i][key][1] + yipf);
-                ctx.moveTo(xpos, ypos);
-                break;
-              
-              case "lineTo":
-                xpos = (c[i][key][0] + xipf);
-                ypos = (c[i][key][1] + yipf);
-                ctx.lineTo(xpos, ypos);
-                break;
-              
-              case "lineWidth":
-                ctx.lineWidth = c[i][key];
-                break;
-
-              case "lineJoin":
-                ctx.lineJoin = c[i][key];
-                break;
-
-              case "miterLimit":
-                ctx.miterLimit = c[i][key];
-                break;
-
-              case "bezierCurveTo":
-                xctrl_1 = (c[i][key][0] + xipf);
-                yctrl_1 = (c[i][key][1] + yipf);
-                xctrl_2 = (c[i][key][2] + xipf);
-                yctrl_2 = (c[i][key][3] + yipf);
-                xpos = (c[i][key][4] + xipf);
-                ypos = (c[i][key][5] + yipf);
-                ctx.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
-                break;
-
-              case "strokeRect":
-                xpos = (c[i][key][0] + xipf);
-                ypos = (c[i][key][1] + xipf);
-                width = c[i][key][2];
-                height = c[i][key][3];
-                ctx.strokeRect(xpos, ypos, width, height);
-                break;
-
-              case "fillRect":
-                xpos = (c[i][key][0] + xipf);
-                ypos = (c[i][key][1] + xipf);
-                width = c[i][key][2];
-                height = c[i][key][3];
-                ctx.fillRect(xpos, ypos, width, height);
-                break;
-
-              case "addColorStop":
-                offset = c[i][key][0];
-                color_string = c[i][key][1];
-                gradient.addColorStop(offset, color_string);
-                break;
-
-              case "fillStyle":
-                ctx.fillStyle = c[i][key];
-                break;
-                
-              case "strokeStyle":
-                ctx.strokeStyle = c[i][key];
-                break;
-                
-              default:
-                break;
-              
-              }
-            }
-          }
-        }
-      }
-    }
-  };
+  Slider.prototype = Character.prototype; 
 
   function renderCharacter (obj, ctx) {
     var cs = obj.sequence_order[obj.current_seq],
         cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
+
     ctx = (ctx) ? ctx : context;
-    if (typeof obj[cs].cels[cc] == "function") {
-      obj[cs].cels[cc](ctx);
+    
+    /* ... if this is a slider, always draw the track before drawing the scrubber
+    on the same frame ... */
+    if (obj.constructor == Slider) {
+      if (typeof obj[cs].cels[cc] == "function") {
+        obj.current_seq = 0;
+        obj.track.cels[cc](ctx);
+        obj.current_seq = 1;
+        obj.scrubber.cels[cc](ctx);
+      }
+      else {
+        obj.current_seq = 0;
+        obj.track.cels[(obj.track.cels.length - 1)](ctx);
+        obj.current_seq = 1;
+        obj.scrubber.cels[(obj.scrubber.cels.length - 1)](ctx);
+      }
     }
     else {
-      obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
+      if (typeof obj[cs].cels[cc] == "function") {
+        obj[cs].cels[cc](ctx);
+      }
+      else {
+        obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
+      }
     }
   };
 
-  slider = new Character("slider", false);
+  slider = new Slider("slider", false);
   slider.show();
-  slider.main.cels = [
+  slider.track.cels = [
     function () {
       if (slider.visible) {
 
@@ -439,60 +382,83 @@ function stage () {
       }
     }
   ];
-
-  scrubber = new Character("scrubber", false);
-  scrubber.show();
-  scrubber.main.xinc = 3.21; 
-  scrubber.main.cels = [
+  slider.scrubber.cels = [
     function () {
-      if (scrubber.visible) {
+      if (slider.visible) {
 
         var gradient;
 
-        // scrubber/Group
-        scrubber.save();
+        // slider/Group
+        slider.save();
 
-        // scrubber/Group/Path
-        scrubber.save();
-        scrubber.beginPath();
-        scrubber.moveTo(72.4, 388.0);
-        scrubber.lineTo(72.4, 381.1);
-        scrubber.bezierCurveTo(72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
-        scrubber.lineTo(93.7, 375.9);
-        scrubber.bezierCurveTo(96.6, 375.9, 98.9, 378.2, 98.9, 381.1);
-        scrubber.lineTo(98.9, 388.0);
-        scrubber.bezierCurveTo(98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
-        scrubber.lineTo(85.6, 405.5);
-        scrubber.lineTo(75.1, 395.2);
-        scrubber.bezierCurveTo(73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
-        scrubber.closePath();
-        gradient = scrubber.createLinearGradient(95.9, 376.0, 73.6, 397.4)
-        scrubber.addColorStop(gradient, 0.00, "rgb(234, 236, 236)");
-        scrubber.addColorStop(gradient, 1.00, "rgb(203, 203, 203)");
-        scrubber.fillStyle(gradient);
-        scrubber.fill();
-        scrubber.strokeStyle("rgb(153, 153, 153)");
-        scrubber.stroke();
+        // slider/Group/Path
+        slider.save();
+        slider.beginPath();
+        slider.moveTo(72.4, 388.0);
+        slider.lineTo(72.4, 381.1);
+        slider.bezierCurveTo(72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
+        slider.lineTo(93.7, 375.9);
+        slider.bezierCurveTo(96.6, 375.9, 98.9, 378.2, 98.9, 381.1);
+        slider.lineTo(98.9, 388.0);
+        slider.bezierCurveTo(98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
+        slider.lineTo(85.6, 405.5);
+        slider.lineTo(75.1, 395.2);
+        slider.bezierCurveTo(73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
+        slider.closePath();
+        gradient = slider.createLinearGradient(95.9, 376.0, 73.6, 397.4)
+        slider.addColorStop(gradient, 0.00, "rgb(234, 236, 236)");
+        slider.addColorStop(gradient, 1.00, "rgb(203, 203, 203)");
+        slider.fillStyle(gradient);
+        slider.fill();
+        slider.strokeStyle("rgb(153, 153, 153)");
+        slider.stroke();
 
-        // scrubber/Group/Path
-        scrubber.beginPath();
-        scrubber.moveTo(85.3, 406.1);
-        scrubber.lineTo(74.7, 395.7);
-        scrubber.bezierCurveTo(72.6, 393.7, 72.0, 391.4, 72.0, 388.5);
-        scrubber.lineTo(72.0, 381.6);
-        scrubber.bezierCurveTo(72.0, 380.6, 72.3, 379.7, 72.7, 378.9);
-        scrubber.bezierCurveTo(71.9, 379.9, 71.3, 381.1, 71.3, 382.5);
-        scrubber.lineTo(71.3, 389.4);
-        scrubber.bezierCurveTo(71.3, 392.2, 72.0, 394.6, 74.0, 396.5);
-        scrubber.lineTo(84.6, 406.9);
-        scrubber.lineTo(85.3, 406.1);
-        scrubber.closePath();
-        scrubber.fillStyle("rgb(139, 149, 159)");
-        scrubber.fill();
-        scrubber.restore();
+        // slider/Group/Path
+        slider.beginPath();
+        slider.moveTo(85.3, 406.1);
+        slider.lineTo(74.7, 395.7);
+        slider.bezierCurveTo(72.6, 393.7, 72.0, 391.4, 72.0, 388.5);
+        slider.lineTo(72.0, 381.6);
+        slider.bezierCurveTo(72.0, 380.6, 72.3, 379.7, 72.7, 378.9);
+        slider.bezierCurveTo(71.9, 379.9, 71.3, 381.1, 71.3, 382.5);
+        slider.lineTo(71.3, 389.4);
+        slider.bezierCurveTo(71.3, 392.2, 72.0, 394.6, 74.0, 396.5);
+        slider.lineTo(84.6, 406.9);
+        slider.lineTo(85.3, 406.1);
+        slider.closePath();
+        slider.fillStyle("rgb(139, 149, 159)");
+        slider.fill();
+        slider.restore();
       }
     }
   ];
+  slider.scrubber.xinc = 3.21; 
+  slider.makeSequence("boundary");
+  slider.boundary = function () {
+    if (slider.visible) {
+
+      var gradient;
+
+      // slider/Group
+      slider.save();
+
+      // slider/Group/Path
+      slider.save();
+      slider.beginPath();
+      slider.moveTo(72.4, 388.0);
+      slider.lineTo(72.4, 381.1);
+      slider.bezierCurveTo(72.4, 378.2, 74.7, 375.9, 77.6, 375.9);
+      slider.lineTo(93.7, 375.9);
+      slider.bezierCurveTo(96.6, 375.9, 98.9, 378.2, 98.9, 381.1);
+      slider.lineTo(98.9, 388.0);
+      slider.bezierCurveTo(98.9, 390.9, 98.2, 393.2, 96.2, 395.2);
+      slider.lineTo(85.6, 405.5);
+      slider.lineTo(75.1, 395.2);
+      slider.bezierCurveTo(73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
+      slider.closePath();
+      slider.restore();
+    }
+  };
 
   back = new Character("back", false);
   back.show();
@@ -11978,7 +11944,7 @@ function stage () {
   };
 
   t = new Timeline(75);
-  t.load(slider, scrubber, back, forward, track, pit, shadow, vaulter, pitforeground);
+  t.load(slider, back, forward, track, pit, shadow, vaulter, pitforeground);
   t.init();
 
   function setFinalBreakpoint () {
@@ -12085,7 +12051,8 @@ function stage () {
   };
 
   the_canvas.addEventListener("mouseover", dela, false);
-  the_canvas.addEventListener("click", getClick, false);
+  the_canvas.addEventListener("click", dispatchClick, false);
+  the_canvas.addEventListener("mousedown", dispatchMousedown, false);
 
   function playButton(ctx) {
 
@@ -12127,7 +12094,6 @@ function stage () {
   }
   
   slider.load();
-  scrubber.load();
   back.load();
   forward.load();
   track.load();
@@ -12138,10 +12104,9 @@ function stage () {
   drawFrame(a_queue);
 
   /* ... click detection ... */
-  function getClick (evt) {
+  function dispatchClick (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
-        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
-        i, len;
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
         
     playButtonBoundary(context);
     if (context.isPointInPath(x, y)) {
@@ -12155,13 +12120,34 @@ function stage () {
     }
   };
 
-  function getHover (evt) {
+  function dispatchHover (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
-        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
-        i, len;
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
+
     playButtonBoundary(context);
   };
 
+  function dispatchMousedown (evt) {
+    var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
+        selected = false;
+    
+    slider.boundary();
+    if (context.isPointInPath(x, y)) {
+      console.log("Come Wit Me.");
+    }
+  };
+    
+  function dispatchMouseup (evt) {
+    var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
+    
+    slider.boundary();
+    if (context.isPointInPath(x, y)) {
+      console.log("Blue Girl.");
+    }
+  };
+    
   function playButtonBoundary (ctx) {
     ctx.save();
     ctx.beginPath();
