@@ -5,6 +5,7 @@ function stage () {
       t,
       button_sprite = new Image(), 
       a_queue = [],
+      rollover_count = 0,
       slider,
       back,
       forward,
@@ -78,7 +79,7 @@ function stage () {
       for (i = 0; i < len; i += 1) {
         this[this.sequence_order[i]].current_cel = 0;
         this[this.sequence_order[i]].current_iteration = 0;
-        this[this.sequence_order[i]].xdistance = 0; 
+          this[this.sequence_order[i]].xdistance = 0; 
       }
       this.current_seq = 0;
     },
@@ -109,31 +110,6 @@ function stage () {
           i,
           c_len;
 
-      /* ### drawing instructions should go elsewhere ###
-      
-      if this sequence has a boundary, add xdistance and ydistance to those coordinates, too.
-
-      if (typeof this[cs].boundary == "function") {
-        c_len = this[cs].cache.length;
-
-        this[cs].boundary = function = () {
-          if (this.visible) {
-            for (i = 0; i < c_len; i += 1) {
-              if (typeof this[cs].cache[i] == "string") {
-                context[this[cs].cache[i]](); 
-              }
-              if (type of this[cs].cache[i] == "object") {
-                for (key in this[cs].cache[i]) {
-                  context[key].apply(null, this[cs].cache[i][key]);
-                }
-              }
-            }
-          }
-        }
-
-      }
-      */
-
       this[order[cs]].xdistance += this[order[cs]].xinc;
       this[order[cs]].ydistance += this[order[cs]].yinc;
       
@@ -151,6 +127,14 @@ function stage () {
         }
       }
       if (t.current_frame >= t.frame_total) {
+        /*
+        if (this.constructor == Slider) {
+          if (order[cs] == "scrubber") {
+            this[order[cs]].xlimit = this[order[cs]].xdistance;
+            this[order[cs]].ylimit = this[order[cs]].ydistance;
+          }
+        }
+        */
         this.reset();
       }
     },
@@ -285,6 +269,8 @@ function stage () {
       ydistance : 0,
       xinc : 0,
       yinc : 0,
+      xlimit : 0, 
+      ylimit : 0, 
       starting_frame : 0,
       cache : [],
       iterations : 1,
@@ -294,40 +280,166 @@ function stage () {
     };
     this.constructor = Slider;
   };
-  Slider.prototype = Character.prototype; 
+  Slider.prototype = new Character(); 
+  Slider.prototype.setScrubberLimits = function () {
+    var i,
+        len = this.sequence_order.length,
+        cs_string; 
 
-  function renderCharacter (obj, ctx) {
-    var cs = obj.sequence_order[obj.current_seq],
-        cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
+    for (i = 0; i < len; i += 1) {
+      cs_string = this.sequence_order[i];
 
-    ctx = (ctx) ? ctx : context;
-    
-    /* ... if this is a slider, always draw the track before drawing the scrubber
-    on the same frame ... */
-    if (obj.constructor == Slider) {
-      if (typeof obj[cs].cels[cc] == "function") {
-        obj.current_seq = 0;
-        obj.track.cels[cc](ctx);
-        obj.current_seq = 1;
-        obj.scrubber.cels[cc](ctx);
-      }
-      else {
-        obj.current_seq = 0;
-        obj.track.cels[(obj.track.cels.length - 1)](ctx);
-        obj.current_seq = 1;
-        obj.scrubber.cels[(obj.scrubber.cels.length - 1)](ctx);
-      }
-    }
-    else {
-      if (typeof obj[cs].cels[cc] == "function") {
-        obj[cs].cels[cc](ctx);
-      }
-      else {
-        obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
+      if (cs_string == "scrubber") {
+        this[cs_string].xlimit = ((t.frame_total * this[cs_string].xinc) - this[cs_string].xinc);
+        this[cs_string].ylimit = ((t.frame_total * this[cs_string].yinc) - this[cs_string].yinc);
       }
     }
   };
+  Slider.prototype.drawBoundary = function () {
+    var old_cs = this.current_seq,
+        cs = this.current_seq = 1,
+        cs_string = this.sequence_order[cs];
 
+    /* ... when the scrubber\'s all the way right ... */
+    if (t.current_frame == 0 && rollover_count > 0) {
+      this[cs_string].xdistance = this[cs_string].xlimit; 
+      this[cs_string].ydistance = this[cs_string].ylimit; 
+      this.boundary();
+      console.log(cs_string);
+      this[cs_string].xdistance = 0;
+      this[cs_string].ydistance = 0; 
+    }
+    /* ... when the scrubber\'s somewhere in between ... */
+    else if (t.current_frame > 0 && t.current_frame < t.frame_total) {
+      this[cs_string].xdistance -= this[cs_string].xinc; 
+      this[cs_string].ydistance -= this[cs_string].yinc; 
+      console.log(cs_string);
+      this.boundary();
+      this[cs_string].xdistance += this[cs_string].xinc;
+      this[cs_string].ydistance += this[cs_string].yinc;
+    }
+    else { // ... when the scrubber\'s all the way left ...
+      this.boundary();
+    }
+    this.current_seq = old_cs;
+  };
+  Slider.prototype.load = function () {
+    this.reset();
+    this.queue_index = (a_queue.length) ? a_queue.length : 0;
+    a_queue.push(this);
+    t.setFrameTotal();
+    setFinalBreakpoint();
+    this.setScrubberLimits();
+  };
+
+  function Timeline (fps) {
+    this.queue = [];
+    this.frame_total = 0;
+    this.frames = [];
+    this.current_frame = 0;
+    this.breakpoints = [46, 49, 81];
+    this.current_bp = 0; // by default, the first breakpoint
+    this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
+  };
+  Timeline.prototype = {
+    load : function () {
+      var i,
+          len = arguments.length;
+
+      for (i = 0; i < len; i += 1) {
+        arguments[i].countSpan();
+        this.queue.push(arguments[i]);
+      }
+    },
+    setFrameTotal : function () {
+      var i, j,
+          len = this.queue.length,
+          len2,
+          seq;
+
+      for (i = 0; i < len; i += 1) {
+        len2 = this.queue[i].sequence_order.length;
+
+        for (j = 0; j < len2; j += 1) {
+          seq = this.queue[i].sequence_order[j];
+
+          this.frame_total = (this.frame_total > (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations))) ? this.frame_total : (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations));
+        }
+      }
+      return this.frame_total;
+    },
+    declareFrames : function () {
+      var i;
+
+      for (i = 0; i < this.frame_total; i += 1) {
+        this.frames[i] = [];
+      }
+    },
+    storeInFrames : function (character) {
+      var i, 
+          frame_count = 0,
+          cs = 0,
+          cc = 0,
+          it = 0,
+          visible = true;
+
+      /* ... variables won't work as keys in an object literal. this helper gets around that ... */
+      function objKeyMaker (name, current_seq, current_cel, visible) {
+        var obj = {};
+
+        obj[name] = {
+          cs : current_seq,
+          cc : current_cel,
+          vis : visible 
+        };
+        
+        /* ### how will we check for visibility on a specified frame? ### */
+        return obj;
+      };
+
+      for (i = 0; i < this.frame_total; i += 1) {
+
+        this.frames[frame_count].push(
+          objKeyMaker(character.name, character.sequence_order[cs], cc, visible)
+        );
+        frame_count += 1;
+
+        /* ... if this Character has cels that haven't been drawn ... */
+        if (frame_count < character.span) {
+          cc += 1;
+
+          /* ... if frame_count reaches the end of a sequence before it's done iterating ... */
+          if (character[character.sequence_order[cs]].iterations > 1 && 
+              frame_count % character[character.sequence_order[cs]].cels.length == 0) {
+            it += 1;
+            cc = 0;
+          }
+          /* ... if frame_count reaches the end of a sequence that's done iterating
+          and there's another sequence on deck ... */
+          if (character.sequence_order[(cs + 1)]) {
+            if (it == character[character.sequence_order[cs]].iterations &&
+                frame_count == character[character.sequence_order[(cs + 1)]].starting_frame) {
+              cs += 1;
+              it = 0;
+              cc = 0;
+            }
+          }
+        }
+      }
+    },
+    init : function () {
+      var i, j, 
+          len = this.queue.length;
+      
+      this.setFrameTotal();
+      this.declareFrames();
+
+      for (i = 0; i < len; i += 1) {
+        this.storeInFrames(this.queue[i]);
+      }
+    },
+  };
+  
   slider = new Slider("slider", false);
   slider.show();
   slider.track.cels = [
@@ -455,6 +567,8 @@ function stage () {
       slider.lineTo(85.6, 405.5);
       slider.lineTo(75.1, 395.2);
       slider.bezierCurveTo(73.1, 393.2, 72.4, 390.9, 72.4, 388.0);
+      slider.strokeStyle("rgb(255, 0, 0)");
+      slider.stroke();
       slider.closePath();
       slider.restore();
     }
@@ -11821,131 +11935,42 @@ function stage () {
     }
   ];
 
-  /* ...because objects don\'t offer a length property, this counter helps in loops... */
-  function getObjectLength(obj, prop) {
-    var length = 0;
-    if (arguments.length == 2) {
-      obj = obj.prop;
-    }
-    for (member in obj) {
-      if (obj.hasOwnProperty(member)) {
-        length += 1;
-      }
-    }
-    return length;
-  };
-  
-  function Timeline (fps) {
-    this.queue = [];
-    this.frame_total = 0;
-    this.frames = [];
-    this.current_frame = 0;
-    this.breakpoints = [46, 49, 81];
-    this.current_bp = 0; // by default, the first breakpoint
-    this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
-  };
-  Timeline.prototype = {
-    load : function () {
-      var i,
-          len = arguments.length;
-
-      for (i = 0; i < len; i += 1) {
-        arguments[i].countSpan();
-        this.queue.push(arguments[i]);
-      }
-    },
-    setFrameTotal : function () {
-      var i, j,
-          len = this.queue.length,
-          len2,
-          seq;
-
-      for (i = 0; i < len; i += 1) {
-        len2 = this.queue[i].sequence_order.length;
-
-        for (j = 0; j < len2; j += 1) {
-          seq = this.queue[i].sequence_order[j];
-
-          this.frame_total = (this.frame_total > (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations))) ? this.frame_total : (this.queue[i][seq].starting_frame + (this.queue[i][seq].cels.length * this.queue[i][seq].iterations));
-        }
-      }
-      return this.frame_total;
-    },
-    declareFrames : function () {
-      var i;
-
-      for (i = 0; i < this.frame_total; i += 1) {
-        this.frames[i] = [];
-      }
-    },
-    storeInFrames : function (character) {
-      var i, 
-          frame_count = 0,
-          cs = 0,
-          cc = 0,
-          it = 0,
-          visible = true;
-
-      /* ... variables won't work as keys in an object literal. this helper gets around that ... */
-      function objKeyMaker (name, current_seq, current_cel, visible) {
-        var obj = {};
-
-        obj[name] = {
-          cs : current_seq,
-          cc : current_cel,
-          vis : visible 
-        };
-        
-        /* ### how will we check for visibility on a specified frame? ### */
-        return obj;
-      };
-
-      for (i = 0; i < this.frame_total; i += 1) {
-
-        this.frames[frame_count].push(
-          objKeyMaker(character.name, character.sequence_order[cs], cc, visible)
-        );
-        frame_count += 1;
-
-        /* ... if this Character has cels that haven't been drawn ... */
-        if (frame_count < character.span) {
-          cc += 1;
-
-          /* ... if frame_count reaches the end of a sequence before it's done iterating ... */
-          if (character[character.sequence_order[cs]].iterations > 1 && 
-              frame_count % character[character.sequence_order[cs]].cels.length == 0) {
-            it += 1;
-            cc = 0;
-          }
-          /* ... if frame_count reaches the end of a sequence that's done iterating
-          and there's another sequence on deck ... */
-          if (character.sequence_order[(cs + 1)]) {
-            if (it == character[character.sequence_order[cs]].iterations &&
-                frame_count == character[character.sequence_order[(cs + 1)]].starting_frame) {
-              cs += 1;
-              it = 0;
-              cc = 0;
-            }
-          }
-        }
-      }
-    },
-    init : function () {
-      var i, j, 
-          len = this.queue.length;
-      
-      this.setFrameTotal();
-      this.declareFrames();
-
-      for (i = 0; i < len; i += 1) {
-        this.storeInFrames(this.queue[i]);
-      }
-    },
-  };
 
   t = new Timeline(75);
   t.load(slider, back, forward, track, pit, shadow, vaulter, pitforeground);
   t.init();
+
+  function renderCharacter (obj, ctx) {
+    var cs = obj.sequence_order[obj.current_seq],
+        cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
+
+    ctx = (ctx) ? ctx : context;
+    
+    /* ... if this is a slider, always draw the track before drawing the scrubber
+    on the same frame ... */
+    if (obj.constructor == Slider) {
+      if (typeof obj[cs].cels[cc] == "function") {
+        obj.current_seq = 0;
+        obj.track.cels[cc](ctx);
+        obj.current_seq = 1;
+        obj.scrubber.cels[cc](ctx);
+      }
+      else {
+        obj.current_seq = 0;
+        obj.track.cels[(obj.track.cels.length - 1)](ctx);
+        obj.current_seq = 1;
+        obj.scrubber.cels[(obj.scrubber.cels.length - 1)](ctx);
+      }
+    }
+    else {
+      if (typeof obj[cs].cels[cc] == "function") {
+        obj[cs].cels[cc](ctx);
+      }
+      else {
+        obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
+      }
+    }
+  };
 
   function setFinalBreakpoint () {
     if (setFinalBreakpoint.alreadySet) {
@@ -11990,6 +12015,7 @@ function stage () {
       t.current_frame = 0;
       t.current_bp = 0;
       animate.running = false;
+      rollover_count += 1;
       return "done";
     }
     if (t.current_frame >= t.breakpoints[t.current_bp]) {
@@ -12129,10 +12155,9 @@ function stage () {
 
   function dispatchMousedown (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
-        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
-        selected = false;
-    
-    slider.boundary();
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
+ 
+    slider.drawBoundary();
     if (context.isPointInPath(x, y)) {
       console.log("Come Wit Me.");
     }
@@ -12140,9 +12165,11 @@ function stage () {
     
   function dispatchMouseup (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
-        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop);
+        y = (evt.clientY + document.body.scrollTop + document.documentElement.scrollTop - the_canvas.offsetTop),
+        temp_xdistance = (slider.scrubber.xdistance - slider.scrubber.xinc),
+        temp_ydistance = (slider.scrubber.ydistance - slider.scrubber.yinc);
     
-    slider.boundary();
+    slider.drawBoundary();
     if (context.isPointInPath(x, y)) {
       console.log("Blue Girl.");
     }

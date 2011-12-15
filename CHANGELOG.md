@@ -4,6 +4,14 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/15/11**
+
+1. Added `xlimit` and `ylimit` members to the `scrubber` sequence in `Slider`. These represent the far extremes of the slider, the scrubber's position after it's traveled 100 percent of the track distance.
+
+2. Created `Slider.drawBoundary()`, which helps click detection for the scrubber by drawing a path before running `isPointInPath()`. This was tricky, because it needs to follow the scrubber as it moves, and `Slider` calls two different sequences on each draw.
+
+
+
 **12/14/11**
 
 1. Finished making the `Slider` class and combined the previous `slider` and `scrubber` into a new instance of it. `Slider` inherits from `Character` -- it borrows its prototype.
