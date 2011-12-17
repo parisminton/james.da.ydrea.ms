@@ -6,7 +6,13 @@ Changelog
 
 **12/16/11**
 
-1. Made an `Animator` class that collects all the machinery for drawing images to the screen. You can pass its constructor an optional number representing frames per second in miliseconds; the default is 75. The `Timeline` constructor now expects an `Animator` instance as its first argument.
+1. Made an `Animator` class that collects all the machinery for drawing images to the screen. You can pass its constructor an optional number representing frames per second in milliseconds; the default is 75. The `Timeline` constructor now expects an `Animator` instance as its first argument.
+
+2. Moved `playthrough_count` into `Timeline`.
+
+3. Adapted `Timeline.storeInFrames()` to store the `xdistance` and `ydistance` of every cel.
+
+4. Rounded all `xdistance` and `ydistance` calculations to two decimal places.
 
 
 

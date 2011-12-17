@@ -85,7 +85,7 @@ function stage () {
       for (i = 0; i < len; i += 1) {
         this[this.sequence_order[i]].current_cel = 0;
         this[this.sequence_order[i]].current_iteration = 0;
-          this[this.sequence_order[i]].xdistance = 0; 
+        this[this.sequence_order[i]].xdistance = 0; 
       }
       this.current_seq = 0;
     },
@@ -101,9 +101,6 @@ function stage () {
         else {
           this.span = ((this[cs].cels.length * this[cs].iterations) + this[cs].starting_frame);
         }
-        if (this.constructor == Slider) {
-          this.span -= 1;
-        }
       }
     },
 
@@ -113,8 +110,8 @@ function stage () {
           i,
           c_len;
 
-      this[order[cs]].xdistance += this[order[cs]].xinc;
-      this[order[cs]].ydistance += this[order[cs]].yinc;
+      this[order[cs]].xdistance = Math.round((this[order[cs]].xdistance + this[order[cs]].xinc) * 100) / 100;
+      this[order[cs]].ydistance = Math.round((this[order[cs]].ydistance + this[order[cs]].yinc) * 100) / 100;
       
       this[order[cs]].current_cel += 1;
       if (this[order[cs]].current_cel >= this[order[cs]].cels.length) {
@@ -320,7 +317,7 @@ function stage () {
         cs_string = this.sequence_order[cs];
 
     /* ... when the scrubber\'s all the way right ... */
-    if (this.timeline.current_frame == 0 && this.animator.playthrough_count > 0) {
+    if (this.timeline.current_frame == 0 && this.timeline.playthrough_count > 0) {
       this[cs_string].xdistance = this[cs_string].xlimit; 
       this[cs_string].ydistance = this[cs_string].ylimit; 
       this.boundary();
@@ -354,6 +351,7 @@ function stage () {
     this.current_frame = 0;
     this.breakpoints = [46, 49, 81];
     this.current_bp = 0; // by default, the first breakpoint
+    this.playthrough_count = 0;
     this.constructor = Timeline;
   };
   Timeline.prototype = {
@@ -419,19 +417,23 @@ function stage () {
     storeInFrames : function (character) {
       var i, 
           frame_count = 0,
-          cs = 0,
+          cs = (character.constructor == Slider) ? 1 : 0,
           cc = 0,
           it = 0,
+          xd = 0,
+          yd = 0,
           visible = true;
 
       /* ... variables won't work as keys in an object literal. this helper gets around that ... */
-      function objKeyMaker (name, current_seq, current_cel, visible) {
+      function objKeyMaker (name, current_seq, current_cel, visible, xdist, ydist) {
         var obj = {};
 
         obj[name] = {
           cs : current_seq,
           cc : current_cel,
-          vis : visible 
+          vis : visible, 
+          xd : xdist,
+          yd : ydist
         };
         
         /* ### how will we check for visibility on a specified frame? ### */
@@ -441,7 +443,7 @@ function stage () {
       for (i = 0; i < this.frame_total; i += 1) {
 
         this.frames[frame_count].push(
-          objKeyMaker(character.name, character.sequence_order[cs], cc, visible)
+          objKeyMaker(character.name, character.sequence_order[cs], cc, visible, xd, yd)
         );
         frame_count += 1;
 
@@ -464,6 +466,27 @@ function stage () {
               it = 0;
               cc = 0;
             }
+          }
+          /* ... if there are x- or y-increments set... */
+          if (character[character.sequence_order[cs]].xinc != 0) {
+            xd = Math.round((character[character.sequence_order[cs]].xinc * frame_count) * 100) / 100;
+          }
+          if (character[character.sequence_order[cs]].yinc != 0) {
+            yd = Math.round((character[character.sequence_order[cs]].yinc * frame_count) * 100) / 100;
+          }
+        }
+        /* ... if we\'ve run out of Character cels before running out of frames ... */
+        else {
+          /*
+          if (character.constructor == Slider) {
+            cs = 1;
+          }
+          */
+          if (character[character.sequence_order[cs]].xinc != 0) {
+            xd = Math.round((character[character.sequence_order[cs]].xinc * frame_count) * 100) / 100;
+          }
+          if (character[character.sequence_order[cs]].yinc != 0) {
+            yd = Math.round((character[character.sequence_order[cs]].yinc * frame_count) * 100) / 100;
           }
         }
       }
@@ -519,7 +542,6 @@ function stage () {
   /* CONSTRUCTOR ... does the heavy lifting of drawing frames ... */
   function Animator (fps) {
     this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
-    this.playthrough_count = 0;
     this.running = false;
     this.constructor = Animator;
     this.me = this;
@@ -539,7 +561,7 @@ function stage () {
           obj.timeline.current_frame = 0;
           obj.timeline.current_bp = 0;
           obj.running = false;
-          obj.playthrough_count += 1;
+          obj.timeline.playthrough_count += 1;
           return "done";
         }
         if (obj.timeline.current_frame >= obj.timeline.breakpoints[obj.timeline.current_bp]) {
