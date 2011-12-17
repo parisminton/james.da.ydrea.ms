@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+**12/16/11**
+
+1. Made an `Animator` class that collects all the machinery for drawing images to the screen. You can pass its constructor an optional number representing frames per second in miliseconds; the default is 75. The `Timeline` constructor now expects an `Animator` instance as its first argument.
+
+
+
 **12/15/11**
 
 1. Added `xlimit` and `ylimit` members to the `scrubber` sequence in `Slider`. These represent the far extremes of the slider, the scrubber's position after it's traveled 100 percent of the track distance.

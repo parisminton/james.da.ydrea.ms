@@ -2,10 +2,9 @@ function stage () {
   
   var the_canvas = document.getElementById("main-stage"),
       context = the_canvas.getContext("2d"),
-      t,
+      t, 
+      a,
       button_sprite = new Image(), 
-      a_queue = [],
-      rollover_count = 0,
       slider,
       back,
       forward,
@@ -16,7 +15,9 @@ function stage () {
       vaulter;
 
       button_sprite.src = "a/jd_pv_buttons_24bit.png";
-  
+
+
+  /* CONSTRUCTOR ... an entity on the screen with one or more cels ... */
   function Character (obj_name, touchable) {
     this.name = obj_name;
     this.visible = false;
@@ -38,12 +39,15 @@ function stage () {
     this.constructor = Character;
   };
   Character.prototype = {
+
     show : function () {
       this.visible = true;
     },
+
     hide : function () {
       this.visible = false;
     },
+
     setSequenceOrder : function() {
       var i,
           len = arguments.length;
@@ -59,6 +63,7 @@ function stage () {
         }
       }
     },
+
     makeSequence : function (seq_name) {
       this[seq_name] = {
         xdistance : 0,
@@ -73,6 +78,7 @@ function stage () {
         cels : []
       };
     },
+
     reset : function () {
       var i = 0,
           len = this.sequence_order.length;
@@ -83,6 +89,7 @@ function stage () {
       }
       this.current_seq = 0;
     },
+
     countSpan : function () {
       var i, cs;
 
@@ -94,16 +101,12 @@ function stage () {
         else {
           this.span = ((this[cs].cels.length * this[cs].iterations) + this[cs].starting_frame);
         }
+        if (this.constructor == Slider) {
+          this.span -= 1;
+        }
       }
     },
-    load : function () { 
-      this.reset();
-      this.queue_index = (a_queue.length) ? a_queue.length : 0;
-      a_queue.push(this);
-      t.setFrameTotal();
-      setFinalBreakpoint();
-      this.countSpan();
-    },
+
     advance : function () {
       var cs = this.current_seq,
           order = this.sequence_order,
@@ -126,56 +129,57 @@ function stage () {
           this[order[cs]].current_cel = 0;
         }
       }
-      if (t.current_frame >= t.frame_total) {
-        /*
-        if (this.constructor == Slider) {
-          if (order[cs] == "scrubber") {
-            this[order[cs]].xlimit = this[order[cs]].xdistance;
-            this[order[cs]].ylimit = this[order[cs]].ydistance;
-          }
-        }
-        */
+      if (this.timeline.current_frame >= this.timeline.frame_total) {
         this.reset();
       }
     },
+
     store : function (member) {
       this[this.sequence_order[this.current_seq]].cache.push(member);
     },
+
     emptyCache : function () {
       if (this[this.sequence_order[this.current_seq]] && this[this.sequence_order[this.current_seq]].cache) {
         this[this.sequence_order[this.current_seq]].cache.length = 0;
       }
     },
 
+
     /* ... drawing instructions that update their coordinates before processing ... */
     beginPath : function () {
       this.store("beginPath");
       context.beginPath();
     },
+
     moveTo : function (xpos, ypos) {
       this.store( {moveTo : [xpos, ypos]} );
       xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
       ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.moveTo(xpos, ypos);
     },
+
     lineTo : function (xpos, ypos) {
       this.store( {lineTo : [xpos, ypos]} );
       xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
       ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.lineTo(xpos, ypos);
     },
+
     lineWidth : function (line_width) {
       this.store( {lineWidth : line_width} );
       context.lineWidth = line_width;
     },
+
     lineJoin : function (line_join) {
       this.store( {lineJoin : line_join} );
       context.lineJoin = line_join;
     },
+
     miterLimit : function (miter_limit) {
       this.store( {miterLimit : miter_limit} );
       context.miterLimit = miter_limit;
     },
+
     bezierCurveTo : function (xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos) {
       this.store( {bezierCurveTo : [xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos]} );
       xctrl_1 = (xctrl_1 + this[this.sequence_order[this.current_seq]].xdistance);
@@ -186,54 +190,66 @@ function stage () {
       ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.bezierCurveTo(xctrl_1, yctrl_1, xctrl_2, yctrl_2, xpos, ypos);
     },
+
     strokeRect : function (xpos, ypos, width, height) {
       this.store( {strokeRect : [xpos, ypos, width, height]} );
       xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
       ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.strokeRect(xpos, ypos, width, height);
     },
+
     fillRect : function (xpos, ypos, width, height) {
       this.store( {fillRect : [xpos, ypos, width, height]} );
       xpos = (xpos + this[this.sequence_order[this.current_seq]].xdistance);
       ypos = (ypos + this[this.sequence_order[this.current_seq]].ydistance);
       context.fillRect(xpos, ypos, width, height);
     },
+
     closePath : function () {
       this.store("closePath");
       context.closePath();
     },
+
     createLinearGradient : function (xstart, ystart, xend, yend) {
       this.store( {gradient : context.createLinearGradient(xstart, ystart, xend, yend) } );
       return context.createLinearGradient(xstart, ystart, xend, yend);
     },
+
     addColorStop : function (gradient, offset, color_string) {
       this.store( {addColorStop : [offset, color_string]} );
       gradient.addColorStop(offset, color_string);
     },
+
     fill : function () {
       this.store("fill");
       context.fill();
     },
+
     fillStyle : function (style_string) {
       this.store( {fillStyle : style_string} );
       context.fillStyle = style_string;
     },
+
     stroke : function () {
       this.store("stroke");
       context.stroke();
     },
+
     strokeStyle : function (style_string) {
       this.store( {strokeStyle : style_string} );
       context.strokeStyle = style_string;
     },
+
     save : function () {
       this.store("save");
       context.save();
     },
+
     restore : function () {
       this.store("restore");
       context.restore();
     },
+
 
     getMousedown : function (evt) {
       var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
@@ -246,6 +262,8 @@ function stage () {
     }
   };
 
+
+  /* CONSTRUCTOR ... a control that lets the user slide through a range ... */
   function Slider (obj_name) {
     this.name = obj_name;
     this.visible = true;
@@ -265,6 +283,7 @@ function stage () {
       cels : []
     };
     this.scrubber = {
+      selected : false,
       xdistance : 0,
       ydistance : 0,
       xinc : 0,
@@ -290,8 +309,8 @@ function stage () {
       cs_string = this.sequence_order[i];
 
       if (cs_string == "scrubber") {
-        this[cs_string].xlimit = ((t.frame_total * this[cs_string].xinc) - this[cs_string].xinc);
-        this[cs_string].ylimit = ((t.frame_total * this[cs_string].yinc) - this[cs_string].yinc);
+        this[cs_string].xlimit = ((this.timeline.frame_total * this[cs_string].xinc) - this[cs_string].xinc);
+        this[cs_string].ylimit = ((this.timeline.frame_total * this[cs_string].yinc) - this[cs_string].yinc);
       }
     }
   };
@@ -301,7 +320,7 @@ function stage () {
         cs_string = this.sequence_order[cs];
 
     /* ... when the scrubber\'s all the way right ... */
-    if (t.current_frame == 0 && rollover_count > 0) {
+    if (this.timeline.current_frame == 0 && this.animator.playthrough_count > 0) {
       this[cs_string].xdistance = this[cs_string].xlimit; 
       this[cs_string].ydistance = this[cs_string].ylimit; 
       this.boundary();
@@ -310,7 +329,7 @@ function stage () {
       this[cs_string].ydistance = 0; 
     }
     /* ... when the scrubber\'s somewhere in between ... */
-    else if (t.current_frame > 0 && t.current_frame < t.frame_total) {
+    else if (this.timeline.current_frame > 0 && this.timeline.current_frame < this.timeline.frame_total) {
       this[cs_string].xdistance -= this[cs_string].xinc; 
       this[cs_string].ydistance -= this[cs_string].yinc; 
       console.log(cs_string);
@@ -323,34 +342,54 @@ function stage () {
     }
     this.current_seq = old_cs;
   };
-  Slider.prototype.load = function () {
-    this.reset();
-    this.queue_index = (a_queue.length) ? a_queue.length : 0;
-    a_queue.push(this);
-    t.setFrameTotal();
-    setFinalBreakpoint();
-    this.setScrubberLimits();
-  };
 
-  function Timeline (fps) {
+
+  /* CONSTRUCTOR ... a collection that manages the history of all Characters in the animation ... */
+  function Timeline (anim, copy) {
+    this.animator = anim;
+    this.copy = (copy) ? copy : null;
     this.queue = [];
     this.frame_total = 0;
     this.frames = [];
     this.current_frame = 0;
     this.breakpoints = [46, 49, 81];
     this.current_bp = 0; // by default, the first breakpoint
-    this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
+    this.constructor = Timeline;
   };
   Timeline.prototype = {
+
     load : function () {
       var i,
           len = arguments.length;
 
       for (i = 0; i < len; i += 1) {
         arguments[i].countSpan();
+        arguments[i].animator = this.animator;
+        arguments[i].timeline = this;
+        arguments[i].reset();
+        arguments[i].queue_index = (this.queue.length) ? this.queue.length : 0;
         this.queue.push(arguments[i]);
       }
+      this.init();
     },
+
+    init : function () {
+      var i, 
+          len = this.queue.length;
+
+      this.setFrameTotal();
+      this.setFinalBreakpoint();
+      this.declareFrames();
+      for (i = 0; i < len; i += 1) {
+        if (this.queue[i].constructor == Slider) {
+          this.queue[i].setScrubberLimits();
+        }
+        this.storeInFrames(this.queue[i]);
+      }
+      this.animator.timeline = this;
+      this.animator.init();
+    },
+
     setFrameTotal : function () {
       var i, j,
           len = this.queue.length,
@@ -368,6 +407,7 @@ function stage () {
       }
       return this.frame_total;
     },
+
     declareFrames : function () {
       var i;
 
@@ -375,6 +415,7 @@ function stage () {
         this.frames[i] = [];
       }
     },
+
     storeInFrames : function (character) {
       var i, 
           frame_count = 0,
@@ -427,19 +468,171 @@ function stage () {
         }
       }
     },
-    init : function () {
-      var i, j, 
-          len = this.queue.length;
-      
-      this.setFrameTotal();
-      this.declareFrames();
 
-      for (i = 0; i < len; i += 1) {
-        this.storeInFrames(this.queue[i]);
+    setFinalBreakpoint : function () {
+      if (this.setFinalBreakpoint.alreadySet) {
+        this.setFinalBreakpoint.lastRemovedValue = this.breakpoints.pop();
+      }
+      this.breakpoints.push(this.frame_total);
+      this.setFinalBreakpoint.alreadySet = true;
+    },
+
+    advanceBreakpoint : function () {
+      this.current_bp += 1;
+      if (this.current_bp >= this.breakpoints.length) {
+        this.current_bp = 0;
       }
     },
+
+    play : function () {
+      if (!this.animator.running) {
+        this.current_bp = (this.breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
+        this.current_frame = 0;
+        this.animator.resetAllCels();
+        this.animator.animate();
+      }
+    },
+
+    stepThrough : function () {
+      if (!this.animator.running) {
+        this.animator.animate();
+      }
+    },
+
+    frameBack : function () {
+      if (!this.animator.running) {
+        // retreatAll();
+        this.animator.drawFrame();
+      }
+    },
+
+    frameForward : function () {
+      if (!this.animator.running) {
+        this.animator.advanceAll();
+        this.animator.drawFrame();
+      }
+    }
   };
   
+
+
+  /* CONSTRUCTOR ... does the heavy lifting of drawing frames ... */
+  function Animator (fps) {
+    this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
+    this.playthrough_count = 0;
+    this.running = false;
+    this.constructor = Animator;
+    this.me = this;
+  };
+  Animator.prototype = {
+
+    /* ... only thinks about repeating calls to drawFrame() ... */ 
+    /* ... created in this non-standard way to avoid the scope problems with repeated calls to 
+           setTimeout. using *this* won't retain the instance\'s scope .. */
+    makeAnimate : function (obj) {
+      
+      return function () {
+
+        if (obj.timeline.current_frame >= obj.timeline.frame_total) {
+          // console.log("First condition: animate() exited on frame " + obj.timeline.current_frame + ".");
+          obj.advanceAll();
+          obj.timeline.current_frame = 0;
+          obj.timeline.current_bp = 0;
+          obj.running = false;
+          obj.playthrough_count += 1;
+          return "done";
+        }
+        if (obj.timeline.current_frame >= obj.timeline.breakpoints[obj.timeline.current_bp]) {
+          // console.log("Second condition: animate() exited on frame " + obj.timeline.current_frame + ".");
+          obj.timeline.advanceBreakpoint(); 
+          obj.running = false;
+          return "done";
+        }
+        obj.running = true;
+        obj.drawFrame(obj.timeline.queue); 
+        // console.log(obj.timeline.current_frame);
+        obj.advanceAll();
+        obj.timeline.current_frame += 1;
+        setTimeout(obj.animate, obj.fps);
+
+      }
+    },
+
+    init : function () {
+      this.animate = this.makeAnimate(this.me);
+      this.drawFrame();
+    },
+
+    renderCharacter : function (obj, ctx) {
+      var cs = obj.sequence_order[obj.current_seq],
+          cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
+
+      ctx = (ctx) ? ctx : context;
+      
+      /* ... if this is a slider, always draw the track before drawing the scrubber
+      on the same frame ... */
+      if (obj.constructor == Slider) {
+        if (typeof obj[cs].cels[cc] == "function") {
+          obj.current_seq = 0;
+          obj.track.cels[cc](ctx);
+          obj.current_seq = 1;
+          obj.scrubber.cels[cc](ctx);
+        }
+        else {
+          obj.current_seq = 0;
+          obj.track.cels[(obj.track.cels.length - 1)](ctx);
+          obj.current_seq = 1;
+          obj.scrubber.cels[(obj.scrubber.cels.length - 1)](ctx);
+        }
+      }
+      else {
+        if (typeof obj[cs].cels[cc] == "function") {
+          obj[cs].cels[cc](ctx);
+        }
+        else {
+          obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
+        }
+      }
+    },
+    
+    /* ...only thinks about drawing... */
+    drawFrame : function () {
+      var i, len;
+      context.clearRect(0, 0, 566, 476);
+      this.emptyAllCaches();
+      context.drawImage(button_sprite, 0, 51, 104, 51, 42.8, 424.8, 104, 51);
+      context.drawImage(button_sprite, 104, 51, 355, 51, 170.8, 424.8, 355, 51);
+      len = this.timeline.queue.length;
+      for (i = 0; i < len; i += 1) {
+        this.renderCharacter(this.timeline.queue[i], context);
+      }
+    },
+
+    getAllCels : function (method_string) {
+      var i,
+          len = this.timeline.queue.length;
+      for (i = 0; i < len; i += 1) {
+        this.timeline.queue[i][method_string]();
+      }
+    },
+
+    advanceAll : function () {
+      this.getAllCels("advance");
+    },
+
+    resetAllCels : function () {
+      this.getAllCels("reset");
+    },
+
+    emptyAllCaches : function () {
+      this.getAllCels("emptyCache");
+    }
+  };
+
+  a = new Animator(75);
+  t = new Timeline(a);
+
+
   slider = new Slider("slider", false);
   slider.show();
   slider.track.cels = [
@@ -11936,145 +12129,8 @@ function stage () {
   ];
 
 
-  t = new Timeline(75);
-  t.load(slider, back, forward, track, pit, shadow, vaulter, pitforeground);
-  t.init();
-
-  function renderCharacter (obj, ctx) {
-    var cs = obj.sequence_order[obj.current_seq],
-        cc = obj[obj.sequence_order[obj.current_seq]].current_cel;
-
-    ctx = (ctx) ? ctx : context;
-    
-    /* ... if this is a slider, always draw the track before drawing the scrubber
-    on the same frame ... */
-    if (obj.constructor == Slider) {
-      if (typeof obj[cs].cels[cc] == "function") {
-        obj.current_seq = 0;
-        obj.track.cels[cc](ctx);
-        obj.current_seq = 1;
-        obj.scrubber.cels[cc](ctx);
-      }
-      else {
-        obj.current_seq = 0;
-        obj.track.cels[(obj.track.cels.length - 1)](ctx);
-        obj.current_seq = 1;
-        obj.scrubber.cels[(obj.scrubber.cels.length - 1)](ctx);
-      }
-    }
-    else {
-      if (typeof obj[cs].cels[cc] == "function") {
-        obj[cs].cels[cc](ctx);
-      }
-      else {
-        obj[cs].cels[(obj[cs].cels.length - 1)](ctx);
-      }
-    }
-  };
-
-  function setFinalBreakpoint () {
-    if (setFinalBreakpoint.alreadySet) {
-      setFinalBreakpoint.lastRemovedValue = t.breakpoints.pop();
-    }
-    t.breakpoints.push(t.frame_total);
-    setFinalBreakpoint.alreadySet = true;
-  };
-
-  function getAllCels (method_string) {
-    var i,
-        len = a_queue.length;
-    for (i = 0; i < len; i += 1) {
-      a_queue[i][method_string]();
-    }
-  };
   
-  function advanceAll () {
-    getAllCels("advance");
-  };
 
-  function resetAllCels () {
-    getAllCels("reset");
-  };
-  
-  function emptyAllCaches () {
-    getAllCels("emptyCache");
-  };
-  
-  function advanceBreakpoint () {
-    t.current_bp += 1;
-    if (t.current_bp >= t.breakpoints.length) {
-      t.current_bp = 0;
-    }
-  };
-
-  /* ...only thinks about repeating calls to drawFrame()... */ 
-  function animate () {
-    if (t.current_frame >= t.frame_total) {
-      // console.log("First condition: animate() exited on frame " + t.current_frame + ".");
-      advanceAll();
-      t.current_frame = 0;
-      t.current_bp = 0;
-      animate.running = false;
-      rollover_count += 1;
-      return "done";
-    }
-    if (t.current_frame >= t.breakpoints[t.current_bp]) {
-      // console.log("Second condition: animate() exited on frame " + t.current_frame + ".");
-      advanceBreakpoint(); 
-      animate.running = false;
-      return "done";
-    }
-    animate.running = true;
-    drawFrame(a_queue); 
-    // console.log(t.current_frame);
-    advanceAll();
-    t.current_frame += 1;
-    setTimeout(animate, t.fps);
-  };
-
-  function play () {
-    if (!animate.running) {
-      t.current_bp = (t.breakpoints.length - 1);  // ### a chance current_bp becomes a negative number ###
-      t.current_frame = 0;
-      resetAllCels();
-      animate();
-    }
-  };
-
-  function stepThrough () {
-    if (!animate.running) {
-      animate();
-    }
-  };
-
-  function frameBack () {
-    if (!animate.running) {
-      // retreatAll();
-      drawFrame();
-    }
-  };
-
-  function frameForward () {
-    if (!animate.running) {
-      advanceAll();
-      drawFrame();
-    }
-  };
-
-  /* ...only thinks about drawing... */
-  function drawFrame () {
-    var i, len;
-    context.clearRect(0, 0, 566, 476);
-    emptyAllCaches();
-    context.drawImage(button_sprite, 0, 51, 104, 51, 42.8, 424.8, 104, 51);
-    context.drawImage(button_sprite, 104, 51, 355, 51, 170.8, 424.8, 355, 51);
-    if (arguments.length == 1 && Array.isArray(arguments[0]) ){
-      len = arguments[0].length;
-      for (i = 0; i < len; i += 1) {
-        renderCharacter(arguments[0][i], context);
-      }
-    }
-  };
 
   the_canvas.addEventListener("mouseover", dela, false);
   the_canvas.addEventListener("click", dispatchClick, false);
@@ -12119,16 +12175,6 @@ function stage () {
     console.log("This is how it is.");
   }
   
-  slider.load();
-  back.load();
-  forward.load();
-  track.load();
-  pit.load();
-  shadow.load();
-  vaulter.load();
-  pitforeground.load();
-  drawFrame(a_queue);
-
   /* ... click detection ... */
   function dispatchClick (evt) {
     var x = (evt.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - the_canvas.offsetLeft),
@@ -12136,12 +12182,12 @@ function stage () {
         
     playButtonBoundary(context);
     if (context.isPointInPath(x, y)) {
-      play();
+      t.play();
       return "play";
     }
     stepButtonBoundary(context);
     if (context.isPointInPath(x, y)) {
-      stepThrough();
+      t.stepThrough();
       return "stepThrough";
     }
   };
@@ -12160,6 +12206,7 @@ function stage () {
     slider.drawBoundary();
     if (context.isPointInPath(x, y)) {
       console.log("Come Wit Me.");
+      slider.scrubber.selected = true;
     }
   };
     
@@ -12195,6 +12242,8 @@ function stage () {
     ctx.restore();
   };
 
+  t.load(slider, back, forward, track, pit, shadow, vaulter, pitforeground);
+  
 };
 
 stage();
