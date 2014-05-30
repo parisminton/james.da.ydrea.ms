@@ -3,6 +3,8 @@ body { background: url(../a/bg_8bit.png) left top repeat-x; }
 
 #shade { display: none; position: fixed; background-color: #000; z-index: 20; opacity: 0.0; }
 
+.ghost { display: block; position: absolute; }
+
 #lightbox { display: none; position: absolute; width: 920px; margin: 60px auto; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; z-index: 30; }
 #lightbox-top { width: 920px; height: 52px; margin: 0; background: url('../a/lightbox_top_8bit.png') 48px top no-repeat; }
 #lightbox-body { background: url('../a/shelf_bg_8bit.png') 48px top repeat-y; }

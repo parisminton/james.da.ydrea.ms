@@ -109,7 +109,7 @@
             <p id="photocredit">Photo by <a href="http://www.amberhuntphotography.com" target="_new">Amber Hunt</a></p>
             </div>
             <p>For 14 years, I've built and managed digital content in a career path that began as a newsroom apprentice at the <a href="http://www.freep.com" target="_new">Detroit Free Press</a> and traced the stark border between journalism and technology.</p>
-            <p><a href="http://www.linkedin.com/in/jamesthomaswebguy" target="_new">My LinkedIn profile</a> and <a href="pdf/jamesthomas_resume_060111.pdf">resume</a> give a glimpse of this odd, interesting space: ("Here, edit this election story. ... Now turn this Illustrator file into code. ... Now parse this XML feed.")</p>
+            <p><a href="http://www.linkedin.com/in/jamesthomaswebguy" target="_new">My LinkedIn profile</a> and <a href="pdf/jamesthomas_resume042614.pdf">resume</a> give a glimpse of this odd, interesting space: ("Here, edit this election story. ... Now turn this Illustrator file into code. ... Now parse this XML feed.")</p>
             <p>I've increasingly spent more time on the tech side, and I'd like to focus my career on it.</p>
             <p>I've got a solid understanding of Web standards and the core principles of object-oriented programming. Lately I've been learning some compiled languages and practicing mobile development.</p>
             <p>But I started as a writer and still love the written word. I strive for a well-turned phrase, and news that's accurate, engaging and incisive. Much of my Freep.com work has been making concise Web text read well.</p>
@@ -213,7 +213,7 @@
           <img src="a/conday_logo_8bit.png" alt="This site rolls with ConDay." title="This site rolls with ConDay." />
           <a href="http://www.dreamhost.com" target="_new"><img src="a/dreamhost_logo_8bit.png" alt="This site rests at Dreamhost." title="This site rests at Dreamhost." /></a>
         </div>
-        <p id="copyright">All content and design &copy; 2005-2011 James Thomas (parisminton) unless noted otherwise. All rights reserved.</p>
+        <p id="copyright">All content and design &copy; 2005-2014 James Thomas (parisminton) unless noted otherwise. All rights reserved.</p>
       </div>
     </div>
   </body>

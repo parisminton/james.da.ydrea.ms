@@ -477,11 +477,6 @@ function stage () {
         }
         /* ... if we\'ve run out of Character cels before running out of frames ... */
         else {
-          /*
-          if (character.constructor == Slider) {
-            cs = 1;
-          }
-          */
           if (character[character.sequence_order[cs]].xinc != 0) {
             xd = Math.round((character[character.sequence_order[cs]].xinc * frame_count) * 100) / 100;
           }
@@ -544,12 +539,12 @@ function stage () {
     this.fps = (fps) ? fps : 75; // ### optionally, an array? [75]
     this.running = false;
     this.constructor = Animator;
-    this.me = this;
+    this.me = this; // ... need this self-reference for makeAnimate, explained below ...
   };
   Animator.prototype = {
 
     /* ... only thinks about repeating calls to drawFrame() ... */ 
-    /* ... created in this non-standard way to avoid the scope problems with repeated calls to 
+    /* ... created in this tricky way to avoid the scope problems with repeated calls to 
            setTimeout. using *this* won't retain the instance\'s scope .. */
     makeAnimate : function (obj) {
       

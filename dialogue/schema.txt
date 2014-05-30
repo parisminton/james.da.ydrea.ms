@@ -1,0 +1,12 @@
+idea
+  _id
+  created
+  modified
+  history : object
+  author
+  head
+  ehead
+  summary
+  body
+  from_james : boolean
+  keywords

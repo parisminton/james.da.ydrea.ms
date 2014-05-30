@@ -105,7 +105,7 @@
       
       // ... return a node closer to the root of the DOM using one farther away...
       descendTree : function (elem, ancestor) {
-        if (elem.nodeName == target) {
+        if (elem.nodeName == ancestor) {
           return elem;
         }
         else {
@@ -124,8 +124,7 @@
     // nav helpers
     nav : {
       
-      goHome : function (evt) {
-        var ev = bW.evts.identify(evt);
+      goHome : function () {
           window.location = "/";
       }
       
@@ -227,7 +226,7 @@
       
       /* ... a tester for reading the yoffset value...
       compass : function () {
-        alert(bW.motion.getCurrYOffset());
+        console.log(bW.motion.getCurrYOffset());
       },
       */
       
@@ -340,7 +339,7 @@
         return key;
       },
       
-      // ... populate that empty buttons object from 298; we want to store the reference to the corresponding button, the string scrollBg() uses to determine the destination territory, the yoffset value where the territory begins, and the background position of the slider arrow for each button...
+      // ... populate that empty buttons object; we want to store the reference to the corresponding button, the string scrollBg() uses to determine the destination territory, the yoffset value where the territory begins, and the background position of the slider arrow for each button...
       setup : function () {
         var refs = [
               document.getElementById('nav-carousel'),
@@ -424,5 +423,5 @@ bW.env.drawTerritories();
 }());
 
 window.onunload = bW.evts.stopAllListeners;
- 
+
 // alert('I can take you there. Just follow me.');

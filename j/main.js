@@ -11,16 +11,19 @@
         
         // ...W3C-compliant browsers...
         if (node.addEventListener) {
+          bW.evts.listener_model = "addEventListener";
           node.addEventListener(evt, func, capt);
         }
         // ...IE pre-9...
         else {
           if (node.attachEvent) { 
+            bW.evts.listener_model = "attachEvent";
             node.attachEvent(("on" + evt), func);
           }
           // ...fall back to DOM level 0...
           else { 
-            node[evt] = func;
+            bW.evts.listener_model = "onevent";
+            node["on" + evt] = func;
           }
         }
         
@@ -127,7 +130,7 @@
 
 
 
-    imgswaps : {
+    imgs : {
       
       preload : function (path) {
         var images = [],
@@ -200,7 +203,7 @@
       
       toggleSprite : function (evt) {
         var ev = bW.evts.identify(evt),
-            aargs = bW.evts.getAargs(bW.imgswaps.toggleSprite, ev.type);
+            aargs = bW.evts.getAargs(bW.imgs.toggleSprite, ev.type);
         if (ev.type == "mouseover") {
           ev.src.style.backgroundPosition = aargs[0][0] + " " + aargs[0][1];
         }
@@ -208,10 +211,30 @@
           ev.src.style.backgroundPosition = aargs[1][0] + " " + aargs[1][1];
         }
       }
-    },
+    }, // end image object
     
     // style retreival
     styles : {
+
+      // ... figure out which method of reporting DOM styles the browser is using... 
+      getStyleModel : function () {
+        var ghost = document.createElement("div"),
+            bod = document.getElementsByTagName("body")[0];
+            // bod.appendChild(ghost);
+        if (document.defaultView && document.defaultView.getComputedStyle) {
+          bW.env.style_model = "getComputedStyle";
+          bW.styles.getStyle = function (elem, prop) {
+            return document.defaultView.getComputedStyle(elem, null).getPropertyValue(bW.styles.cssProps[prop]); 
+          };
+        }
+        else if (ghost.currentStyle) {
+          bW.env.style_model = "currentStyle";
+          bW.styles.getStyle = function (elem, prop) {
+            return elem.currentStyle[prop]; 
+          };
+        }
+        ghost = null;
+      },
       
       cssProps : {
         background : "background",
@@ -245,10 +268,13 @@
         borderTopWidth : "border-top-width",
         borderWidth : "border-width",
         bottom : "bottom",
+        captionSide : "caption-side",
         clear : "clear",
         clip : "clip",
         color : "color",
         content : "content",
+        counterIncrement : "counter-increment",
+        counterReset : "counter-reset",
         cursor : "cursor",
         direction : "direction",
         display : "display",
@@ -262,22 +288,57 @@
         fontWeight : "font-weight",
         height : "height",
         left : "left",
+        letterSpacing : "letter-spacing",
+        lineHeight : "line-height",
+        listStyle : "list-style",
+        listStyleImage : "list-style-image",
+        listStylePosition : "list-style-position",
+        listStyleType : "list-style-type",
         margin : "margin",
+        marginBottom : "margin-bottom",
+        marginLeft : "margin-left",
+        marginRight : "margin-right",
+        marginTop : "margin-top",
+        maxHeight : "max-height",
+        maxWidth : "max-width",
+        minHeight : "min-height",
+        minWidth : "min-width",
         opacity : "opacity",
         orphans : "orphans",
         outline : "outline",
+        outlineColor : "outline-color",
+        outlineStyle : "outline-style",
+        outlineWidth : "outline-width",
         overflow : "overflow",
         padding : "padding",
+        paddingBottom : "padding-bottom",
+        paddingLeft : "padding-left",
+        paddingRight : "padding-right",
+        paddingTop : "padding-top",
+        pageBreakAfter : "page-break-after",
+        pageBreakBefore : "page-break-before",
+        pageBreakInside : "page-break-inside",
         position : "position",
         quotes : "quotes",
         right : "right",
+        tableLayout : "table-layout",
+        textAlign : "text-align",
+        textDecoration : "text-decoration",
+        textIndent : "text-indent",
+        textShadow : "text-shadow",
+        textTransform : "text-transform",
         top : "top",
+        unicodeBidi : "unicode-bidi",
+        verticalAlign : "vertical-align",
         visibility : "visibility", 
+        whiteSpace : "white-space",
         widows : "widows",
         width : "width",
+        wordSpacing : "word-spacing",
+        wordWrap : "word-wrap",
         zIndex : "z-index"
       },
-    },
+    }, // end styles object
     
     // string manipulation
     strings : {
@@ -326,7 +387,7 @@
         }
         return split_array.join("");
       }
-    },
+    }, // end string object
     
 
 
@@ -357,7 +418,7 @@
     
       buttons : {},
       
-      slider : document.getElementById('slider'),
+      slider : document.getElementById('about'),
       
       current : 'nav-carousel', // ... the current territory; carousel by default...
       
@@ -373,9 +434,9 @@
       // ... populate that empty buttons object; we want to store the reference to the corresponding button, the string scrollBg() uses to determine the destination territory, the yoffset value where the territory begins, and the background position of the slider arrow for each button...
       setup : function () {
         var refs = [
-              document.getElementById('nav-carousel'),
-              document.getElementById('nav-balloon'),
-              document.getElementById('nav-widgetry')
+              document.getElementById('nav-about'),
+              document.getElementById('nav-work'),
+              document.getElementById('nav-contact')
             ],
             len = refs.length,
             i;
@@ -443,7 +504,7 @@
     
     bail : function () {
       alert('Started when I was nine years old.');
-    },
+    }, // end page object
     
     
     // motion helpers
@@ -667,7 +728,7 @@
         wait = setTimeout(bW.motion.slideBg, 50);
       }
     
-    },// end motion object
+    }, // end motion object
 
     
     // window calculations
@@ -726,7 +787,7 @@
 		  	}
 		  	return [page_width, page_height, window_width, window_height];
 		  }
-		},
+		}, // end viewport object
     
     // form processing
     forms : {
@@ -853,24 +914,7 @@
     }
   }; // ... end bW object. still inside the immediate function...
 
-  // ... figure out which method of reporting DOM styles the browser is using... 
-  (function () {
-    var ghost = document.createElement("div"),
-        bod = document.getElementsByTagName("body")[0];
-        // bod.appendChild(ghost);
-    if (document.defaultView && document.defaultView.getComputedStyle) {
-      bW.env.style_model = "getComputedStyle";
-      bW.styles.getStyle = function (elem, prop) {
-        return document.defaultView.getComputedStyle(elem, null).getPropertyValue(bW.styles.cssProps[prop]); 
-      };
-    }
-    else if (ghost.currentStyle) {
-      bW.env.style_model = "currentStyle";
-      bW.styles.getStyle = function (elem, prop) {
-        return elem.currentStyle[prop]; 
-      };
-    }
-  }());
+  bW.styles.getStyleModel();
   
   // ... work object. all this stuff needs to be stored in a database...
   var work = {
@@ -1128,8 +1172,8 @@
       sp = document.createElement("span");
       sp.id = id;
       sp.className = "work-thumbnail";
-      bW.evts.listenFor(sp, "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
-      bW.evts.listenFor(sp, "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(sp, "mouseover", bW.imgs.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(sp, "mouseout", bW.imgs.toggleSprite, false, thumb_coords);
       bW.evts.listenFor(sp, "mouseover", announce, false);
       bW.evts.listenFor(sp, "mouseout", announce, false);
       sp.appendChild(clone);
@@ -1313,8 +1357,8 @@
     for (key in work) {
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", announce, true);
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", announce, true);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", bW.imgswaps.toggleSprite, false, thumb_coords);
-      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", bW.imgswaps.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseover", bW.imgs.toggleSprite, false, thumb_coords);
+      bW.evts.listenFor(document.getElementById(work[key].thumb_id), "mouseout", bW.imgs.toggleSprite, false, thumb_coords);
       bW.evts.listenFor(document.getElementById(work[key].thumb_id), "click", showWorkItem, false);
     }
   }
@@ -1348,6 +1392,7 @@
 
   var welc = document.getElementById("welcome");
   var tbout = document.getElementById("about");
+  var twork = document.getElementById("work");
   var h = document.getElementById("home-page");
   var w = document.getElementById("wrap");
   var cont = document.getElementById("content");
@@ -1355,7 +1400,7 @@
 
   var fragm = document.createDocumentFragment();
   var ghost = document.createElement("div");
-  ghost.id = "ghost";
+  ghost.className = "ghost";
   var about_clone = tbout.cloneNode(true);
   var ghost_dimensions = {};
   about_clone.style.display = "block";
@@ -1368,6 +1413,57 @@
   ghost.appendChild(about_clone);
   fragm.appendChild(ghost);
   cont.insertBefore(fragm, co);
+
+  function mokus(arg1, arg2) {
+    if (arg1.parentNode === arg2.parentNode) {
+      return "They have the same parent.";
+    }
+    else {
+      return "The parent nodes are not the same.";
+    }
+  }
+
+  function ghostCapture() { 
+    var i, j, p_len, 
+        clones = [],
+        parents = [],
+        a_len = arguments.length,
+        fragm = document.createDocumentFragment(),
+    for (i = 0; i < len; i += 1) {
+      clones[i] = {
+        node : arguments[i].cloneNode(true),
+        parent : arguments[i].parentNode
+      }
+      clones[i].node.className = "ghost";
+      p_len = parents.length;
+
+      // stuff! 
+
+      for (j = 0; j < len2; j += 1) {
+        found = false;
+        p = clones[j].parent;
+        for (k = 0; k < len3; k += 1) {
+          if (parents[k] == p) {
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          insertions.push(p);
+          found = false;
+        }
+      }
+
+    }
+
+    ghost.appendChild(arg_clone);
+    fragm.appendChild(ghost);
+    cont.insertBefore(fragm, co);
+    /* ... in a custom script, this can be stored in a very specific object, as I\'m doing here. But for the library it should probably be put in a standard env object... */
+    // var ghost_dimensions = {};
+    bW.env.buttons[arguments[i].id].ghostDimensions = {}; 
+  }
+
 
   ghost_dimensions.about = {
     height : about_clone.getBoundingClientRect()
@@ -1392,22 +1488,24 @@
   
   setTimeout(dropshelf, 3000);
 
-  console.log(bW.strings.hyphenToCamelCase(bW.styles.cssProps.backgroundPositionX));
+      console.log(bW.env.slider);
+  console.log(bW.styles.cssProps.wordWrap);
   console.log(bW.env.style_model);
 
   console.log(tbout.getBoundingClientRect());
   console.log(welc.getBoundingClientRect());
   console.log(ghost_dimensions.about.height);
+  console.log(mokus(tbout, twork));
 
 }());
 
 bW.forms.swapCheckbox(bW.page.cb);
 
-bW.imgswaps.preload("a/", bW.page.nav_lis);
+bW.imgs.preload("a/", bW.page.nav_lis);
 
-bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
+bW.evts.listenFor(bW.page.the_nav, "mouseover", bW.imgs.toggleNavBg, false, bW.page.nav_lis);
 
-bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgswaps.toggleNavBg, false, bW.page.nav_lis);
+bW.evts.listenFor(bW.page.the_nav, "mouseout", bW.imgs.toggleNavBg, false, bW.page.nav_lis);
 
 bW.evts.listenFor(bW.page.form_name, "focus", bW.forms.placeholder, false);
 bW.evts.listenFor(bW.page.form_name, "blur", bW.forms.placeholder, false);
