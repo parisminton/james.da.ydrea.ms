@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*10/6/19*
+
+1. Let's try Gatsby.
+
+
+
 *1/9/14*
 
 1. Archived the previous code in v1.0 and starting v2.0 with MEAN.

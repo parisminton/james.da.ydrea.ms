@@ -1,0 +1,35 @@
+@font-face{
+  font-family:"infra-regular";
+  src:url("../fonts/5747651/2c2efc31-41ad-4100-abde-b176cf17f40e.eot?#iefix");
+  src:url("../fonts/5747651/2c2efc31-41ad-4100-abde-b176cf17f40e.eot?#iefix") format("eot"),url("../fonts/5747651/daeb003f-daac-40bb-9b23-c96d01b01c8b.woff2") format("woff2"),url("../fonts/5747651/09c26253-da3d-4b60-b546-9198f7091673.woff") format("woff"),url("../fonts/5747651/eef28c6c-1b7a-490e-b6b4-a1dab074ea7a.ttf") format("truetype");
+}
+@font-face{
+  font-family:"infra-regular-italic";
+  src:url("../fonts/5747659/60447ac5-4ccb-4bb1-9c0e-e94a2527e3c0.eot?#iefix");
+  src:url("../fonts/5747659/60447ac5-4ccb-4bb1-9c0e-e94a2527e3c0.eot?#iefix") format("eot"),url("../fonts/5747659/7537a1a0-9bfa-4547-b41d-49235e94a8d2.woff2") format("woff2"),url("../fonts/5747659/bbfb6fad-65f4-4499-a53d-56a254ee5916.woff") format("woff"),url("../fonts/5747659/cbe96cca-63cf-4029-a0db-ad11b8ac41c7.ttf") format("truetype");
+}
+@font-face{
+  font-family:"infra-bold";
+  src:url("../fonts/5747699/33392630-0ac6-49bb-bed8-4d884120ca37.eot?#iefix");
+  src:url("../fonts/5747699/33392630-0ac6-49bb-bed8-4d884120ca37.eot?#iefix") format("eot"),url("../fonts/5747699/54915934-249d-40b1-820a-c9f2b5274d7f.woff2") format("woff2"),url("../fonts/5747699/661e5997-c653-4b99-b038-551c9c0b627c.woff") format("woff"),url("../fonts/5747699/b10892e9-816b-47d0-860e-56f78b64be1b.ttf") format("truetype");
+}
+@font-face{
+  font-family:"infra-bold-italic";
+  src:url("../fonts/5747707/09e96c1b-b8b5-487b-bb1c-f14d0816cc7a.eot?#iefix");
+  src:url("../fonts/5747707/09e96c1b-b8b5-487b-bb1c-f14d0816cc7a.eot?#iefix") format("eot"),url("../fonts/5747707/f792e984-42af-42c9-aaaa-b35bb8b5e490.woff2") format("woff2"),url("../fonts/5747707/5a7ff748-be0d-49de-a8d2-e6d678f1674c.woff") format("woff"),url("../fonts/5747707/9a886149-5059-42e7-98aa-ad8ef597130a.ttf") format("truetype");
+}
+@font-face{
+  font-family:"infra-black";
+  src:url("../fonts/5747731/cd889796-19b6-443d-88f2-bec751e8bc0b.eot?#iefix");
+  src:url("../fonts/5747731/cd889796-19b6-443d-88f2-bec751e8bc0b.eot?#iefix") format("eot"),url("../fonts/5747731/8295c94f-8b30-455a-bc26-7eac1e6f7a61.woff2") format("woff2"),url("../fonts/5747731/9f1e79a7-744d-47d4-b8da-e986fa92f7b9.woff") format("woff"),url("../fonts/5747731/20d22c85-09ee-4c47-bae1-c085d482e7f7.ttf") format("truetype");
+}
+
+body {
+  font-family: "infra-regular";
+}
+
+.nameplate {
+  font-family: "infra-black";
+  font-weight: normal;
+  font-size: 70px;
+}
