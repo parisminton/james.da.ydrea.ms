@@ -2,6 +2,7 @@ import React from "react"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import ExpandText from "../components/expand-text"
 
 let expandText = (seed, fullstring) => {
   // Find location of the seed within the longer string.
@@ -50,6 +51,7 @@ const IndexPage = () => (
     <SEO title="Home" />
     <h1 className="nameplate">James Thomas</h1>
     <p className="body-copy">For two decades -- my entire professional life -- I've worked for large news organizations as a digital editor, producer and developer. Since 2012, I've been a software engineer for the Interactive News department of The New York Times. Before that, I spent 11 years as Web Editor for the Detroit Free Press.</p>
+    <ExpandText triggerText="Most of what I do is collaborative and behind the scenes">Most of what I do is collaborative and behind the scenes, like the code wired into the nytimes.com home page on presidential debate nights that allows editors to curate up-to-the-minute photos and video in its centerpiece. Nights like these, I'm shoulder-to-shoulder with those editors in the nerve center of the newsroom to guard against unforeseen bugs, errant captions and 404s.</ExpandText>
     <p className="body-copy">Most of what I do is collaborative and behind the scenes, like the code wired into the nytimes.com home page on presidential debate nights that allows editors to curate up-to-the-minute photos and video in its centerpiece. Nights like these, I'm shoulder-to-shoulder with those editors in the nerve center of the newsroom to guard against unforeseen bugs, errant captions and 404s.</p>
     <p className="body-copy">But I work far more often outside the breaking news cycle. An example is the interactive template I built for The Real Estate section's weekly column <em>The Hunt</em>, where readers can get an intimate understanding of New York's bonkers housing market by playing a quiz game weaved into the narrative. Gamifying the column has helped Real Estate find more habitual readers.</p>
     <p className="body-copy">Part of my job is training the newsroom to use the apps and templates we build in Interactive News. I write code, documentation and curricula, and I help editors incubate new ways to use the tools we provide. The idea to gamify the <em>The Hunt</em> grew out of one of these training sessions.</p>
