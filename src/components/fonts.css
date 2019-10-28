@@ -26,10 +26,13 @@
 
 body {
   font-family: "infra-regular";
+  color: #514d4d;
 }
 
 .nameplate {
-  font-family: "infra-black";
+  font-family: "infra-bold";
   font-weight: normal;
   font-size: 70px;
+  color: #000;
+
 }

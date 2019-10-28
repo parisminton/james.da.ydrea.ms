@@ -1,0 +1,9 @@
+.expand-text {
+  text-decoration: underline;
+  color: #f60;
+  cursor: pointer;
+}
+
+.expand-text:hover {
+  text-decoration: none;
+}
