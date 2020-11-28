@@ -1,9 +1,18 @@
-.expand-text {
+.expand-text.closed {
   text-decoration: underline;
   color: #f60;
   cursor: pointer;
 }
 
-.expand-text:hover {
+.expand-text.closed:hover {
   text-decoration: none;
+}
+
+.body-copy {
+  margin: 20px 0;
+}
+
+.newgraf {
+  display: block;
+  margin: 20px 0;
 }

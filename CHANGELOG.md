@@ -4,6 +4,12 @@ james.da.ydrea.ms
 Changelog
 ---------
 
+*11/28/20*
+
+1. Bare minimum for publishing.
+
+
+
 *10/6/19*
 
 1. Let's try Gatsby.

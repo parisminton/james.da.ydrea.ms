@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `james.da.ydrea.ms`,
-    description: `James Thomas\' personal site of James Thomas.`,
+    description: `James Thomas\' personal site.`,
     author: `parisminton@da.ydrea.ms`,
   },
   plugins: [
