@@ -9,10 +9,16 @@
 }
 
 .body-copy {
-  margin: 20px 0;
+  margin: 40px 0;
+  font-size: 1.775rem;
+  line-height: 2.5rem;
 }
 
 .newgraf {
   display: block;
   margin: 20px 0;
+}
+
+footer {
+  height: 200px;
 }
